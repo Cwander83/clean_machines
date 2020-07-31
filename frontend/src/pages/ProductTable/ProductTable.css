@@ -1,0 +1,10 @@
+.product-table {
+	width: 50%;
+	margin: auto;
+	border: 1px solid black;
+}
+
+.product-table thead {
+	background-color: black;
+	color: white;
+}
