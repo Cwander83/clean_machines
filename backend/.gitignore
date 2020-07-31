@@ -107,3 +107,6 @@ dist
 # other files not to show on github
 rental.sql
 rental.http
+backend_notes.txt
+bissell.js
+./models-1
