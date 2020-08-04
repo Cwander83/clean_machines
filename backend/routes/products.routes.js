@@ -8,13 +8,16 @@ const { productController } = require('../controllers');
 // GET
 //
 
+router.get('/', productController.findAllProducts); // all products
+router.get('/sku/:id', productController.findProduct); // find one product by id
+router.get('/rent', productController.findAllProductsForRent); // all products for rent
+router.get('/sale', productController.findAllProductsForSale); // all products for sale
+router.get('/out', productController.findAllProductsOutOfStock); // all products out of stock
 
-router.get('/', productController.findAllProducts);
+router.post('/', productController.createProductDB); // create product
 
-router.post('/post', productController.createProductDB); // create product
+router.put('/update/:id', productController.updateProduct);
 
-// router.put('/update/:id', productController.updateProduct); // update single product
-// router.put('/updateprice/:id/:price', productController.updateProductPrice); // update single product
-//router.delete('/product/:id', productController.deleteProduct); // delete a product
+router.delete('/delete/:id', productController.deleteProduct)
 
 module.exports = router;

@@ -1,5 +1,7 @@
-
 module.exports = {
-  Products: require("./Products"),
-  
-  };
+	Customers: require('./Customers'),
+	Products: require('./Products'),
+	Rentals: require('./Rentals'),
+
+	Sales: require('./Sales'),
+};

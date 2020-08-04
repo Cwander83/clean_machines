@@ -1,10 +1,9 @@
-import React from 'react'
-import {useForm} from 'react-hook-form'
+import React from 'react';
+import { useForm } from 'react-hook-form';
 const CreateProduct = () => {
-    const { handleSubmit, register } = useForm();
-	
+	const { handleSubmit, register } = useForm();
+
 	const onSubmit = (data) => {
-	
 		fetch('/products/post', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -14,9 +13,9 @@ const CreateProduct = () => {
 			.catch((err) => console.log(err));
 	};
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+	return (
+		<div>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<label htmlFor="name">
 					name:
 					<input name="name" ref={register} />
@@ -33,17 +32,14 @@ const CreateProduct = () => {
 					sub category:
 					<input name="sub_category" ref={register} />
 				</label>
-				<label htmlFor="rental_active">
-					available to rent(check if YES):
-					<input type="radio" name="rental_active" value="1" ref={register} />
-				</label>
-				<label htmlFor="rental_active">
-					available to sale(check if YES):
-					<input type="radio" name="sale_active" value="1" ref={register} />
-				</label>
+				
 				<label htmlFor="units">
 					number of units to sale:
-					<input name="units" ref={register} />
+					<input name="units_sale" ref={register} />
+				</label>
+				<label htmlFor="units">
+					number of units to rent:
+					<input name="units_rent" ref={register} />
 				</label>
 				<label htmlFor="rental_price">
 					rental_price price:
@@ -98,8 +94,8 @@ const CreateProduct = () => {
 
 				<input type="submit" />
 			</form>
-        </div>
-    )
-}
+		</div>
+	);
+};
 
-export default CreateProduct
+export default CreateProduct;

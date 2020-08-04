@@ -1,17 +1,81 @@
-// const { Products } = require('../models/index');
-const { createCustomer } = require('../stripe/stripe.customer');
+const {
+	createCustomer,
+	createPayment,
+	findAllCustomers,
+	findSingleCustomer,
+	updateCustomer,
+	deleteCustomer,
+	findCustomerCards
+} = require('../stripe/stripe.customer');
+const { calculateOrderAmount } = require('../stripe/helpers');
+
+const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
 
 module.exports = {
-	createCustomer: (req, res) => {
-		const customerName = req.params.name;
+	// createCustomer: (req, res) => {
+	// 	const customerName = req.params.name;
+	// 	// stripe function in stripe folder
+	// 	createCustomer(customerName)
+	// 		.then((result) => {
+	// 			res.status(200).json(result);
+	// 			console.log(result);
+	// 			return result;
+	// 		})
+
+	// 		.catch((err) => console.log(err));
+	// },
+
+	findAllCustomers: async (req, res) => {
+		//const customerName = req.params.name;
 		// stripe function in stripe folder
-		createCustomer(customerName)
+		await findAllCustomers()
 			.then((result) => {
 				res.status(200).json(result);
-				console.log(result);
+				console.log(JSON.stringify(result, null, 2));
 				return result;
 			})
 
 			.catch((err) => console.log(err));
 	},
+	findSingleCustomer: async (req, res) => {
+		// TODO ADD PRODUCT RENTALS AND PURCHASES
+
+		await findSingleCustomer(req.params.id)
+			.then((result) => {
+				res.status(200).json(result);
+				console.log(JSON.stringify(result, null, 2));
+				return result;
+			})
+
+			.catch((err) => console.log(err));
+	},
+
+	findCustomerCards: async (req, res) => {
+	
+
+		await findCustomerCards(req.params.id)
+			.then((result) => {
+				res.status(200).json(result);
+				console.log(JSON.stringify(result, null, 2));
+				return result;
+			})
+
+			.catch((err) => console.log(err));
+	},
+
+	updateCustomer: async (req, res) => {
+		const id = req.params.id;
+		const body = req.body;
+		await updateCustomer(id, body)
+			.then((result) => {
+				res.status(200).json(result);
+				console.log(JSON.stringify(result, null, 2));
+				return result;
+			})
+
+			.catch((err) => console.log(err));
+	},
+
+
+
 };
