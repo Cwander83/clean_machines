@@ -9,13 +9,13 @@ const cors = require('cors');
 const db = require('./config/config');
 
 //Test
-db.sequelize
-	.authenticate()
-	.then(() => console.log('Database connected...'.blue))
-	.catch((err) => console.log(`error: ${err}`.bgRed));
+// db.sequelize
+// 	.authenticate()
+// 	.then(() => console.log('Database connected...'.blue))
+// 	.catch((err) => console.log(`error: ${err}`.bgRed));
 
 /*
-* to wipe and reset set mysql    
+ * to wipe and reset set mysql
  */
 // db.sequelize.sync({ force: true }).then(() => {
 // 	console.log('Drop and re-sync db.');

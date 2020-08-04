@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		rental_price: {
 			type: DataTypes.INTEGER,
+			allowNull: false,
 		},
+
 		category: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -28,35 +30,46 @@ module.exports = (sequelize, DataTypes) => {
 		sub_category: {
 			type: DataTypes.STRING,
 		},
-		start_date: {
-			type: DataTypes.STRING,
-		},
-		end_date: {
-			type: DataTypes.STRING,
-		},
-
-		rental_active: {
-			type: DataTypes.TINYINT,
-			allowNull: false,
-			defaultValue: 0,
-		},
-		sale_active: {
-			type: DataTypes.TINYINT,
-			allowNull: false,
+		rental_units: {
+			type: DataTypes.INTEGER,
 			defaultValue: 0,
 		},
 		units: {
 			type: DataTypes.INTEGER,
 			defaultValue: 0,
 		},
+		feature_0: {
+			type: DataTypes.STRING,
+		},
+		feature_1: {
+			type: DataTypes.STRING,
+		},
+		feature_2: {
+			type: DataTypes.STRING,
+		},
+		feature_3: {
+			type: DataTypes.STRING,
+		},
+		feature_4: {
+			type: DataTypes.STRING,
+		},
+		feature_5: {
+			type: DataTypes.STRING,
+		},
+		feature_6: {
+			type: DataTypes.STRING,
+		},
+		feature_7: {
+			type: DataTypes.STRING,
+		},
+		feature_8: {
+			type: DataTypes.STRING,
+		},
+		feature_9: {
+			type: DataTypes.STRING,
+		},
 	});
-	Products.associate = function (models) {
-		// associations can be defined here
-		Products.hasOne(models.Features, {
-			foreignKey: 'product_id',
-			as: 'features',
-		});
-	};
+
 
 	return Products;
 };
