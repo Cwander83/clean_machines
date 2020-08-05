@@ -28,11 +28,7 @@ module.exports = {
 		const customer = await createCustomer(items);
 		const dbCustomer = await createDbCustomer(items,customer);
 		const rentAndSale = await rentalAndSales(items, dbCustomer);
-		// if (items.rental === true) await createRental(items, customer);
-		// if (items.rental === true && items.sales === true)
-		// 	await createRentalAndSales(items, customer);
-		// if (items.sale === true && items.rental === false)
-		// 	await createSales(items, customer);
+		
 
 		//console.log('customer' + JSON.stringify(customer, null, 2));
 

@@ -5,18 +5,22 @@ import React from 'react';
 
 // import CheckoutForm from './components/Stripe/CheckoutForm';
 
-
 import './App.css';
 
 import { useAuth0 } from '@auth0/auth0-react';
-import Header from './components/Header';
+
 import Admin from './pages/Admin/Admin';
 import Home from './pages/Home/Home';
+import { Route, Switch } from 'react-router-dom';
+import Rentals from './pages/Rentals/Rentals';
+import Sales from './pages/Sales/Sales';
+import NavDrawer from './components/Drawer/Drawer';
+import NotFound from './pages/NotFound';
+import NotAuthorized from './pages/NotAuthorized';
 
 //import CardSection from './components/Stripe/CardSection';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-
 
 function App() {
 	const { isLoading, isAuthenticated, error } = useAuth0();
@@ -30,9 +34,27 @@ function App() {
 
 	return (
 		<div className="App">
-			
-			<Header />
-			{isAuthenticated ? <Admin /> : <Home />}
+			<NavDrawer />
+			{isAuthenticated ? (
+				<Route
+					exact
+					from="/admin"
+					render={(props) =>
+						isAuthenticated ? <Admin {...props} /> : <NotAuthorized />
+					}
+				/>
+			) : (
+				<Switch>
+					<Route exact from="/" render={(props) => <Home {...props} />} />
+					<Route
+						exact
+						from="/rentals"
+						render={(props) => <Rentals {...props} />}
+					/>
+					<Route exact from="/sales" render={(props) => <Sales {...props} />} />
+					<Route component={NotFound} />
+				</Switch>
+			)}
 		</div>
 	);
 }
