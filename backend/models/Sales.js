@@ -6,21 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 			autoIncrement: true,
 			primaryKey: true,
 		},
-		// product_id: {
-		// 	type: DataTypes.INTEGER,
-		// 	allowNull: false,
-		// 	references: {
-		// 		model: 'products',
-		// 		key: 'id',
-		// 	},
-		//  },
-		// customer_id: {
-		// 	type: DataTypes.INTEGER,
-		// 	references: {
-		// 		model: 'customers',
-		// 		key: 'id',
-		// 	},
-		// },
+	
 		// total price
 		price_per_unit: {
 			type: DataTypes.INTEGER,
@@ -30,11 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	});
 	Sales.associate = function (models) {
-		// Sales.belongsTo(models.Customers, {
-		// 	foreignKey: {
-		// 		allowNull: false,
-		// 	},
-		// });
+	
 		Sales.belongsTo(models.Products, {
 			foreignKey: {
 				allowNull: false,
