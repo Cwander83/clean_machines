@@ -5,14 +5,15 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 
+
 // Database
 const db = require('./config/config');
 
 //Test
-// db.sequelize
-// 	.authenticate()
-// 	.then(() => console.log('Database connected...'.blue))
-// 	.catch((err) => console.log(`error: ${err}`.bgRed));
+db.sequelize
+	.authenticate()
+	.then(() => console.log('Database connected...'.blue))
+	.catch((err) => console.log(`error: ${err}`.bgRed));
 
 /*
  * to wipe and reset set mysql

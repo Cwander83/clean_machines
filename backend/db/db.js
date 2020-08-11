@@ -1,24 +1,15 @@
 const db = require('../config/config');
+const moment = require('moment');
+const { Op } = require('sequelize');
 
-// rentals: {
-// 	productId: product.id,
-// 	rental_price_day: items.rental[i].rental_price_day,
-// 	rental_days: items.rental[i].rental_days,
-// 	start_date: items.rental[i].rental_start_date,
 
-// 	end_date: items.rental[i].rental_end_date,
-// 	deposit: items.rental[i].deposit,
-// },
-
-// {
-// 	include: [{ model: db.Rentals, as: 'rentals' }],
-// }
 module.exports = {
+
 	createRental: async (items, dbCustomer) => {
-		console.log(`create Rentals`);
-		console.log('items: ' + JSON.stringify(items, null, 2));
-		console.log('length: ' + items.rental.length);
-		console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
+		 console.log(`create Rentals`);
+		// console.log('items: ' + JSON.stringify(items, null, 2));
+		// console.log('length: ' + items.rental.length);
+		// console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
 
 		for (let i = 0; i < items.rental.length; i++) {
 			db.Products.findOne({
@@ -31,7 +22,7 @@ module.exports = {
 						rental_price_day: items.rental[i].rental_price_day,
 						rental_days: items.rental[i].rental_days,
 						start_date: items.rental[i].rental_start_date,
-
+						location: items.rental[i].location,
 						end_date: items.rental[i].rental_end_date,
 						deposit: items.rental[i].deposit,
 					});
@@ -49,10 +40,10 @@ module.exports = {
 		});
 	},
 	createRentalAndSales: async (items, customer) => {
-		console.log(`create Rentals`);
-		console.log('items: ' + JSON.stringify(items, null, 2));
-		console.log('length: ' + items.rental.length);
-		console.log('customer: ' + JSON.stringify(customer, null, 2));
+		 console.log(`create Rentals`);
+		// console.log('items: ' + JSON.stringify(items, null, 2));
+		// console.log('length: ' + items.rental.length);
+		// console.log('customer: ' + JSON.stringify(customer, null, 2));
 
 		for (let i = 0; i < items.rental.length; i++) {
 			db.Products.findOne({
@@ -65,7 +56,7 @@ module.exports = {
 						rental_price_day: items.rental[i].rental_price_day,
 						rental_days: items.rental[i].rental_days,
 						start_date: items.rental[i].rental_start_date,
-
+						location: items.rental[i].location,
 						end_date: items.rental[i].rental_end_date,
 						deposit: items.rental[i].deposit,
 					});
@@ -91,10 +82,10 @@ module.exports = {
 		}
 	},
 	createSales: async (items, dbCustomer) => {
-		console.log(`create Rentals`);
-		console.log('items: ' + JSON.stringify(items, null, 2));
-		console.log('length: ' + items.rental.length);
-		console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
+		 console.log(`create Rentals`);
+		// console.log('items: ' + JSON.stringify(items, null, 2));
+		// console.log('length: ' + items.rental.length);
+		// console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
 
 		for (let i = 0; i < items.rental.length; i++) {
 			db.Products.findOne({

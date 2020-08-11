@@ -14,25 +14,34 @@ const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
 const rentalAndSales = (items, customer) => {
 	if (items.rental_boolean && !items.sales_boolean)
 		createRental(items, customer);
-	if (items.rental_boolean && items.sales_boolean) createRentalAndSales(items, customer);
-	if (items.sales_boolean && !items.rental_boolean) createSales(items, customer);
+
+	if (items.rental_boolean && items.sales_boolean)
+		createRentalAndSales(items, customer);
+
+	if (items.sales_boolean && !items.rental_boolean)
+		createSales(items, customer);
+
 	return items;
 };
 
 module.exports = {
 	createPayment: async (req, res) => {
-		const { items } = req.body;
-		console.log('items: ' + JSON.stringify(items, null, 2));
-		// Create a PaymentIntent with the order amount and currency
+		let { payment_method_id, userData } = req.body;
+
 		console.log('1');
-		const customer = await createCustomer(items);
-		const dbCustomer = await createDbCustomer(items,customer);
-		const rentAndSale = await rentalAndSales(items, dbCustomer);
-		
+		console.log('userData: ' + JSON.stringify(userData, null, 2));
 
-		//console.log('customer' + JSON.stringify(customer, null, 2));
+		const customer = await createCustomer(userData);
+		const dbCustomer = await createDbCustomer(userData, customer);
+		const rentAndSale = await rentalAndSales(userData, dbCustomer);
 
-		const paymentIntent = await createPayment(rentAndSale, customer);
+		console.log('customer' + JSON.stringify(rentAndSale, null, 2));
+
+		const paymentIntent = await createPayment(
+			payment_method_id,
+			userData,
+			customer
+		);
 		const sendOff = await res.send({
 			clientSecret: paymentIntent.client_secret,
 		});

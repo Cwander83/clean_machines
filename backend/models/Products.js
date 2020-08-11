@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
 		sub_category: {
 			type: DataTypes.STRING,
 		},
-		rental_units: {
+		rental: {
 			type: DataTypes.INTEGER,
 			defaultValue: 0,
 		},

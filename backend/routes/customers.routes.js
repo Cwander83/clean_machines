@@ -15,7 +15,7 @@ router.get('/cards/:id', customerController.findCustomerCards);
 //
 // POST
 //
-router.post('/create-payment-intent', paymentController.createPayment);
+router.post('/pay', paymentController.createPayment);
 
 //
 // PUT

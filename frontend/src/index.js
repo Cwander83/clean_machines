@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { Auth0Provider } from '@auth0/auth0-react';
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import theme from './theme/theme';
@@ -12,13 +12,9 @@ ReactDOM.render(
 	<React.Fragment>
 		<Router>
 			<ThemeProvider theme={theme}>
-				<Auth0Provider
-					domain={process.env.REACT_APP_AUTH0_DOMAIN}
-					clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
-					redirectUri={window.location.origin}
-				>
+				<Auth0ProviderWithHistory>
 					<App />
-				</Auth0Provider>
+				</Auth0ProviderWithHistory>
 			</ThemeProvider>
 		</Router>
 	</React.Fragment>,
