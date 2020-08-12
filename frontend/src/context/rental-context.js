@@ -14,10 +14,13 @@ export const RentalContext = React.createContext({
 const RentalContextProvider = (props) => {
 	const [rentalDates, setRentalDates] = React.useState({
 		days: 1,
-		startDate: moment().format(),
-		endDate: moment().format(),
+		startDate: null,
+		endDate: null,
 	});
-	const [availableProducts, setAvailableProducts] = React.useState([]);
+	const [
+		availableProducts,
+		// setAvailableProducts
+		] = React.useState([]);
 
 	const getAvailableRentals = () => {
 		let start = moment(rentalDates.startDate).format('YYYY-MM-DD');
@@ -29,10 +32,7 @@ const RentalContextProvider = (props) => {
 			.catch((err) => console.error(err));
 	};
 
-	// const setTime = (date, start) => {
-	// 	let time = moment(date);
-	// 	return start ? time.set('hour', 12) : time.set('hour', 21);
-	// };
+
 
 	const setDays = (endDate) => {
 		let a = moment(endDate);
