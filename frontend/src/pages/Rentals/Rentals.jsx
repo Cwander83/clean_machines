@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import { Grid, Container, Paper } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SimpleCard from '../../components/SimpleCard/SimpleCard';
 import RentalSearch from '../../components/RentalSearch/RentalSearch';
-import { RentalContext } from '../../context/rental-context';
+//import { RentalContext } from '../../context/rental-context';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -18,12 +18,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		// padding: theme.spacing(1),
-		textAlign: 'left',
+	},
+	gallery: {
+		[theme.breakpoints.down('sm')]: {
+			alignContent: 'flex-start',
+		},
+		
 	},
 }));
 
 const Rentals = () => {
-	const { availableProducts } = React.useContext(RentalContext);
+	//const { availableProducts } = React.useContext(RentalContext);
 
 	const classes = useStyles();
 	return (
@@ -33,49 +38,40 @@ const Rentals = () => {
 					<Grid item xs={12}></Grid>
 					<Grid item xs={12}></Grid>
 					<Grid item xs={12}>
-						<Paper className={classes.paper} elevation={1}>
-							<Grid container>
-								<Grid item xs={6}>
-									<Typography
-										variant="h4"
-										component="h4"
-										className={classes.title}
-									>
-										Rentals
-									</Typography>
-								</Grid>
-								<Grid item xs={6}>
-									<Typography variant="h4" component="h4">
-										Rentals
-									</Typography>
-								</Grid>
+						<Grid container justify="center">
+							<Grid item xs={6}>
+								<Typography
+									variant="h4"
+									component="h4"
+									className={classes.title}
+								>
+									Rentals
+								</Typography>
 							</Grid>
-						</Paper>
+						</Grid>
 					</Grid>
+
 					<Grid item xs={12}>
-						<Typography variant="h4" component="h4">
-							<RentalSearch />
-						</Typography>
+						<RentalSearch />
 					</Grid>
 
 					{/* where the products to rent will show up */}
 					<Grid
 						container
+						
 						spacing={2}
-						direction="row"
-						wrap="wrap"
-						justify="flex-start"
-						alignItems="flex-start"
+						justify="center"
+						className={classes.gallery}
 					>
-						<Grid item xs={11} sm={6} md={4}>
+						<Grid item xs={11} sm={6} md={10} >
 							<SimpleCard />
 						</Grid>
 
-						<Grid item xs={11} sm={6} md={4}>
+						<Grid item xs={11} sm={6} md={10} >
 							<SimpleCard />
 						</Grid>
 
-						<Grid item xs={11} sm={6} md={4}>
+						<Grid item xs={11} sm={6} md={10} >
 							<SimpleCard />
 						</Grid>
 					</Grid>
