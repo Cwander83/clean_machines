@@ -1,7 +1,7 @@
 import React from 'react';
 
-import './ProductTable.css';
-import AdminProduct from '../AdminProduct/AdminProduct';
+
+import AdminProduct from './AdminProduct';
 
 const ProductTable = () => {
 	const [data, setData] = React.useState([]);
@@ -9,7 +9,7 @@ const ProductTable = () => {
 	const [id, setId] = React.useState(null);
 
 	const callProducts = async (type) => {
-		await fetch(`/products${type}`, {})
+		await fetch(`/products`, {})
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data);

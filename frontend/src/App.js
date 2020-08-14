@@ -15,7 +15,7 @@ import Home from './pages/Home/Home';
 import { Route, Switch } from 'react-router-dom';
 import Rentals from './pages/Rentals/Rentals';
 import Sales from './pages/Sales/Sales';
-import NavDrawer from './components/Drawer/Drawer';
+import Drawer from './components/Drawer';
 import NotFound from './pages/NotFound';
 import RentalContextProvider from './context/rental-context';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -23,6 +23,10 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Spinner from './UI/Spinner';
 import Contact from './pages/Contact/Contact';
 import Videos from './pages/Videos/Videos';
+import AdminRentals from './pages/Admin/AdminRentals';
+import AdminSales from './pages/Admin/AdminSales';
+import AdminCustomers from './pages/Admin/AdminCustomers';
+import AllProducts from './pages/Admin/AllProducts';
 
 //import CardSection from './components/Stripe/CardSection';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -39,11 +43,18 @@ function App() {
 		<MuiPickersUtilsProvider utils={DateFnsUtils}>
 			<RentalContextProvider>
 				<div className="App">
-					<NavDrawer />
+					<Drawer />
 
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<ProtectedRoute path="/admin" component={Admin} />
+						<ProtectedRoute exact path="/admin" component={Admin} />
+						<ProtectedRoute path="/admin/rentals" component={AdminRentals} />
+						<ProtectedRoute path="/admin/sales" component={AdminSales} />
+						<ProtectedRoute path="/admin/products" component={AllProducts} />
+						<ProtectedRoute
+							path="/admin/customers"
+							component={AdminCustomers}
+						/>
 						<Route path="/rentals" component={Rentals} />
 						<Route path="/videos" component={Videos} />
 						<Route path="/contact" component={Contact} />

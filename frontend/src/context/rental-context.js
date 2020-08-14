@@ -17,10 +17,7 @@ const RentalContextProvider = (props) => {
 		startDate: null,
 		endDate: null,
 	});
-	const [
-		availableProducts,
-		// setAvailableProducts
-		] = React.useState([]);
+	const [availableProducts, setAvailableProducts] = React.useState([]);
 
 	const getAvailableRentals = () => {
 		let start = moment(rentalDates.startDate).format('YYYY-MM-DD');
@@ -28,11 +25,12 @@ const RentalContextProvider = (props) => {
 		console.log(start, end);
 		fetch(`/products/available-rent/${start}/${end}`)
 			.then((response) => response.json())
-			.then((data) => console.log(data))
+			.then((data) => {
+				//console.log(data);
+				setAvailableProducts(data);
+			})
 			.catch((err) => console.error(err));
 	};
-
-
 
 	const setDays = (endDate) => {
 		let a = moment(endDate);
@@ -67,11 +65,12 @@ const RentalContextProvider = (props) => {
 	return (
 		<RentalContext.Provider
 			value={{
-				startDateHandler: startDateHandler,
-				endDateHandler: endDateHandler,
-				rentalDates: rentalDates,
-				availableProducts: availableProducts,
-				getAvailableRentals: getAvailableRentals,
+				startDateHandler,
+				endDateHandler,
+				rentalDates,
+				availableProducts,
+				getAvailableRentals,
+				
 			}}
 		>
 			{props.children}
