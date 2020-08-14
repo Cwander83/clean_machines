@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import RentalSearch from '../../components/RentalSearch/RentalSearch';
+import RentalSearch from '../../components/RentalSearch';
 //import Admin from '../Admin/Admin';
 
 //import { Link } from 'react-router-dom';

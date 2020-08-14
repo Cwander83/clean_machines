@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 //import LocationChecker from '../LocationChecker/LocationChecker';
 import { DatePicker } from '@material-ui/pickers';
 import { Grid, Paper, Button } from '@material-ui/core';
-import { RentalContext } from '../../context/rental-context';
+import { RentalContext } from '../context/rental-context';
 //import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({

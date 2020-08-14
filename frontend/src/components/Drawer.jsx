@@ -28,8 +28,8 @@ const useStyles = makeStyles({
 	},
 	button: {},
 	root: {
-		display: 'flex'
-	}
+		display: 'flex',
+	},
 });
 
 const NavDrawer = () => {
@@ -82,23 +82,23 @@ const NavDrawer = () => {
 		{
 			text: 'Customers',
 			icon: <HomeIcon />,
-			to: '/',
+			to: '/admin/customers',
 		},
 
 		{
+			text: 'All Products',
+			icon: <ViewComfyIcon />,
+			to: '/admin/products',
+		},
+		{
 			text: 'Rentals',
 			icon: <ViewComfyIcon />,
-			to: '/rentals',
+			to: '/admin/rentals',
 		},
 		{
 			text: 'Sales',
 			icon: <ViewComfyIcon />,
-			to: '/sales',
-		},
-		{
-			text: 'Products',
-			icon: <ViewComfyIcon />,
-			to: '/videos',
+			to: '/admin/sales',
 		},
 	];
 

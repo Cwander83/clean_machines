@@ -3,9 +3,11 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Grid, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import SimpleCard from '../../components/SimpleCard/SimpleCard';
-import RentalSearch from '../../components/RentalSearch/RentalSearch';
-//import { RentalContext } from '../../context/rental-context';
+import RentalCard from '../../components/RentalCard';
+import RentalSearch from '../../components/RentalSearch';
+import { RentalContext } from '../../context/rental-context';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import SingleRental from '../../components/SingleRental';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -19,18 +21,20 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		// padding: theme.spacing(1),
 	},
-	gallery: {
-		[theme.breakpoints.down('sm')]: {
-			alignContent: 'flex-start',
-		},
-		
-	},
+	gallery: {},
 }));
 
 const Rentals = () => {
-	//const { availableProducts } = React.useContext(RentalContext);
-
 	const classes = useStyles();
+	let { path, url } = useRouteMatch();
+	const { availableProducts } = React.useContext(RentalContext);
+
+	React.useEffect(() => {
+		return () => {};
+	}, [availableProducts]);
+
+	//console.log(availableProducts);
+
 	return (
 		<div className={classes.root}>
 			<Container>
@@ -54,27 +58,29 @@ const Rentals = () => {
 					<Grid item xs={12}>
 						<RentalSearch />
 					</Grid>
-
-					{/* where the products to rent will show up */}
-					<Grid
-						container
-						
-						spacing={2}
-						justify="center"
-						className={classes.gallery}
-					>
-						<Grid item xs={11} sm={6} md={10} >
-							<SimpleCard />
-						</Grid>
-
-						<Grid item xs={11} sm={6} md={10} >
-							<SimpleCard />
-						</Grid>
-
-						<Grid item xs={11} sm={6} md={10} >
-							<SimpleCard />
-						</Grid>
-					</Grid>
+					<Switch>
+						{/* where the products to rent will show up */}
+						<Route exact path={path}>
+							<Grid
+								container
+								spacing={2}
+								justify="center"
+								className={classes.gallery}
+							>
+								{availableProducts.length !== 0 ? (
+									availableProducts.map((obj, i) => {
+										return <RentalCard key={obj.id} product={obj} />;
+									})
+								) : (
+									<Typography variant="h5">coming soon</Typography>
+								)}
+							</Grid>
+						</Route>
+						<Route
+							path={`${path}/:id`}
+							render={(routeProps) => <SingleRental {...routeProps} />}
+						/>
+					</Switch>
 				</Grid>
 			</Container>
 		</div>

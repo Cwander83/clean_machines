@@ -22,7 +22,7 @@
     "express": "^4.17.1",
     "moment": "^2.27.0",
     "mysql2": "^2.1.0",
-    "sequelize": "^6.3.3",
-    "stripe": "^8.79.0"
+    "sequelize": "^6.3.4",
+    "stripe": "^8.84.0"
   }
 }

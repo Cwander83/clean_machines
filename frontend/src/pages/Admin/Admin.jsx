@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './Admin.css';
 
-import ProductTable from './ProductTable/ProductTable';
-import CreateProductModal from './CreateProduct/CreateProductModal';
+
+import ProductTable from './ProductTable';
+import CreateProductModal from './CreateProductModal';
 import {  withAuthenticationRequired } from "@auth0/auth0-react";
 import Logout from '../../auth/Logout';
 import Spinner from '../../UI/Spinner';
