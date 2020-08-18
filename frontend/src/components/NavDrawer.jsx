@@ -80,6 +80,11 @@ const NavDrawer = () => {
 	];
 	const adminList = [
 		{
+			text: 'Admin Home',
+			icon: <HomeIcon />,
+			to: '/admin',
+		},
+		{
 			text: 'Customers',
 			icon: <HomeIcon />,
 			to: '/admin/customers',
@@ -133,7 +138,6 @@ const NavDrawer = () => {
 									button
 									key={index}
 									onClick={handleDrawerClose}
-									//disabled={isAuthenticated}
 								>
 									{icon && <ListItemIcon>{icon}</ListItemIcon>}
 									<ListItemText primary={text} />
@@ -152,7 +156,6 @@ const NavDrawer = () => {
 									button
 									key={index}
 									onClick={handleDrawerClose}
-									//disabled={isAuthenticated}
 								>
 									{icon && <ListItemIcon>{icon}</ListItemIcon>}
 									<ListItemText primary={text} />

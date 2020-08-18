@@ -1,9 +1,12 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -25,90 +28,117 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 	},
 	button: {},
+	paper: {},
 }));
 
-const CreateProduct = React.memo(() => {
+const ProductModify = React.memo(() => {
 	const classes = useStyles();
 
+	const [id, setId] = React.useState();
 	const [rental, setRental] = React.useState(1);
 	const [sale_price, setSalePrice] = React.useState();
 	const [units, setUnits] = React.useState();
 	const [rental_price, setRentalPrice] = React.useState();
-	const [name, setName] = React.useState();
-	const [model, setModel] = React.useState();
-	const [category, setCategory] = React.useState();
-	const [sub_category, setSubCategory] = React.useState();
-	const [feature_0, set0] = React.useState();
-	const [feature_1, set1] = React.useState();
-	const [feature_2, set2] = React.useState();
-	const [feature_3, set3] = React.useState();
-	const [feature_4, set4] = React.useState();
-	const [feature_5, set5] = React.useState();
-	const [feature_6, set6] = React.useState();
-	const [feature_7, set7] = React.useState();
-	const [feature_8, set8] = React.useState();
-	const [feature_9, set9] = React.useState();
+	const [name, setName] = React.useState(null);
+	const [model, setModel] = React.useState(null);
+	const [category, setCategory] = React.useState(null);
+	const [sub_category, setSubCategory] = React.useState(null);
+	const [feature_0, set0] = React.useState(null);
+	const [feature_1, set1] = React.useState(null);
+	const [feature_2, set2] = React.useState(null);
+	const [feature_3, set3] = React.useState(null);
+	const [feature_4, set4] = React.useState(null);
+	const [feature_5, set5] = React.useState(null);
+	const [feature_6, set6] = React.useState(null);
+	const [feature_7, set7] = React.useState(null);
+	const [feature_8, set8] = React.useState(null);
+	const [feature_9, set9] = React.useState(null);
 
 	const [success, setSuccess] = React.useState(false);
 
 	const postHandler = () => {
-		const data = {
-			name,
-			model,
-			category,
-			sub_category,
-			sale_price,
-			units,
-			rental_price,
-			feature_0,
-			feature_1,
-			feature_2,
-			feature_3,
-			feature_4,
-			feature_5,
-			feature_6,
-			feature_7,
-			feature_8,
-			feature_9,
-			rental,
-		};
-		fetch('/products', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(data),
-		})
-			.then(() => {
+		axios
+			.put(`/products/update/${id}`, {
+				name,
+				model,
+				category,
+				sub_category,
+				feature_0,
+				feature_1,
+				feature_2,
+				feature_3,
+				feature_4,
+				feature_5,
+				feature_6,
+				feature_7,
+				feature_8,
+				feature_9,
+				sale_price,
+				rental_price,
+				rental,
+				units,
+			})
+			.then((response) => {
+				console.log(response);
 				setSuccess(true);
 				console.log('Success product created!');
 			})
 			.catch((err) => console.log(err));
 	};
 
+	console.log(success);
 	return (
 		<Grid container spacing={3}>
 			<Grid item xs={12}>
 				<Typography variant="h5" component="h5" className={classes.title}>
-					Create Product
+					Modify Product
 				</Typography>
 			</Grid>
 			{!success ? (
 				<>
 					<Grid container spacing={2} justify="center">
 						<Grid item xs={12} sm={10}>
+							<Paper className={classes.paper}>
+								<Typography variant="h5" component="h5">
+									Enter id to update
+								</Typography>
+								<TextField
+									name="id"
+									className={classes.input}
+									variant="standard"
+									label="Product Id"
+									//value={id}
+									onChange={(e) => setId(e.target.value)}
+								/>
+								<FormControl className={classes.input}>
+									<InputLabel shrink id="label">
+										still for rent
+									</InputLabel>
+									<Select
+										name="rental"
+										labelId="label"
+										value={rental}
+										onChange={(e) => setRental(e.target.value)}
+									>
+										<MenuItem value={1}>YES</MenuItem>
+										<MenuItem value={0}>NO</MenuItem>
+									</Select>
+								</FormControl>
+							</Paper>
+						</Grid>
+						<Grid item xs={12} sm={10}>
 							<TextField
 								className={classes.input}
 								variant="standard"
-								required
 								label="name"
 								name="name"
 								onChange={(e) => setName(e.target.value)}
 							/>
-
 							<TextField
-								name="model"
 								className={classes.input}
 								variant="standard"
 								label="model"
+								name="model"
 								onChange={(e) => setModel(e.target.value)}
 							/>
 						</Grid>
@@ -154,20 +184,6 @@ const CreateProduct = React.memo(() => {
 								label="# of units to sale"
 								onChange={(e) => setUnits(e.target.value)}
 							/>
-							<FormControl className={classes.input}>
-								<InputLabel shrink id="label">
-									for rent
-								</InputLabel>
-								<Select
-									name="rental"
-									labelId="label"
-									value={rental}
-									onChange={(e) => setRental(e.target.value)}
-								>
-									<MenuItem value={1}>YES</MenuItem>
-									<MenuItem value={0}>NO</MenuItem>
-								</Select>
-							</FormControl>
 						</Grid>
 						<Grid item xs={12} sm={10}>
 							<TextField
@@ -273,7 +289,7 @@ const CreateProduct = React.memo(() => {
 				</>
 			) : (
 				<Grid item xs={12}>
-					<Typography variant="h2">Success! Product Created</Typography>
+					<Typography variant="h2">Success! Product {id} updated</Typography>
 					<Button variant="contained" onClick={() => setSuccess(false)}>
 						add more
 					</Button>
@@ -283,4 +299,4 @@ const CreateProduct = React.memo(() => {
 	);
 });
 
-export default CreateProduct;
+export default ProductModify;
