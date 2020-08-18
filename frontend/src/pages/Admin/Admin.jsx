@@ -1,11 +1,8 @@
 import React from 'react';
 
-
-
-import ProductTable from './ProductTable';
 import CreateProductModal from './CreateProductModal';
-import {  withAuthenticationRequired } from "@auth0/auth0-react";
-import Logout from '../../auth/Logout';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
+import Logout from '../../components/Logout';
 import Spinner from '../../UI/Spinner';
 
 const Admin = () => {
@@ -13,12 +10,10 @@ const Admin = () => {
 		<div>
 			<Logout />
 			<CreateProductModal />
-			<ProductTable />
 		</div>
 	);
 };
 
-
 export default withAuthenticationRequired(Admin, {
 	onRedirecting: () => <Spinner />,
-  });
+});

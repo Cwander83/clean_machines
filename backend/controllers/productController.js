@@ -83,7 +83,6 @@ module.exports = {
 			const start = req.params.start;
 			const end = req.params.end;
 
-
 			let rentals = await db.Rentals.findAll({
 				where: {
 					[Op.and]: [
@@ -112,7 +111,6 @@ module.exports = {
 				return idArray;
 			});
 
-			
 			let products = await db.Products.findAll({
 				where: {
 					rental: 1,
@@ -124,6 +122,13 @@ module.exports = {
 		} catch (error) {
 			console.error(error);
 		}
+	},
+
+	// find all rentals
+	findAllRentals: (req, res) => {
+		db.Rentals.findAll({
+			include: db.Products,
+		}).then((result) => res.json(result));
 	},
 
 	// all products to sale

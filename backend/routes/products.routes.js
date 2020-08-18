@@ -15,8 +15,11 @@ router.get(
 	'/available-rent/:start/:end',
 	productController.findAllProductsForRentAndAvailable
 ); // all products for rent
+
 router.get('/sale', productController.findAllProductsForSale); // all products for sale
 router.get('/out', productController.findAllProductsOutOfStock); // all products out of stock
+
+router.get('/rentals', productController.findAllRentals);
 
 router.post('/', productController.createProductDB); // create product
 

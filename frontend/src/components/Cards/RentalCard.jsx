@@ -10,7 +10,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import picture from '../images/BGH19E.jpg';
+import picture from '../../images/BGH19E.jpg';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RentalCard = React.memo((product) => {
 	let { url } = useRouteMatch();
-	let{name,id} = product.product;
+	let { name, id, model } = product.product;
 	const classes = useStyles();
 	console.log(product);
 	return (
@@ -52,7 +52,7 @@ const RentalCard = React.memo((product) => {
 						/>
 						<CardContent>
 							<Typography gutterBottom variant="h5" component="h2">
-								{name}
+								{name ? name : model}
 							</Typography>
 						</CardContent>
 					</CardActionArea>
