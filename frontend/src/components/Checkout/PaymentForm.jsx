@@ -4,15 +4,16 @@ import { makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
+import Button from '@material-ui/core/Button'
+
 
 import {
 	CardNumberElement,
 	CardExpiryElement,
 	CardCvcElement,
-	useStripe,
-	useElements,
+	//useStripe,
+	//useElements,
 } from '@stripe/react-stripe-js';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,13 +27,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function PaymentForm() {
+export default function PaymentForm({prevStep, nextStep}) {
 	const classes = useStyles();
 
-	const stripe = useStripe();
-	const elements = useElements();
+	//const stripe = useStripe();
+	//const elements = useElements();
 	return (
 		<React.Fragment>
+			
 			<Typography variant="h6" gutterBottom>
 				Payment method
 			</Typography>
@@ -56,6 +58,14 @@ export default function PaymentForm() {
 					<Grid item xs={3}>
 						<CardCvcElement className={classes.stripe} />
 					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Button color="primary" variant="contained" type="submit" onClick={prevStep}>
+						back
+					</Button>
+					<Button color="primary" variant="contained" type="submit" onClick={nextStep}>
+						complete purchase
+					</Button>
 				</Grid>
 			</form>
 		</React.Fragment>

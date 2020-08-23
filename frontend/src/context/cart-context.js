@@ -27,19 +27,26 @@ const CartProvider = (props) => {
 		// //sales_boolean: true,
 	});
 	const [products, setProducts] = React.useState([]);
-	const [errors, setErrors] = React.useState([]);
+	
 
-	const updateUserHandler = (e) => {
-		const value = e.target.value;
-		setUser({ ...user, [e.target.name]: value });
-	};
+	const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+	
+
+	// const updateUserHandler = (e) => {
+	// 	const value = e.target.value;
+	// 	setUser({ ...user, [e.target.name]: value });
+	// };
+
+	const updateUserHandler =(data)=> setUser(data)
 	const updateProductsHandler = () => setProducts(true);
-
-	const errorsHandler = (error) => {
-		setErrors([...errors, errors.push(error)]);
-	};
-
-	const clearErrors = () => setErrors([]);
 
 	console.log(user);
 
@@ -50,9 +57,11 @@ const CartProvider = (props) => {
 				updateUser: updateUserHandler,
 				updateProduct: updateProductsHandler,
 				products: products,
-				errors: errors,
-				clearErrors: clearErrors,
-				errorsHandler: errorsHandler,
+				open: open,
+				handleClickOpen: handleClickOpen,
+				handleClose: handleClose
+				
+			
 			}}
 		>
 			{props.children}

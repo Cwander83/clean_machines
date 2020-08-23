@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import { useForm } from 'react-hook-form';
+
 
 import { CartContext } from '../../context/cart-context.js';
 
@@ -16,18 +17,41 @@ const useStyles = makeStyles((theme) => ({
 			width: '100%',
 		},
 	},
+	buttons: {
+		display: 'flex',
+		justifyContent: 'flex-end',
+	},
+	button: {
+		marginTop: theme.spacing(3),
+		marginLeft: theme.spacing(1),
+	},
 }));
 
-export default function AddressForm() {
+export default function AddressForm({ nextStep }) {
 	const classes = useStyles();
+	const { register, handleSubmit, errors } = useForm();
 	const { updateUser } = React.useContext(CartContext);
+
+	const onSubmit = (data) => {
+		console.log(data);
+		if (data) {
+			updateUser(data);
+			nextStep();
+		}
+	};
 
 	return (
 		<React.Fragment>
+	
+			  
 			<Typography variant="h6" gutterBottom>
-				Shipping address
+				Delivery Address
 			</Typography>
-			<form className={classes.form} noValidate>
+			<form
+				className={classes.form}
+				noValidate
+				onSubmit={handleSubmit(onSubmit)}
+			>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={6}>
 						<TextField
@@ -37,8 +61,10 @@ export default function AddressForm() {
 							label="First name"
 							fullWidth
 							autoComplete="given-name"
-							onChange={(e) => updateUser(e)}
+							error={!!errors.firstName}
+							inputRef={register({ required: true })}
 						/>
+						
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField
@@ -48,7 +74,33 @@ export default function AddressForm() {
 							label="Last name"
 							fullWidth
 							autoComplete="family-name"
-							onChange={(e) => updateUser(e)}
+							error={!!errors.lastName}
+							inputRef={register({ required: true })}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<TextField
+							required
+							id="email"
+							name="email"
+							label="Email"
+							fullWidth
+							autoComplete="email"
+							error={!!errors.email}
+							inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
+						/>
+						<p>{errors.email && 'not valid email'}</p>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<TextField
+							required
+							id="phone"
+							name="phone"
+							label="Phone Number"
+							fullWidth
+							autoComplete="phone"
+							error={!!errors.phone}
+							inputRef={register({ required: true })}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -58,8 +110,9 @@ export default function AddressForm() {
 							name="shipping_line1"
 							label="Address line 1"
 							fullWidth
-							autoComplete="shipping address-line1"
-							onChange={(e) => updateUser(e)}
+							autoComplete="address-line1"
+							error={!!errors.shipping_line1}
+							inputRef={register({ required: true })}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -69,7 +122,7 @@ export default function AddressForm() {
 							label="Address line 2"
 							fullWidth
 							autoComplete="shipping address-line2"
-							onChange={(e) => updateUser(e)}
+							inputRef={register}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -80,16 +133,21 @@ export default function AddressForm() {
 							label="City"
 							fullWidth
 							autoComplete="shipping address-level2"
-							onChange={(e) => updateUser(e)}
+							error={!!errors.shipping_city}
+							inputRef={register({ required: true })}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField
+						required
 							id="state"
 							name="shipping_state"
-							label="State/Province/Region"
+							label="State"
+							defaultValue="FL"
+							disabled
 							fullWidth
-							onChange={(e) => updateUser(e)}
+							
+							inputRef={register}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -100,13 +158,19 @@ export default function AddressForm() {
 							label="Zip / Postal code"
 							fullWidth
 							autoComplete="shipping postal-code"
-							onChange={(e) => updateUser(e)}
+							error={!!errors.shipping_postal_code}
+							inputRef={register({ required: true, pattern: /^\d{5}$|^\d{5}-\d{4}$/ })}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}></Grid>
-					<Grid item xs={12}></Grid>
+					<Grid item xs={12}>
+						<Button color="primary" variant="contained" type="submit">
+							Review order
+						</Button>
+					</Grid>
 				</Grid>
 			</form>
+		
 		</React.Fragment>
 	);
 }

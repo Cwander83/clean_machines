@@ -6,15 +6,12 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 import SingleRental from '../../components/SingleRental';
-import RentalCard from '../../components/Cards/RentalCard';
-import RentalSearch from '../../components/RentalSearch';
-import LocationChecker from '../../components/LocationChecker';
-
 import { RentalContext } from '../../context/rental-context';
 import RentalStepper from './RentalStepper';
-import { green } from '@material-ui/core/colors';
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -28,21 +25,19 @@ const useStyles = makeStyles((theme) => ({
 		// padding: theme.spacing(1),
 	},
 	gallery: {},
+	// productsContainer: {
+	// 	border: '1px green solid'
+	// },
 }));
 
 const Rentals = () => {
 	const classes = useStyles();
-	let {
-		path,
-		// url
-	} = useRouteMatch();
+	let { path } = useRouteMatch();
 	const { availableProducts } = React.useContext(RentalContext);
 
 	React.useEffect(() => {
 		return () => {};
 	}, [availableProducts]);
-
-	//console.log(availableProducts);
 
 	return (
 		<Container maxWidth="lg">
@@ -59,17 +54,10 @@ const Rentals = () => {
 					</Grid>
 				</Grid>
 				<Grid item sm></Grid>
-				<Grid item xs={12}sm={6}>
+				<Grid item xs={12} sm={8}>
 					<RentalStepper />
 				</Grid>
 				<Grid item sm></Grid>
-				{/* 
-				<Grid item xs={12}>
-					<LocationChecker />
-				</Grid>
-				<Grid item xs={12}>
-					<RentalSearch />
-				</Grid> */}
 
 				<Switch>
 					{/* where the products to rent will show up */}
@@ -78,21 +66,29 @@ const Rentals = () => {
 							container
 							spacing={2}
 							justify="center"
+							alignContent="center"
 							className={classes.gallery}
+							component={Paper}
 						>
 							{availableProducts.length !== 0 ? (
 								availableProducts.map((obj, i) => {
-									return <RentalCard key={obj.id} product={obj} />;
+									return (
+										<React.Fragment key={obj.id}>
+											<Grid item xs={12} className={classes.productsContainer}>
+												<SingleRental product={obj} />
+											</Grid>
+										</React.Fragment>
+									);
 								})
 							) : (
 								<Typography variant="h5">coming soon</Typography>
 							)}
 						</Grid>
 					</Route>
-					<Route
+					{/* <Route
 						path={`${path}/:id`}
 						render={(routeProps) => <SingleRental {...routeProps} />}
-					/>
+					/> */}
 				</Switch>
 			</Grid>
 		</Container>

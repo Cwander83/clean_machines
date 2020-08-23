@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import LocationChecker from '../../components/LocationChecker';
 import RentalSearch from '../../components/RentalSearch';
 import RentalCategory from '../../components/RentalCategory';
-import { Grid } from '@material-ui/core';
+//import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 	resetContainer: {
 		padding: theme.spacing(3),
 	},
+	label: {
+		textAlign: 'left'
+	}
 }));
 
 function getSteps() {
@@ -73,7 +76,7 @@ export default function RentalStepper() {
 				{steps.map((label, index) => (
 					<Step key={label}>
 						
-							<StepLabel>{label}</StepLabel>
+							<StepLabel className={classes.label}>{label}</StepLabel>
 							<StepContent>
 								{getStepContent(index)}
 								<div className={classes.actionsContainer}>
@@ -91,7 +94,7 @@ export default function RentalStepper() {
 											onClick={handleNext}
 											className={classes.button}
 										>
-											{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+											{activeStep === steps.length - 1 ? 'Find Rentals' : 'Next'}
 										</Button>
 									</div>
 								</div>
@@ -100,14 +103,14 @@ export default function RentalStepper() {
 					</Step>
 				))}
 			</Stepper>
-			{/* {activeStep === steps.length && (
+			{activeStep === steps.length && (
 				<Paper square elevation={0} className={classes.resetContainer}>
 					<Typography>All steps completed - you&apos;re finished</Typography>
 					<Button onClick={handleReset} className={classes.button}>
 						Reset
 					</Button>
 				</Paper>
-			)} */}
+			)}
 		</div>
 	);
 }

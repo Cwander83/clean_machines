@@ -17,7 +17,31 @@ const RentalContextProvider = (props) => {
 		startDate: null,
 		endDate: null,
 	});
-	const [availableProducts, setAvailableProducts] = React.useState([]);
+	const [availableProducts, setAvailableProducts] = React.useState([
+		{
+			id: 1,
+			name: 'thunder bucket',
+			model: 'AGM4000',
+			sale_price: 5,
+			rental_price: 2,
+			category: 'a',
+			sub_category: 'a',
+			rental: 1,
+			units: 5,
+			feature_0: 'this is 3',
+			feature_1: '333 difejf',
+			feature_2: 'width: 234oc',
+			feature_3: 'height ded',
+			feature_4: 'bddfv',
+			feature_5: 'lll',
+			feature_6: 'll',
+			feature_7: '99999',
+			feature_8: '99999',
+			feature_9: '9999999',
+			createdAt: '2020-08-10T20:31:37.000Z',
+			updatedAt: '2020-08-15T01:19:08.000Z',
+		},
+	]);
 
 	const getAvailableRentals = () => {
 		let start = moment(rentalDates.startDate).format('YYYY-MM-DD');
@@ -70,7 +94,6 @@ const RentalContextProvider = (props) => {
 				rentalDates,
 				availableProducts,
 				getAvailableRentals,
-				
 			}}
 		>
 			{props.children}

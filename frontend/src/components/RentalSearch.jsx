@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { DatePicker } from '@material-ui/pickers';
 import { Grid, Paper, Button } from '@material-ui/core';
 import { RentalContext } from '../context/rental-context';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 //import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
