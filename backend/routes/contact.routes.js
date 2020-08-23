@@ -3,10 +3,10 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-	host: 'smtp.gmail.com', //replace with your email provider
-	port: 465,
+	host: process.env.GMAIL_HOST, //replace with your email provider
+	port: process.env.GMAIL_PORT,
 	auth: {
-		user: 'chriswandermail@gmail.com', //replace with the email address
+		user: process.env.GMAIL_USER, //replace with the email address
 		pass: process.env.GMAIL_PASS, //replace with the password
 	},
 });
