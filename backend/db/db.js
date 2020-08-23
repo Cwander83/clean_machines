@@ -2,11 +2,9 @@ const db = require('../config/config');
 const moment = require('moment');
 const { Op } = require('sequelize');
 
-
 module.exports = {
-
 	createRental: async (items, dbCustomer) => {
-		 console.log(`create Rentals`);
+		console.log(`create Rentals`);
 		// console.log('items: ' + JSON.stringify(items, null, 2));
 		// console.log('length: ' + items.rental.length);
 		// console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
@@ -40,7 +38,7 @@ module.exports = {
 		});
 	},
 	createRentalAndSales: async (items, customer) => {
-		 console.log(`create Rentals`);
+		console.log(`create Rentals`);
 		// console.log('items: ' + JSON.stringify(items, null, 2));
 		// console.log('length: ' + items.rental.length);
 		// console.log('customer: ' + JSON.stringify(customer, null, 2));
@@ -82,7 +80,7 @@ module.exports = {
 		}
 	},
 	createSales: async (items, dbCustomer) => {
-		 console.log(`create Rentals`);
+		console.log(`create Rentals`);
 		// console.log('items: ' + JSON.stringify(items, null, 2));
 		// console.log('length: ' + items.rental.length);
 		// console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));

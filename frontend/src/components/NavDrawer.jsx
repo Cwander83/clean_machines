@@ -120,7 +120,7 @@ const NavDrawer = () => {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h3" color="inherit"></Typography>
-					<IconButton color="inherit">
+					<IconButton color="inherit" component={Link} to="/cart">
 						<ShoppingCartIcon />
 						cart
 					</IconButton>

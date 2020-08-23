@@ -5,6 +5,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
 import { CartContext } from '../../context/cart-context';
 
 const products = [
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Review() {
+export default function Review({nextStep, prevStep}) {
 	const { user } = React.useContext(CartContext);
 
 	React.useEffect(() => {}, []);
@@ -60,12 +62,14 @@ export default function Review() {
 					</Typography>
 				</ListItem>
 			</List>
-			<Grid container spacing={2}>
-				<Grid item xs={12} sm={6}>
+			<Grid container spacing={2} justify="center">
+				<Grid item xs={12}>
 					<Typography variant="h6" gutterBottom className={classes.title}>
-						Shipping
+						Delivery Address
 					</Typography>
-					<Typography gutterBottom>John Smith</Typography>
+					<Typography gutterBottom>
+						{user.firstName} {user.lastName}
+					</Typography>
 					<Typography gutterBottom>
 						{user.shipping_line1}
 						<br /> {user.shipping_line2}
@@ -74,7 +78,14 @@ export default function Review() {
 						{user.shipping_postal_code}
 					</Typography>
 				</Grid>
-				<Grid item container direction="column" xs={12} sm={6}></Grid>
+				<Grid item xs={12}>
+					<Button color="primary" variant="contained" type="submit" onClick={prevStep}>
+						back
+					</Button>
+					<Button color="primary" variant="contained" type="submit" onClick={nextStep}>
+						purchase
+					</Button>
+				</Grid>
 			</Grid>
 		</React.Fragment>
 	);

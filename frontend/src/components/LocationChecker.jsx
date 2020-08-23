@@ -2,11 +2,12 @@ import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+//import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
+import GoogleImage from '../images/google-maps-central-fl.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -22,10 +23,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 	searchField: {
 		display: 'flex',
-		alignContent: 'baseline',
+		
+		alignContent: 'center',
 		justifyContent: 'center',
 	},
 	gallery: {},
+	img: {
+		width: '200px',
+	},
+	searchButton: {
+		margin: '0 auto',
+		height: '40px',
+		width: '200px'
+	},
 }));
 
 const LocationChecker = () => {
@@ -93,14 +103,10 @@ const LocationChecker = () => {
 					STEP 1. Check if you're service area
 				</Typography>
 			</Grid> */}
-			<Grid item sm></Grid>
+			<Grid item sm>
+				<img src={GoogleImage} alt="map" className={classes.img} />
+			</Grid>
 			<Grid item xs={12} sm={6} className={classes.searchField}>
-				{/* <TextField
-					name="line"
-					label="Street Address"
-					variant="standard"
-					onChange={(e) => setLocation({ ...location, line: e.target.value })}
-				/> */}
 				<TextField
 					name="line"
 					variant="standard"
@@ -110,17 +116,13 @@ const LocationChecker = () => {
 					}
 				/>
 				<Button
+					className={classes.searchButton}
 					variant="outlined"
 					disabled={location.line === '' && location.zipcode === null}
-					onClick={async () => {
-						getCoords();
-					}}
+					onClick={getCoords}
 				>
 					Check address
-				</Button>
-			</Grid>
-			<Grid item sm>
-				<Typography variant="h6">
+				</Button>	<Typography variant="h6">
 					{!error
 						? distance
 							? distance <= 60
@@ -130,6 +132,7 @@ const LocationChecker = () => {
 						: 'Sorry didnt get that'}
 				</Typography>
 			</Grid>
+			
 			{/* <p>lng: {coords.work.lng}</p>
 			<p>lat: {coords.work.lat}</p>
 			<p>client Lng: {coords.client.lng}</p>
