@@ -27,28 +27,29 @@ const CartProvider = (props) => {
 		// //sales_boolean: true,
 	});
 	const [products, setProducts] = React.useState([]);
-	
 
 	const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-	
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	// const updateUserHandler = (e) => {
 	// 	const value = e.target.value;
 	// 	setUser({ ...user, [e.target.name]: value });
 	// };
 
-	const updateUserHandler =(data)=> setUser(data)
-	const updateProductsHandler = () => setProducts(true);
+	
+	const updateUserHandler = (data) => setUser(data);
 
-	console.log(user);
+
+	const updateProductsHandler = ({ data }) => setProducts([...products, data]);
+
+	console.log(products);
 
 	return (
 		<CartContext.Provider
@@ -59,9 +60,7 @@ const CartProvider = (props) => {
 				products: products,
 				open: open,
 				handleClickOpen: handleClickOpen,
-				handleClose: handleClose
-				
-			
+				handleClose: handleClose,
 			}}
 		>
 			{props.children}

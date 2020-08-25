@@ -3,11 +3,7 @@ import moment from 'moment';
 
 // store default value
 export const RentalContext = React.createContext({
-	rentalDates: {},
-	availableProducts: [],
-	startDateHandler: () => {},
-	endDateHandler: () => {},
-	getAvailableRentals: () => {},
+
 });
 
 // Provider
