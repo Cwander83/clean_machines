@@ -33,10 +33,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		marginTop: theme.spacing(2),
+		textAlign: 'center',
 	},
 }));
 
-export default function Review({nextStep, prevStep}) {
+export default function Review({ nextStep, prevStep }) {
 	const { user } = React.useContext(CartContext);
 
 	React.useEffect(() => {}, []);
@@ -63,7 +64,7 @@ export default function Review({nextStep, prevStep}) {
 				</ListItem>
 			</List>
 			<Grid container spacing={2} justify="center">
-				<Grid item xs={12}>
+				<Grid item xs={12} sm={6}>
 					<Typography variant="h6" gutterBottom className={classes.title}>
 						Delivery Address
 					</Typography>
@@ -78,12 +79,32 @@ export default function Review({nextStep, prevStep}) {
 						{user.shipping_postal_code}
 					</Typography>
 				</Grid>
+				<Grid item xs={12} sm={6}>
+					<Typography variant="h6" gutterBottom className={classes.title}>
+						Shipping Address
+					</Typography>
+					<Typography gutterBottom>
+						{user.firstName} {user.lastName}
+					</Typography>
+					<Typography gutterBottom>
+						{user.shipping_line1}
+						<br /> {user.shipping_line2}
+						<br />
+						{user.shipping_city} {user.shipping_state}{' '}
+						{user.shipping_postal_code}
+					</Typography>
+				</Grid>
 				<Grid item xs={12}>
-					<Button color="primary" variant="contained" type="submit" onClick={prevStep}>
+					<Button color="primary" variant="contained" onClick={prevStep}>
 						back
 					</Button>
-					<Button color="primary" variant="contained" type="submit" onClick={nextStep}>
-						purchase
+					<Button
+						color="primary"
+						variant="contained"
+						type="submit"
+						onClick={nextStep}
+					>
+						payment
 					</Button>
 				</Grid>
 			</Grid>

@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useForm } from 'react-hook-form';
 
-
 import { CartContext } from '../../context/cart-context.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,10 +26,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function AddressForm({ nextStep }) {
+export default function DeliveryForm({ nextStep }) {
 	const classes = useStyles();
+
 	const { register, handleSubmit, errors } = useForm();
+
 	const { updateUser } = React.useContext(CartContext);
+
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -42,10 +44,11 @@ export default function AddressForm({ nextStep }) {
 
 	return (
 		<React.Fragment>
-	
-			  
 			<Typography variant="h6" gutterBottom>
 				Delivery Address
+			</Typography>
+			<Typography variant="h6" onClick={nextStep}>
+				click here if not a rental
 			</Typography>
 			<form
 				className={classes.form}
@@ -64,7 +67,6 @@ export default function AddressForm({ nextStep }) {
 							error={!!errors.firstName}
 							inputRef={register({ required: true })}
 						/>
-						
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField
@@ -139,14 +141,13 @@ export default function AddressForm({ nextStep }) {
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<TextField
-						required
+							required
 							id="state"
 							name="shipping_state"
 							label="State"
 							defaultValue="FL"
 							disabled
 							fullWidth
-							
 							inputRef={register}
 						/>
 					</Grid>
@@ -159,18 +160,20 @@ export default function AddressForm({ nextStep }) {
 							fullWidth
 							autoComplete="shipping postal-code"
 							error={!!errors.shipping_postal_code}
-							inputRef={register({ required: true, pattern: /^\d{5}$|^\d{5}-\d{4}$/ })}
+							inputRef={register({
+								required: true,
+								pattern: /^\d{5}$|^\d{5}-\d{4}$/,
+							})}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}></Grid>
 					<Grid item xs={12}>
 						<Button color="primary" variant="contained" type="submit">
-							Review order
+							next
 						</Button>
 					</Grid>
 				</Grid>
 			</form>
-		
 		</React.Fragment>
 	);
 }
