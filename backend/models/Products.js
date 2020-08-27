@@ -18,9 +18,17 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
-		rental_price: {
+		rental_day: {
 			type: DataTypes.INTEGER,
-			allowNull: false,
+			
+		},
+		rental_two_day: {
+			type: DataTypes.INTEGER,
+		
+		},
+		rental_week: {
+			type: DataTypes.INTEGER,
+			
 		},
 
 		category: {
@@ -38,7 +46,42 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.INTEGER,
 			defaultValue: 0,
 		},
-		feature_0: {
+		short_description: { type: DataTypes.STRING },
+		cord: {
+			type: DataTypes.STRING,
+		},
+		weight: {
+			type: DataTypes.STRING,
+		},
+		height: {
+			type: DataTypes.STRING,
+		},
+		width: {
+			type: DataTypes.STRING,
+		},
+		tools: {
+			type: DataTypes.STRING,
+		},
+		motor: {
+			type: DataTypes.STRING,
+		},
+		sound_pressure: {
+			type: DataTypes.STRING,
+		},
+		container_capacity: {
+			type: DataTypes.STRING,
+		},
+		tank_capacity: {
+			type: DataTypes.STRING,
+		},
+		speed: {
+			type: DataTypes.STRING,
+		},
+		size: {
+			type: DataTypes.STRING,
+		},
+
+		feature_1: {
 			type: DataTypes.STRING,
 		},
 		feature_1: {
@@ -56,20 +99,7 @@ module.exports = (sequelize, DataTypes) => {
 		feature_5: {
 			type: DataTypes.STRING,
 		},
-		feature_6: {
-			type: DataTypes.STRING,
-		},
-		feature_7: {
-			type: DataTypes.STRING,
-		},
-		feature_8: {
-			type: DataTypes.STRING,
-		},
-		feature_9: {
-			type: DataTypes.STRING,
-		},
 	});
-
 
 	return Products;
 };

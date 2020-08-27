@@ -42,7 +42,7 @@ const ProductChanges = () => {
 				</ButtonGroup>
 			</Grid>
 			{open ? (
-				<Grid item xs={12} sm={6} component={Paper}>
+				<Grid item xs={12} sm={8} component={Paper}>
 					{!state ? <CreateProduct /> : <ProductModify />}
 				</Grid>
 			) : (

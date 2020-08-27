@@ -10,6 +10,27 @@ module.exports = (sequelize, DataTypes) => {
 		email: {
 			type: DataTypes.STRING,
 		},
+		name: {
+			type: DataTypes.STRING,
+		},
+		phone: {
+			type: DataTypes.STRING,
+		},
+		billing_line1: {
+			type: DataTypes.STRING,
+		},
+		billing_line2: {
+			type: DataTypes.STRING,
+		},
+		billing_city: {
+			type: DataTypes.STRING,
+		},
+		billing_zipcode: {
+			type: DataTypes.STRING,
+		},
+		billing_state: {
+			type: DataTypes.STRING,
+		},
 
 		stripe_id: {
 			type: DataTypes.STRING,

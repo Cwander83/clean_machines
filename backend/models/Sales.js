@@ -6,9 +6,30 @@ module.exports = (sequelize, DataTypes) => {
 			autoIncrement: true,
 			primaryKey: true,
 		},
-	
+		shipping_name: {
+			type: DataTypes.STRING,
+		},
+		shipping_line1: {
+			type: DataTypes.STRING,
+		},
+		shipping_line2: {
+			type: DataTypes.STRING,
+		},
+		shipping_city: {
+			type: DataTypes.STRING,
+		},
+		shipping_zipcode: {
+			type: DataTypes.STRING,
+		},
+		shipping_state: {
+			type: DataTypes.STRING,
+		},
+		stripe_id: {
+			type: DataTypes.STRING,
+		},
+
 		// total price
-		price_per_unit: {
+		total: {
 			type: DataTypes.INTEGER,
 		},
 		products_purchased: {
@@ -16,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	});
 	Sales.associate = function (models) {
-	
 		Sales.belongsTo(models.Products, {
 			foreignKey: {
 				allowNull: false,
