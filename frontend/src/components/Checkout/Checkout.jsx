@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
-import CheckoutForm from './CheckoutForm';
+import CheckoutStepper from './CheckoutStepper';
 
 import { CartContext } from '../../context/cart-context';
 
@@ -51,7 +51,7 @@ const Checkout = () => {
 							Checkout
 						</Typography>
 
-						<CheckoutForm />
+						<CheckoutStepper />
 					</Paper>
 				</main>
 			</Dialog>
