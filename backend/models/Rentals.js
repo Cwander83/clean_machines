@@ -9,13 +9,10 @@ module.exports = (sequelize, DataTypes) => {
 		},
 
 		// total price
-		rental_price_day: {
+		rental_total: {
 			type: DataTypes.INTEGER,
 		},
 		rental_days: {
-			type: DataTypes.INTEGER,
-		},
-		deposit: {
 			type: DataTypes.INTEGER,
 		},
 
@@ -25,7 +22,22 @@ module.exports = (sequelize, DataTypes) => {
 		end_date: {
 			type: DataTypes.DATEONLY,
 		},
-		location: {
+		rental_name: {
+			type: DataTypes.STRING,
+		},
+		rental_line1: {
+			type: DataTypes.STRING,
+		},
+		rental_line2: {
+			type: DataTypes.STRING,
+		},
+		rental_city: {
+			type: DataTypes.STRING,
+		},
+		rental_zipcode: {
+			type: DataTypes.STRING,
+		},
+		rental_state: {
 			type: DataTypes.STRING,
 		},
 	});
