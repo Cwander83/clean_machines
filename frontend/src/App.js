@@ -26,6 +26,7 @@ import Cart from './pages/Cart/Cart';
 
 import CartProvider from './context/cart-context';
 import SalesContextProvider from './context/sales-context';
+import AdminContextProvider from './context/admin-context';
 
 function App() {
 	const { isLoading } = useAuth0();
@@ -44,20 +45,22 @@ function App() {
 
 							<Switch>
 								<Route exact path="/" component={Home} />
-								<ProtectedRoute exact path="/admin" component={Admin} />
-								<ProtectedRoute
-									path="/admin/rentals"
-									component={AdminRentals}
-								/>
-								<ProtectedRoute path="/admin/sales" component={AdminSales} />
-								<ProtectedRoute
-									path="/admin/products"
-									component={AllProducts}
-								/>
-								<ProtectedRoute
-									path="/admin/customers"
-									component={AdminCustomers}
-								/>
+								<AdminContextProvider>
+									<ProtectedRoute exact path="/admin" component={Admin} />
+									<ProtectedRoute
+										path="/admin/rentals"
+										component={AdminRentals}
+									/>
+									<ProtectedRoute path="/admin/sales" component={AdminSales} />
+									<ProtectedRoute
+										path="/admin/products"
+										component={AllProducts}
+									/>
+									<ProtectedRoute
+										path="/admin/customers"
+										component={AdminCustomers}
+									/>
+								</AdminContextProvider>
 								<Route path="/rentals" component={Rentals} />
 								<Route path="/videos" component={Videos} />
 								<Route path="/contact" component={Contact} />
