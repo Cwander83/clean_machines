@@ -3,8 +3,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,9 +17,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Typography from '@material-ui/core/Typography';
+
 import TableHead from '@material-ui/core/TableHead';
 
 
@@ -141,13 +138,13 @@ const AllProductsTable = React.memo(() => {
 
 	function Row(props) {
 		const { row } = props;
-		const [open, setOpen] = React.useState(false);
+		
 		const classes = useRowStyles();
 
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					<TableCell>
+					{/* <TableCell>
 						<IconButton
 							aria-label="expand row"
 							size="small"
@@ -155,18 +152,83 @@ const AllProductsTable = React.memo(() => {
 						>
 							{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
 						</IconButton>
-					</TableCell>
+					</TableCell> */}
 					<TableCell align="left">{row.id}</TableCell>
 					<TableCell align="left">{row.name}</TableCell>
 					<TableCell align="left">{row.model}</TableCell>
 					<TableCell align="left">{row.category}</TableCell>
-					<TableCell align="left">{row.sub_category}</TableCell>
-					<TableCell align="center">{row.sale_price}</TableCell>
-					<TableCell align="center">{row.rental_price}</TableCell>
-					<TableCell align="center">{row.units}</TableCell>
-					<TableCell align="center">{row.rental ? 'YES' : 'NO'}</TableCell>
+					
+				
 				</TableRow>
-				<TableRow>
+		
+			</React.Fragment>
+		);
+	}
+
+	return (
+		
+				<TableContainer component={Paper}>
+					<Table className={classes.table} aria-label="products table">
+						<TableHead>
+							<TableRow>
+								
+								<TableCell>id</TableCell>
+								<TableCell>name</TableCell>
+								<TableCell align="left">model</TableCell>
+								<TableCell align="left">category</TableCell>
+								
+								
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{(rowsPerPage > 0
+								? rows.slice(
+										page * rowsPerPage,
+										page * rowsPerPage + rowsPerPage
+								  )
+								: rows
+							).map((row, i) => (
+								<Row key={i} row={row} />
+							))}
+
+							{emptyRows > 0 && (
+								<TableRow style={{ height: 53 * emptyRows }}>
+									<TableCell colSpan={12} />
+								</TableRow>
+							)}
+						</TableBody>
+						<TableFooter>
+							<TableRow>
+								<TablePagination
+									rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+									colSpan={12}
+									count={rows.length}
+									rowsPerPage={rowsPerPage}
+									page={page}
+									SelectProps={{
+										inputProps: { 'aria-label': 'rows per page' },
+										native: true,
+									}}
+									onChangePage={handleChangePage}
+									onChangeRowsPerPage={handleChangeRowsPerPage}
+									ActionsComponent={TablePaginationActions}
+								/>
+							</TableRow>
+						</TableFooter>
+					</Table>
+				</TableContainer>
+	
+	);
+});
+
+export default AllProductsTable;
+
+
+
+
+
+
+		{/* <TableRow>
 					<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={20}>
 						<Collapse in={open} timeout="auto" unmountOnExit>
 							<Box margin={1}>
@@ -264,68 +326,4 @@ const AllProductsTable = React.memo(() => {
 							</Box>
 						</Collapse>
 					</TableCell>
-				</TableRow>
-			</React.Fragment>
-		);
-	}
-
-	return (
-		
-				<TableContainer component={Paper}>
-					<Table className={classes.table} aria-label="products table">
-						<TableHead>
-							<TableRow>
-								<TableCell />
-								<TableCell>id</TableCell>
-								<TableCell>name</TableCell>
-								<TableCell align="left">model</TableCell>
-								<TableCell align="left">category</TableCell>
-								<TableCell align="left">sub category</TableCell>
-								<TableCell align="right">sale price</TableCell>
-								<TableCell align="right">rental per day</TableCell>
-								<TableCell align="right">inventory (for sale)</TableCell>
-								<TableCell align="right">rental (YES or NO)</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{(rowsPerPage > 0
-								? rows.slice(
-										page * rowsPerPage,
-										page * rowsPerPage + rowsPerPage
-								  )
-								: rows
-							).map((row, i) => (
-								<Row key={i} row={row} />
-							))}
-
-							{emptyRows > 0 && (
-								<TableRow style={{ height: 53 * emptyRows }}>
-									<TableCell colSpan={12} />
-								</TableRow>
-							)}
-						</TableBody>
-						<TableFooter>
-							<TableRow>
-								<TablePagination
-									rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-									colSpan={12}
-									count={rows.length}
-									rowsPerPage={rowsPerPage}
-									page={page}
-									SelectProps={{
-										inputProps: { 'aria-label': 'rows per page' },
-										native: true,
-									}}
-									onChangePage={handleChangePage}
-									onChangeRowsPerPage={handleChangeRowsPerPage}
-									ActionsComponent={TablePaginationActions}
-								/>
-							</TableRow>
-						</TableFooter>
-					</Table>
-				</TableContainer>
-	
-	);
-});
-
-export default AllProductsTable;
+				</TableRow> */}

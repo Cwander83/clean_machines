@@ -5,10 +5,17 @@ const Rentals = require('../models/Rentals');
 const moment = require('moment');
 const { findRentalIds } = require('../db/db');
 const { sequelize } = require('../config/config');
-//const { deleteProduct } = require('../stripe/stripe.products');
+const {
+	deleteProduct,
+	createProduct,
+	
+	findSku,
+	findSingleProduct
+} = require('../stripe/stripe.products');
+const stripeCharges = require('../stripe/stripe.charges');
 
 module.exports = {
-	// create a product
+	// create a product on DB
 	createProductDB: (req, res) => {
 		db.Products.create({
 			name: req.body.name,
@@ -32,8 +39,7 @@ module.exports = {
 			container_capacity: req.body.container_capacity,
 			tank_capacity: req.body.tank_capacity,
 			speed: req.body.speed,
-			size: req.boyd.size,
-
+			size: req.body.size,
 			feature_1: req.body.feature_1,
 			feature_2: req.body.feature_2,
 			feature_3: req.body.feature_3,
@@ -50,6 +56,7 @@ module.exports = {
 			.catch((err) => console.log(err));
 	},
 
+
 	// all products
 	findAllProducts: (req, res) => {
 		db.Products.findAll()
@@ -60,7 +67,7 @@ module.exports = {
 			.catch((err) => console.error(err));
 	},
 
-	// all products
+	// find one products
 	findProduct: (req, res) => {
 		db.Products.findOne({
 			where: { id: req.params.id },
@@ -71,6 +78,7 @@ module.exports = {
 			})
 			.catch((err) => console.error(err));
 	},
+
 
 	// all products to rent
 	findAllProductsForRent: (req, res) => {
