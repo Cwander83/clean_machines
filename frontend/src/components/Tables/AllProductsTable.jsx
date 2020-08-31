@@ -17,9 +17,10 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TableHead from '@material-ui/core/TableHead';
-
+import { AdminContext } from '../../context/admin-context';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -109,11 +110,14 @@ const useStyles2 = makeStyles((theme) => ({
 }));
 
 const AllProductsTable = React.memo(() => {
+	const { product, setProduct,setDeleteBtn, setEditBtn} = React.useContext(AdminContext);
 	const classes = useStyles2();
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 	const [rows, setData] = React.useState([]);
+
+	console.log(JSON.stringify(product, null, 2));
 
 	React.useEffect(() => {
 		const fetchData = async () => {
@@ -138,7 +142,7 @@ const AllProductsTable = React.memo(() => {
 
 	function Row(props) {
 		const { row } = props;
-		
+
 		const classes = useRowStyles();
 
 		return (
@@ -157,173 +161,66 @@ const AllProductsTable = React.memo(() => {
 					<TableCell align="left">{row.name}</TableCell>
 					<TableCell align="left">{row.model}</TableCell>
 					<TableCell align="left">{row.category}</TableCell>
-					
-				
+					<TableCell>
+						<ButtonGroup>
+						
+							<Button onClick={() => {setProduct(row); }}>view</Button>
+							<Button onClick={() => {setProduct(row); }}>edit</Button>
+							<Button onClick={() => {setProduct(row); }}>delete</Button>
+						</ButtonGroup>
+					</TableCell>
 				</TableRow>
-		
 			</React.Fragment>
 		);
 	}
 
 	return (
-		
-				<TableContainer component={Paper}>
-					<Table className={classes.table} aria-label="products table">
-						<TableHead>
-							<TableRow>
-								
-								<TableCell>id</TableCell>
-								<TableCell>name</TableCell>
-								<TableCell align="left">model</TableCell>
-								<TableCell align="left">category</TableCell>
-								
-								
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{(rowsPerPage > 0
-								? rows.slice(
-										page * rowsPerPage,
-										page * rowsPerPage + rowsPerPage
-								  )
-								: rows
-							).map((row, i) => (
-								<Row key={i} row={row} />
-							))}
+		<TableContainer component={Paper}>
+			<Table className={classes.table} aria-label="products table">
+				<TableHead>
+					<TableRow>
+						<TableCell>id</TableCell>
+						<TableCell>name</TableCell>
+						<TableCell align="left">model</TableCell>
+						<TableCell align="left">category</TableCell>
+						<TableCell></TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{(rowsPerPage > 0
+						? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+						: rows
+					).map((row, i) => (
+						<Row key={i} row={row} />
+					))}
 
-							{emptyRows > 0 && (
-								<TableRow style={{ height: 53 * emptyRows }}>
-									<TableCell colSpan={12} />
-								</TableRow>
-							)}
-						</TableBody>
-						<TableFooter>
-							<TableRow>
-								<TablePagination
-									rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-									colSpan={12}
-									count={rows.length}
-									rowsPerPage={rowsPerPage}
-									page={page}
-									SelectProps={{
-										inputProps: { 'aria-label': 'rows per page' },
-										native: true,
-									}}
-									onChangePage={handleChangePage}
-									onChangeRowsPerPage={handleChangeRowsPerPage}
-									ActionsComponent={TablePaginationActions}
-								/>
-							</TableRow>
-						</TableFooter>
-					</Table>
-				</TableContainer>
-	
+					{emptyRows > 0 && (
+						<TableRow style={{ height: 53 * emptyRows }}>
+							<TableCell colSpan={12} />
+						</TableRow>
+					)}
+				</TableBody>
+				<TableFooter>
+					<TableRow>
+						<TablePagination
+							rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+							colSpan={12}
+							count={rows.length}
+							rowsPerPage={rowsPerPage}
+							page={page}
+							SelectProps={{
+								inputProps: { 'aria-label': 'rows per page' },
+								native: true,
+							}}
+							onChangePage={handleChangePage}
+							onChangeRowsPerPage={handleChangeRowsPerPage}
+							ActionsComponent={TablePaginationActions}
+						/>
+					</TableRow>
+				</TableFooter>
+			</Table>
+		</TableContainer>
 	);
 });
 
 export default AllProductsTable;
-
-
-
-
-
-
-		{/* <TableRow>
-					<TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={20}>
-						<Collapse in={open} timeout="auto" unmountOnExit>
-							<Box margin={1}>
-								<Typography variant="h6" gutterBottom component="div">
-									Additional
-								</Typography>
-								<Table size="small" aria-label="features">
-									<TableHead>
-										<TableRow>
-											<TableCell width="3" colSpan={1}>
-												Feature #
-											</TableCell>
-											<TableCell align="left">features</TableCell>
-										</TableRow>
-									</TableHead>
-									<TableBody>
-										<TableRow>
-											<TableCell component="th">0</TableCell>
-											<TableCell>{row.feature_0}</TableCell>
-										</TableRow>
-										{row.feature_1 ? (
-											<TableRow>
-												<TableCell>1</TableCell>
-												<TableCell>{row.feature_1}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_2 ? (
-											<TableRow>
-												<TableCell>2</TableCell>
-												<TableCell>{row.feature_2}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_3 ? (
-											<TableRow>
-												<TableCell>3</TableCell>
-												<TableCell>{row.feature_3}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_4 ? (
-											<TableRow>
-												<TableCell>4</TableCell>
-												<TableCell>{row.feature_4}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_5 ? (
-											<TableRow>
-												<TableCell>5</TableCell>
-												<TableCell>{row.feature_5}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_6 ? (
-											<TableRow>
-												<TableCell>6</TableCell>
-												<TableCell>{row.feature_6}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_7 ? (
-											<TableRow>
-												<TableCell>7</TableCell>
-												<TableCell>{row.feature_7}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_8 ? (
-											<TableRow>
-												<TableCell>8</TableCell>
-												<TableCell>{row.feature_8}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-										{row.feature_9 ? (
-											<TableRow>
-												<TableCell>9</TableCell>
-												<TableCell>{row.feature_9}</TableCell>
-											</TableRow>
-										) : (
-											<></>
-										)}
-									</TableBody>
-								</Table>
-							</Box>
-						</Collapse>
-					</TableCell>
-				</TableRow> */}
