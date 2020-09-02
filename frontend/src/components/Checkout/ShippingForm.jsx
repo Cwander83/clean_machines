@@ -4,8 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useForm } from 'react-hook-form';
-
+import Select from '@material-ui/core/Select';
+import { useForm, Controller } from 'react-hook-form';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 import { CartContext } from '../../context/cart-context.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShippingForm({ nextStep, prevStep }) {
 	const classes = useStyles();
-	const { register, handleSubmit, errors } = useForm();
-	const { updateUser } = React.useContext(CartContext);
+	const { register, handleSubmit, errors, control } = useForm();
+	const { user, updateShipping } = React.useContext(CartContext);
 
 	const onSubmit = (data) => {
 		console.log(data);
 		if (data) {
-			updateUser(data);
+			updateShipping(data);
 			nextStep();
 		}
 	};
@@ -44,9 +46,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 			<Typography variant="h6" gutterBottom>
 				Shipping Address
 			</Typography>
-			<Typography variant="h6" onClick={nextStep}>
-				click here if only a rental
-			</Typography>
+			<Typography variant="h6">skip if only renting</Typography>
 			<form
 				className={classes.form}
 				noValidate
@@ -57,7 +57,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						<TextField
 							required
 							id="firstName"
-							name="firstName"
+							name="shipping_firstName"
 							label="First name"
 							fullWidth
 							autoComplete="given-name"
@@ -69,12 +69,22 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						<TextField
 							required
 							id="lastName"
-							name="lastName"
+							name="shipping_lastName"
 							label="Last name"
 							fullWidth
 							autoComplete="family-name"
 							error={!!errors.lastName}
 							inputRef={register({ required: true })}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							id="companyName"
+							name="shipping_companyName"
+							label="Company name"
+							fullWidth
+							autoComplete="company-name"
+							inputRef={register}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
@@ -137,14 +147,22 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="state"
+						<InputLabel id="select-state">State</InputLabel>
+						<Controller
+							as={
+								<Select fullWidth required labelId="select-state">
+									{states.map((state) => {
+										return (
+											<MenuItem key={state} value={state}>
+												{state}
+											</MenuItem>
+										);
+									})}
+								</Select>
+							}
 							name="shipping_state"
-							label="State"
-							defaultValue="FL"
-							disabled
-							fullWidth
+							defaultValue={user.billing_state}
+							control={control}
 							inputRef={register}
 						/>
 					</Grid>
@@ -171,9 +189,72 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						<Button color="primary" variant="contained" type="submit">
 							Review order
 						</Button>
+						<Button color="primary" variant="contained" onClick={nextStep}>
+							skip
+						</Button>
 					</Grid>
 				</Grid>
 			</form>
 		</React.Fragment>
 	);
 }
+
+const states = [
+	'AL',
+	'AK',
+	'AS',
+	'AZ',
+	'AR',
+	'CA',
+	'CO',
+	'CT',
+	'DE',
+	'DC',
+	'FM',
+	'FL',
+	'GA',
+	'GU',
+	'HI',
+	'ID',
+	'IL',
+	'IN',
+	'IA',
+	'KS',
+	'KY',
+	'LA',
+	'ME',
+	'MH',
+	'MD',
+	'MA',
+	'MI',
+	'MN',
+	'MS',
+	'MO',
+	'MT',
+	'NE',
+	'NV',
+	'NH',
+	'NJ',
+	'NM',
+	'NY',
+	'NC',
+	'ND',
+	'MP',
+	'OH',
+	'OK',
+	'OR',
+	'PW',
+	'PA',
+	'RI',
+	'SC',
+	'SD',
+	'TN',
+	'TX',
+	'UT',
+	'VT',
+	'VA',
+	'WA',
+	'WV',
+	'WI',
+	'WY',
+];
