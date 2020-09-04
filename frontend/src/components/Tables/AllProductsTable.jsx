@@ -21,7 +21,6 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TableHead from '@material-ui/core/TableHead';
 import { AdminContext } from '../../context/admin-context';
-
 const useStyles1 = makeStyles((theme) => ({
 	root: {
 		flexShrink: 0,
@@ -110,7 +109,9 @@ const useStyles2 = makeStyles((theme) => ({
 }));
 
 const AllProductsTable = React.memo(() => {
-	const { product, setProduct,setDeleteBtn, setEditBtn} = React.useContext(AdminContext);
+	const { product, setProduct, setDeleteBtn, setEditBtn } = React.useContext(
+		AdminContext
+	);
 	const classes = useStyles2();
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -163,10 +164,29 @@ const AllProductsTable = React.memo(() => {
 					<TableCell align="left">{row.category}</TableCell>
 					<TableCell>
 						<ButtonGroup>
-						
-							<Button onClick={() => {setProduct(row); }}>view</Button>
-							<Button onClick={() => {setProduct(row); }}>edit</Button>
-							<Button onClick={() => {setProduct(row); }}>delete</Button>
+							<Button
+								onClick={() => {
+									setProduct(row);
+									setEditBtn(false);
+								}}
+							>
+								view
+							</Button>
+							<Button
+								onClick={() => {
+									setProduct(row);
+									setEditBtn(true);
+								}}
+							>
+								edit
+							</Button>
+							<Button
+								onClick={() => {
+									setProduct(row);
+								}}
+							>
+								delete
+							</Button>
 						</ButtonGroup>
 					</TableCell>
 				</TableRow>

@@ -16,7 +16,7 @@ const SalesContextProvider = (props) => {
 		fetch(`/products/sale`)
 			.then((response) => response.json())
 			.then((data) => {
-				//console.log(data);
+				console.log(data);
 				setAvailableProducts(data);
 			})
 			.catch((err) => console.error(err));
