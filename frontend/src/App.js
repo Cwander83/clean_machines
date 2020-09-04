@@ -39,13 +39,20 @@ function App() {
 		<MuiPickersUtilsProvider utils={DateFnsUtils}>
 			<RentalContextProvider>
 				<CartProvider>
+
 					<SalesContextProvider><AdminContextProvider>
 						<div className="App">
 							<NavDrawer />
-
 							<Switch>
 								<Route exact path="/" component={Home} />
-								
+					<SalesContextProvider>
+						<AdminContextProvider>
+							<div className="App">
+								<NavDrawer />
+
+								<Switch>
+									<Route exact path="/" component={Home} />
+
 									<ProtectedRoute exact path="/admin" component={Admin} />
 									<ProtectedRoute
 										path="/admin/rentals"
@@ -60,7 +67,7 @@ function App() {
 										path="/admin/customers"
 										component={AdminCustomers}
 									/>
-								
+
 								<Route path="/rentals" component={Rentals} />
 								<Route path="/videos" component={Videos} />
 								<Route path="/contact" component={Contact} />
@@ -69,6 +76,18 @@ function App() {
 								<Route component={NotFound} />
 							</Switch>
 						</div></AdminContextProvider>
+
+
+									<Route path="/rentals" component={Rentals} />
+									<Route path="/videos" component={Videos} />
+									<Route path="/contact" component={Contact} />
+									<Route path="/sales" component={Sales} />
+									<Route path="/cart" component={Cart} />
+									<Route component={NotFound} />
+								</Switch>
+							</div>
+						</AdminContextProvider>
+
 					</SalesContextProvider>
 				</CartProvider>
 			</RentalContextProvider>
