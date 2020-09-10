@@ -109,7 +109,10 @@ const useStyles2 = makeStyles((theme) => ({
 }));
 
 const AllProductsTable = React.memo(() => {
-	const { product, setProduct, setDeleteBtn, setEditBtn } = React.useContext(
+	const { product,
+		 setProduct,
+		// setDeleteBtn, 
+		 setEditBtn } = React.useContext(
 		AdminContext
 	);
 	const classes = useStyles2();

@@ -8,6 +8,8 @@ import Select from '@material-ui/core/Select';
 import { useForm, Controller } from 'react-hook-form';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { CartContext } from '../../context/cart-context.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,55 +36,62 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 	const { register, handleSubmit, errors, control } = useForm();
 
 	const { updateDelivery, user } = React.useContext(CartContext);
+	const [checked, setChecked] = React.useState(false);
 
+	console.log(checked);
 	const onSubmit = (data) => {
 		console.log(data);
-		if (data) {
+		if (!checked && data) {
 			updateDelivery(data);
 			nextStep();
 		}
+		if (checked) {
+			nextStep();
+		}
+	};
+
+	const handleChange = (event) => {
+		setChecked(event.target.checked);
 	};
 
 	return (
 		<React.Fragment>
 			<Typography variant="h6" gutterBottom>
-				Delivery Address
+				Rental Delivery Address
 			</Typography>
-			<Typography variant="h6">Skip if not renting</Typography>
+			<FormControlLabel
+				control={
+					<Checkbox
+						checked={checked}
+						onChange={handleChange}
+						inputProps={{ 'aria-label': 'primary checkbox' }}
+					/>
+				}
+				label="check here if not renting"
+			/>
 			<form
 				className={classes.form}
 				noValidate
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={6}>
+					
+					<Grid item xs={12} >
 						<TextField
 							required
-							id="firstName"
-							name="delivery_firstName"
-							label="First name"
+							id="name"
+							name="delivery_name"
+							label="Name"
 							fullWidth
-							autoComplete="given-name"
-							error={!!errors.firstName}
-							inputRef={register({ required: true })}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="lastName"
-							name="delivery_lastName"
-							label="Last name"
-							fullWidth
-							autoComplete="family-name"
-							error={!!errors.lastName}
+							autoComplete="name"
+							error={!!errors.delivery_name}
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
 							id="companyName"
-							name="delivery_companyName"
+							name="delivery_company_name"
 							label="Company name"
 							fullWidth
 							autoComplete="company-name"
@@ -93,11 +102,11 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 						<TextField
 							required
 							id="email"
-							name="deliver_email"
+							name="delivery_email"
 							label="Email"
 							fullWidth
 							autoComplete="email"
-							error={!!errors.email}
+							error={!!errors.delivery_email}
 							inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
 						/>
 						<p>{errors.email && 'not valid email'}</p>
@@ -106,11 +115,11 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 						<TextField
 							required
 							id="phone"
-							name="phone"
+							name="delivery_phone"
 							label="Phone Number"
 							fullWidth
 							autoComplete="phone"
-							error={!!errors.phone}
+							error={!!errors.delivery_phone}
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
@@ -188,12 +197,15 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 						<Button color="primary" variant="contained" onClick={prevStep}>
 							back
 						</Button>
-						<Button color="primary" variant="contained" type="submit">
-							next
-						</Button>
-						<Button color="primary" variant="contained" onClick={nextStep}>
-							skip
-						</Button>
+						{checked ? (
+							<Button color="primary" variant="contained" onClick={nextStep}>
+								skip
+							</Button>
+						) : (
+							<Button color="primary" variant="contained" type="submit">
+								next
+							</Button>
+						)}
 					</Grid>
 				</Grid>
 			</form>

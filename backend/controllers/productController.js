@@ -8,9 +8,9 @@ const { sequelize } = require('../config/config');
 const {
 	deleteProduct,
 	createProduct,
-	
+
 	findSku,
-	findSingleProduct
+	findSingleProduct,
 } = require('../stripe/stripe.products');
 const stripeCharges = require('../stripe/stripe.charges');
 
@@ -56,7 +56,6 @@ module.exports = {
 			.catch((err) => console.log(err));
 	},
 
-
 	// all products
 	findAllProducts: (req, res) => {
 		db.Products.findAll()
@@ -78,7 +77,6 @@ module.exports = {
 			})
 			.catch((err) => console.error(err));
 	},
-
 
 	// all products to rent
 	findAllProductsForRent: (req, res) => {
@@ -146,7 +144,35 @@ module.exports = {
 	findAllRentals: (req, res) => {
 		db.Rentals.findAll({
 			include: db.Products,
-		}).then((result) => res.json(result));
+		}).then((result) => res.json(result)).catch(err=>console.error(err))
+	},
+	// find all rentals
+	findAllActiveRentals: async (req, res) => {
+		let currentDate = new Date();
+
+		db.Rentals.findAll({
+			where: {
+				[Op.or]: [
+					{
+						start_date: {
+							[Op.gte]: currentDate,
+						},
+					},
+
+					{
+						end_date: {
+							[Op.gte]: currentDate,
+						},
+					},
+				],
+			},
+			include: db.Products,
+			order: [['end_date', 'ASC']],
+		})
+			.then((result) => {
+				return res.json(result);
+			})
+			.catch((err) => console.error(err));
 	},
 
 	// all products to sale

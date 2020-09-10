@@ -10,7 +10,6 @@ const { productController } = require('../controllers');
 
 router.get('/', productController.findAllProducts); // all products
 
-
 router.get('/rent', productController.findAllProductsForRent); // all products for rent
 
 router.get(
@@ -18,15 +17,12 @@ router.get(
 	productController.findAllProductsForRentAndAvailable
 ); // all products for rent
 
-
 router.get('/sale', productController.findAllProductsForSale); // all products for sale
 router.get('/out', productController.findAllProductsOutOfStock); // all products out of stock
 router.get('/rentals', productController.findAllRentals);
-
-
+router.get('/active-rentals', productController.findAllActiveRentals);
 
 router.post('/', productController.createProductDB); // create product on DB
-
 
 router.put('/update/:id', productController.updateProduct);
 

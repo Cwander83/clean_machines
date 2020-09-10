@@ -4,7 +4,32 @@ export const CartContext = React.createContext();
 
 const CartProvider = (props) => {
 	const [user, setUser] = React.useState({});
-	const [products, setProducts] = React.useState([]);
+	const [products, setProducts] = React.useState([
+		{
+			type: 'rental',
+			model: 'AG1000',
+			productId: 1,
+			total: 2000,
+			start_date: '2020-09-09',
+			end_date: '2020-09-15',
+		},
+		{
+			type: 'sale',
+			model: 'AG1000',
+			productId: 1,
+			quantity: 2,
+			total: 2000,
+			price_per_unit: 8000,
+		},
+		{
+			type: 'sale',
+			model: 'BG19',
+			productId: 1,
+			quantity: 1,
+			total: 2000,
+			price_per_unit: 99999,
+		},
+	]);
 
 	const [open, setOpen] = React.useState(false);
 
@@ -16,7 +41,7 @@ const CartProvider = (props) => {
 		setOpen(false);
 	};
 
-	console.log(user);
+	console.log('USER: ' + JSON.stringify(user, null, 2));
 
 	const updateUserHandler = (data) => setUser(data);
 
@@ -24,11 +49,11 @@ const CartProvider = (props) => {
 		setUser({ ...user, delivery: data });
 
 	const updateShippingUserHandler = (data) =>
-		setUser({ ...user, rental: data });
+		setUser({ ...user, shipping: data });
 
 	const updateProductsHandler = ({ data }) => setProducts([...products, data]);
 
-	//	console.log(products);
+	console.log('PRODUCTS: ' + JSON.stringify(products, null, 2));
 
 	return (
 		<CartContext.Provider

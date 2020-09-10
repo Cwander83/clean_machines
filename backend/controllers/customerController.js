@@ -12,18 +12,6 @@ const { calculateOrderAmount } = require('../stripe/helpers');
 const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
 
 module.exports = {
-	// createCustomer: (req, res) => {
-	// 	const customerName = req.params.name;
-	// 	// stripe function in stripe folder
-	// 	createCustomer(customerName)
-	// 		.then((result) => {
-	// 			res.status(200).json(result);
-	// 			console.log(result);
-	// 			return result;
-	// 		})
-
-	// 		.catch((err) => console.log(err));
-	// },
 
 	findAllCustomers: async (req, res) => {
 		//const customerName = req.params.name;

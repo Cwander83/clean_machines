@@ -12,9 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 		rental_total: {
 			type: DataTypes.INTEGER,
 		},
-		rental_days: {
-			type: DataTypes.INTEGER,
-		},
+		
 
 		start_date: {
 			type: DataTypes.DATEONLY,
@@ -22,22 +20,61 @@ module.exports = (sequelize, DataTypes) => {
 		end_date: {
 			type: DataTypes.DATEONLY,
 		},
-		rental_name: {
+		customer_stripe_id: {
 			type: DataTypes.STRING,
 		},
-		rental_line1: {
+		billing_name: {
 			type: DataTypes.STRING,
 		},
-		rental_line2: {
+		billing_company_name: {
 			type: DataTypes.STRING,
 		},
-		rental_city: {
+		billing_email: {
 			type: DataTypes.STRING,
 		},
-		rental_zipcode: {
+		billing_phone: {
 			type: DataTypes.STRING,
 		},
-		rental_state: {
+		billing_line1: {
+			type: DataTypes.STRING,
+		},
+		billing_line2: {
+			type: DataTypes.STRING,
+		},
+		billing_city: {
+			type: DataTypes.STRING,
+		},
+		billing_zipcode: {
+			type: DataTypes.STRING,
+		},
+		billing_state: {
+			type: DataTypes.STRING,
+		},
+		delivery_name: {
+			type: DataTypes.STRING,
+		},
+		delivery_company_name: {
+			type: DataTypes.STRING,
+		},
+		delivery_email: {
+			type: DataTypes.STRING,
+		},
+		delivery_phone: {
+			type: DataTypes.STRING,
+		},
+		delivery_line1: {
+			type: DataTypes.STRING,
+		},
+		delivery_line2: {
+			type: DataTypes.STRING,
+		},
+		delivery_city: {
+			type: DataTypes.STRING,
+		},
+		delivery_zipcode: {
+			type: DataTypes.STRING,
+		},
+		delivery_state: {
 			type: DataTypes.STRING,
 		},
 	});

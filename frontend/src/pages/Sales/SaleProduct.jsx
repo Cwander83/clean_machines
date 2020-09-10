@@ -7,27 +7,31 @@ import Grid from '@material-ui/core/Grid';
 import { CartContext } from '../../context/cart-context';
 import Dialog from '@material-ui/core/Dialog';
 
-import picture from '../../images/BGFS5000.jpg'
+//import picture from '../../images/BGFS5000.jpg';
 
 const useStyles = makeStyles((theme) => ({}));
 const SaleProduct = (props) => {
 	const classes = useStyles();
 
-	const [amount, setAmount] = React.useState(1);
-
 	const { updateProduct } = React.useContext(CartContext);
 
+	const [amount, setAmount] = React.useState(1); // inside dialog
+
+	// opens dialog
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
+		// dialog
 		setOpen(true);
 	};
 
 	const handleClose = () => {
+		// dialog
 		setOpen(false);
 	};
 
 	const increment = () => {
+		// inside dialog
 		setAmount((prevState) =>
 			prevState === product.units ? prevState : prevState + 1
 		);
@@ -37,6 +41,7 @@ const SaleProduct = (props) => {
 	};
 
 	const addToCart = () => {
+		// sends data to cart context
 		let data = {
 			productId: product.id,
 			unitPrice: product.sale_price,
@@ -45,8 +50,6 @@ const SaleProduct = (props) => {
 		console.log(data);
 		updateProduct({ data });
 	};
-
-	//console.log('props: ' + JSON.stringify(props.location, null, 2));
 
 	const product = props.location.state.products;
 

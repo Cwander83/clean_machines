@@ -15,7 +15,7 @@ import {
 	useElements,
 } from '@stripe/react-stripe-js';
 
-//import { CartContext } from '../../context/cart-context';
+import { CartContext } from '../../context/cart-context';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PaymentForm({ prevStep, nextStep }) {
-	//const {}= React.useContext(CartContext)
+	const { products, user } = React.useContext(CartContext);
 	const classes = useStyles();
 
 	const stripe = useStripe();
@@ -52,83 +52,9 @@ export default function PaymentForm({ prevStep, nextStep }) {
 	};
 
 	const handlePaymentMethodResult = async (result) => {
-		const user = {
-			name: 'chris',
-			email: 'test@abc.com',
-			phone: 111111111,
-			amount: 2000,
-			items: 'AG1000',
-			city: 'Orlando',
-			line1: '23 abd st.',
-			line2: 'po box 22',
-			country: 'US',
-			state: 'FL',
-			postal_code: 32807,
-			shipping_name: 'tj max',
-			shipping_phone: '1111111111',
-			shipping_city: 'Orlando',
-			shipping_line1: '23 abd st.',
-			shipping_line2: 'po box 22',
-			shipping_country: 'US',
-			shipping_state: 'FL',
-			shipping_postal_code: 32807,
-			rental_boolean: true,
-			sales_boolean: true,
-			rental: [
-				{
-					product_id: 1,
-					rental_price_day: 5,
-					rental_days: 20,
-					rental_start_date: new Date('2020-10-01T14:31:00-04:00'),
-					rental_end_date: new Date('2020-10-20T14:31:00-04:00'),
-					deposit: 10,
-				},
-				{
-					product_id: 3,
-					rental_price_day: 5,
-					rental_days: 4,
-					rental_start_date: new Date('2020-10-01T14:31:00-04:00'),
-					rental_end_date: new Date('2020-10-10T14:31:00-04:00'),
-					deposit: 3,
-				},
-				{
-					product_id: 5,
-					rental_price_day: 5,
-					rental_days: 10,
-					rental_start_date: new Date('2020-10-05T14:31:00-04:00'),
-					rental_end_date: new Date('2020-10-25T14:31:00-04:00'),
-					deposit: 3,
-				},
-			],
-			sales: [
-				{
-					product_id: 2,
-					units: 1,
-					price_per_unit: 2,
-				},
-				{
-					product_id: 1,
-					units: 1,
-					price_per_unit: 2,
-				},
-				{
-					product_id: 2,
-					units: 3,
-					price_per_unit: 12,
-				},
-				{
-					product_id: 4,
-					units: 1,
-					price_per_unit: 2,
-				},
-				{
-					product_id: 2,
-					units: 71,
-					price_per_unit: 102,
-				},
-			],
-		};
 		console.log('hit');
+		console.log('results: ' + result);
+		console.log('products: ' + JSON.stringify(products, null, 2));
 		if (result.error) {
 			// An error happened when collecting card details,
 			// show `result.error.message` in the payment form.
@@ -141,6 +67,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 					payment_method_id: result.paymentMethod.id,
 
 					userData: user,
+					productData: products,
 				}),
 			});
 
@@ -208,3 +135,81 @@ export default function PaymentForm({ prevStep, nextStep }) {
 		</React.Fragment>
 	);
 }
+
+// const user = {
+// 	name: 'chris',
+// 	email: 'test@abc.com',
+// 	phone: 111111111,
+// 	amount: 2000,
+// 	items: 'AG1000',
+// 	city: 'Orlando',
+// 	line1: '23 abd st.',
+// 	line2: 'po box 22',
+// 	country: 'US',
+// 	state: 'FL',
+// 	postal_code: 32807,
+// 	shipping_name: 'tj max',
+// 	shipping_companyName: 'tj max',
+// 	shipping_phone: '1111111111',
+// 	shipping_city: 'Orlando',
+// 	shipping_line1: '23 abd st.',
+// 	shipping_line2: 'po box 22',
+// 	shipping_country: 'US',
+// 	shipping_state: 'FL',
+// 	shipping_postal_code: 32807,
+// 	rental_boolean: true,
+// 	sales_boolean: true,
+// 	rental: [
+// 		{
+// 			product_id: 1,
+// 			rental_price_day: 5,
+// 			rental_days: 20,
+// 			rental_start_date: new Date('2020-10-01T14:31:00-04:00'),
+// 			rental_end_date: new Date('2020-10-20T14:31:00-04:00'),
+// 			deposit: 10,
+// 		},
+// 		{
+// 			product_id: 3,
+// 			rental_price_day: 5,
+// 			rental_days: 4,
+// 			rental_start_date: new Date('2020-10-01T14:31:00-04:00'),
+// 			rental_end_date: new Date('2020-10-10T14:31:00-04:00'),
+// 			deposit: 3,
+// 		},
+// 		{
+// 			product_id: 5,
+// 			rental_price_day: 5,
+// 			rental_days: 10,
+// 			rental_start_date: new Date('2020-10-05T14:31:00-04:00'),
+// 			rental_end_date: new Date('2020-10-25T14:31:00-04:00'),
+// 			deposit: 3,
+// 		},
+// 	],
+// 	sales: [
+// 		{
+// 			product_id: 2,
+// 			units: 1,
+// 			price_per_unit: 2,
+// 		},
+// 		{
+// 			product_id: 1,
+// 			units: 1,
+// 			price_per_unit: 2,
+// 		},
+// 		{
+// 			product_id: 2,
+// 			units: 3,
+// 			price_per_unit: 12,
+// 		},
+// 		{
+// 			product_id: 4,
+// 			units: 1,
+// 			price_per_unit: 2,
+// 		},
+// 		{
+// 			product_id: 2,
+// 			units: 71,
+// 			price_per_unit: 102,
+// 		},
+// 	],
+// };

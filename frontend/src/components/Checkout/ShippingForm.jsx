@@ -8,6 +8,8 @@ import Select from '@material-ui/core/Select';
 import { useForm, Controller } from 'react-hook-form';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { CartContext } from '../../context/cart-context.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +35,8 @@ export default function ShippingForm({ nextStep, prevStep }) {
 	const { register, handleSubmit, errors, control } = useForm();
 	const { user, updateShipping } = React.useContext(CartContext);
 
+	const [checked, setChecked] = React.useState(false);
+
 	const onSubmit = (data) => {
 		console.log(data);
 		if (data) {
@@ -41,46 +45,48 @@ export default function ShippingForm({ nextStep, prevStep }) {
 		}
 	};
 
+	const handleChange = (event) => {
+		setChecked(event.target.checked);
+	};
+
 	return (
 		<React.Fragment>
 			<Typography variant="h6" gutterBottom>
 				Shipping Address
 			</Typography>
-			<Typography variant="h6">skip if only renting</Typography>
+			<FormControlLabel
+				control={
+					<Checkbox
+						checked={checked}
+						onChange={handleChange}
+						inputProps={{ 'aria-label': 'primary checkbox' }}
+					/>
+				}
+				label="check here if not renting"
+			/>
 			<form
 				className={classes.form}
 				noValidate
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} >
 						<TextField
 							required
 							id="firstName"
-							name="shipping_firstName"
+							name="shipping_name"
 							label="First name"
 							fullWidth
 							autoComplete="given-name"
-							error={!!errors.firstName}
+							error={!!errors.shipping_name}
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="lastName"
-							name="shipping_lastName"
-							label="Last name"
-							fullWidth
-							autoComplete="family-name"
-							error={!!errors.lastName}
-							inputRef={register({ required: true })}
-						/>
-					</Grid>
+					
 					<Grid item xs={12}>
 						<TextField
 							id="companyName"
-							name="shipping_companyName"
+							name="shipping_company_name"
 							label="Company name"
 							fullWidth
 							autoComplete="company-name"
@@ -91,11 +97,11 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						<TextField
 							required
 							id="email"
-							name="email"
+							name="shipping_email"
 							label="Email"
 							fullWidth
 							autoComplete="email"
-							error={!!errors.email}
+							error={!!errors.shipping_email}
 							inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
 						/>
 						<p>{errors.email && 'not valid email'}</p>
@@ -104,11 +110,11 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						<TextField
 							required
 							id="phone"
-							name="phone"
+							name="shipping_phone"
 							label="Phone Number"
 							fullWidth
 							autoComplete="phone"
-							error={!!errors.phone}
+							error={!!errors.shipping_phone}
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
@@ -186,18 +192,22 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						<Button color="primary" variant="contained" onClick={prevStep}>
 							back
 						</Button>
-						<Button color="primary" variant="contained" type="submit">
-							Review order
-						</Button>
-						<Button color="primary" variant="contained" onClick={nextStep}>
-							skip
-						</Button>
+						{!checked ? (
+							<Button color="primary" variant="contained" type="submit">
+								Review order
+							</Button>
+						) : (
+							<Button color="primary" variant="contained" onClick={nextStep}>
+								Review order
+							</Button>
+						)}
 					</Grid>
 				</Grid>
 			</form>
 		</React.Fragment>
 	);
 }
+
 
 const states = [
 	'AL',

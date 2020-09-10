@@ -55,37 +55,27 @@ export default function BillingAddressForm({ nextStep }) {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={6}>
+					
+					<Grid item xs={12} >
 						<TextField
 							required
-							id="firstName"
-							name="firstName"
-							label="First name"
+							id="name"
+							name="billing_name"
+							label="Name"
 							fullWidth
-							autoComplete="given-name"
-							defaultValue={user.firstName}
-							error={!!errors.firstName}
-							inputRef={register({ required: true })}
-						/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="lastName"
-							name="lastName"
-							label="Last name"
-							fullWidth
-							autoComplete="family-name"
-							error={!!errors.lastName}
+							defaultValue={user.billing_name}
+							autoComplete="name"
+							error={!!errors.billing_name}
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
 							id="company"
-							name="companyName"
+							name="billing_company_name"
 							label="Company Name"
 							fullWidth
+							defaultValue={user.billing_company_name}
 							autoComplete="company-name"
 							inputRef={register}
 						/>
@@ -94,11 +84,12 @@ export default function BillingAddressForm({ nextStep }) {
 						<TextField
 							required
 							id="email"
-							name="email"
+							name="billing_email"
 							label="Email"
 							fullWidth
 							autoComplete="email"
-							error={!!errors.email}
+							defaultValue={user.billing_email}
+							error={!!errors.billing_email}
 							inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
 						/>
 						<p>{errors.email && 'not valid email'}</p>
@@ -107,12 +98,12 @@ export default function BillingAddressForm({ nextStep }) {
 						<TextField
 							required
 							id="phone"
-							name="phone"
+							name="billing_phone"
 							label="Phone Number"
 							fullWidth
 							autoComplete="phone"
-							error={!!errors.phone}
-							defaultValue={user.phone}
+							error={!!errors.billing_phone}
+							defaultValue={user.billing_phone}
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
@@ -123,6 +114,7 @@ export default function BillingAddressForm({ nextStep }) {
 							name="billing_line1"
 							label="Address line 1"
 							fullWidth
+							defaultValue={user.billing_line1}
 							autoComplete="address-line1"
 							error={!!errors.billing_line1}
 							inputRef={register({ required: true })}
@@ -134,6 +126,7 @@ export default function BillingAddressForm({ nextStep }) {
 							name="billing_line2"
 							label="Address line 2"
 							fullWidth
+							defaultValue={user.billing_line2}
 							autoComplete="address-line2"
 							inputRef={register}
 						/>
@@ -145,6 +138,7 @@ export default function BillingAddressForm({ nextStep }) {
 							name="billing_city"
 							label="City"
 							fullWidth
+							defaultValue={user.billing_city}
 							autoComplete="address-level2"
 							error={!!errors.billing_city}
 							inputRef={register({ required: true })}
@@ -178,6 +172,7 @@ export default function BillingAddressForm({ nextStep }) {
 							label="Zip / Postal code"
 							fullWidth
 							autoComplete="postal-code"
+							defaultValue={user.billing_postal_code}
 							error={!!errors.billing_postal_code}
 							inputRef={register({
 								required: true,
