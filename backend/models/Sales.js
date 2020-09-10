@@ -6,7 +6,43 @@ module.exports = (sequelize, DataTypes) => {
 			autoIncrement: true,
 			primaryKey: true,
 		},
+		billing_name: {
+			type: DataTypes.STRING,
+		},
+		billing_company_name: {
+			type: DataTypes.STRING,
+		},
+		billing_email: {
+			type: DataTypes.STRING,
+		},
+		billing_phone: {
+			type: DataTypes.STRING,
+		},
+		billing_line1: {
+			type: DataTypes.STRING,
+		},
+		billing_line2: {
+			type: DataTypes.STRING,
+		},
+		billing_city: {
+			type: DataTypes.STRING,
+		},
+		billing_zipcode: {
+			type: DataTypes.STRING,
+		},
+		billing_state: {
+			type: DataTypes.STRING,
+		},
 		shipping_name: {
+			type: DataTypes.STRING,
+		},
+		shipping_company_name: {
+			type: DataTypes.STRING,
+		},
+		shipping_email: {
+			type: DataTypes.STRING,
+		},
+		shipping_phone: {
 			type: DataTypes.STRING,
 		},
 		shipping_line1: {
@@ -24,15 +60,18 @@ module.exports = (sequelize, DataTypes) => {
 		shipping_state: {
 			type: DataTypes.STRING,
 		},
-		stripe_id: {
+		customer_stripe_id: {
 			type: DataTypes.STRING,
 		},
 
 		// total price
-		total: {
+		total_price: {
 			type: DataTypes.INTEGER,
 		},
-		products_purchased: {
+		price_per_unit: {
+			type: DataTypes.INTEGER,
+		},
+		quantity_purchased: {
 			type: DataTypes.INTEGER,
 		},
 	});

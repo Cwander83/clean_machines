@@ -17,7 +17,6 @@ db.sequelize = sequelize;
 
 //Models/tables
 db.Products = require('../models/Products.js')(sequelize, Sequelize);
-db.Customers = require('../models/Customers.js')(sequelize, Sequelize);
 
 db.Rentals = require('../models/Rentals.js')(sequelize, Sequelize);
 
