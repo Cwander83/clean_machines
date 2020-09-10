@@ -18,20 +18,22 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function CurrentRentals() {
+export default function RecentSalesTable() {
 	const classes = useStyles();
 
 	const [rows, setData] = React.useState([]);
 
 	React.useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/products/active-rentals`);
+			// TODO change to recent sales
+			const result = await axios(`/products/recent-sales`);
 
 			setData(result.data);
 		};
 		fetchData();
 	}, []);
-	
+
+	console.log('sales table: ' + JSON.stringify(rows, null, 2));
 
 	return (
 		<>
@@ -41,20 +43,20 @@ export default function CurrentRentals() {
 						<TableHead>
 							<TableRow>
 								<TableCell>ID</TableCell>
-								<TableCell>Delivery Name</TableCell>
-								<TableCell>Start Date</TableCell>
-								<TableCell>End Date</TableCell>
+								<TableCell>Billing Name</TableCell>
+								<TableCell>Model</TableCell>
+								<TableCell>Total Price</TableCell>
 								<TableCell></TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{rows.map((row) => {
+							{rows.map((row,i) => {
 								return (
-									<TableRow key={row.id}>
+									<TableRow key={i}>
 										<TableCell>{row.id}</TableCell>
-										<TableCell>{row.delivery_name}</TableCell>
-										<TableCell>{row.start_date}</TableCell>
-										<TableCell>{row.end_date}</TableCell>
+										<TableCell>{row.shipping_name}</TableCell>
+										<TableCell>{row.product.model}</TableCell>
+										<TableCell>{row.total_price}</TableCell>
 										<TableCell>
 											<Button>view</Button>
 										</TableCell>

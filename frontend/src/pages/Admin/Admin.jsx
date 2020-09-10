@@ -2,6 +2,8 @@ import React from 'react';
 
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Logout from '../../components/Logout';
+import CurrentRentals from '../../components/Tables/CurrentRentals';
+import RecentSalesTable from '../../components/Tables/RecentSalesTable';
 import Spinner from '../../UI/Spinner';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -29,9 +31,11 @@ const Admin = () => {
 			<Grid container spacing={2} justify="center">
 				<Grid item xs={12} sm={5} component={Paper} className={classes.section}>
 					<Typography variant="h4">rentals in progress</Typography>
+					<CurrentRentals />
 				</Grid>
 				<Grid item xs={12} sm={5} component={Paper} className={classes.section}>
 					<Typography variant="h4">recent sales</Typography>
+					<RecentSalesTable />
 				</Grid>
 				<Grid item xs={12}>
 					<Logout />

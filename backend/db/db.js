@@ -20,7 +20,7 @@ module.exports = {
 					end_date: obj.end_date,
 					customer_stripe_id: customer.id,
 					billing_name: userData.billing_name,
-					billing_company_name: userDatabilling_.company_name,
+					billing_company_name: userData.billing_company_name,
 					billing_email: userData.billing_email,
 					billing_phone: userData.billing_phone,
 					billing_line1: userData.billing_line1,
@@ -30,7 +30,7 @@ module.exports = {
 					billing_state: userData.billing_state,
 
 					delivery_name: userData.delivery.delivery_name,
-					delivery_company: userData.delivery.delivery_company_name,
+					delivery_company_name: userData.delivery.delivery_company_name,
 					delivery_email: userData.delivery.delivery_email,
 					delivery_phone: userData.delivery.delivery_phone,
 					delivery_line1: userData.delivery.delivery_line1,

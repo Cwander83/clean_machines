@@ -1,3 +1,5 @@
+// TODO fix and update table with current data
+
 import React from 'react';
 
 import axios from 'axios';
@@ -17,6 +19,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
+import Button from '@material-ui/core/Button';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -24,8 +27,6 @@ const useStyles1 = makeStyles((theme) => ({
 		marginLeft: theme.spacing(2.5),
 	},
 }));
-
-
 
 function TablePaginationActions(props) {
 	const classes = useStyles1();
@@ -135,13 +136,14 @@ const RentalsTable = React.memo(() => {
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					<TableCell align="left">{row.product.id}</TableCell>
-					<TableCell align="left">{row.product.id}</TableCell>
-					<TableCell align="left">{row.product.name}</TableCell>
-					<TableCell align="left">{row.product.model}</TableCell>
-					<TableCell align="left">{row.deposit}</TableCell>
+					<TableCell>{row.id}</TableCell>
+					<TableCell>{row.billing_name}</TableCell>
+					<TableCell>{row.delivery_name}</TableCell>
+					<TableCell>{row.product.model}</TableCell>
+					<TableCell>{row.start_date}</TableCell>
 
-					<TableCell align="center">{row.rental_price}</TableCell>
+					<TableCell>{row.end_date}</TableCell>
+				
 				</TableRow>
 			</React.Fragment>
 		);
@@ -152,10 +154,13 @@ const RentalsTable = React.memo(() => {
 			<Table className={classes.table} aria-label="products table">
 				<TableHead>
 					<TableRow>
-						<TableCell>product id</TableCell>
-						<TableCell>Name</TableCell>
-						<TableCell align="left">Model</TableCell>
-						<TableCell>Deposit</TableCell>
+						<TableCell>Id</TableCell>
+						<TableCell>Billing Name</TableCell>
+						<TableCell>Delivery Name</TableCell>
+						<TableCell>Model</TableCell>
+						<TableCell>Start Date</TableCell>
+						<TableCell>End Date</TableCell>
+						
 					</TableRow>
 				</TableHead>
 				<TableBody>
