@@ -144,7 +144,10 @@ module.exports = {
 	findAllRentals: (req, res) => {
 		db.Rentals.findAll({
 			include: db.Products,
-		}).then((result) => res.json(result)).catch(err=>console.error(err))
+			order: [['end_date', 'ASC']],
+		})
+			.then((result) => res.json(result))
+			.catch((err) => console.error(err));
 	},
 	// find all rentals
 	findAllActiveRentals: async (req, res) => {
@@ -172,6 +175,16 @@ module.exports = {
 			.then((result) => {
 				return res.json(result);
 			})
+			.catch((err) => console.error(err));
+	},
+
+	findRecentSales: async (req, res) => {
+		db.Sales.findAll({
+			limit: 5,
+			order: [['createdAt', 'ASC']],
+			include: db.Products
+		})
+			.then((results) => res.json(results))
 			.catch((err) => console.error(err));
 	},
 

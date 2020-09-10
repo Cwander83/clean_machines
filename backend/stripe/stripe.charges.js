@@ -1,4 +1,4 @@
-const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 const moment = require('moment');
 
 module.exports = {
