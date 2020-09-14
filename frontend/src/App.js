@@ -27,6 +27,7 @@ import Cart from './pages/Cart/Cart';
 import CartProvider from './context/cart-context';
 import SalesContextProvider from './context/sales-context';
 import AdminContextProvider from './context/admin-context';
+import ModalProvider from './context/modal-context';
 
 function App() {
 	const { isLoading } = useAuth0();
@@ -41,35 +42,40 @@ function App() {
 				<CartProvider>
 					<SalesContextProvider>
 						<AdminContextProvider>
-							<div className="App">
-								<NavDrawer />
+							<ModalProvider>
+								<div className="App">
+									<NavDrawer />
 
-								<Switch>
-									<Route exact path="/" component={Home} />
+									<Switch>
+										<Route exact path="/" component={Home} />
 
-									<ProtectedRoute exact path="/admin" component={Admin} />
-									<ProtectedRoute
-										path="/admin/rentals"
-										component={AdminRentals}
-									/>
-									<ProtectedRoute path="/admin/sales" component={AdminSales} />
-									<ProtectedRoute
-										path="/admin/products"
-										component={AllProducts}
-									/>
-									<ProtectedRoute
-										path="/admin/customers"
-										component={AdminCustomers}
-									/>
+										<ProtectedRoute exact path="/admin" component={Admin} />
+										<ProtectedRoute
+											path="/admin/rentals"
+											component={AdminRentals}
+										/>
+										<ProtectedRoute
+											path="/admin/sales"
+											component={AdminSales}
+										/>
+										<ProtectedRoute
+											path="/admin/products"
+											component={AllProducts}
+										/>
+										<ProtectedRoute
+											path="/admin/customers"
+											component={AdminCustomers}
+										/>
 
-									<Route path="/rentals" component={Rentals} />
-									<Route path="/videos" component={Videos} />
-									<Route path="/contact" component={Contact} />
-									<Route path="/sales" component={Sales} />
-									<Route path="/cart" component={Cart} />
-									<Route component={NotFound} />
-								</Switch>
-							</div>
+										<Route path="/rentals" component={Rentals} />
+										<Route path="/videos" component={Videos} />
+										<Route path="/contact" component={Contact} />
+										<Route path="/sales" component={Sales} />
+										<Route path="/cart" component={Cart} />
+										<Route component={NotFound} />
+									</Switch>
+								</div>
+							</ModalProvider>
 						</AdminContextProvider>
 					</SalesContextProvider>
 				</CartProvider>

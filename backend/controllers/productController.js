@@ -187,6 +187,15 @@ module.exports = {
 			.then((results) => res.json(results))
 			.catch((err) => console.error(err));
 	},
+	findAllSales: async (req, res) => {
+		db.Sales.findAll({
+			
+			order: [['createdAt', 'ASC']],
+			include: db.Products
+		})
+			.then((results) => res.json(results))
+			.catch((err) => console.error(err));
+	},
 
 	// all products to sale
 	findAllProductsForSale: (req, res) => {

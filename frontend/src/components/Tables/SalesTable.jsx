@@ -102,7 +102,7 @@ const useStyles2 = makeStyles((theme) => ({
 	},
 }));
 
-const RentalsTable = () => {
+const SalesTable = () => {
 	const classes = useStyles2();
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -111,7 +111,7 @@ const RentalsTable = () => {
 
 	React.useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/products/rentals`);
+			const result = await axios(`/products/sales`);
 
 			setData(result.data);
 		};
@@ -140,21 +140,15 @@ const RentalsTable = () => {
 				<TableRow className={classes.root}>
 					<TableCell>{row.id}</TableCell>
 					<TableCell>{row.billing_name}</TableCell>
-					<TableCell>{row.delivery_name}</TableCell>
-					<TableCell>{row.delivery_company_name}</TableCell>
+					<TableCell>{row.shipping_name}</TableCell>
+					<TableCell>{row.shipping_company_name}</TableCell>
 					<TableCell>{row.product.model}</TableCell>
-					<TableCell>{row.start_date}</TableCell>
-
-					<TableCell>{row.end_date}</TableCell>
+					<TableCell>{row.quantity_purchased}</TableCell>
+					<TableCell>{row.total_price}</TableCell>
 					<TableCell>
 						<ButtonGroup>
 							<Button>View</Button>
-							<Button
-								target="_blank"
-								href={`https://maps.google.com/?q=${row.delivery_line1},${row.delivery_line2},${row.delivery_city},${row.delivery_state},${row.delivery_zipcode}`}
-							>
-								Map it
-							</Button>
+
 							<Button>Remove</Button>
 						</ButtonGroup>
 					</TableCell>
@@ -173,8 +167,9 @@ const RentalsTable = () => {
 						<TableCell>Delivery Name</TableCell>
 						<TableCell>Delivery Company Name</TableCell>
 						<TableCell>Model</TableCell>
-						<TableCell>Start Date</TableCell>
-						<TableCell>End Date</TableCell>
+						<TableCell>Quantity</TableCell>
+						<TableCell>Total Price</TableCell>
+
 						<TableCell></TableCell>
 					</TableRow>
 				</TableHead>
@@ -213,6 +208,6 @@ const RentalsTable = () => {
 			</Table>
 		</TableContainer>
 	);
-}
+};
 
-export default RentalsTable;
+export default SalesTable;
