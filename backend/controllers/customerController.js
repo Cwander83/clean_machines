@@ -19,7 +19,7 @@ module.exports = {
 		await findAllCustomers()
 			.then((result) => {
 				res.status(200).json(result);
-				console.log(JSON.stringify(result, null, 2));
+				//console.log(JSON.stringify(result, null, 2));
 				return result;
 			})
 

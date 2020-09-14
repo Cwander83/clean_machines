@@ -1,25 +1,26 @@
-import { createContext } from 'react';
+import React from 'react';
 
-const ModalContext = createContext({
-	open: null,
+export const ModalContext = React.createContext();
+// 	{
+// 	open: null,
 
-	showModal: () => {},
-	hideModal: () => {},
-});
+// 	showModal: () => {},
+// 	hideModal: () => {},
+// }
 
 const ModalProvider = (props) => {
-	const [open, setOpen] = React.useState(false);
+	const [createRental, setCreateRental] = React.useState(false);
 
-	const showModal = () => setOpen(true);
+	const showCreateRental = () => setCreateRental(true);
 
-	const hideModal = () => setOpen(false);
+	const hideCreateRental = () => setCreateRental(false);
 
 	return (
 		<ModalContext.Provider
 			value={{
-				open: open,
-				showModal: showModal,
-				hideModal: hideModal,
+				createRental,
+				showCreateRental,
+				hideCreateRental
 			}}
 		>
 			{props.children}

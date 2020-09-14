@@ -4,6 +4,16 @@ import React from 'react';
 
 import axios from 'axios';
 
+import {
+	Switch,
+	Route,
+	Link,
+	useRouteMatch,
+	//useParams,
+} from 'react-router-dom';
+
+import CustomerDetails from '../CustomersDetails';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -19,9 +29,9 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
-//import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+import CircularProgress from '@material-ui/core/CircularProgress';
+//import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -102,8 +112,13 @@ const useStyles2 = makeStyles((theme) => ({
 	},
 }));
 
-const RentalsTable = () => {
+const CustomersTable = () => {
 	const classes = useStyles2();
+
+	let { path } = useRouteMatch();
+
+	const [loading, setLoading] = React.useState(false);
+
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -111,14 +126,16 @@ const RentalsTable = () => {
 
 	React.useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/products/rentals`);
+			setLoading(true);
+			const result = await axios(`/customers/`);
 
-			setData(result.data);
+			setData(result.data.data);
+			setLoading(false);
 		};
 		fetchData();
 	}, []);
 
-	console.log(rows);
+	//console.log(rows);
 
 	const emptyRows =
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -138,25 +155,15 @@ const RentalsTable = () => {
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					<TableCell>{row.id}</TableCell>
-					<TableCell>{row.billing_name}</TableCell>
-					<TableCell>{row.delivery_name}</TableCell>
-					<TableCell>{row.delivery_company_name}</TableCell>
-					<TableCell>{row.product.model}</TableCell>
-					<TableCell>{row.start_date}</TableCell>
-
-					<TableCell>{row.end_date}</TableCell>
 					<TableCell>
-						<ButtonGroup>
-							<Button>View</Button>
-							<Button
-								target="_blank"
-								href={`https://maps.google.com/?q=${row.delivery_line1},${row.delivery_line2},${row.delivery_city},${row.delivery_state},${row.delivery_zipcode}`}
-							>
-								Map it
-							</Button>
-							<Button>Remove</Button>
-						</ButtonGroup>
+						<Button component={Link} to={`${path}/${row.id}`}>
+							{row.name}
+						</Button>
+					</TableCell>
+					<TableCell>{row.email}</TableCell>
+					<TableCell>{row.phone}</TableCell>
+					<TableCell>
+						{row.address.city}, {row.address.state}
 					</TableCell>
 				</TableRow>
 			</React.Fragment>
@@ -164,55 +171,71 @@ const RentalsTable = () => {
 	}
 
 	return (
-		<TableContainer component={Paper}>
-			<Table className={classes.table} aria-label="products table">
-				<TableHead>
-					<TableRow>
-						<TableCell>Id</TableCell>
-						<TableCell>Billing Name</TableCell>
-						<TableCell>Delivery Name</TableCell>
-						<TableCell>Delivery Company Name</TableCell>
-						<TableCell>Model</TableCell>
-						<TableCell>Start Date</TableCell>
-						<TableCell>End Date</TableCell>
-						<TableCell></TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{(rowsPerPage > 0
-						? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-						: rows
-					).map((row, i) => (
-						<Row key={i} row={row} />
-					))}
+		<Switch>
+			<Route exact path={path}>
+				<TableContainer component={Paper}>
+					{!loading ? (
+						<Table className={classes.table} aria-label="products table">
+							<TableHead>
+								<TableRow>
+									<TableCell>Billing Name</TableCell>
+									<TableCell>Email</TableCell>
+									<TableCell>Phone</TableCell>
 
-					{emptyRows > 0 && (
-						<TableRow style={{ height: 53 * emptyRows }}>
-							<TableCell colSpan={12} />
-						</TableRow>
+									<TableCell>City, State</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{(rowsPerPage > 0
+									? rows.slice(
+											page * rowsPerPage,
+											page * rowsPerPage + rowsPerPage
+									  )
+									: rows
+								).map((row, i) => (
+									<Row key={i} row={row} />
+								))}
+
+								{emptyRows > 0 && (
+									<TableRow style={{ height: 53 * emptyRows }}>
+										<TableCell colSpan={12} />
+									</TableRow>
+								)}
+							</TableBody>
+							<TableFooter>
+								<TableRow>
+									<TablePagination
+										rowsPerPageOptions={[
+											5,
+											10,
+											25,
+											{ label: 'All', value: -1 },
+										]}
+										colSpan={12}
+										count={rows.length}
+										rowsPerPage={rowsPerPage}
+										page={page}
+										SelectProps={{
+											inputProps: { 'aria-label': 'rows per page' },
+											native: true,
+										}}
+										onChangePage={handleChangePage}
+										onChangeRowsPerPage={handleChangeRowsPerPage}
+										ActionsComponent={TablePaginationActions}
+									/>
+								</TableRow>
+							</TableFooter>
+						</Table>
+					) : (
+						<CircularProgress />
 					)}
-				</TableBody>
-				<TableFooter>
-					<TableRow>
-						<TablePagination
-							rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-							colSpan={12}
-							count={rows.length}
-							rowsPerPage={rowsPerPage}
-							page={page}
-							SelectProps={{
-								inputProps: { 'aria-label': 'rows per page' },
-								native: true,
-							}}
-							onChangePage={handleChangePage}
-							onChangeRowsPerPage={handleChangeRowsPerPage}
-							ActionsComponent={TablePaginationActions}
-						/>
-					</TableRow>
-				</TableFooter>
-			</Table>
-		</TableContainer>
+				</TableContainer>
+			</Route>
+			<Route path={`${path}/:id`}>
+				<CustomerDetails />
+			</Route>
+		</Switch>
 	);
-}
+};
 
-export default RentalsTable;
+export default CustomersTable;
