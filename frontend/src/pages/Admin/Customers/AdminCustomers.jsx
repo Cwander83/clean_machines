@@ -3,13 +3,13 @@ import React from 'react';
 import {
 	Switch,
 	Route,
-	Link,
+	//Link,
 	useRouteMatch,
 	//useParams,
 } from 'react-router-dom';
 
-import CustomersTable from '../../components/Tables/CustomersTable';
-import CustomersDetails from '../../components/CustomersDetails';
+import CustomersTable from './CustomersTable';
+import CustomersDetails from './CustomersDetails';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -27,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
 const AdminCustomers = () => {
 	const classes = useStyles();
 
-	let { path, url } = useRouteMatch();
+	let { path,
+		// url
+		 } = useRouteMatch();
 
 	return (
 		<Grid container justify="center" className={classes.root}>

@@ -5,14 +5,14 @@ const {
 	findSingleCustomer,
 	updateCustomer,
 	deleteCustomer,
-	findCustomerCards
+	findCustomerCards,
 } = require('../stripe/stripe.customer');
 const { calculateOrderAmount } = require('../stripe/helpers');
+const {findAllSalesById, findAllRentalsById} = require('../db/db')
 
 const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
 
 module.exports = {
-
 	findAllCustomers: async (req, res) => {
 		//const customerName = req.params.name;
 		// stripe function in stripe folder
@@ -31,16 +31,32 @@ module.exports = {
 		await findSingleCustomer(req.params.id)
 			.then((result) => {
 				res.status(200).json(result);
-				console.log(JSON.stringify(result, null, 2));
+				//console.log(JSON.stringify(result, null, 2));
 				return result;
 			})
 
 			.catch((err) => console.log(err));
 	},
+	findAllSalesById: async (req, res) => {
+		await findAllSalesById(req.params.id)
+			.then((result) => {
+				res.status(200).json(result);
+			
+				return result;
+			})
+			.catch((err) => console.error(err));
+	},
+	findAllRentalsById: async (req, res) => {
+		await findAllRentalsById(req.params.id)
+			.then((result) => {
+				res.status(200).json(result);
+			
+				return result;
+			})
+			.catch((err) => console.error(err));
+	},
 
 	findCustomerCards: async (req, res) => {
-	
-
 		await findCustomerCards(req.params.id)
 			.then((result) => {
 				res.status(200).json(result);
@@ -63,7 +79,4 @@ module.exports = {
 
 			.catch((err) => console.log(err));
 	},
-
-
-
 };

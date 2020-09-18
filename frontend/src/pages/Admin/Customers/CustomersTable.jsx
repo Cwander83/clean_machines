@@ -12,7 +12,7 @@ import {
 	//useParams,
 } from 'react-router-dom';
 
-import CustomerDetails from '../CustomersDetails';
+import CustomerDetails from './CustomersDetails';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -165,6 +165,7 @@ const CustomersTable = () => {
 					<TableCell>
 						{row.address.city}, {row.address.state}
 					</TableCell>
+					<TableCell>{row.id}</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -183,6 +184,7 @@ const CustomersTable = () => {
 									<TableCell>Phone</TableCell>
 
 									<TableCell>City, State</TableCell>
+									<TableCell>Stripe Id</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>

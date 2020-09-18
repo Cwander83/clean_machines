@@ -20,7 +20,7 @@ import Contact from './pages/Contact/Contact';
 import Videos from './pages/Videos/Videos';
 import AdminRentals from './pages/Admin/AdminRentals';
 import AdminSales from './pages/Admin/AdminSales';
-import AdminCustomers from './pages/Admin/AdminCustomers';
+import AdminCustomers from './pages/Admin/Customers/AdminCustomers';
 import AllProducts from './pages/Admin/AllProducts';
 import Cart from './pages/Cart/Cart';
 
