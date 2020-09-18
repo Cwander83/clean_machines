@@ -17,21 +17,30 @@ const CustomersDetails = () => {
 	let history = useHistory();
 
 	const [customer, setCustomer] = React.useState({});
+	const [billingAddress, setBillingAddress] = React.useState({});
+	const [sales, setSales] = React.useState({});
+	const [rentals, setRentals] = React.useState({});
 
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	React.useEffect(() => {
 		const fetchData = async () => {
 			setIsLoading(true);
-			const result = await axios.get(`/customers/${id}`);
+			const stripeData = await axios.get(`/customers/${id}`);
+			const salesData = await axios.get(`/customers/sales/${id}`);
+			const rentalData = await axios.get(`/customers/rentals/${id}`);
 
-			setCustomer(result.data);
+			setCustomer(stripeData.data);
+			setBillingAddress(stripeData.data.address);
+			setSales(salesData.data);
+			setRentals(rentalData.data);
+			
 			setIsLoading(false);
 		};
 
 		fetchData();
 	}, []);
-	console.log(customer);
+	
 	return (
 		<Container maxWidth="xl">
 			<Grid container spacing={2} justify="center" component={Paper}>
@@ -54,6 +63,13 @@ const CustomersDetails = () => {
 							<Typography variant="h3">Billing</Typography>
 							<Typography variant="body1">{customer.email}</Typography>
 							<Typography variant="body1">{customer.phone}</Typography>
+							<Typography variant="body1">{billingAddress.city}</Typography>
+						</Grid>
+						<Grid item xs={12}>
+							<Typography variant="h3">Sales</Typography>
+							<Typography variant="body1">{sales.email}</Typography>
+							<Typography variant="body1">{sales.phone}</Typography>
+							<Typography variant="body1">{billingAddress.city}</Typography>
 						</Grid>
 					</>
 				)}

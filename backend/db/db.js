@@ -73,35 +73,26 @@ module.exports = {
 					.catch((err) => console.error(err));
 			}
 		});
-
-		// for (let i = 0; i < items.rental.length; i++) {
-		// 	db.Products.findOne({
-		// 		where: { id: items.rental[i].product_id },
-		// 	})
-		// 		.then((product) => {
-		// 			db.Rentals.create({
-		// 				customerId: dbCustomer[0].id,
-		// 				productId: product.id,
-		// 				rental_price_day: items.rental[i].rental_price_day,
-		// 				rental_days: items.rental[i].rental_days,
-		// 				start_date: items.rental[i].rental_start_date,
-		// 				location: items.rental[i].location,
-		// 				end_date: items.rental[i].rental_end_date,
-		// 				deposit: items.rental[i].deposit,
-		// 			});
-		// 		})
-
-		// 		.catch((err) => console.error(err));
-		// }
+	},
+	findAllSalesById:  (id) => {
+		return  db.Sales.findAll({
+			where: {
+				customer_stripe_id: id,
+			},
+			order: [['id', 'DESC']],
+		});
 	},
 
-	// createDbCustomer: (items, customer) => {
-	// 	return db.Customers.findOrCreate({
-	// 		where: { stripe_id: customer.id },
+	// TODO change to rental dates 
+	findAllRentalsById:  (id) => {
+		return  db.Rentals.findAll({
+			where: {
+				customer_stripe_id: id,
+			},
+			order: [['id', 'DESC']],
+		});
+	},
 
-	// 		defaults: { stripe_id: customer.id, email: items.email },
-	// 	});
-	// },
 	createRentalAndSales: async (items, customer) => {
 		console.log(`create Rentals`);
 		// console.log('items: ' + JSON.stringify(items, null, 2));

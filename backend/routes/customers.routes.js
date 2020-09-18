@@ -11,6 +11,8 @@ const { customerController, paymentController } = require('../controllers');
 router.get('/', customerController.findAllCustomers);
 router.get('/:id', customerController.findSingleCustomer);
 router.get('/cards/:id', customerController.findCustomerCards);
+router.get('/sales/:id', customerController.findAllSalesById);
+router.get('/rentals/:id', customerController.findAllRentalsById);
 
 //
 // POST
