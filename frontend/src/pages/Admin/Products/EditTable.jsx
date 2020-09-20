@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button';
 
 //import Switch from '@material-ui/core/Switch';
 
-import { AdminContext } from '../../context/admin-context';
+import { AdminContext } from '../../../context/admin-context';
 
 const useStyles = makeStyles({
 	table: {

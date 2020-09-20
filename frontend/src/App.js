@@ -19,9 +19,9 @@ import Spinner from './UI/Spinner';
 import Contact from './pages/Contact/Contact';
 import Videos from './pages/Videos/Videos';
 import AdminRentals from './pages/Admin/Rentals/AdminRentals';
-import AdminSales from './pages/Admin/AdminSales';
+import AdminSales from './pages/Admin/Sales/AdminSales';
 import AdminCustomers from './pages/Admin/Customers/AdminCustomers';
-import AllProducts from './pages/Admin/AllProducts';
+import AllProducts from './pages/Admin/Products/AllProducts';
 import Cart from './pages/Cart/Cart';
 
 import CartProvider from './context/cart-context';

@@ -41,7 +41,7 @@ const CartProvider = (props) => {
 		setOpen(false);
 	};
 
-	console.log('USER: ' + JSON.stringify(user, null, 2));
+	//console.log('USER: ' + JSON.stringify(user, null, 2));
 
 	const updateUserHandler = (data) => setUser(data);
 
@@ -53,7 +53,7 @@ const CartProvider = (props) => {
 
 	const updateProductsHandler = ({ data }) => setProducts([...products, data]);
 
-	console.log('PRODUCTS: ' + JSON.stringify(products, null, 2));
+	//console.log('PRODUCTS: ' + JSON.stringify(products, null, 2));
 
 	return (
 		<CartContext.Provider

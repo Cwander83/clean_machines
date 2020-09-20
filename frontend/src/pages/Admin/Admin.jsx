@@ -2,8 +2,8 @@ import React from 'react';
 
 import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Logout from '../../components/Logout';
-import CurrentRentals from '../../components/Tables/CurrentRentals';
-import RecentSalesTable from '../../components/Tables/RecentSalesTable';
+import CurrentRentals from './CurrentRentals';
+import RecentSalesTable from './RecentSalesTable';
 import Spinner from '../../UI/Spinner';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
