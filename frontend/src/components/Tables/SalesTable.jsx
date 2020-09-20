@@ -118,7 +118,7 @@ const SalesTable = () => {
 		fetchData();
 	}, []);
 
-	console.log(rows);
+	//console.log(rows);
 
 	const emptyRows =
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);

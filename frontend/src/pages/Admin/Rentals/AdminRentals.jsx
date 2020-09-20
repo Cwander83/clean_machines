@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-	
 	Switch,
 	Route,
 	Link,
@@ -15,8 +14,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import RentalsTable from '../../components/Tables/RentalsTable';
-import AdminCreateRental from '../../components/AdminCreateRental';
+import RentalsTable from './RentalsTable';
+import RentalsDetails from './RentalsDetails';
 
 const useStyles2 = makeStyles((theme) => ({
 	root: {
@@ -36,7 +35,7 @@ const AdminRentals = () => {
 		<Grid container justify="center" className={classes.root}>
 			<Grid item xs={12}>
 				<Typography variant="h3">Rentals</Typography>
-				
+
 				<Button component={Link} to={`${url}`}>
 					Rental Table
 				</Button>
@@ -51,9 +50,8 @@ const AdminRentals = () => {
 					</Grid>
 				</Route>
 
-				
-				<Route path={`${path}/:rentalID`}>
-					<AdminCreateRental />
+				<Route path={`${path}/:id`}>
+					<RentalsDetails />
 				</Route>
 			</Switch>
 		</Grid>
