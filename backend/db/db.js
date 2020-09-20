@@ -92,6 +92,14 @@ module.exports = {
 			order: [['id', 'DESC']],
 		});
 	},
+	findRentalById:  (id) => {
+		return  db.Rentals.findAll({
+			where: {
+				customer_stripe_id: id,
+			},
+			order: [['id', 'DESC']],
+		});
+	},
 
 	createRentalAndSales: async (items, customer) => {
 		console.log(`create Rentals`);

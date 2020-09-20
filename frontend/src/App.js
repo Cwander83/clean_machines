@@ -18,7 +18,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Spinner from './UI/Spinner';
 import Contact from './pages/Contact/Contact';
 import Videos from './pages/Videos/Videos';
-import AdminRentals from './pages/Admin/AdminRentals';
+import AdminRentals from './pages/Admin/Rentals/AdminRentals';
 import AdminSales from './pages/Admin/AdminSales';
 import AdminCustomers from './pages/Admin/Customers/AdminCustomers';
 import AllProducts from './pages/Admin/AllProducts';

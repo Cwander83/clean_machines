@@ -5,10 +5,12 @@ const customerRoutes = require('./customers.routes');
 const chargesRoutes = require('./charges.routes');
 const productRoutes = require('./products.routes');
 const emailRoutes = require('./contact.routes');
+const rentalRoutes = require('./rentals.routes');
 
 router.use('/customers', customerRoutes);
 router.use('/charges', chargesRoutes);
 router.use('/products', productRoutes);
 router.use('/mail', emailRoutes);
+router.use('/rentals', rentalRoutes);
 
 module.exports = router;

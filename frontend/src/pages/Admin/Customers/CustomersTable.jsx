@@ -4,15 +4,7 @@ import React from 'react';
 
 import axios from 'axios';
 
-import {
-	Switch,
-	Route,
-	Link,
-	useRouteMatch,
-	//useParams,
-} from 'react-router-dom';
-
-import CustomerDetails from './CustomersDetails';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -31,7 +23,6 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-//import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -172,71 +163,56 @@ const CustomersTable = () => {
 	}
 
 	return (
-		<Switch>
-			<Route exact path={path}>
-				<TableContainer component={Paper}>
-					{!loading ? (
-						<Table className={classes.table} aria-label="products table">
-							<TableHead>
-								<TableRow>
-									<TableCell>Billing Name</TableCell>
-									<TableCell>Email</TableCell>
-									<TableCell>Phone</TableCell>
+		<TableContainer component={Paper}>
+			{!loading ? (
+				<Table className={classes.table} aria-label="products table">
+					<TableHead>
+						<TableRow>
+							<TableCell>Billing Name</TableCell>
+							<TableCell>Email</TableCell>
+							<TableCell>Phone</TableCell>
 
-									<TableCell>City, State</TableCell>
-									<TableCell>Stripe Id</TableCell>
-								</TableRow>
-							</TableHead>
-							<TableBody>
-								{(rowsPerPage > 0
-									? rows.slice(
-											page * rowsPerPage,
-											page * rowsPerPage + rowsPerPage
-									  )
-									: rows
-								).map((row, i) => (
-									<Row key={i} row={row} />
-								))}
+							<TableCell>City, State</TableCell>
+							<TableCell>Stripe Id</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{(rowsPerPage > 0
+							? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+							: rows
+						).map((row, i) => (
+							<Row key={i} row={row} />
+						))}
 
-								{emptyRows > 0 && (
-									<TableRow style={{ height: 53 * emptyRows }}>
-										<TableCell colSpan={12} />
-									</TableRow>
-								)}
-							</TableBody>
-							<TableFooter>
-								<TableRow>
-									<TablePagination
-										rowsPerPageOptions={[
-											5,
-											10,
-											25,
-											{ label: 'All', value: -1 },
-										]}
-										colSpan={12}
-										count={rows.length}
-										rowsPerPage={rowsPerPage}
-										page={page}
-										SelectProps={{
-											inputProps: { 'aria-label': 'rows per page' },
-											native: true,
-										}}
-										onChangePage={handleChangePage}
-										onChangeRowsPerPage={handleChangeRowsPerPage}
-										ActionsComponent={TablePaginationActions}
-									/>
-								</TableRow>
-							</TableFooter>
-						</Table>
-					) : (
-						<CircularProgress />
-					)}
-				</TableContainer>
-			</Route>
-			<Route path={`${path}/:id`}>
-				<CustomerDetails />
-			</Route>
-		</Switch>
+						{emptyRows > 0 && (
+							<TableRow style={{ height: 53 * emptyRows }}>
+								<TableCell colSpan={12} />
+							</TableRow>
+						)}
+					</TableBody>
+					<TableFooter>
+						<TableRow>
+							<TablePagination
+								rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+								colSpan={12}
+								count={rows.length}
+								rowsPerPage={rowsPerPage}
+								page={page}
+								SelectProps={{
+									inputProps: { 'aria-label': 'rows per page' },
+									native: true,
+								}}
+								onChangePage={handleChangePage}
+								onChangeRowsPerPage={handleChangeRowsPerPage}
+								ActionsComponent={TablePaginationActions}
+							/>
+						</TableRow>
+					</TableFooter>
+				</Table>
+			) : (
+				<CircularProgress />
+			)}
+		</TableContainer>
 	);
 };
 
