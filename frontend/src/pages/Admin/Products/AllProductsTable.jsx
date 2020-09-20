@@ -20,7 +20,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TableHead from '@material-ui/core/TableHead';
-import { AdminContext } from '../../context/admin-context';
+import { AdminContext } from '../../../context/admin-context';
 const useStyles1 = makeStyles((theme) => ({
 	root: {
 		flexShrink: 0,

@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-import { useParams, useRouteMatch, useHistory, Link } from 'react-router-dom';
+import { useParams, useRouteMatch, 
+	//useHistory,
+	 Link } from 'react-router-dom';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -14,7 +16,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 const CustomersDetails = () => {
 	let { url, path } = useRouteMatch();
 	let { id } = useParams();
-	let history = useHistory();
+	//let history = useHistory();
 
 	console.log(path);
 	const [customer, setCustomer] = React.useState({});
@@ -40,7 +42,7 @@ const CustomersDetails = () => {
 		};
 
 		fetchData();
-	}, []);
+	}, [id]);
 	
 	return (
 		<Container maxWidth="xl">

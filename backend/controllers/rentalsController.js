@@ -10,10 +10,7 @@ const db = require('../config/config');
 
 module.exports = {
 	findAllRentals: async (req, res) => {
-      
-		await db.Rentals.findAll({
-			
-		})
+		await db.Rentals.findAll({})
 			.then((result) => {
 				res.status(200).json(result);
 				return result;
@@ -21,11 +18,11 @@ module.exports = {
 			.catch((err) => console.error(err));
 	},
 	findRentalById: async (req, res) => {
-      
 		await db.Rentals.findOne({
 			where: {
 				id: req.params.id,
 			},
+			include: { model: db.Products },
 		})
 			.then((result) => {
 				res.status(200).json(result);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SalesTable from '../../components/Tables/SalesTable';
+import SalesTable from './SalesTable';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
