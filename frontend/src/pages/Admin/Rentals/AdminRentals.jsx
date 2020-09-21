@@ -16,14 +16,13 @@ import Button from '@material-ui/core/Button';
 
 import RentalsTable from './RentalsTable';
 import RentalsDetails from './RentalsDetails';
+import CurrentRentals from '../CurrentRentals';
 
 const useStyles2 = makeStyles((theme) => ({
-	root: {
-		flexShrink: 3,
-	},
-	table: {
-		minWidth: 400,
-	},
+	root: {},
+	// table: {
+	// 	minWidth: 400,
+	// },
 }));
 
 const AdminRentals = () => {
@@ -45,7 +44,13 @@ const AdminRentals = () => {
 
 			<Switch>
 				<Route exact path={path}>
+				
 					<Grid item xs={12} md={10}>
+						<Typography variant="h4">Active Rentals</Typography>
+						<CurrentRentals />
+					</Grid>
+						<Grid item xs={12} md={10}>
+						<Typography variant="h4">All Rentals</Typography>
 						<RentalsTable />
 					</Grid>
 				</Route>

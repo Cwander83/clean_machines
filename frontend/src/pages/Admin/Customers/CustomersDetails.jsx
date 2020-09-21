@@ -14,7 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const CustomersDetails = () => {
-	let { url, path } = useRouteMatch();
+	let { 
+		//url, 
+		path } = useRouteMatch();
 	let { id } = useParams();
 	//let history = useHistory();
 
@@ -64,6 +66,7 @@ const CustomersDetails = () => {
 						</Grid>
 						<Grid item xs={12}>
 							<Typography variant="h3">Billing</Typography>
+							
 							<Typography variant="body1">{customer.email}</Typography>
 							<Typography variant="body1">{customer.phone}</Typography>
 							<Typography variant="body1">{billingAddress.city}</Typography>
