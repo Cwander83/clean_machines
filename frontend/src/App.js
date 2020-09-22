@@ -29,6 +29,7 @@ import SalesContextProvider from './context/sales-context';
 import AdminContextProvider from './context/admin-context';
 import ModalProvider from './context/modal-context';
 
+
 function App() {
 	const { isLoading } = useAuth0();
 
@@ -45,7 +46,7 @@ function App() {
 							<ModalProvider>
 								<div className="App">
 									<NavDrawer />
-
+									
 									<Switch>
 										<Route exact path="/" component={Home} />
 
