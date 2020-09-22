@@ -8,6 +8,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import theme from './theme/theme';
 import * as serviceWorker from './serviceWorker';
 
+import './assets/FONTS/ROBOTO/Roboto-Regular.ttf'
+import './assets/FONTS/ROBOTO/Roboto-Black.ttf'
+
 ReactDOM.render(
 	<React.Fragment>
 		<Router>

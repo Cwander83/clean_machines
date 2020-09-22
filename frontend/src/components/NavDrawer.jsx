@@ -10,27 +10,94 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
+import MailIcon from '@material-ui/icons/Mail';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles({
+import ShoppingCartButton from '../components/Buttons/ShoppingCartButton';
+
+import Logo from '../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips.png';
+import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
+import Divider from '@material-ui/core/Divider';
+
+const useStyles = makeStyles((theme) => ({
+	toolbar: {},
+	appBar: {
+		backgroundColor: 'transparent',
+		boxShadow: 'none',
+	},
+	menuIcon: {
+		fontSize: '40px',
+		color: theme.palette.primary.main,
+	},
+	menuLabel: {
+		width: '60px',
+		height: '60px',
+		//backgroundColor: theme.palette.gold.main,
+	},
+
 	list: {
 		width: 250,
+		//backgroundColor: theme.palette.grey.main,
 	},
 	fullList: {
 		width: 'auto',
 	},
 	button: {},
+	ShoppingCartIcon: {
+		margin: '0 5% 0 auto',
+		padding: '5px 40px',
+	},
+	cartBox: {
+		margin: '0 5% 0 auto',
+
+		backgroundColor: theme.palette.gold.main,
+	},
+
 	root: {
 		display: 'flex',
+		//backgroundColor: 'transparent'
 	},
-});
+
+	logo: {
+		width: '270px',
+	},
+	drawerLogoBox: {
+		width: 'auto',
+		height: '200px',
+		backgroundColor: 'white',
+		boxShadow:
+			'0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	drawerLogo: {
+		width: '240px',
+		margin: 'auto',
+	},
+	drawerBody: {
+		backgroundColor: theme.palette.primary.main,
+	},
+	navIcons: {
+		color: theme.palette.gold.main,
+	},
+	divider: {
+		color: theme.palette.gold.main,
+	},
+	listItem: {
+		color: theme.palette.grey.main,
+	},
+}));
 
 const NavDrawer = () => {
 	const { isAuthenticated } = useAuth0();
@@ -64,17 +131,17 @@ const NavDrawer = () => {
 		},
 		{
 			text: 'How to Videos',
-			icon: <ViewComfyIcon />,
+			icon: <VideoLibraryIcon />,
 			to: '/videos',
 		},
 		{
 			text: 'Contact',
-			icon: <ViewComfyIcon />,
+			icon: <MailIcon />,
 			to: '/contact',
 		},
 		{
 			text: 'Admin',
-			icon: <ViewComfyIcon />,
+			icon: <SupervisorAccountIcon />,
 			to: '/admin',
 		},
 	];
@@ -86,47 +153,74 @@ const NavDrawer = () => {
 		},
 		{
 			text: 'Customers',
-			icon: <HomeIcon />,
+			icon: <ArrowForwardIosIcon />,
 			to: '/admin/customers',
 		},
 
 		{
 			text: 'All Products',
-			icon: <ViewComfyIcon />,
+			icon: <ArrowForwardIosIcon />,
 			to: '/admin/products',
 		},
 		{
 			text: 'Rentals',
-			icon: <ViewComfyIcon />,
+			icon: <ArrowForwardIosIcon />,
 			to: '/admin/rentals',
 		},
 		{
 			text: 'Sales',
-			icon: <ViewComfyIcon />,
+			icon: <ArrowForwardIosIcon />,
 			to: '/admin/sales',
 		},
 	];
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static">
-				<Toolbar>
+			<AppBar
+				position="static"
+				classes={{
+					root: classes.appBar,
+				}}
+			>
+				<Toolbar className={classes.toolbar}>
 					<IconButton
 						onClick={handleDrawerOpen}
 						aria-label="Menu"
-						color="inherit"
-						variant="outlined"
+						classes={{
+							label: classes.menuLabel,
+						}}
 					>
-						<MenuIcon />
+						<MenuIcon
+							classes={{
+								root: classes.menuIcon,
+							}}
+						/>
 					</IconButton>
-					<Typography variant="h3" color="inherit"></Typography>
-					<IconButton color="inherit" component={Link} to="/cart">
-						<ShoppingCartIcon />
-						cart
-					</IconButton>
+					<img
+						className={classes.logo}
+						src={Logo}
+						alt="clean machines rentals"
+					/>
+
+					<ShoppingCartButton />
 				</Toolbar>
 			</AppBar>
-			<Drawer onClose={handleDrawerClose} open={state}>
+
+			<Drawer
+				onClose={handleDrawerClose}
+				open={state}
+				classes={{
+					paper: classes.drawerBody,
+				}}
+			>
+				<div className={classes.drawerLogoBox}>
+					<img
+						className={classes.drawerLogo}
+						src={DrawerLogo}
+						alt="clean machines rentals"
+					/>
+				</div>
+
 				{!isAuthenticated ? (
 					<List className={classes.list}>
 						{itemsList.map((item, index) => {
@@ -138,8 +232,17 @@ const NavDrawer = () => {
 									button
 									key={index}
 									onClick={handleDrawerClose}
+									divider
+									classes={{
+										root: classes.listItem,
+										divider: classes.divider,
+									}}
 								>
-									{icon && <ListItemIcon>{icon}</ListItemIcon>}
+									{icon && (
+										<ListItemIcon className={classes.navIcons}>
+											{icon}
+										</ListItemIcon>
+									)}
 									<ListItemText primary={text} />
 								</ListItem>
 							);
@@ -156,6 +259,7 @@ const NavDrawer = () => {
 									button
 									key={index}
 									onClick={handleDrawerClose}
+									divider="true"
 								>
 									{icon && <ListItemIcon>{icon}</ListItemIcon>}
 									<ListItemText primary={text} />
