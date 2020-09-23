@@ -8,82 +8,59 @@ import Grid from '@material-ui/core/Grid';
 //import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 
-//import RentalSearch from '../../components/RentalSearch';
 import CompanyTimeline from '../../components/CompanyTimeLine';
 
 import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-White.png';
-import BGH15E from '../../images/BGH15E.jpg';
 
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import DemoCarousel from '../../components/Carousels/DemoCarousel';
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	titleBox: {
 		backgroundColor: theme.palette.primary.main,
+		borderTopLeftRadius: '50%',
+		borderTopRightRadius: '50%',
 	},
 	logo: {
-		width: '60%',
+		width: '50%',
 	},
-	carousel: {
-		height: 'auto',
 
-		color: 'white',
-	},
 	image: {
-		width: '60px',
+		maxHeight: '200px',
 	},
-	root: {
-		position: 'relative',
+	sliderGrid: {
+		marginBottom: '30px',
+
+		border: `10px solid ${theme.palette.primary.main}`,
 	},
-	slide: {
-		padding: '15px',
-		minHeight: '100px',
-		color: '#fff',
-	},
-	slide1: {
-		backgroundColor: '#FEA900',
-	},
-	slide2: {
-		backgroundColor: '#B3DC4A',
-	},
-	slide3: {
-		backgroundColor: '#6AC0FF',
-	},
+	aboutImage: {
+		border: `1px solid ${theme.palette.primary.main}`,
+	}
 }));
 
 const Home = () => {
-	//const [checkout, setCheckout] = React.useState(false);
 	const classes = useStyles();
-	const [value, setValue] = React.useState(0);
-
-	const onChange = (value) => {
-		setValue(value);
-	};
 
 	return (
 		<Container className={classes.root} maxWidth="lg">
-			<Grid container justify="center" spacing={2}>
-				<Grid item xs={12}>
-					<AutoPlaySwipeableViews
-						interval={3000}
-						index={value}
-						onChangeIndex={onChange}
-					>
-						<div className={classes.slide1}>slide n°1</div>
-						<div className={classes.slide2}>slide n°2</div>
-						<div className={classes.slide3}>slide n°3</div>
-					</AutoPlaySwipeableViews>
-				</Grid>
-				<Grid item xs={12} sm={6} className={classes.titleBox}>
+			<Grid container justify="center">
+				<Grid item xs={12} sm={10} className={classes.titleBox}>
 					<img
 						className={classes.logo}
 						src={Logo}
 						alt="clean machine rentals"
 					/>
 				</Grid>
+				<Grid item xs={3} className={classes.aboutText}>
+					<h2>about</h2>
+				</Grid>
+				<Grid item xs={7} className={classes.aboutImage}>
+					<h2>about</h2>
+				</Grid>
+				<Grid item xs={12} sm={10} className={classes.sliderGrid}>
+					<DemoCarousel />
+				</Grid>
+
 				<Grid item xs={12}>
 					<Typography variant="h4">about the company</Typography>
 				</Grid>

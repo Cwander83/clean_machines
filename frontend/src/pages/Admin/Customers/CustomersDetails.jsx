@@ -1,9 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 
-import { useParams, useRouteMatch, 
+import {
+	useParams,
+	useRouteMatch,
 	//useHistory,
-	 Link } from 'react-router-dom';
+	Link,
+} from 'react-router-dom';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -14,9 +17,10 @@ import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const CustomersDetails = () => {
-	let { 
-		//url, 
-		path } = useRouteMatch();
+	let {
+		//url,
+		path,
+	} = useRouteMatch();
 	let { id } = useParams();
 	//let history = useHistory();
 
@@ -24,7 +28,7 @@ const CustomersDetails = () => {
 	const [customer, setCustomer] = React.useState({});
 	const [billingAddress, setBillingAddress] = React.useState({});
 	const [sales, setSales] = React.useState({});
-	const [rentals, setRentals] = React.useState({});
+	//const [rentals, setRentals] = React.useState({});
 
 	const [isLoading, setIsLoading] = React.useState(false);
 
@@ -33,19 +37,19 @@ const CustomersDetails = () => {
 			setIsLoading(true);
 			const stripeData = await axios.get(`/customers/${id}`);
 			const salesData = await axios.get(`/customers/sales/${id}`);
-			const rentalData = await axios.get(`/customers/rentals/${id}`);
+			//	const rentalData = await axios.get(`/customers/rentals/${id}`);
 
 			setCustomer(stripeData.data);
 			setBillingAddress(stripeData.data.address);
 			setSales(salesData.data);
-			setRentals(rentalData.data);
-			
+			//setRentals(rentalData.data);
+
 			setIsLoading(false);
 		};
 
 		fetchData();
 	}, [id]);
-	
+
 	return (
 		<Container maxWidth="xl">
 			<Grid container spacing={2} justify="center" component={Paper}>
@@ -58,7 +62,9 @@ const CustomersDetails = () => {
 					<>
 						<Grid item xs={12}>
 							<ButtonGroup>
-								<Button component={Link} to="/admin/customers">back to table</Button>
+								<Button component={Link} to="/admin/customers">
+									back to table
+								</Button>
 								<Button>create rental</Button>
 								<Button>update</Button>
 							</ButtonGroup>
@@ -66,7 +72,7 @@ const CustomersDetails = () => {
 						</Grid>
 						<Grid item xs={12}>
 							<Typography variant="h3">Billing</Typography>
-							
+
 							<Typography variant="body1">{customer.email}</Typography>
 							<Typography variant="body1">{customer.phone}</Typography>
 							<Typography variant="body1">{billingAddress.city}</Typography>

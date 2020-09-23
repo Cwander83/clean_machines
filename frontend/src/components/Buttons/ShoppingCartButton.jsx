@@ -20,7 +20,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShoppingCartButton() {
 	const classes = useStyles();
-	const [items, setItems] = React.useState(0);
+	const [items, 
+	//	setItems
+	] = React.useState(0);
+	
 
 	return (
 		<div className={classes.root}>

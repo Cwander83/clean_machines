@@ -27,7 +27,7 @@ import ShoppingCartButton from '../components/Buttons/ShoppingCartButton';
 
 import Logo from '../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips.png';
 import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
-import Divider from '@material-ui/core/Divider';
+//import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
 	toolbar: {},

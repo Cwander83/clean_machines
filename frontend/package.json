@@ -17,7 +17,6 @@
 		"@testing-library/user-event": "^7.2.1",
 		"axios": "^0.19.2",
 		"date-fns": "^2.15.0",
-		"material-auto-rotating-carousel": "^3.0.2",
 		"moment": "^2.27.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
@@ -25,7 +24,8 @@
 		"react-moment": "^0.9.7",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "^3.4.3",
-		"react-swipeable-views": "^0.13.9",
+		"react-slick": "^0.26.1",
+		"slick-carousel": "^1.8.1",
 		"styled-components": "^5.1.1"
 	},
 	"scripts": {
