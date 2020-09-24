@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.main,
 		borderTopLeftRadius: '50%',
 		borderTopRightRadius: '50%',
+		marginBottom: '10px',
 	},
 	logo: {
 		width: '50%',
@@ -29,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
 		maxHeight: '200px',
 	},
 	sliderGrid: {
-		marginBottom: '30px',
-
-		border: `10px solid ${theme.palette.primary.main}`,
+		//marginBottom: '30px',
+		//	border: `10px solid ${theme.palette.primary.main}`,
+		marginTop: '40px',
 	},
 	aboutImage: {
 		border: `1px solid ${theme.palette.primary.main}`,
-	}
+	},
 }));
 
 const Home = () => {
@@ -44,21 +45,22 @@ const Home = () => {
 	return (
 		<Container className={classes.root} maxWidth="lg">
 			<Grid container justify="center">
-				<Grid item xs={12} sm={10} className={classes.titleBox}>
+				{/* <Grid item xs={12} sm={10} className={classes.titleBox}>
 					<img
 						className={classes.logo}
 						src={Logo}
 						alt="clean machine rentals"
 					/>
+				</Grid> */}
+				<Grid item xs={12} sm={10} className={classes.sliderGrid}>
+					<DemoCarousel />
 				</Grid>
+
 				<Grid item xs={3} className={classes.aboutText}>
 					<h2>about</h2>
 				</Grid>
 				<Grid item xs={7} className={classes.aboutImage}>
 					<h2>about</h2>
-				</Grid>
-				<Grid item xs={12} sm={10} className={classes.sliderGrid}>
-					<DemoCarousel />
 				</Grid>
 
 				<Grid item xs={12}>

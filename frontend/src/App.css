@@ -1,8 +1,7 @@
 .App {
-  text-align: center;
-  background-image: url('./images/pexels-gdtography-950241.jpg');
+	text-align: center;
+	/* background-image: url('./images/pexels-gdtography-950241.jpg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
 }
-
