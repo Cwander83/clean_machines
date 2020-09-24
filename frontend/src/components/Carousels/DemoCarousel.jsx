@@ -3,18 +3,23 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 //import Paper from '@material-ui/core/Paper';
 //import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import BGH15E from '../../images/BGH15E.jpg';
 
 import Carousel from 'react-slick';
 
+// CSS for carousel
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '../../styles/Carousel.css';
 
 const useStyles = makeStyles((theme) => ({
 	image: {
@@ -31,6 +36,19 @@ const useStyles = makeStyles((theme) => ({
 	slide: {
 		height: '100%',
 		display: 'flex',
+		outline: 'none',
+		border: 'none',
+		borderColor: 'transparent',
+		outlineColor: 'transparent',
+		'&$focus': {
+			outline: 'none',
+			border: 'none',
+		},
+	},
+	slideList: {},
+	card: {
+		
+		width: '100%',
 	},
 }));
 
@@ -38,6 +56,7 @@ const DemoCarousel = () => {
 	const classes = useStyles();
 
 	const settings = {
+		className: 'center',
 		dots: true,
 		infinite: true,
 		slidesToShow: 1,
@@ -51,26 +70,20 @@ const DemoCarousel = () => {
 
 	return (
 		<Grid container className={classes.sliderGrid}>
-			<Card>
+			<Grid item xs={12} sm={10} md={8}>
 				<Carousel {...settings}>
 					<div>
-						<Grid item xs={12} className={classes.slide}>
-							<Grid item xs={6}>
+						<Card className={classes.card}>
+							<CardContent>
 								<img src={BGH15E} alt="bisssell" className={classes.image} />
-							</Grid>
-							<Grid item xs={6}>
-								<Typography variant="body1">
-									Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book.
-								</Typography>
-							</Grid>
-						</Grid>
+							</CardContent>
+							<CardActions>
+								<Button>Learn more!</Button>
+							</CardActions>
+						</Card>
 					</div>
 				</Carousel>
-			</Card>
+			</Grid>
 		</Grid>
 	);
 };
