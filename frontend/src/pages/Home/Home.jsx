@@ -7,14 +7,16 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
-
+import Card from '@material-ui/core/Card';
 
 import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png';
-
+import image1 from '../../images/697ActionA.jpg';
+import image2 from '../../images/BGU1937TontheBeach.JPG'
 
 import DemoCarousel from '../../components/Carousels/DemoCarousel';
 
 import CompanyTimeline from '../../components/CompanyTimeLine';
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -25,6 +27,26 @@ const useStyles = makeStyles((theme) => ({
 		// borderTopRightRadius: '50%',
 		// borderBottomLeftRadius: '8px',
 		// borderBottomRightRadius: '8px',
+	},
+	productBox: {
+		//backgroundColor: theme.palette.primary.light,
+		margin: '30px 0 40px 0',
+		// borderTopLeftRadius: '50%',
+		// borderTopRightRadius: '50%',
+		// borderBottomLeftRadius: '8px',
+		// borderBottomRightRadius: '8px',
+		//height: '400px' 
+	},
+	productSection: {
+		//	display: 'flex',
+		//backgroundColor: theme.palette.primary.light,
+		//margin: '30px 0 40px 0',
+		borderTopLeftRadius: '50%',
+		borderTopRightRadius: '50%',
+		// borderBottomLeftRadius: '8px',
+		// borderBottomRightRadius: '8px',
+		maxHeight: '400px'
+		
 	},
 	logo: {
 		width: '30%',
@@ -50,8 +72,24 @@ const useStyles = makeStyles((theme) => ({
 	aboutImage: {
 		//border: `1px solid ${theme.palette.primary.light}`,
 	},
-	cardContent: {
-		padding: '0',
+	card1: {
+		height: '300px',
+		marginTop: '20px',
+		border: '1px solid black',
+		zIndex: '4',
+		backgroundImage: `url(${image1})`,
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+		
+	},
+	card2: {
+		height: '300px',
+		marginTop: '20px',
+		border: '1px solid black',
+		zIndex: '4',
+		backgroundImage: `url(${image2})`,
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
 	},
 }));
 
@@ -74,13 +112,39 @@ const Home = () => {
 						alt="clean machine rentals"
 					/>
 				</Grid>
-				<Grid item xs={10}>
+				<Grid xs={12} className={classes.productSectionTitle}>
+							<Typography variant="h4">Explore our inventories </Typography>
+						</Grid>
+				<Grid item xs={10} className={classes.productSection}>
+					<Grid container>
+						
+
+						<Grid item xs={1}></Grid>
+						<Grid item xs={4}>
+							<Card
+							raised className={classes.card1}>
+								<Typography variant="h4">Explore our inventories </Typography>
+							</Card>
+						</Grid>
+						<Grid item xs={2}></Grid>
+						<Grid item xs={4}>
+							<Card 
+							raised
+							className={classes.card2}>
+								<Typography variant="h4">Explore our inventories </Typography>
+							</Card>
+						</Grid>
+						<Grid item xs={1}></Grid>
+					</Grid>
+				</Grid>
+
+				{/* <Grid item xs={10}>
 					<Typography variant="h4">Check out our</Typography>
 					<Typography variant="h4">Inventory</Typography>
 					<DemoCarousel />
-				</Grid>
+				</Grid> */}
 
-				<Grid item xs={12} component={Paper}>
+				<Grid item xs={12}>
 					<Typography variant="h4">How to rent</Typography>
 					<CompanyTimeline />
 				</Grid>
