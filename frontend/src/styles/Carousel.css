@@ -1,3 +1,17 @@
 .slick-slide > div > div:focus {
 	outline: none;
 }
+
+/* .slick-active:hover {
+	transform: scale(1.1);
+} */
+
+/* the parent
+.slick-list {
+	margin: 0 -10px;
+} */
+
+.slick-dots li {
+	margin: auto 5px;
+	/* more CSS */
+}

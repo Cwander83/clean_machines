@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom';
 
 import ShoppingCartButton from '../components/Buttons/ShoppingCartButton';
 
-import Logo from '../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips.png';
+//import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
 import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
 //import Divider from '@material-ui/core/Divider';
 
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	logo: {
-		width: '270px',
+		width: '70px',
 	},
 	drawerLogoBox: {
 		width: 'auto',
@@ -196,11 +196,11 @@ const NavDrawer = () => {
 							}}
 						/>
 					</IconButton>
-					<img
+					{/* <img
 						className={classes.logo}
 						src={Logo}
 						alt="clean machines rentals"
-					/>
+					/> */}
 
 					<ShoppingCartButton />
 				</Toolbar>
