@@ -47,9 +47,7 @@ const RentalSearch = () => {
 	//console.log('inputs: ' + JSON.stringify(rentalDates, null, 2));
 	return (
 		<Grid container spacing={2} className={classes.body}>
-			{/* <Grid item xs={12} className={classes.title}>
-				<Typography variant="h6">STEP 2. Search for rental dates</Typography>
-			</Grid> */}
+		
 			<Grid item sm></Grid>
 			<Grid item xs={12} sm={6} className={classes.searchField}>
 				<DatePicker
