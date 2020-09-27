@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 //import TextField from '@material-ui/core/TextField';
 //import LocationChecker from '../LocationChecker/LocationChecker';
 import { DatePicker } from '@material-ui/pickers';
-import { Grid, Paper, Button } from '@material-ui/core';
-import { RentalContext } from '../context/rental-context';
+import { Grid, Button } from '@material-ui/core';
+import { RentalContext } from '../../context/rental-context';
 //import Typography from '@material-ui/core/Typography';
 //import Button from '@material-ui/core/Button';
 
@@ -46,7 +46,7 @@ const RentalSearch = () => {
 
 	//console.log('inputs: ' + JSON.stringify(rentalDates, null, 2));
 	return (
-		<Grid container spacing={2} className={classes.body} component={Paper}>
+		<Grid container spacing={2} className={classes.body}>
 			{/* <Grid item xs={12} className={classes.title}>
 				<Typography variant="h6">STEP 2. Search for rental dates</Typography>
 			</Grid> */}
