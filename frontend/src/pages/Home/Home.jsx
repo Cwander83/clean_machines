@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
 // images / icons
-import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png';
+
 
 // components
 import SalesBox from './SalesBox';
@@ -124,7 +124,7 @@ const Home = () => {
 	return (
 		<Container disableGutters maxWidth={false}>
 			<Grid container justify="center">
-				<Grid
+				{/* <Grid
 					item
 					xs={12}
 					className={classes.titleBox}
@@ -136,7 +136,7 @@ const Home = () => {
 						src={Logo}
 						alt="clean machine rentals"
 					/>
-				</Grid>
+				</Grid> */}
 
 				<Grid item xs={10} className={classes.section}>
 					<Grid container spacing={2} justify="center">

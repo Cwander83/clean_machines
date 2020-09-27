@@ -1,11 +1,15 @@
 import React from 'react';
+
+// auth 0
 import { useAuth0 } from '@auth0/auth0-react';
 
+// react router
+import { Link } from 'react-router-dom';
+
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-//import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-//import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -17,32 +21,29 @@ import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-//import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 
-import { Link } from 'react-router-dom';
-
-import ShoppingCartButton from '../components/Buttons/ShoppingCartButton';
-
-//import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
+// images / logos
+import Logo from '../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png';
 import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
-//import Divider from '@material-ui/core/Divider';
+
+// components
 
 const useStyles = makeStyles((theme) => ({
-	toolbar: {},
+	toolbar: { padding: '10px 0 10px 5%' },
 	appBar: {
-		backgroundColor: 'transparent',
+		backgroundColor: theme.palette.primary.light,
 		boxShadow: 'none',
 	},
 	menuIcon: {
 		fontSize: '40px',
-		color: theme.palette.primary.main,
+		color: theme.palette.gold.main,
 	},
 	menuLabel: {
-		width: '60px',
-		height: '60px',
-		//backgroundColor: theme.palette.gold.main,
+		width: '50px',
+		height: '50px',
+		color: theme.palette.gold.main,
 	},
 
 	list: {
@@ -65,11 +66,17 @@ const useStyles = makeStyles((theme) => ({
 
 	root: {
 		display: 'flex',
-		//backgroundColor: 'transparent'
 	},
 
 	logo: {
-		width: '70px',
+		width: '20%',
+		[theme.breakpoints.down('xs')]: {
+			width: '60%'
+		},
+		[theme.breakpoints.down('sm')]: {
+			width: '30%'
+		},
+		
 	},
 	drawerLogoBox: {
 		width: 'auto',
@@ -196,13 +203,13 @@ const NavDrawer = () => {
 							}}
 						/>
 					</IconButton>
-					{/* <img
+					<img
 						className={classes.logo}
 						src={Logo}
-						alt="clean machines rentals"
-					/> */}
+						alt="clean machine rentals"
+					/>
 
-					<ShoppingCartButton />
+				
 				</Toolbar>
 			</AppBar>
 
