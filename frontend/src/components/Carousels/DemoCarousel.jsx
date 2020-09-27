@@ -2,25 +2,28 @@ import React from 'react';
 //import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+
+
 import image1 from '../../images/697.jpg';
-import image2 from '../../images/BGH17E.jpg';
-import image3 from '../../images/697ActionA.jpg';
-import image4 from '../../images/BG101H(3).jpg';
+ import image2 from '../../images/BGAM3000.jpg';
+// import image3 from '../../images/697ActionA.jpg';
+// import image4 from '../../images/BG101H(3).jpg';
+import image5 from '../../images/355.jpg'
+
 
 import Carousel from 'react-slick';
+import MagicSliderDots from 'react-magic-slider-dots';
+
 
 // CSS for carousel
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../../styles/Carousel.css';
-import theme from '../../theme/theme';
+import 'react-magic-slider-dots/dist/magic-dots.css';
+
 
 const useStyles = makeStyles((theme) => ({
 	image: {
@@ -50,6 +53,7 @@ const DemoCarousel = () => {
 		infinite: true,
 		slidesToShow: 5,
 		speed: 500,
+		
 		responsive: [
 			{
 				breakpoint: 1024,
@@ -76,46 +80,26 @@ const DemoCarousel = () => {
 				},
 			},
 		],
-		appendDots: (dots) => (
-			<div
-				style={{
-					backgroundColor: theme.palette.primary.main,
-					borderRadius: '10px',
-					padding: '10px',
-				}}
-			>
-				<ul style={{ margin: '0px' }}>{dots}</ul>
-			</div>
-		),
-		customPaging: (i) => (
-			<div
-				style={{
-					width: '30px',
-					height: '10px',
-					backgroundColor: theme.palette.primary.main,
-					margin: '5px',
-					border: '1px black solid',
-					textAlign: 'center',
-				}}
-			></div>
-		),
+		appendDots: (dots) => {
+			return <MagicSliderDots dots={dots} numDotsToShow={6} dotWidth={30} />;
+		},
 	};
 
 	return (
 		<Grid container className={classes.sliderGrid}>
 			<Grid item xs={12}>
-				<Carousel {...settings}>
+				<Carousel {...settings}  >
 					<div>
 						<img src={image1} alt="bisssell" className={classes.image} />
 						<Typography variant="caption">Vacuum</Typography>
 					</div>
 					<div>
-						<img src={image1} alt="bisssell" className={classes.image} />
-						<Typography variant="caption">Vacuum</Typography>
+						<img src={image2} alt="bisssell" className={classes.image} />
+						<Typography variant="caption">Air Movers</Typography>
 					</div>
 					<div>
-						<img src={image1} alt="bisssell" className={classes.image} />
-						<Typography variant="caption">Vacuum</Typography>
+						<img src={image5} alt="bisssell" className={classes.image} />
+						<Typography variant="caption">Power Sweepers</Typography>
 					</div>
 					<div>
 						<img src={image1} alt="bisssell" className={classes.image} />
