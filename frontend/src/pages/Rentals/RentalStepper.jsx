@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import LocationChecker from '../../components/LocationChecker';
-import RentalSearch from '../../components/RentalSearch';
+//import RentalSearch from '../../components/RentalSearch';
 import RentalCategory from '../../components/RentalCategory';
 //import { Grid } from '@material-ui/core';
 
@@ -44,8 +44,8 @@ function getStepContent(step) {
 	switch (step) {
 		case 0:
 			return <LocationChecker />;
-		case 1:
-			return <RentalSearch />;
+		// case 1:
+		// 	return <RentalSearch />;
 		case 2:
 			return <RentalCategory />;
 		default:
