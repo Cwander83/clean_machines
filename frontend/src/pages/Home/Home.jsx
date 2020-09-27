@@ -4,97 +4,84 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
+import Box from '@material-ui/core/Box';
 
 import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png';
-import image1 from '../../images/697ActionA.jpg';
-import image2 from '../../images/BGU1937TontheBeach.JPG'
 
-import DemoCarousel from '../../components/Carousels/DemoCarousel';
+import SalesBox from './SalesBox';
 
-import CompanyTimeline from '../../components/CompanyTimeLine';
-
+import '../../styles/Home.css';
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	titleBox: {
 		backgroundColor: theme.palette.primary.light,
 		margin: '30px 0 40px 0',
-		// borderTopLeftRadius: '50%',
-		// borderTopRightRadius: '50%',
-		// borderBottomLeftRadius: '8px',
-		// borderBottomRightRadius: '8px',
+		borderRadius: '0',
 	},
-	productBox: {
-		//backgroundColor: theme.palette.primary.light,
-		margin: '30px 0 40px 0',
-		// borderTopLeftRadius: '50%',
-		// borderTopRightRadius: '50%',
-		// borderBottomLeftRadius: '8px',
-		// borderBottomRightRadius: '8px',
-		//height: '400px' 
-	},
-	productSection: {
-		//	display: 'flex',
-		//backgroundColor: theme.palette.primary.light,
-		//margin: '30px 0 40px 0',
-		borderTopLeftRadius: '50%',
-		borderTopRightRadius: '50%',
-		// borderBottomLeftRadius: '8px',
-		// borderBottomRightRadius: '8px',
-		maxHeight: '400px'
-		
+
+	section2: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'center',
 	},
 	logo: {
 		width: '30%',
 	},
-	section: {
-		height: '800px',
-		//	backgroundColor: theme.palette.grey.main,
+	boxes: {
+		[theme.breakpoints.down('sm')]: {
+			width: '100%',
+		},
+
+		width: '50%',
+		margin: 'auto',
 	},
 
-	image: {
-		//maxHeight: '200px',
-		width: '100%',
+	box1: {
+		position: 'relative',
+		width: '60px',
+		height: '40px',
+		backgroundColor: theme.palette.primary.light,
 	},
-	sliderGrid: {
-		backgroundColor: theme.palette.primary.main,
-		//marginBottom: '30px',
-		//	border: `10px solid ${theme.palette.primary.main}`,
-		//	marginTop: '40px',
-		display: 'flex',
-		justifyContent: 'center',
-		padding: '30px',
+	box2: {
+		position: 'relative',
+		top: '-20px',
+		left: '15px',
+		width: 'auto',
+		//height: 'auto',
+		border: '2px solid',
+		padding: '5px 0',
+		zIndex: '10',
+		borderColor: theme.palette.primary.light,
+		backgroundColor: 'white',
+		cursor: 'pointer',
+		[theme.breakpoints.down('sm')]: {},
 	},
-	aboutImage: {
-		//border: `1px solid ${theme.palette.primary.light}`,
+	boxSubtitle: {
+		fontWeight: '400',
+		letterSpacing: '.05em',
 	},
-	card1: {
-		height: '300px',
-		marginTop: '20px',
-		border: '1px solid black',
-		zIndex: '4',
-		backgroundImage: `url(${image1})`,
-		backgroundSize: 'cover',
-		backgroundPosition: 'center',
-		
-	},
-	card2: {
-		height: '300px',
-		marginTop: '20px',
-		border: '1px solid black',
-		zIndex: '4',
-		backgroundImage: `url(${image2})`,
-		backgroundSize: 'cover',
-		backgroundPosition: 'center',
+
+	box3: {
+		position: 'relative',
+		top: '-40px',
+		left: '280px',
+		width: '60px',
+		height: '40px',
+
+		backgroundColor: theme.palette.gold.main,
 	},
 }));
 
 const Home = () => {
 	const classes = useStyles();
+
+	//const [salesList, setSalesList] = React.useState(false);
+	//const [rentalList, setRentalList] = React.useState(false);
+
+	//const closeSalesList = () => setSalesList(false);
 
 	return (
 		<Container disableGutters maxWidth={false}>
@@ -112,31 +99,59 @@ const Home = () => {
 						alt="clean machine rentals"
 					/>
 				</Grid>
-				<Grid xs={12} className={classes.productSectionTitle}>
-							<Typography variant="h4">Explore our inventories </Typography>
+				<Grid item xs={12} className={classes.section1}>
+					{/* <Typography variant="h4">BROWSE OUR</Typography>
+					<Typography variant="h4">IINVENTORIES</Typography> */}
+				</Grid>
+				<Grid item xs={10} className={classes.section2}>
+					<Grid container spacing={2} justify="center">
+						<Grid item xs={12}>
+							<Box className={classes.boxes}>
+								<Box
+									className={classes.box1}
+									component={Paper}
+									elevation={2}
+								></Box>
+								<Box className={classes.box2} component={Paper} elevation={2}>
+									<Typography variant="h3" className={classes.boxSubtitle}>
+										SALES
+									</Typography>
+									<SalesBox />
+								</Box>
+								<Box
+									className={classes.box3}
+									component={Paper}
+									elevation={2}
+								></Box>
+							</Box>
 						</Grid>
-				<Grid item xs={10} className={classes.productSection}>
-					<Grid container>
-						
-
-						<Grid item xs={1}></Grid>
-						<Grid item xs={4}>
-							<Card
-							raised className={classes.card1}>
-								<Typography variant="h4">Explore our inventories </Typography>
-							</Card>
-						</Grid>
-						<Grid item xs={2}></Grid>
-						<Grid item xs={4}>
-							<Card 
-							raised
-							className={classes.card2}>
-								<Typography variant="h4">Explore our inventories </Typography>
-							</Card>
-						</Grid>
-						<Grid item xs={1}></Grid>
+						{/* <Grid item xs={12} sm={12} md={6}>
+							<Box className={classes.boxes}>
+								<Box
+									className={classes.box1}
+									component={Paper}
+									elevation={2}
+								></Box>
+								<Box className={classes.box2} component={Paper} elevation={2}>
+									<Typography variant="h3" className={classes.imageTitle}>
+										Rentals
+									</Typography>
+								</Box>
+								<Box
+									className={classes.box3}
+									component={Paper}
+									elevation={2}
+								></Box>
+							</Box>
+						</Grid> */}
 					</Grid>
 				</Grid>
+				{/* <Grid item xs={12} className={classes.productSectionTitle}>
+					<Typography variant="h4"></Typography>
+				</Grid>
+				<Grid item xs={10}>
+					<DemoCarousel />
+				</Grid> */}
 
 				{/* <Grid item xs={10}>
 					<Typography variant="h4">Check out our</Typography>
@@ -144,10 +159,10 @@ const Home = () => {
 					<DemoCarousel />
 				</Grid> */}
 
-				<Grid item xs={12}>
+				{/* <Grid item xs={12}>
 					<Typography variant="h4">How to rent</Typography>
 					<CompanyTimeline />
-				</Grid>
+				</Grid> */}
 			</Grid>
 		</Container>
 	);
