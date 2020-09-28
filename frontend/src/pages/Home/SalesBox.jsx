@@ -22,66 +22,273 @@ import powersweeper from '../../images/icons/powersweeper.jpg';
 import steammachine from '../../images/icons/steammachine.jpg';
 import sweeper from '../../images/icons/sweeper.jpg';
 import upright from '../../images/icons/upright.jpg';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
 		display: 'flex',
-		paddingLeft: '40px',
+		MarginLeft: '40px',
 		justifyContent: 'flex-start',
-		//width: 'auto',
-		letterSpacing: '.07em',
-		textTransform: 'none',
 	},
 	grid: {},
 	image: {
-		height: '35px',
+		height: '45px',
 		width: 'auto',
 	},
+
 	imageBox: {
-		width: '45px',
+		width: '55px',
+	},
+	text: {
+		fontSize: '14px',
+		letterSpacing: '.09em',
+		alignSelf: 'flex-end',
+		marginBottom: '10px',
+		textTransform: 'capitalize',
+	},
+	sectionTitle: {
+		textAlign: 'left',
+		paddingLeft: '60px',
+		textTransform: 'uppercase',
 	},
 }));
 const SalesBox = () => {
 	const classes = useStyles();
 
-	const links = [
-		{ title: 'View all Vacuums', image: upright, path: '/' },
+	const vacuums = [
+		{ title: 'View all', image: upright, path: '/' },
 		{ title: 'Upright Vacuums', image: upright, path: '/' },
 		{ title: 'Canister Vacuums', image: canister, path: '/' },
 		{ title: 'Backpack Vacuums', image: backpack, path: '/' },
-		{ title: 'Air Movers', image: airmover, path: '/' },
 		{ title: 'Extra-wide Vacuums', image: extrawide, path: '/' },
-		{ title: 'Extractors', image: extractor, path: '/' },
-		{ title: 'Power Sweepers', image: powersweeper, path: '/' },
-		{ title: 'Sweepers', image: sweeper, path: '/' },
-		{ title: 'Floor Machines', image: floormachine, path: '/' },
-		{ title: 'Steam Machines', image: steammachine, path: '/' },
-		{ title: 'Accessories', image: formula, path: '/' },
 	];
 
 	return (
-		<Grid
-			container
-			direction="row"
-			justify="flex-start"
-			alignItems="flex-start"
-		>
-			{links.map((link, i) => {
-				return (
-					<Grid item xs={12} sm={6} className={classes.grid} key={i}>
-						<Button className={classes.button}>
+		<Grid container direction="row" justify="flex-start" spacing={2}>
+			<Grid item xs={12} sm={6}>
+				<Typography variant="h6" className={classes.sectionTitle}>
+					Vacuums
+				</Typography>
+				<Divider />
+
+				{vacuums.map((link, i) => {
+					return (
+						<Grid item xs={12} className={classes.grid} key={i}>
+							<Button
+								className={classes.button}
+								classes={{
+									label: classes.label,
+								}}
+							>
+								<Box className={classes.imageBox}>
+									<img
+										src={link.image}
+										alt={link.title}
+										className={classes.image}
+									/>
+								</Box>
+								<Typography variant="h6" className={classes.text}>
+									{link.title}
+								</Typography>
+							</Button>
+						</Grid>
+					);
+				})}
+				<Grid item xs={12}>
+					<Typography variant="h6" className={classes.sectionTitle}>
+						air movers
+					</Typography>
+					<Divider />
+
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
 							<Box className={classes.imageBox}>
 								<img
-									src={link.image}
-									alt={link.title}
+									src={airmover}
+									alt="bissell air mover"
 									className={classes.image}
 								/>
 							</Box>
-							<Typography variant="h6">{link.title}</Typography>
+							<Typography variant="h6" className={classes.text}>
+								Air Movers
+							</Typography>
 						</Button>
 					</Grid>
-				);
-			})}
+				</Grid>
+				<Grid item xs={12}>
+					<Typography variant="h6" className={classes.sectionTitle}>
+						steam machines
+					</Typography>
+					<Divider />
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
+							<Box className={classes.imageBox}>
+								<img
+									src={steammachine}
+									alt="bissell steam machine"
+									className={classes.image}
+								/>
+							</Box>
+							<Typography variant="h6" className={classes.text}>
+								Steam machines
+							</Typography>
+						</Button>
+					</Grid>
+				</Grid>
+			</Grid>
+			<Grid item xs={12} sm={6}>
+				<Grid item xs={12}>
+					<Typography variant="h6" className={classes.sectionTitle}>
+						extractors
+					</Typography>
+					<Divider />
+
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
+							<Box className={classes.imageBox}>
+								<img
+									src={extractor}
+									alt="bissell extractor"
+									className={classes.image}
+								/>
+							</Box>
+							<Typography variant="h6" className={classes.text}>
+								Extractors
+							</Typography>
+						</Button>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Typography variant="h6" className={classes.sectionTitle}>
+						sweepers
+					</Typography>
+					<Divider />
+
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
+							<Box className={classes.imageBox}>
+								<img
+									src={powersweeper}
+									alt="bissell power sweeper"
+									className={classes.image}
+								/>
+							</Box>
+							<Typography variant="h6" className={classes.text}>
+								Power sweepers
+							</Typography>
+						</Button>
+					</Grid>
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
+							<Box className={classes.imageBox}>
+								<img
+									src={sweeper}
+									alt="bissell sweeper"
+									className={classes.image}
+								/>
+							</Box>
+							<Typography variant="h6" className={classes.text}>
+								Sweepers
+							</Typography>
+						</Button>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Typography variant="h6" className={classes.sectionTitle}>
+						floor machines
+					</Typography>
+					<Divider />
+
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
+							<Box className={classes.imageBox}>
+								<img
+									src={floormachine}
+									alt="bissell floor machines"
+									className={classes.image}
+								/>
+							</Box>
+							<Typography variant="h6" className={classes.text}>
+								Floor Machines
+							</Typography>
+						</Button>
+					</Grid>
+				</Grid>
+				<Grid item xs={12}>
+					<Typography variant="h6" className={classes.sectionTitle}>
+						Accessories
+					</Typography>
+					<Divider />
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
+							<Box className={classes.imageBox}>
+								<img
+									src={formula}
+									alt="cleaning formula"
+									className={classes.image}
+								/>
+							</Box>
+							<Typography variant="h6" className={classes.text}>
+								cleaning formula
+							</Typography>
+						</Button>
+					</Grid>
+					<Grid item xs={12} className={classes.grid}>
+						<Button
+							className={classes.button}
+							classes={{
+								label: classes.label,
+							}}
+						>
+							<Box className={classes.imageBox}>
+								<img
+									src={formula}
+									alt="bissell accessories"
+									className={classes.image}
+								/>
+							</Box>
+							<Typography variant="h6" className={classes.text}>
+								Accessories
+							</Typography>
+						</Button>
+					</Grid>
+				</Grid>
+			</Grid>
 		</Grid>
 	);
 };

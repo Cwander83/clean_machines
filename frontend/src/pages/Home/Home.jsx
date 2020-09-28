@@ -12,20 +12,19 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
 // images / icons
-
+import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png'
 
 // components
 import SalesBox from './SalesBox';
 import RentalSearch from './RentalSearch';
 
 // outside styles
-import '../../styles/Home.css';
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	titleBox: {
 		backgroundColor: theme.palette.primary.light,
-		margin: '30px 0 40px 0',
+		margin: '5px 0 40px 0',
 		borderRadius: '0',
 	},
 
@@ -103,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.light,
 	},
 	span: {
-		fontSize: '26px',
+		fontSize: '28px',
 		fontFamily: 'YellowTail',
 	},
 	search: {
@@ -124,7 +123,7 @@ const Home = () => {
 	return (
 		<Container disableGutters maxWidth={false}>
 			<Grid container justify="center">
-				{/* <Grid
+				<Grid
 					item
 					xs={12}
 					className={classes.titleBox}
@@ -136,7 +135,7 @@ const Home = () => {
 						src={Logo}
 						alt="clean machine rentals"
 					/>
-				</Grid> */}
+				</Grid>
 
 				<Grid item xs={10} className={classes.section}>
 					<Grid container spacing={2} justify="center">
@@ -174,11 +173,7 @@ const Home = () => {
 									</Typography>
 									<SalesBox />
 								</Box>
-								{/* <Box
-									className={classes.box3}
-									component={Paper}
-									elevation={2}
-								></Box> */}
+								
 							</Box>
 						</Grid>
 					</Grid>

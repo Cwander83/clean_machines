@@ -41,8 +41,14 @@ const theme = createMuiTheme({
 		h4: {
 			fontFamily: 'Roboto-Black',
 		},
-		button: {
+		h5: {
 			fontFamily: 'Roboto-Black',
+		},
+		h6: {
+			fontFamily: 'Roboto',
+		},
+		button: {
+			fontFamily: 'Roboto',
 		},
 	},
 });
