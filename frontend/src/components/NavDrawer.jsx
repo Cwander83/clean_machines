@@ -25,15 +25,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 
 // images / logos
-import Logo from '../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png';
+import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
 import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
 
 // components
 
 const useStyles = makeStyles((theme) => ({
-	toolbar: { padding: '10px 0 10px 5%' },
+	toolbar: { padding: '0 0 0 5%' },
 	appBar: {
-		backgroundColor: theme.palette.primary.light,
+		backgroundColor: 'transparent',
 		boxShadow: 'none',
 	},
 	menuIcon: {
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	logo: {
-		width: '20%',
+		width: '8%',
 		[theme.breakpoints.down('xs')]: {
 			width: '60%'
 		},

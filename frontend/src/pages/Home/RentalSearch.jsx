@@ -1,37 +1,46 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
+// react router
 import { Link } from 'react-router-dom';
-//import TextField from '@material-ui/core/TextField';
-//import LocationChecker from '../LocationChecker/LocationChecker';
+
+// material ui
+import { makeStyles } from '@material-ui/core/styles';
 import { DatePicker } from '@material-ui/pickers';
-import { Grid, Button } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+
+// context
 import { RentalContext } from '../../context/rental-context';
-//import Typography from '@material-ui/core/Typography';
-//import Button from '@material-ui/core/Button';
+
+// components
 
 const useStyles = makeStyles((theme) => ({
 	textField: {
-		marginLeft: theme.spacing(1),
-		marginRight: theme.spacing(1),
+		width: '60%',
+		margin: 'auto',
 	},
-	// paper: {
-	// 	padding: theme.spacing(1),
-	// 	textAlign: 'center',
-	// 	color: theme.palette.text.secondary,
-	// 	display: 'flex',
-	// 	justifyContent: 'center',
 
-	// 	flexShrink: 2,
-	// },
 	body: {
-		marginBottom: '10px',
+		//marginBottom: '10px',
+	},
+	button: {
+		margin: 'auto',
+		width: '35%',
+		backgroundColor: theme.palette.primary.light,
+	},
+	buttonLabel: {
+		color: theme.palette.gold.main,
 	},
 	title: {},
 	searchField: {
 		display: 'flex',
+		flexDirection: 'column',
 		justifyContent: 'center',
-		alignContent: 'baseline',
+		alignContent: 'center',
 	},
+	description: {},
 }));
 
 const RentalSearch = () => {
@@ -46,9 +55,17 @@ const RentalSearch = () => {
 
 	//console.log('inputs: ' + JSON.stringify(rentalDates, null, 2));
 	return (
-		<Grid container spacing={2} className={classes.body}>
-		
-			<Grid item sm></Grid>
+		<Grid container className={classes.body}>
+			<Grid item xs={12} sm={6}>
+				<Typography variant="body1" className={classes.description}>
+					We are Central Florida Based Rental company. we deliver the rental on
+					start date by noon. and pick up the rental at the end of the rental.
+					no need to worry about anything but enjoying the great products we
+					offer.
+				</Typography>
+			</Grid>
+			{/* <Divider orientation="vertical" /> */}
+
 			<Grid item xs={12} sm={6} className={classes.searchField}>
 				<DatePicker
 					className={classes.textField}
@@ -74,6 +91,10 @@ const RentalSearch = () => {
 					disablePast="true"
 				/>
 				<Button
+					classes={{
+						label: classes.buttonLabel,
+					}}
+					className={classes.button}
 					component={Link}
 					variant="outlined"
 					to="/rentals"
@@ -83,9 +104,6 @@ const RentalSearch = () => {
 					Search
 				</Button>
 			</Grid>
-			<Grid item sm></Grid>
-
-			{/* <LocationChecker /> */}
 		</Grid>
 	);
 };
