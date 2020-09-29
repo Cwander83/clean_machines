@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.light,
 		margin: '5px 0 40px 0',
 		borderRadius: '0',
+		zIndex: '2'
 	},
 
 	section: {
@@ -59,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 		width: '60px',
 		height: '40px',
 		backgroundColor: theme.palette.gold.main,
+		zIndex: '2'
 	},
 	box2: {
 		position: 'relative',
@@ -115,6 +117,61 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
 	},
+	backDesign: {
+		width: '50%',
+		height: '50%',
+		backgroundColor: theme.palette.gold.main,
+		position: 'absolute',
+		top: '80px',
+		right: '0',
+		borderBottomLeftRadius: '75%',
+		zIndex: '1'
+	},
+	backDesign2: {
+		width: '200px',
+		height: '150px',
+		backgroundColor: theme.palette.primary.light,
+		position: 'absolute',
+		top: '380px',
+		right: '10px',
+		borderRadius: '5%',
+		zIndex: '1'
+	},
+	backDesign3: {
+		width: '200px',
+		height: '150px',
+		backgroundColor: theme.palette.primary.light,
+		position: 'absolute',
+		top: '70%',
+		right: '40%',
+		borderRadius: '5%',
+		zIndex: '1'
+	},
+	backDesign4: {
+		width: '200px',
+		height: '150px',
+		backgroundColor: theme.palette.gold.main,
+		position: 'absolute',
+		bottom: '5%',
+		left: '0',
+		borderTopRightRadius: '75%',
+		borderBottomRightRadius: '75%',
+		zIndex: '1'
+	},
+	backDesign5: {
+		width: '300px',
+		height: '250px',
+		backgroundColor: theme.palette.primary.light,
+		position: 'absolute',
+		bottom: '10%',
+		left: '0',
+		//borderTopRightRadius: '100%',
+		borderBottomRightRadius: '75%',
+		zIndex: '1'
+	},
+	mainGrid: {
+		
+	}
 }));
 
 const Home = () => {
@@ -122,7 +179,13 @@ const Home = () => {
 
 	return (
 		<Container disableGutters maxWidth={false}>
-			<Grid container justify="center">
+			
+			<Grid container justify="center" classes={{root: classes.mainGrid}}>
+			<Paper className={classes.backDesign} elevation={2}></Paper>
+			<Paper className={classes.backDesign2} elevation={2}></Paper>
+			{/* <Paper className={classes.backDesign3} elevation={2}></Paper> */}
+			<Paper className={classes.backDesign4} elevation={2}></Paper>
+			<Paper className={classes.backDesign5} elevation={2}></Paper>
 				<Grid
 					item
 					xs={12}
