@@ -46,6 +46,7 @@ function App() {
 							<ModalProvider>
 								<div className="App">
 									<NavDrawer />
+									<div className="design"></div>
 									
 									<Switch>
 										<Route exact path="/" component={Home} />
