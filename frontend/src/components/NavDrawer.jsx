@@ -25,16 +25,24 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 
 // images / logos
-import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
+//import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
 import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
 
 // components
+import headerNavigation from '../components/HeaderNavigation';
+import HeaderNavigation from '../components/HeaderNavigation';
 
 const useStyles = makeStyles((theme) => ({
-	toolbar: { padding: '0 0 0 5%' },
+	toolbar: {},
 	appBar: {
 		backgroundColor: 'transparent',
+
 		boxShadow: 'none',
+	},
+	menu: {
+		[theme.breakpoints.up('md')]: {
+			display: 'none',
+		},
 	},
 	menuIcon: {
 		fontSize: '40px',
@@ -71,12 +79,11 @@ const useStyles = makeStyles((theme) => ({
 	logo: {
 		width: '8%',
 		[theme.breakpoints.down('xs')]: {
-			width: '60%'
+			width: '60%',
 		},
 		[theme.breakpoints.down('sm')]: {
-			width: '30%'
+			width: '30%',
 		},
-		
 	},
 	drawerLogoBox: {
 		width: 'auto',
@@ -191,9 +198,11 @@ const NavDrawer = () => {
 			>
 				<Toolbar className={classes.toolbar}>
 					<IconButton
+						edge="start"
 						onClick={handleDrawerOpen}
 						aria-label="Menu"
 						classes={{
+							root: classes.menu,
 							label: classes.menuLabel,
 						}}
 					>
@@ -203,13 +212,12 @@ const NavDrawer = () => {
 							}}
 						/>
 					</IconButton>
-					<img
+					{/* <img
 						className={classes.logo}
 						src={Logo}
 						alt="clean machine rentals"
-					/>
-
-				
+					/> */}
+					<HeaderNavigation />
 				</Toolbar>
 			</AppBar>
 

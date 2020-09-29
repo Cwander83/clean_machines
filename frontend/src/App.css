@@ -1,7 +1,19 @@
 .App {
-	text-align: center;
+  text-align: center;
+  background-color: rgb(231, 231, 231);
 	/* background-image: url('./images/pexels-gdtography-950241.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; */
+}
+
+.design{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  border-bottom-right-radius: 50%;
+  background-color: green;
+  z-index: -1;
 }
