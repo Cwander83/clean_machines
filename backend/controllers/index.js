@@ -4,4 +4,5 @@ module.exports = {
 	paymentController: require('./paymentsController'),
 	chargesController: require('./chargesController'),
 	rentalsController: require('./rentalsController'),
+	salesController: require('./salesController')
 };
