@@ -1,18 +1,11 @@
 const { Op } = require('sequelize');
 
 const db = require('../config/config');
-const Rentals = require('../models/Rentals');
-const moment = require('moment');
-const { findRentalIds } = require('../db/db');
-const { sequelize } = require('../config/config');
-const {
-	deleteProduct,
-	createProduct,
 
-	findSku,
-	findSingleProduct,
-} = require('../stripe/stripe.products');
-const stripeCharges = require('../stripe/stripe.charges');
+const moment = require('moment');
+
+
+
 
 module.exports = {
 	// create a product on DB
@@ -93,109 +86,8 @@ module.exports = {
 			.catch((err) => console.error(err));
 	},
 
-	// all products to rent
-	findAllProductsForRentAndAvailable: async (req, res) => {
-		try {
-			const start = req.params.start;
-			const end = req.params.end;
 
-			let rentals = await db.Rentals.findAll({
-				where: {
-					[Op.and]: [
-						{
-							start_date: {
-								[Op.between]: [
-									sequelize.fn('date', sequelize.col('start_date')),
-									end,
-								],
-							},
-						},
 
-						{
-							end_date: {
-								[Op.between]: [
-									start,
-									sequelize.fn('date', sequelize.col('end_date')),
-								],
-							},
-						},
-					],
-				},
-			}).then((rentals) => {
-				let idArray = [];
-				rentals.forEach((product) => idArray.push(product.productId));
-				return idArray;
-			});
-
-			let products = await db.Products.findAll({
-				where: {
-					rental: 1,
-					id: { [Op.notIn]: rentals },
-				},
-			});
-
-			return res.json(products);
-		} catch (error) {
-			console.error(error);
-		}
-	},
-
-	// find all rentals
-	findAllRentals: (req, res) => {
-		db.Rentals.findAll({
-			include: db.Products,
-			order: [['end_date', 'ASC']],
-		})
-			.then((result) => res.json(result))
-			.catch((err) => console.error(err));
-	},
-	// find all rentals
-	findAllActiveRentals: async (req, res) => {
-		let currentDate = new Date();
-
-		db.Rentals.findAll({
-			where: {
-				[Op.or]: [
-					{
-						start_date: {
-							[Op.gte]: currentDate,
-						},
-					},
-
-					{
-						end_date: {
-							[Op.gte]: currentDate,
-						},
-					},
-				],
-			},
-			include: db.Products,
-			order: [['end_date', 'ASC']],
-		})
-			.then((result) => {
-				return res.json(result);
-			})
-			.catch((err) => console.error(err));
-	},
-
-	findRecentSales: async (req, res) => {
-		db.Sales.findAll({
-			limit: 5,
-			order: [['createdAt', 'ASC']],
-			include: db.Products
-		})
-			.then((results) => res.json(results))
-			.catch((err) => console.error(err));
-	},
-	findAllSales: async (req, res) => {
-		db.Sales.findAll({
-			
-			order: [['createdAt', 'ASC']],
-			include: db.Products
-		})
-			.then((results) => res.json(results))
-			.catch((err) => console.error(err));
-	},
 
 	
 

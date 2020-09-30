@@ -6,7 +6,7 @@ const chargesRoutes = require('./charges.routes');
 const productRoutes = require('./products.routes');
 const emailRoutes = require('./contact.routes');
 const rentalRoutes = require('./rentals.routes');
-const salesRoutes = require('./sales.routes')
+const salesRoutes = require('./sales.routes');
 
 router.use('/customers', customerRoutes);
 router.use('/charges', chargesRoutes);
