@@ -197,17 +197,7 @@ module.exports = {
 			.catch((err) => console.error(err));
 	},
 
-	// all products to sale
-	findAllProductsForSale: (req, res) => {
-		db.Products.findAll({
-			where: { units: { [Op.gt]: 0 } },
-		})
-			.then((results) => {
-				res.json(results);
-				console.log(JSON.stringify(results, null, 2));
-			})
-			.catch((err) => console.error(err));
-	},
+	
 
 	// all products out of stock
 	findAllProductsOutOfStock: (req, res) => {
