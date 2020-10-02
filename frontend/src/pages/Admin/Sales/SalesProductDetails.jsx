@@ -1,7 +1,6 @@
 import React from 'react'
 
-const AdminCreateRentalForm = () => {
-    
+const SalesProductDetails = () => {
     return (
         <div>
             
@@ -9,4 +8,4 @@ const AdminCreateRentalForm = () => {
     )
 }
 
-export default AdminCreateRentalForm
+export default SalesProductDetails

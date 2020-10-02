@@ -29,7 +29,6 @@ import IconButton from '@material-ui/core/IconButton';
 import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
 
 // components
-import headerNavigation from '../components/HeaderNavigation';
 import HeaderNavigation from '../components/HeaderNavigation';
 
 const useStyles = makeStyles((theme) => ({
@@ -172,11 +171,6 @@ const NavDrawer = () => {
 		},
 
 		{
-			text: 'All Products',
-			icon: <ArrowForwardIosIcon />,
-			to: '/admin/products',
-		},
-		{
 			text: 'Rentals',
 			icon: <ArrowForwardIosIcon />,
 			to: '/admin/rentals',
@@ -274,7 +268,7 @@ const NavDrawer = () => {
 									button
 									key={index}
 									onClick={handleDrawerClose}
-									divider="true"
+									divider
 								>
 									{icon && <ListItemIcon>{icon}</ListItemIcon>}
 									<ListItemText primary={text} />

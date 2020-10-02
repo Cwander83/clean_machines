@@ -7,7 +7,7 @@ module.exports = {
 	// used by rental page and admin page
 	findAllRentals: async (req, res) => {
 		await db.Rentals.findAll({
-			include: db.Products,
+			include: db.RentalProducts,
 			order: [['end_date', 'ASC']],
 		})
 			.then((result) => {
@@ -37,7 +37,7 @@ module.exports = {
 					},
 				],
 			},
-			include: db.Products,
+			include: db.RentalProducts,
 			order: [['end_date', 'ASC']],
 		})
 			.then((result) => {
@@ -82,7 +82,7 @@ module.exports = {
 				return idArray;
 			});
 
-			let products = await db.Products.findAll({
+			let products = await db.RentalProducts.findAll({
 				where: {
 					rental: 1,
 					id: { [Op.notIn]: rentals },
@@ -101,7 +101,7 @@ module.exports = {
 			where: {
 				id: req.params.id,
 			},
-			include: { model: db.Products },
+			include: { model: db.RentalProducts },
 		})
 			.then((result) => {
 				res.status(200).json(result);

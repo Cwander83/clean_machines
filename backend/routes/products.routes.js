@@ -3,11 +3,13 @@ const router = express.Router();
 const { productController } = require('../controllers');
 
 // all products * no queries
-router.get('/', productController.findAllProducts);
+router.get('/sales', productController.findAllProducts);
+router.get('/rental', productController.findAllRentalProducts);
 
 router.get('/out', productController.findAllProductsOutOfStock); // all products out of stock
 
-router.post('/', productController.createProductDB); // create product on DB
+router.post('/rental', productController.createRentalProduct); // create product on DB
+router.post('/sales', productController.createSalesProduct); // create product on DB
 
 router.put('/update/:id', productController.updateProduct);
 

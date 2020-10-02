@@ -18,6 +18,8 @@ db.sequelize = sequelize;
 //Models/tables
 db.Products = require('../models/Products.js')(sequelize, Sequelize);
 
+db.RentalProducts = require('../models/RentalProducts.js')(sequelize, Sequelize);
+
 db.Rentals = require('../models/Rentals.js')(sequelize, Sequelize);
 
 db.Sales = require('../models/Sales.js')(sequelize, Sequelize);

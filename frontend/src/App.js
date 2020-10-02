@@ -26,7 +26,6 @@ import Videos from './pages/Videos/Videos';
 import AdminRentals from './pages/Admin/Rentals/AdminRentals';
 import AdminSales from './pages/Admin/Sales/AdminSales';
 import AdminCustomers from './pages/Admin/Customers/AdminCustomers';
-import AllProducts from './pages/Admin/Products/AllProducts';
 import Cart from './pages/Cart/Cart';
 import Footer from './components/Footer';
 
@@ -69,10 +68,7 @@ function App() {
 											path="/admin/sales"
 											component={AdminSales}
 										/>
-										<ProtectedRoute
-											path="/admin/products"
-											component={AllProducts}
-										/>
+								
 										<ProtectedRoute
 											path="/admin/customers"
 											component={AdminCustomers}
