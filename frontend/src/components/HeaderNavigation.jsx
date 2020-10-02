@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 const HeaderNavigation = () => {
 	const classes = useStyles();
 
+	const { isAuthenticated, logout } = useAuth0();
+
 	const links = [
 		{ title: 'Products', path: '/sales' },
 		{ title: 'Rentals', path: '/rentals' },
@@ -45,31 +47,67 @@ const HeaderNavigation = () => {
 		{ title: 'Videos', path: '/videos' },
 		{ title: 'faq', path: '/contact' },
 	];
+
+	const admin = [
+		{ title: 'Sales', path: '/admin/sales' },
+		{ title: 'Rentals', path: '/admin/rentals' },
+		{ icon: Logo, path: '/admin' },
+	
+		{ title: 'Customers', path: '/admin/customers' },
+		{ title: 'Logout', path: '/', logout: logout },
+	];
+
 	return (
 		<div className={classes.root}>
-			{links.map((link, i) => {
-				return (
-					<Button
-						disableRipple
-						disableFocusRipple
-						disableTouchRipple
-						key={i}
-						component={Link}
-						to={link.path}
-						className={classes.button}
-					>
-						{link.icon ? (
-							<img
-								className={classes.icon}
-								src={link.icon}
-								alt="Clean Machines rentals"
-							/>
-						) : (
-							link.title
-						)}
-					</Button>
-				);
-			})}
+			{!isAuthenticated
+				? links.map((link, i) => {
+						return (
+							<Button
+								disableRipple
+								disableFocusRipple
+								disableTouchRipple
+								key={i}
+								component={Link}
+								to={link.path}
+								className={classes.button}
+								onClick={link.logout ? link.logout : null}
+							>
+								{link.icon ? (
+									<img
+										className={classes.icon}
+										src={link.icon}
+										alt="Clean Machines rentals"
+									/>
+								) : (
+									link.title
+								)}
+							</Button>
+						);
+				  })
+				: admin.map((link, i) => {
+						return (
+							<Button
+								disableRipple
+								disableFocusRipple
+								disableTouchRipple
+								key={i}
+								component={Link}
+								to={link.path}
+								className={classes.button}
+								onClick={link.logout ? link.logout : null}
+							>
+								{link.icon ? (
+									<img
+										className={classes.icon}
+										src={link.icon}
+										alt="Clean Machines rentals"
+									/>
+								) : (
+									link.title
+								)}
+							</Button>
+						);
+				  })}
 		</div>
 	);
 };

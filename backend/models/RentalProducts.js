@@ -1,85 +1,95 @@
-const moment = require('moment');
 module.exports = (sequelize, DataTypes) => {
-	const Rentals = sequelize.define('rentals', {
+	const RentalProducts = sequelize.define('rentalProducts', {
 		id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			autoIncrement: true,
 			primaryKey: true,
 		},
-
-		// total price
-		rental_total: {
-			type: DataTypes.INTEGER,
+		name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		model: {
+			type: DataTypes.STRING,
+			allowNull: false,
 		},
 		
-		start_date: {
-			type: DataTypes.DATEONLY,
+		rental_day: {
+			type: DataTypes.INTEGER,
+			
 		},
-		end_date: {
-			type: DataTypes.DATEONLY,
+		rental_two_day: {
+			type: DataTypes.INTEGER,
+		
 		},
-		customer_stripe_id: {
+		rental_week: {
+			type: DataTypes.INTEGER,
+			
+		},
+
+		category: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		sub_category: {
 			type: DataTypes.STRING,
 		},
-		billing_name: {
+		
+		short_description: { type: DataTypes.STRING },
+		cord: {
 			type: DataTypes.STRING,
 		},
-		billing_company_name: {
+		weight: {
 			type: DataTypes.STRING,
 		},
-		billing_email: {
+		height: {
 			type: DataTypes.STRING,
 		},
-		billing_phone: {
+		width: {
 			type: DataTypes.STRING,
 		},
-		billing_line1: {
+		tools: {
 			type: DataTypes.STRING,
 		},
-		billing_line2: {
+		motor: {
 			type: DataTypes.STRING,
 		},
-		billing_city: {
+		sound_pressure: {
 			type: DataTypes.STRING,
 		},
-		billing_zipcode: {
+		container_capacity: {
 			type: DataTypes.STRING,
 		},
-		billing_state: {
+		tank_capacity: {
 			type: DataTypes.STRING,
 		},
-		delivery_name: {
+		speed: {
 			type: DataTypes.STRING,
 		},
-		delivery_company_name: {
+		size: {
 			type: DataTypes.STRING,
 		},
-		delivery_email: {
+
+		feature_1: {
 			type: DataTypes.STRING,
 		},
-		delivery_phone: {
+		feature_1: {
 			type: DataTypes.STRING,
 		},
-		delivery_line1: {
+		feature_2: {
 			type: DataTypes.STRING,
 		},
-		delivery_line2: {
+		feature_3: {
 			type: DataTypes.STRING,
 		},
-		delivery_city: {
+		feature_4: {
 			type: DataTypes.STRING,
 		},
-		delivery_zipcode: {
-			type: DataTypes.STRING,
-		},
-		delivery_state: {
+		feature_5: {
 			type: DataTypes.STRING,
 		},
 	});
 
-	Rentals.associate = function (models) {
-		Rentals.belongsTo(models.RentalProducts, { allowNull: false });
-	};
-	return Rentals;
+	return RentalProducts;
 };

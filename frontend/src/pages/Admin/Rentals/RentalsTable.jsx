@@ -2,8 +2,10 @@
 
 import React from 'react';
 
+// axios
 import axios from 'axios';
 
+// material ui
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -22,14 +24,12 @@ import TableHead from '@material-ui/core/TableHead';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
+// react router
 import {
-
 	Link,
 	useRouteMatch,
 	//useParams,
 } from 'react-router-dom';
-
-
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -124,8 +124,8 @@ const RentalsTable = () => {
 
 	React.useEffect(() => {
 		const fetchData = async () => {
-			setLoading(true);
-			const result = await axios(`/products/rentals`);
+			//setLoading(true);
+			const result = await axios(`/rentals/`);
 
 			setData(result.data);
 			setLoading(false);
@@ -155,9 +155,9 @@ const RentalsTable = () => {
 				<TableRow className={classes.root}>
 					<TableCell>{row.id}</TableCell>
 					<TableCell>
-						<Button component={Link} to={`${path}/${row.id}`}>
+						<Button component={Link} to={`${path}/rental/${row.id}`}>
 							{row.billing_name}
-						</Button>{' '}
+						</Button>
 					</TableCell>
 					<TableCell>{row.delivery_name}</TableCell>
 					<TableCell>{row.delivery_company_name}</TableCell>

@@ -18,18 +18,6 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
-		rental_day: {
-			type: DataTypes.INTEGER,
-			
-		},
-		rental_two_day: {
-			type: DataTypes.INTEGER,
-		
-		},
-		rental_week: {
-			type: DataTypes.INTEGER,
-			
-		},
 
 		category: {
 			type: DataTypes.STRING,
@@ -38,10 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 		sub_category: {
 			type: DataTypes.STRING,
 		},
-		rental: {
-			type: DataTypes.INTEGER,
-			defaultValue: 0,
-		},
+		
 		units: {
 			type: DataTypes.INTEGER,
 			defaultValue: 0,

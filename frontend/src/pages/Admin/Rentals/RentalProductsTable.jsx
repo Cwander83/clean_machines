@@ -1,9 +1,12 @@
-// TODO fix and update table with current data
-
 import React from 'react';
 
+// React router
+import { Link } from 'react-router-dom';
+
+// axios
 import axios from 'axios';
 
+// material ui
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,10 +21,11 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import TableHead from '@material-ui/core/TableHead';
-//import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+import TableHead from '@material-ui/core/TableHead';
+
+// context
+import { AdminContext } from '../../../context/admin-context';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -29,6 +33,14 @@ const useStyles1 = makeStyles((theme) => ({
 		marginLeft: theme.spacing(2.5),
 	},
 }));
+
+const useRowStyles = makeStyles({
+	root: {
+		'& > *': {
+			borderBottom: 'unset',
+		},
+	},
+});
 
 function TablePaginationActions(props) {
 	const classes = useStyles1();
@@ -102,23 +114,29 @@ const useStyles2 = makeStyles((theme) => ({
 	},
 }));
 
-const SalesTable = () => {
+const RentalProductsTable = React.memo(() => {
+	const {
+		product,
+		//	setProduct,
+		// setDeleteBtn,
+		//	setEditBtn,
+	} = React.useContext(AdminContext);
 	const classes = useStyles2();
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 	const [rows, setData] = React.useState([]);
 
+	console.log(JSON.stringify(product, null, 2));
+
 	React.useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/sales`);
+			const result = await axios(`/products/rental`);
 
 			setData(result.data);
 		};
 		fetchData();
 	}, []);
-
-	//console.log(rows);
 
 	const emptyRows =
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -135,23 +153,20 @@ const SalesTable = () => {
 	function Row(props) {
 		const { row } = props;
 
+		const classes = useRowStyles();
+
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
 					<TableCell>{row.id}</TableCell>
-					<TableCell>{row.billing_name}</TableCell>
-					<TableCell>{row.shipping_name}</TableCell>
-					<TableCell>{row.shipping_company_name}</TableCell>
-					<TableCell>{row.product.model}</TableCell>
-					<TableCell>{row.quantity_purchased}</TableCell>
-					<TableCell>{row.total_price}</TableCell>
 					<TableCell>
-						<ButtonGroup>
-							<Button>View</Button>
-
-							<Button>Remove</Button>
-						</ButtonGroup>
+						<Button component={Link} to={`admin/rentals/products/${row.id}`}>
+							{row.name}
+						</Button>
 					</TableCell>
+					<TableCell>{row.model}</TableCell>
+					<TableCell>{row.category}</TableCell>
+					<TableCell>{row.sub_category}</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -163,14 +178,10 @@ const SalesTable = () => {
 				<TableHead>
 					<TableRow>
 						<TableCell>Id</TableCell>
-						<TableCell>Billing Name</TableCell>
-						<TableCell>Delivery Name</TableCell>
-						<TableCell>Delivery Company Name</TableCell>
+						<TableCell>Name</TableCell>
 						<TableCell>Model</TableCell>
-						<TableCell>Quantity</TableCell>
-						<TableCell>Total Price</TableCell>
-
-						<TableCell></TableCell>
+						<TableCell>Category</TableCell>
+						<TableCell>Sub Category</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -208,6 +219,6 @@ const SalesTable = () => {
 			</Table>
 		</TableContainer>
 	);
-};
+});
 
-export default SalesTable;
+export default RentalProductsTable;

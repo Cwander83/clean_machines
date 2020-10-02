@@ -1,15 +1,21 @@
 import React from 'react';
 
+// auth 0
 import { withAuthenticationRequired } from '@auth0/auth0-react';
-import Logout from '../../components/Logout';
-import CurrentRentals from './CurrentRentals';
-import RecentSalesTable from './RecentSalesTable';
-import Spinner from '../../UI/Spinner';
+
+// material ui
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
+
+// components
+import Logout from '../../components/Logout';
+import CurrentRentals from './CurrentRentals';
+import RecentSalesTable from './RecentSalesTable';
+import Spinner from '../../UI/Spinner';
+
 
 const useStyles = makeStyles((theme) => ({
 	// root: {
@@ -19,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 		minWidth: 400,
 	},
 	section: {
-		height: '300px',
+		height: 'auto',
 	},
 }));
 

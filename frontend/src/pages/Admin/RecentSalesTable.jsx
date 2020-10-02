@@ -1,7 +1,9 @@
 import React from 'react';
 
+// axios
 import axios from 'axios';
 
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,15 +27,14 @@ export default function RecentSalesTable() {
 
 	React.useEffect(() => {
 		const fetchData = async () => {
-			// TODO change to recent sales
-			const result = await axios(`/products/recent-sales`);
+			
+			const result = await axios(`/sales/recent`);
 
 			setData(result.data);
 		};
 		fetchData();
 	}, []);
 
-	console.log('sales table: ' + JSON.stringify(rows, null, 2));
 
 	return (
 		<>
@@ -50,7 +51,7 @@ export default function RecentSalesTable() {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{rows.map((row,i) => {
+							{rows.map((row, i) => {
 								return (
 									<TableRow key={i}>
 										<TableCell>{row.id}</TableCell>
