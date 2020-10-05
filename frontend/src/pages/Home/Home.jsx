@@ -12,7 +12,7 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
 // images / icons
-import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png'
+import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png';
 
 // components
 import SalesBox from './SalesBox';
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.light,
 		margin: '5px 0 40px 0',
 		borderRadius: '0',
-		zIndex: '2'
+		zIndex: '2',
 	},
 
 	section: {
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '15px 0 ',
 		width: '100%',
 		fontWeight: '400',
+		marginBottom: '20px',
 		letterSpacing: '.05em',
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 		width: '60px',
 		height: '40px',
 		backgroundColor: theme.palette.gold.main,
-		zIndex: '2'
+		zIndex: '2',
 	},
 	box2: {
 		position: 'relative',
@@ -119,13 +120,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 	backDesign: {
 		width: '50%',
-		height: '50%',
+		height: '100%',
 		backgroundColor: theme.palette.gold.main,
 		position: 'absolute',
 		top: '80px',
 		right: '0',
 		borderBottomLeftRadius: '75%',
-		zIndex: '1'
+		zIndex: '1',
+		[theme.breakpoints.down('sm')]: {
+			height: '70%',
+		},
 	},
 	backDesign2: {
 		width: '200px',
@@ -135,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
 		top: '380px',
 		right: '10px',
 		borderRadius: '5%',
-		zIndex: '1'
+		zIndex: '1',
 	},
 	backDesign3: {
 		width: '200px',
@@ -145,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
 		top: '70%',
 		right: '40%',
 		borderRadius: '5%',
-		zIndex: '1'
+		zIndex: '1',
 	},
 	backDesign4: {
 		width: '200px',
@@ -156,7 +160,7 @@ const useStyles = makeStyles((theme) => ({
 		left: '0',
 		borderTopRightRadius: '75%',
 		borderBottomRightRadius: '75%',
-		zIndex: '1'
+		zIndex: '1',
 	},
 	backDesign5: {
 		width: '300px',
@@ -167,11 +171,9 @@ const useStyles = makeStyles((theme) => ({
 		left: '0',
 		//borderTopRightRadius: '100%',
 		borderBottomRightRadius: '75%',
-		zIndex: '1'
+		zIndex: '1',
 	},
-	mainGrid: {
-		
-	}
+	mainGrid: {},
 }));
 
 const Home = () => {
@@ -179,13 +181,12 @@ const Home = () => {
 
 	return (
 		<Container disableGutters maxWidth={false}>
-			
-			<Grid container justify="center" classes={{root: classes.mainGrid}}>
-			<Paper className={classes.backDesign} elevation={2}></Paper>
-			<Paper className={classes.backDesign2} elevation={2}></Paper>
-			{/* <Paper className={classes.backDesign3} elevation={2}></Paper> */}
-			<Paper className={classes.backDesign4} elevation={2}></Paper>
-			<Paper className={classes.backDesign5} elevation={2}></Paper>
+			<Grid container justify="center" classes={{ root: classes.mainGrid }}>
+				<Paper className={classes.backDesign} elevation={2}></Paper>
+				{/* <Paper className={classes.backDesign2} elevation={2}></Paper> */}
+				{/* <Paper className={classes.backDesign3} elevation={2}></Paper> */}
+				{/* <Paper className={classes.backDesign4} elevation={2}></Paper>
+			<Paper className={classes.backDesign5} elevation={2}></Paper> */}
 				<Grid
 					item
 					xs={12}
@@ -236,7 +237,6 @@ const Home = () => {
 									</Typography>
 									<SalesBox />
 								</Box>
-								
 							</Box>
 						</Grid>
 					</Grid>

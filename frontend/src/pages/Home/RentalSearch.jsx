@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-import { DatePicker } from '@material-ui/pickers';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import SearchIcon from '@material-ui/icons/Search';
 
 // context
 import { RentalContext } from '../../context/rental-context';
@@ -17,29 +18,51 @@ import { RentalContext } from '../../context/rental-context';
 
 const useStyles = makeStyles((theme) => ({
 	textField: {
-		width: '60%',
-		margin: 'auto',
+		margin: 'auto ',
+		width: '90%',
+		color: theme.palette.primary.light,
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
+		},
 	},
 
-	body: {
-		//marginBottom: '10px',
-	},
+	body: {},
 	button: {
 		margin: 'auto',
-		width: '35%',
-		backgroundColor: theme.palette.primary.light,
+		fontSize: '16px',
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '16px',
+			marginTop: '5px',
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: '15px',
+		},
+		
 	},
+
 	buttonLabel: {
 		color: theme.palette.gold.main,
 	},
 	title: {},
-	searchField: {
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignContent: 'center',
+
+	label: {
+		marginTop: 'auto',
 	},
-	description: {},
+
+	description: {
+		padding: '30px 40px',
+		textAlign: 'left',
+		fontStyle: 'italic',
+		fontSize: '16px',
+		fontWeight: '500',
+		letterSpacing: '0.1em',
+	},
+	searchSection: {
+		marginBottom: '30px',
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
+		},
+	},
 }));
 
 const RentalSearch = () => {
@@ -52,10 +75,9 @@ const RentalSearch = () => {
 		getAvailableRentals,
 	} = React.useContext(RentalContext);
 
-	//console.log('inputs: ' + JSON.stringify(rentalDates, null, 2));
 	return (
 		<Grid container className={classes.body}>
-			<Grid item xs={12} sm={6}>
+			<Grid item xs={12}>
 				<Typography variant="body1" className={classes.description}>
 					We are Central Florida Based Rental company. we deliver the rental on
 					start date by noon. and pick up the rental at the end of the rental.
@@ -63,46 +85,65 @@ const RentalSearch = () => {
 					offer.
 				</Typography>
 			</Grid>
-			{/* <Divider orientation="vertical" /> */}
+			<Grid item xs sm={1}></Grid>
 
-			<Grid item xs={12} sm={6} className={classes.searchField}>
-				<DatePicker
-					className={classes.textField}
-					label="start Date"
-					clearable
-					value={rentalDates.startDate}
-					variant="dialog"
-					onChange={(date) => startDateHandler(date)}
-					placeholder="MM/DD/YYYY"
-					format="MM/dd/yyyy"
-					disablePast="true"
-				/>
-
-				<DatePicker
-					className={classes.textField}
-					clearable
-					label="end date"
-					value={rentalDates.endDate}
-					placeholder="MM/DD/YYYY"
-					onChange={(date) => endDateHandler(date)}
-					format="MM/dd/yyyy"
-					minDate={rentalDates.endDate}
-					disablePast="true"
-				/>
-				<Button
-					classes={{
-						label: classes.buttonLabel,
-					}}
-					className={classes.button}
-					component={Link}
-					variant="outlined"
-					to="/rentals"
-					onClick={getAvailableRentals}
-					disabled={rentalDates.startDate === null}
+			<Grid item xs={12} sm={10}>
+				<Grid
+					container
+					alignItems="center"
+					classes={{ root: classes.searchSection }}
 				>
-					Search
-				</Button>
+					<Grid item xs={1}></Grid>
+					<Grid item xs={12} sm={4}>
+						<KeyboardDatePicker
+							className={classes.textField}
+							label="Start date"
+							autoOk
+							variant="inline"
+							value={rentalDates.startDate}
+							animateYearScrolling
+							onChange={(date) => startDateHandler(date)}
+							placeholder="MM/DD/YYYY"
+							format="MM/dd/yyyy"
+							disablePast="true"
+						/>
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<KeyboardDatePicker
+							className={classes.textField}
+							autoOk
+							animateYearScrolling
+							label="End date"
+							variant="inline"
+							value={rentalDates.endDate}
+							placeholder="MM/DD/YYYY"
+							onChange={(date) => endDateHandler(date)}
+							format="MM/dd/yyyy"
+							minDate={rentalDates.endDate}
+							disablePast="true"
+						/>
+					</Grid>
+					<Grid item sx={12} sm={2}>
+						<Button
+							classes={{
+								label: classes.buttonLabel,
+							}}
+							className={classes.button}
+							component={Link}
+							variant="outlined"
+							to="/rentals"
+							onClick={getAvailableRentals}
+							disabled={rentalDates.startDate === null}
+						>
+							Search
+							<SearchIcon style={{ marginLeft: '5px' }} />
+						</Button>
+					</Grid>
+
+					<Grid item xs={1}></Grid>
+				</Grid>
 			</Grid>
+			<Grid item xs sm={1}></Grid>
 		</Grid>
 	);
 };
