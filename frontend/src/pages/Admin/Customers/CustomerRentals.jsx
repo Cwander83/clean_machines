@@ -1,12 +1,12 @@
 import React from 'react';
 
 // react router
-import {
-	Switch,
-	Route,
-	// Link,
-	useRouteMatch,
-} from 'react-router-dom';
+// import {
+// 	Switch,
+// 	Route,
+// 	 Link,
+// 	useRouteMatch,
+// } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,21 +16,19 @@ import Typography from '@material-ui/core/Typography';
 
 // components
 
-
 const useStyles = makeStyles((theme) => ({
-	root: {
-	
-	},
-
+	root: {},
 }));
 
 const CustomerRentals = () => {
-    return (
-        <Grid item xs={12}>
-            <Typography variant="h5">rental information</Typography>
-            
-        </Grid>
-    )
-}
+	const classes = useStyles();
+	return (
+		<div className={classes.root}>
+			<Grid item xs={12}>
+				<Typography variant="h5">rental information</Typography>
+			</Grid>
+		</div>
+	);
+};
 
-export default CustomerRentals
+export default CustomerRentals;

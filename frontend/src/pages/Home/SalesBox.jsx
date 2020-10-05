@@ -22,6 +22,7 @@ import powersweeper from '../../images/icons/powersweeper.jpg';
 import steammachine from '../../images/icons/steammachine.jpg';
 import sweeper from '../../images/icons/sweeper.jpg';
 import upright from '../../images/icons/upright.jpg';
+import accessories from '../../images/icons/accessories.jpg'
 import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
@@ -277,7 +278,7 @@ const SalesBox = () => {
 						>
 							<Box className={classes.imageBox}>
 								<img
-									src={formula}
+									src={accessories}
 									alt="bissell accessories"
 									className={classes.image}
 								/>

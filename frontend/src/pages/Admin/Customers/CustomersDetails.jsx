@@ -14,7 +14,7 @@ import {
 } from 'react-router-dom';
 
 // material ui
-import CircularProgress from '@material-ui/core/CircularProgress';
+//import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -46,15 +46,15 @@ const CustomersDetails = React.memo(() => {
 
 	//const [rentals, setRentals] = React.useState({});
 
-	const [isLoading, setIsLoading] = React.useState(false);
+	//const [isLoading, setIsLoading] = React.useState(false);
 
 	console.log(shipping);
 
 	React.useEffect(() => {
 		const fetchData = async () => {
-			setIsLoading(true);
+		//	setIsLoading(true);
 			const stripeData = await axios.get(`/customers/${id}`);
-			const salesData = await axios.get(`/customers/sales/${id}`);
+		//	const salesData = await axios.get(`/customers/sales/${id}`);
 			//	const rentalData = await axios.get(`/customers/rentals/${id}`);
 
 			setCustomer(stripeData.data);
@@ -62,7 +62,7 @@ const CustomersDetails = React.memo(() => {
 			setShipping(stripeData.data.shipping);
 			setShippingAddress(stripeData.data.shipping.address);
 
-			setIsLoading(false);
+			//setIsLoading(false);
 		};
 
 		fetchData();
