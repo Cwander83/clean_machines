@@ -1,43 +1,30 @@
 import React from 'react';
 
+// axios
+import axios from 'axios';
+
 // store default value
-export const SalesContext = React.createContext({
-	availableProducts: [],
-	outOfStock: [],
-	getAvailableProducts: () => {},
-});
+export const SalesContext = React.createContext();
 
 // Provider
 const SalesContextProvider = (props) => {
-	const [availableProducts, setAvailableProducts] = React.useState([]);
-	const [outOfStock, setOutOfStock] = React.useState([]);
+	const [products, setAvailableProducts] = React.useState([]);
 
 	const getAvailableProducts = React.useCallback(() => {
-		fetch(`/products/sale`)
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data);
-				setAvailableProducts(data);
-			})
+		axios('/products/')
+			.then((results) => {setAvailableProducts(results.data)})
 			.catch((err) => console.error(err));
 	}, []);
-	const getOutOfStock = React.useCallback(() => {
-		fetch(`/products/out`)
-			.then((response) => response.json())
-			.then((data) => {
-				//console.log(data);
-				setOutOfStock(data);
-			})
-			.catch((err) => console.error(err));
-	}, []);
+	const findSingleProduct = (id) => {
+		return products.find((product) => product.id === id);
+	};
 
 	return (
 		<SalesContext.Provider
 			value={{
-				availableProducts,
-				outOfStock,
+				products,
 				getAvailableProducts,
-				getOutOfStock,
+				findSingleProduct,
 			}}
 		>
 			{props.children}

@@ -138,7 +138,7 @@ const NavDrawer = () => {
 			to: '/rentals',
 		},
 		{
-			text: 'Sales',
+			text: 'Shop',
 			icon: <ViewComfyIcon />,
 			to: '/sales',
 		},

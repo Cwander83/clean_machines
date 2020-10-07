@@ -22,9 +22,11 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		width: '100%',
 		height: 'auto',
+		
 		backgroundColor: theme.palette.primary.light,
 		
 		bottom: 0,
+		
 	},
 }));
 const Footer = () => {
