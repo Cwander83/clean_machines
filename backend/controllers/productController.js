@@ -4,9 +4,6 @@ const db = require('../config/config');
 
 const moment = require('moment');
 
-
-
-
 module.exports = {
 	// create a product on DB
 	createRentalProduct: (req, res) => {
@@ -84,7 +81,9 @@ module.exports = {
 
 	// all products
 	findAllProducts: (req, res) => {
-		db.Products.findAll()
+		db.Products.findAll({
+			where: { units: { [Op.gt]: 0 } },
+		})
 			.then((results) => {
 				res.json(results);
 				console.log(JSON.stringify(results, null, 2));
@@ -127,11 +126,6 @@ module.exports = {
 
 			.catch((err) => console.error(err));
 	},
-
-
-
-
-	
 
 	// all products out of stock
 	findAllProductsOutOfStock: (req, res) => {

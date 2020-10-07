@@ -1,5 +1,42 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+import RobotoBlack from '../assets/FONTS/ROBOTO/Roboto-Black.ttf';
+import Roboto from '../assets/FONTS/ROBOTO/Roboto-Regular.ttf';
+import YellowTail from '../assets/FONTS/YELLOWTAIL/Yellowtail-Regular.ttf';
+
+const robotoBlack = {
+	fontFamily: 'Roboto Black',
+	fontStyle: 'normal',
+	fontDisplay: 'swap',
+	fontWeight: 700,
+	src: `
+	  local('Roboto'),
+	  local('Roboto-Black'),
+	  url(${RobotoBlack}) format('ttf')
+	`,
+};
+const roboto = {
+	fontFamily: 'Roboto ',
+	fontStyle: 'normal',
+	fontDisplay: 'swap',
+	fontWeight: 400,
+	src: `
+	  local('Roboto'),
+	  local('Roboto-Regular'),
+	  url(${Roboto}) format('ttf')
+	`,
+};
+const yellowTail = {
+	fontFamily: 'YellowTail ',
+	fontStyle: 'normal',
+	fontDisplay: 'swap',
+	fontWeight: 400,
+	src: `
+	  local('YellowTail'),
+	  local('YellowTail-Regular'),
+	  url(${YellowTail}) format('ttf')
+	`,
+};
 
 const theme = createMuiTheme({
 	palette: {
@@ -28,27 +65,26 @@ const theme = createMuiTheme({
 		},
 	},
 	typography: {
-		fontFamily: 'Roboto',
-		h1: {
-			fontFamily: 'Roboto',
-		},
-		h2: {
-			fontFamily: 'Roboto',
-		},
-		h3: {
-			fontFamily: 'YellowTail',
-		},
-		h4: {
-			fontFamily: 'Roboto-Black',
-		},
-		h5: {
-			fontFamily: 'Roboto-Black',
-		},
-		h6: {
-			fontFamily: 'Roboto',
-		},
-		button: {
-			fontFamily: 'Roboto',
+		fontFamily: [
+			'Roboto',
+			'YellowTail',
+			'-apple-system',
+			'BlinkMacSystemFont',
+			'"Segoe UI"',
+			'Roboto',
+			'"Helvetica Neue"',
+			'Arial',
+			'sans-serif',
+			'"Apple Color Emoji"',
+			'"Segoe UI Emoji"',
+			'"Segoe UI Symbol"',
+		].join(','),
+	},
+	overrides: {
+		MuiCssBaseline: {
+			'@global': {
+				'@font-face': [roboto, robotoBlack, yellowTail],
+			},
 		},
 	},
 });

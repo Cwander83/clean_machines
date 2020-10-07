@@ -13,7 +13,7 @@ module.exports = {
 		})
 			.then((results) => {
 				res.status(200).json(results);
-				console.log(JSON.stringify(results, null, 2));
+				//	//console.log(JSON.stringify(results, null, 2));
 				return results;
 			})
 			.catch((err) => console.error(err));
@@ -29,7 +29,7 @@ module.exports = {
 		})
 			.then((results) => {
 				res.status(200).json(results);
-				console.log(JSON.stringify(results, null, 2));
+				//	//console.log(JSON.stringify(results, null, 2));
 			})
 			.catch((err) => console.error(err));
 	},
@@ -44,7 +44,7 @@ module.exports = {
 		})
 			.then((results) => {
 				res.status(200).json(results);
-				console.log(JSON.stringify(results, null, 2));
+				//	//console.log(JSON.stringify(results, null, 2));
 				return results;
 			})
 			.catch((err) => console.error(err));
@@ -61,19 +61,18 @@ module.exports = {
 		})
 			.then((results) => {
 				res.status(200).json(results);
-				console.log(JSON.stringify(results, null, 2));
+				//console.log(JSON.stringify(results, null, 2));
 				return results;
 			})
 			.catch((err) => console.error(err));
 	},
 
-
-	// finds most recent 5 sales 
+	// finds most recent 5 sales
 	findRecentSales: async (req, res) => {
 		await db.Sales.findAll({
 			limit: 5,
 			order: [['createdAt', 'ASC']],
-			include: db.Products
+			include: db.Products,
 		})
 			.then((results) => res.status(200).json(results))
 			.catch((err) => console.error(err));
@@ -82,12 +81,10 @@ module.exports = {
 	// find all sales with most recent first
 	findAllSales: async (req, res) => {
 		await db.Sales.findAll({
-			
-		//	order: [['createdAt', 'ASC']],
-		//	include: db.Products
+			//	order: [['createdAt', 'ASC']],
+			//	include: db.Products
 		})
 			.then((results) => res.status(200).json(results))
 			.catch((err) => console.error(err));
 	},
-
 };

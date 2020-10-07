@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-
 import Button from '@material-ui/core/Button';
 
 // components
@@ -41,7 +40,7 @@ const HeaderNavigation = () => {
 	const { isAuthenticated, logout } = useAuth0();
 
 	const links = [
-		{ title: 'Products', path: '/sales' },
+		{ title: 'Shop', path: '/sales' },
 		{ title: 'Rentals', path: '/rentals' },
 		{ icon: Logo, path: '/' },
 		{ title: 'Videos', path: '/videos' },

@@ -1,158 +1,126 @@
-import React from 'react';
+import React, { useState, useContext, useMemo, useEffect } from 'react';
 
+// axios
+import axios from 'axios';
+
+// react router
+import { useParams } from 'react-router-dom';
+
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import { CartContext } from '../../context/cart-context';
-import Dialog from '@material-ui/core/Dialog';
 
-//import picture from '../../images/BGFS5000.jpg';
+// context api
+//import { CartContext } from '../../context/cart-context';
 
-const useStyles = makeStyles((theme) => ({}));
-const SaleProduct = (props) => {
-	const classes = useStyles();
+// images
+import picture from '../../images/BGFS5000.jpg';
 
-	const { updateProduct } = React.useContext(CartContext);
+const useStyles = makeStyles((theme) => ({
+	root: {
+		width: '100%',
+		height: '100%',
+	},
+	image: {
+		height: '300px',
+	},
+}));
 
-	const [amount, setAmount] = React.useState(1); // inside dialog
+function productFunc(obj, classes) {
+	if (!obj) return {};
 
-	// opens dialog
-	const [open, setOpen] = React.useState(false);
-
-	const handleClickOpen = () => {
-		// dialog
-		setOpen(true);
-	};
-
-	const handleClose = () => {
-		// dialog
-		setOpen(false);
-	};
-
-	const increment = () => {
-		// inside dialog
-		setAmount((prevState) =>
-			prevState === product.units ? prevState : prevState + 1
-		);
-	};
-	const decrement = () => {
-		setAmount((prevState) => (prevState === 1 ? prevState : prevState - 1));
-	};
-
-	const addToCart = () => {
-		// sends data to cart context
-		let data = {
-			productId: product.id,
-			unitPrice: product.sale_price,
-			amount: amount,
-		};
-		console.log(data);
-		updateProduct({ data });
-	};
-
-	const product = props.location.state.products;
+	let product = obj;
 
 	return (
-		<div>
-			<Grid item xs={12}>
+		<Grid item xs={12}>
+			<Grid item xs={6}>
+				<img className={classes.image} src={picture} alt="vacuum" />
+			</Grid>
+
+			<Grid item xs={6}>
 				<Typography className={classes.title} variant="h6">
 					{!product.name ? product.model : product.name}
 				</Typography>
 			</Grid>
-			<Grid item xs={12}>
-				<Typography className={classes.title} variant="h6">
-					{product.rental === 1 ? 'available to rent' : null}
-				</Typography>
-			</Grid>
+		</Grid>
+	);
+}
 
-			<Grid item xs={12} className={classes.modelTitle}>
-				<Typography
-					color="textSecondary"
-					variant="h6"
-					className={classes.modelText}
-				>
-					Model
-				</Typography>
-				<Typography color="textSecondary" className={classes.modelText2}>
-					{product.model}
-				</Typography>
+const SaleProduct = () => {
+	const classes = useStyles();
+
+	let { id } = useParams();
+
+	//	const { updateProduct } = useContext(CartContext);
+
+	const [product, setProduct] = useState({});
+
+	//const [amount, setAmount] = useState(1); // inside dialog
+
+	// opens dialog
+	//const [open, setOpen] = useState(false);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const results = await axios(`/products/sales/${id}`);
+			setProduct(results.data);
+		};
+		fetchData();
+	}, [id]);
+
+	// const handleClickOpen = () => {
+	// 	// dialog
+	// 	setOpen(true);
+	// };
+
+	// const handleClose = () => {
+	// 	// dialog
+	// 	setOpen(false);
+	// };
+
+	// const increment = () => {
+	// 	// inside dialog
+	// 	setAmount((prevState) =>
+	// 		prevState === product.units ? prevState : prevState + 1
+	// 	);
+	// };
+	// const decrement = () => {
+	// 	setAmount((prevState) => (prevState === 1 ? prevState : prevState - 1));
+	// };
+
+	// const addToCart = () => {
+	// 	// sends data to cart context
+	// 	let data = {
+	// 		productId: product.id,
+	// 		unitPrice: product.sale_price,
+	// 		amount: amount,
+	// 	};
+	// 	console.log(data);
+	// 	updateProduct({ data });
+	// };
+
+	const productSection = useMemo(() => productFunc(product, classes), [
+		product,
+		classes,
+	]);
+
+	return (
+		<div className={classes.root}>
+			<Grid alignContent="flex-start" container>
+				{productSection}
+				{/* 
+
+				<Button>add to cart</Button> */}
 			</Grid>
-			<Grid item xs={12} className={classes.modelTitle}>
-				<Typography
-					color="textSecondary"
-					variant="h6"
-					className={classes.modelText}
-				>
-					# of units available
-				</Typography>
-				<Typography color="textSecondary" className={classes.modelText2}>
-					{product.units}
-				</Typography>
-			</Grid>
-			<Grid item xs={12} className={classes.modelTitle}>
-				<Typography
-					color="textSecondary"
-					variant="h6"
-					className={classes.modelText}
-				>
-					Features
-				</Typography>
-				<ul className={classes.list}>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_0 ? product.feature_0 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_1 ? product.feature_1 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_2 ? product.feature_2 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_3 ? product.feature_3 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_4 ? product.feature_4 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_5 ? product.feature_5 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_6 ? product.feature_6 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_7 ? product.feature_7 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_8 ? product.feature_8 : <></>}
-						</Typography>
-					</li>
-					<li className={classes.listItem}>
-						<Typography color="textSecondary">
-							{product.feature_9 ? product.feature_9 : <></>}
-						</Typography>
-					</li>
-				</ul>
-				<Button onClick={handleClickOpen}>add to cart</Button>
-			</Grid>
-			<Dialog open={open} fullWidth maxWidth="md" onClose={handleClose}>
+		</div>
+	);
+};
+
+export default SaleProduct;
+{
+	/* <Dialog open={open} fullWidth maxWidth="md" onClose={handleClose}>
 				<Typography variant="h4">{product.model}</Typography>
 				<Typography variant="h4">{product.sale_price}</Typography>
 				<Button onClick={decrement}>less</Button>
@@ -160,9 +128,5 @@ const SaleProduct = (props) => {
 				<Button onClick={increment}>add</Button>
 				<Typography variant="h4">sub total</Typography>
 				<Button onClick={addToCart}>add to cart</Button>
-			</Dialog>
-		</div>
-	);
-};
-
-export default SaleProduct;
+			</Dialog> */
+}

@@ -21,7 +21,10 @@ import RentalSearch from './RentalSearch';
 // outside styles
 
 const useStyles = makeStyles((theme) => ({
-	root: {},
+	root: {
+		height: '100%',
+		minHeight: '100vh',
+	},
 	titleBox: {
 		backgroundColor: theme.palette.primary.light,
 		margin: '5px 0 40px 0',
@@ -120,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	backDesign: {
 		width: '50%',
-		height: '100%',
+		height: '80%',
 		backgroundColor: theme.palette.gold.main,
 		position: 'absolute',
 		top: '80px',
@@ -173,14 +176,16 @@ const useStyles = makeStyles((theme) => ({
 		borderBottomRightRadius: '75%',
 		zIndex: '1',
 	},
-	mainGrid: {},
+	mainGrid: {
+		minHeight: '100%',
+	},
 }));
 
 const Home = () => {
 	const classes = useStyles();
 
 	return (
-		<Container disableGutters maxWidth={false}>
+		<Container disableGutters maxWidth={false} className={classes.root}>
 			<Grid container justify="center" classes={{ root: classes.mainGrid }}>
 				<Paper className={classes.backDesign} elevation={2}></Paper>
 				{/* <Paper className={classes.backDesign2} elevation={2}></Paper> */}

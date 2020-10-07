@@ -1,24 +1,111 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Switch, Route, useRouteMatch, Link } from 'react-router-dom';
+import React, { useState, memo, useEffect } from 'react';
 
+// react router
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+
+// axios
+import axios from 'axios';
+
+// material ui
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { SalesContext } from '../../context/sales-context';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-//import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
-import picture from '../../images/BGFS5000.jpg';
-
+// components
 import SaleProduct from './SaleProduct';
+import ProductGrid from './ProductGrid';
+
+const useStyles2 = makeStyles((theme) => ({
+	li: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	nestedList: {},
+	toolBar: {
+		justifyContent: 'space-between',
+	},
+	button: {
+		
+	},
+}));
+
+function Categories() {
+	const classes = useStyles2();
+	const [anchorEl, setAnchorEl] = React.useState(null);
+
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+	const view = (
+		<Toolbar className={classes.toolBar}>
+			<Button
+				className={classes.button}
+				aria-controls="vacuum-menu"
+				aria-haspopup="true"
+				onClick={handleClick}
+			>
+				Vacuums
+				<ExpandMore />
+			</Button>
+			<Button className={classes.button}>Power Sweepers</Button>
+			<Button className={classes.button}>Sweepers</Button>
+			<Button className={classes.button}>Extractors</Button>
+			<Button className={classes.button}>Air Movers</Button>
+			<Button className={classes.button}>steam machines</Button>
+			<Button className={classes.button}>cleaning Formulas</Button>
+			<Button className={classes.button}>accessories</Button>
+			<Menu
+				id="vacuum-menu"
+				anchorEl={anchorEl}
+				keepMounted
+				open={Boolean(anchorEl)}
+				onClose={handleClose}
+			>
+				<MenuItem onClick={handleClose}>All Vacuums</MenuItem>
+				<MenuItem onClick={handleClose}>Upright</MenuItem>
+				<MenuItem onClick={handleClose}>Canister</MenuItem>
+				<MenuItem onClick={handleClose}>Backpack</MenuItem>
+			</Menu>
+		</Toolbar>
+	);
+
+	return view;
+}
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		height: '100%',
+		minHeight: 'calc(100vh - 30px)',
+	},
 	title: {
-		color: 'black',
+		fontFamily: 'Roboto Black',
+		width: '100%',
+		height: '200px',
+		backgroundColor: theme.palette.primary.light,
+		color: theme.palette.gold.main,
+		fontSize: '60px',
+		padding: 'auto',
+		display: 'flex',
+		justifyContent: 'center',
+		flexDirection: 'column',
 	},
-	image: {
-		maxHeight: '300px',
+
+	media: {
+		height: 350,
+		backgroundSize: 'contain',
 	},
+	content: {},
 }));
 
 const Sales = () => {
@@ -26,56 +113,40 @@ const Sales = () => {
 
 	let { path } = useRouteMatch();
 
-	const { availableProducts, getAvailableProducts } = React.useContext(
-		SalesContext
-	);
+	const [products, setProducts] = useState([]);
 
-	React.useEffect(() => {
-		getAvailableProducts();
-	}, [getAvailableProducts]);
-
-	//console.log(availableProducts);
+	useEffect(() => {
+		const fetchData = async () => {
+			const result = await axios('/products/sales');
+			setProducts(result.data);
+		};
+		fetchData();
+	}, []);
+	console.log('sales home page');
 
 	return (
-		<Container>
-			<Grid container spacing={4}>
+		<Container maxWidth="xl" className={classes.root}>
+			<Grid container>
 				<Grid item xs={12}>
 					<Typography variant="h3" className={classes.title}>
-						Sales
+						Shop by Category
 					</Typography>
+					<Categories />
 				</Grid>
 
 				<Switch>
 					<Route exact path={path}>
-						{availableProducts &&
-							availableProducts.map((product) => {
-								return (
-									<Grid item key={product.id} xs={12} sm={6} md={3}>
-										<Link
-											to={{
-												pathname: `/sales/${product.id}`,
-												state: { products: product },
-											}}
-										>
-											<img
-												src={picture}
-												alt="model"
-												className={classes.image}
-											/>
-											<Typography variant="h5">{product.model}</Typography>
-										</Link>
-									</Grid>
-								);
-							})}
+						<ProductGrid products={products} />
 					</Route>
-					<Route
-						path={`${path}/:id?`}
-						render={(routeProps) => <SaleProduct {...routeProps} />}
-					/>
+					<Route path={`${path}/:id`}>
+						<Grid item xs={12}>
+							<SaleProduct />
+						</Grid>
+					</Route>
 				</Switch>
 			</Grid>
 		</Container>
 	);
 };
 
-export default Sales;
+export default memo(Sales);
