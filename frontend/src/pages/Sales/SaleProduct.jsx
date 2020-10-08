@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 // axios
 import axios from 'axios';
@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
@@ -119,14 +119,3 @@ const SaleProduct = () => {
 };
 
 export default SaleProduct;
-{
-	/* <Dialog open={open} fullWidth maxWidth="md" onClose={handleClose}>
-				<Typography variant="h4">{product.model}</Typography>
-				<Typography variant="h4">{product.sale_price}</Typography>
-				<Button onClick={decrement}>less</Button>
-				<Typography variant="h6">{amount}</Typography>
-				<Button onClick={increment}>add</Button>
-				<Typography variant="h4">sub total</Typography>
-				<Button onClick={addToCart}>add to cart</Button>
-			</Dialog> */
-}
