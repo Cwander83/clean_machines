@@ -89,7 +89,7 @@ const ProductGrid = ({ products }) => {
 	]);
 
 	return (
-		<Grid container spacing={3}>
+		<Grid container spacing={4}>
 			{productSection}
 		</Grid>
 	);
