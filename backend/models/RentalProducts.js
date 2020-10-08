@@ -32,9 +32,6 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		sub_category: {
-			type: DataTypes.STRING,
-		},
 		
 		short_description: { type: DataTypes.STRING },
 		cord: {

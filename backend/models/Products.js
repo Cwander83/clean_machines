@@ -23,9 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		sub_category: {
-			type: DataTypes.STRING,
-		},
+		
 		
 		units: {
 			type: DataTypes.INTEGER,
