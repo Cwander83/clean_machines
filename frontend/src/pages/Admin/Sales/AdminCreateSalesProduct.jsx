@@ -7,14 +7,7 @@ const AdminCreateSalesProduct = () => {
 	const inputs = [
 		{ name: 'name', required: true, label: 'name', xs: 12, sm: 6 },
 		{ name: 'model', required: true, label: 'model', xs: 12, sm: 6 },
-		{ name: 'category', required: true, label: 'category', xs: 12, sm: 6 },
-		{
-			name: 'sub_category',
-			required: true,
-			label: 'sub category',
-			xs: 12,
-			sm: 6,
-		},
+		
 		{
 			name: 'short_description',
 			required: true,

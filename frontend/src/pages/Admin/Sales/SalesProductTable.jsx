@@ -166,7 +166,7 @@ const SalesProductTable = React.memo(() => {
 					</TableCell>
 					<TableCell>{row.model}</TableCell>
 					<TableCell>{row.category}</TableCell>
-					<TableCell>{row.sub_category}</TableCell>
+					
 				</TableRow>
 			</React.Fragment>
 		);
@@ -181,7 +181,7 @@ const SalesProductTable = React.memo(() => {
 						<TableCell>Name</TableCell>
 						<TableCell>Model</TableCell>
 						<TableCell>Category</TableCell>
-						<TableCell>Sub Category</TableCell>
+						
 					</TableRow>
 				</TableHead>
 				<TableBody>
