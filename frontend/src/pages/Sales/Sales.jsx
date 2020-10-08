@@ -63,7 +63,8 @@ const Sales = () => {
 						</Grid>
 					</Route>
 					<Route path={`${path}/:id`}>
-						<Grid item xs={12} sm>
+						<Grid item sm={1}></Grid>
+						<Grid item xs={12} sm={9}>
 							<SaleProduct />
 						</Grid>
 					</Route>

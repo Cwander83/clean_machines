@@ -121,7 +121,7 @@ module.exports = {
 		})
 			.then((results) => {
 				res.json(results);
-				console.log(JSON.stringify(results, null, 2));
+				//console.log(JSON.stringify(results, null, 2));
 			})
 			.catch((err) => console.error(err));
 	},
