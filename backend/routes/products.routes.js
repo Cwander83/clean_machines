@@ -5,7 +5,10 @@ const { productController } = require('../controllers');
 // all products * no queries
 router.get('/sales', productController.findAllProducts);
 router.get('/sales/:id', productController.findProduct);
-
+router.get(
+	'/sales/category/:category',
+	productController.findAllProductsByCategory
+);
 router.get('/rental', productController.findAllRentalProducts);
 
 router.get('/out', productController.findAllProductsOutOfStock); // all products out of stock

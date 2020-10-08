@@ -1,10 +1,7 @@
-import React, { useState, memo, useEffect } from 'react';
+import React, { memo } from 'react';
 
 // react router
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
-
-// axios
-import axios from 'axios';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,11 +11,8 @@ import Container from '@material-ui/core/Container';
 
 // components
 import SaleProduct from './SaleProduct';
-import SideNav from './SideNav'
-import MobileSideNav from './MobileSideNav'
+import SideNav from './SideNav';
 import ProductGrid from './ProductGrid';
-
-
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -37,12 +31,10 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		flexDirection: 'column',
 	},
-
-	media: {
-		height: 350,
-		backgroundSize: 'contain',
+	productGrid: {
+		marginTop: '15px',
+		marginBottom: '15px',
 	},
-	content: {},
 }));
 
 const Sales = () => {
@@ -50,15 +42,6 @@ const Sales = () => {
 
 	let { path } = useRouteMatch();
 
-	const [products, setProducts] = useState([]);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const result = await axios('/products/sales');
-			setProducts(result.data);
-		};
-		fetchData();
-	}, []);
 	console.log('sales home page');
 
 	return (
@@ -69,20 +52,18 @@ const Sales = () => {
 						Shop by Category
 					</Typography>
 				</Grid>
+				<Grid item xs sm={2}>
+					<SideNav />
+				</Grid>
 
 				<Switch>
 					<Route exact path={path}>
-						<Grid item xs sm={2}>
-							<SideNav />
-							<MobileSideNav />
-						</Grid>
-					
-						<Grid item xs={12} sm={10}>
-							<ProductGrid products={products} />
+						<Grid item xs={12} sm className={classes.productGrid}>
+							<ProductGrid />
 						</Grid>
 					</Route>
 					<Route path={`${path}/:id`}>
-						<Grid item xs={12}>
+						<Grid item xs={12} sm>
 							<SaleProduct />
 						</Grid>
 					</Route>
