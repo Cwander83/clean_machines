@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // react router
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,14 +22,31 @@ import powersweeper from '../../images/icons/powersweeper.jpg';
 import steammachine from '../../images/icons/steammachine.jpg';
 import sweeper from '../../images/icons/sweeper.jpg';
 import upright from '../../images/icons/upright.jpg';
-import accessories from '../../images/icons/accessories.jpg'
+import accessories from '../../images/icons/accessories.jpg';
 import Divider from '@material-ui/core/Divider';
+
+// context api
+import { SalesContext } from '../../context/sales-context';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
 		display: 'flex',
 		MarginLeft: '40px',
 		justifyContent: 'flex-start',
+		'&:hover': {
+			backgroundColor: 'transparent',
+		},
+		'.MuiTouchRipple-child': {
+			backgroundColor: theme.palette.primary.light,
+		},
+	},
+	label: {
+		transition: 'all .2s ease-in-out',
+		'&:hover': {
+			textDecoration: 'underline',
+			textDecorationColor: theme.palette.gold.main,
+			transform: 'scale(1.1)',
+		},
 	},
 	grid: {},
 	image: {
@@ -56,12 +73,33 @@ const useStyles = makeStyles((theme) => ({
 const SalesBox = () => {
 	const classes = useStyles();
 
+	let { setCategory } = useContext(SalesContext);
+
 	const vacuums = [
-		{ title: 'View all', image: upright, path: '/' },
-		{ title: 'Upright Vacuums', image: upright, path: '/' },
-		{ title: 'Canister Vacuums', image: canister, path: '/' },
-		{ title: 'Backpack Vacuums', image: backpack, path: '/' },
-		{ title: 'Extra-wide Vacuums', image: extrawide, path: '/' },
+		{
+			title: 'Upright Vacuums',
+			image: upright,
+			path: '/sales',
+			value: 'upright',
+		},
+		{
+			title: 'Canister Vacuums',
+			image: canister,
+			path: '/sales',
+			value: 'canister',
+		},
+		{
+			title: 'Backpack Vacuums',
+			image: backpack,
+			path: '/sales',
+			value: 'backpack',
+		},
+		{
+			title: 'Extra-wide Vacuums',
+			image: extrawide,
+			path: '/sales',
+			value: 'extra-wide',
+		},
 	];
 
 	return (
@@ -76,10 +114,15 @@ const SalesBox = () => {
 					return (
 						<Grid item xs={12} className={classes.grid} key={i}>
 							<Button
+								disableFocusRipple
+								disableRipple
 								className={classes.button}
 								classes={{
 									label: classes.label,
 								}}
+								component={Link}
+								to={link.path}
+								onClick={() => setCategory(`${link.value}`)}
 							>
 								<Box className={classes.imageBox}>
 									<img
@@ -103,10 +146,15 @@ const SalesBox = () => {
 
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('air-mover')}
 						>
 							<Box className={classes.imageBox}>
 								<img
@@ -128,10 +176,15 @@ const SalesBox = () => {
 					<Divider />
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('steam-machine')}
 						>
 							<Box className={classes.imageBox}>
 								<img
@@ -156,10 +209,15 @@ const SalesBox = () => {
 
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('extractor')}
 						>
 							<Box className={classes.imageBox}>
 								<img
@@ -182,10 +240,15 @@ const SalesBox = () => {
 
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('power-sweeper')}
 						>
 							<Box className={classes.imageBox}>
 								<img
@@ -201,10 +264,15 @@ const SalesBox = () => {
 					</Grid>
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('sweeper')}
 						>
 							<Box className={classes.imageBox}>
 								<img
@@ -227,10 +295,15 @@ const SalesBox = () => {
 
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('floor-machine')}
 						>
 							<Box className={classes.imageBox}>
 								<img
@@ -252,10 +325,15 @@ const SalesBox = () => {
 					<Divider />
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('formula')}
 						>
 							<Box className={classes.imageBox}>
 								<img
@@ -271,10 +349,15 @@ const SalesBox = () => {
 					</Grid>
 					<Grid item xs={12} className={classes.grid}>
 						<Button
+							disableFocusRipple
+							disableRipple
 							className={classes.button}
 							classes={{
 								label: classes.label,
 							}}
+							component={Link}
+							to="/sales"
+							onClick={() => setCategory('accessories')}
 						>
 							<Box className={classes.imageBox}>
 								<img

@@ -90,6 +90,22 @@ module.exports = {
 			})
 			.catch((err) => console.error(err));
 	},
+
+	// all products to sale by category
+	findAllProductsByCategory: async (req, res) => {
+		const category = req.params.category;
+		await db.Products.findAll({
+			where: {
+				[Op.and]: [{ category: category }, { units: { [Op.gt]: 0 } }],
+			},
+		})
+			.then((results) => {
+				res.status(200).json(results);
+				//	//console.log(JSON.stringify(results, null, 2));
+			})
+			.catch((err) => console.error(err));
+	},
+
 	// all products
 	findAllRentalProducts: (req, res) => {
 		db.RentalProducts.findAll()

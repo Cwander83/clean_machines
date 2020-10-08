@@ -31,55 +31,7 @@ const MobileSideNav = () => {
 	const [open, setOpen] = useState(false);
 	const handleClick = () => setOpen(!open);
 	return (
-		<List className={classes.list}>
-			<ListItem
-				divider
-				button
-				className={classes.listItem}
-				onClick={handleClick}
-			>
-				<ListItemText primary="Products" />
-
-				{!open ? <ExpandMore /> : <ExpandLess />}
-			</ListItem>
-			<Collapse in={open} timeout="auto" unmountOnExit>
-				<List component="div" disablePadding>
-					<ListItem divider button className={classes.nested}>
-						<ListItemText primary="All vacuums" />
-					</ListItem>
-					<ListItem divider button className={classes.nested}>
-						<ListItemText primary="Upright" />
-					</ListItem>
-					<ListItem divider button className={classes.nested}>
-						<ListItemText primary="Backpack" />
-					</ListItem>
-					<ListItem divider button className={classes.nested}>
-						<ListItemText primary="Canister" />
-					</ListItem>
-					<ListItem divider button className={classes.listItem}>
-						<ListItemText primary="Sweepers" />
-					</ListItem>
-					<ListItem divider button className={classes.listItem}>
-						<ListItemText primary="Extractors" />
-					</ListItem>
-					<ListItem divider button className={classes.listItem}>
-						<ListItemText primary="Air Movers" />
-					</ListItem>
-					<ListItem divider button className={classes.listItem}>
-						<ListItemText primary="Power Sweepers" />
-					</ListItem>
-					<ListItem divider button className={classes.listItem}>
-						<ListItemText primary="Steam Machines" />
-					</ListItem>
-					<ListItem divider button className={classes.listItem}>
-						<ListItemText primary="Cleaning Formulas" />
-					</ListItem>
-					<ListItem divider button className={classes.listItem}>
-						<ListItemText primary="Accessories" />
-					</ListItem>
-				</List>
-			</Collapse>
-		</List>
+	
 	);
 };
 

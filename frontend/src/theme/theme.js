@@ -80,6 +80,9 @@ const theme = createMuiTheme({
 			'"Segoe UI Symbol"',
 		].join(','),
 	},
+	ripple: {
+		color: '#09594C',
+	},
 	overrides: {
 		MuiCssBaseline: {
 			'@global': {
