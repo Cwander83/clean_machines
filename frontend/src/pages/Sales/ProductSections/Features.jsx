@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useMemo, useEffect } from 'react';
 
 // classnames
 import ClassNames from 'classnames';
@@ -24,113 +24,111 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 
 // components
 
+function featuresFunc(features, classes) {
+	if (!features) return {};
+
+	let feature = features;
+	let section = Object.keys(feature).map((el) => (
+		<React.Fragment key={el}>
+			<Grid item xs={1}></Grid>
+			<Grid item xs={11} className={classes.spec}>
+				<Typography
+					align="left"
+					display="inline"
+					className={ClassNames(classes.itemTitle)}
+					variant="body1"
+				>
+					&bull;
+				</Typography>
+
+				<Typography
+					gutterBottom
+					display="inline"
+					className={ClassNames(classes.item)}
+					variant="body1"
+				>
+					{feature[el]}
+				</Typography>
+			</Grid>
+		</React.Fragment>
+	));
+	return section;
+}
+
 const useStyles = makeStyles((theme) => ({
-	root: {
-		
+	title: {
+		display: 'flex',
+		justifyContent: 'space-between',
 	},
-    title: {
-        display: 'flex',
-        justifyContent: 'space-between'
-    }
+	itemTitle: {
+		fontWeight: 600,
+		marginRight: '5px',
+		textTransform: 'capitalize',
+	},
+	spec: {
+		textAlign: 'left',
+	},
 }));
 
 const Features = ({ product }) => {
 	const classes = useStyles();
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
+
+	const [features, setFeatures] = useState({});
 
 	const handleClick = () => setOpen(!open);
+
+	useEffect(() => {
+		let {
+			short_description,
+			feature_1,
+			feature_2,
+			feature_3,
+			feature_4,
+			feature_5,
+			tools
+		} = product;
+		setFeatures({
+			short_description,
+			feature_1,
+			feature_2,
+			feature_3,
+			feature_4,
+			feature_5,
+			tools
+			
+		});
+	}, [product]);
+
+	console.log('features page ***********');
+
+	const featuresSection = useMemo(() => featuresFunc(features, classes), [
+		features,
+		classes,
+	]);
 	return (
-		<Grid container className={classes.root}>
+		<Grid container justify="flex-start" style={{ marginBottom: '30px' }}>
 			<Grid item xs={12}>
-				<Typography variant="h5" onClick={handleClick} className={classes.title}>
+				<Typography
+					variant="h5"
+					onClick={handleClick}
+					className={classes.title}
+				>
 					Features {!open ? <ExpandMore /> : <ExpandLess />}
 				</Typography>
 				<Divider />
 			</Grid>
 			<Collapse in={open}>
-				<Grid item xs={12}>
-					{!product.weight ? (
-						<Grid item xs={12} className={classes.head}>
-							<Grid item xs={7} sm={8} md={7} lg={5}>
-								<Typography
-									align="left"
-									display="inline"
-									className={ClassNames(classes.title)}
-									variant="h6"
-								>
-									Weight
-								</Typography>
-							</Grid>
-							<Grid item xs={6} sm={4} md={5} lg>
-								<Typography
-									gutterBottom
-									display="inline"
-									className={ClassNames(classes.body1, classes.uppercase)}
-									variant="body1"
-								>
-									{product.weight}
-								</Typography>
-							</Grid>
-						</Grid>
-					) : (
-						<></>
-					)}
-                    {!product.height ? (
-					<Grid item xs={12} className={classes.head}>
-						<Grid item xs={7} sm={8} md={7} lg={5}>
-							<Typography
-								align="left"
-								display="inline"
-								className={ClassNames(classes.title)}
-								variant="h6"
-							>
-								Height
-							</Typography>
-						</Grid>
-						<Grid item xs={6} sm={4} md={5} lg>
-							<Typography
-								gutterBottom
-								display="inline"
-								className={ClassNames(classes.body1, classes.uppercase)}
-								variant="body1"
-							>
-								{product.height}
-							</Typography>
-						</Grid>
-					</Grid>
-				) : (
-					<></>
-				)}
-				{product.cord ? (
-					<Grid item xs={12} className={classes.head}>
-						<Grid item xs={7} sm={8} md={7} lg={5}>
-							<Typography
-								align="left"
-								display="inline"
-								className={ClassNames(classes.title)}
-								variant="h6"
-							>
-								Cord
-							</Typography>
-						</Grid>
-						<Grid item xs={6} sm={4} md={5} lg>
-							<Typography
-								gutterBottom
-								display="inline"
-								className={ClassNames(classes.body1, classes.uppercase)}
-								variant="body1"
-							>
-								{product.cord}
-							</Typography>
-						</Grid>
-					</Grid>
-				) : (
-					<></>
-				)}
+				<Grid
+					container
+					alignContent="flex-start"
+					style={{ paddingTop: '10px' }}
+				>
+					{featuresSection}
 				</Grid>
 			</Collapse>
 		</Grid>
 	);
 };
 
-export default memo(Features);
+export default Features;

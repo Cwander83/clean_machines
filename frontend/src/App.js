@@ -68,7 +68,7 @@ function App() {
 											path="/admin/sales"
 											component={AdminSales}
 										/>
-								
+
 										<ProtectedRoute
 											path="/admin/customers"
 											component={AdminCustomers}

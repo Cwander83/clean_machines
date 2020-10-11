@@ -17,12 +17,14 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Divider from '@material-ui/core/Divider';
 
 // context api
 import { SalesContext } from '../../context/sales-context';
 
 // images
 import picture from '../../images/BGFS5000.jpg';
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -48,6 +50,14 @@ const useStyles = makeStyles((theme) => ({
 	price: {
 		fontStyle: 'italic',
 	},
+	divider: {
+		backgroundColor: theme.palette.gold.main,
+	},
+	subtitle: {
+		marginLeft: '5px',
+		fontSize: '22px',
+		fontWeight: 600,
+	}
 }));
 
 function productFunc(array, classes) {
@@ -80,11 +90,7 @@ function productFunc(array, classes) {
 							{product.name ? product.name : product.model}
 						</Typography>
 
-						<Typography
-							
-							variant="body1"
-							className={classes.description}
-						>
+						<Typography variant="body1" className={classes.description}>
 							{product.short_description}
 						</Typography>
 						<Typography variant="h6" className={classes.price}>
@@ -124,9 +130,22 @@ const ProductGrid = () => {
 	]);
 
 	return (
-		<Grid container spacing={4}>
-			{productSection}
-		</Grid>
+		<>
+			<Grid container spacing={4}>
+				<Grid item xs sm={4}></Grid>
+				<Grid item xs={12} sm={4}>
+					<Typography display="inline" variant="h5">
+						Category:
+						<Typography display="inline" variant="body1" className={classes.subtitle}>
+							{!category ? 'all available' : category}
+						</Typography>
+					</Typography>
+					<Divider className={classes.divider} />
+				</Grid>
+				<Grid item xs sm={4}></Grid>
+				{productSection}
+			</Grid>
+		</>
 	);
 };
 
