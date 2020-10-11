@@ -1,8 +1,7 @@
-const { Op } = require('sequelize');
+//const { Op } = require('sequelize');
 
 const db = require('../config/config');
 
-const moment = require('moment');
 
 module.exports = {
 	// create a product on DB
@@ -77,11 +76,9 @@ module.exports = {
 			.catch((err) => console.log(err));
 	},
 
-	// all products
+	// all sales products
 	findAllProducts: (req, res) => {
-		db.Products.findAll({
-			where: { units: { [Op.gt]: 0 } },
-		})
+		db.Products.findAll({})
 			.then((results) => {
 				res.json(results);
 				console.log(JSON.stringify(results, null, 2));
@@ -93,26 +90,15 @@ module.exports = {
 	findAllProductsByCategory: async (req, res) => {
 		const category = req.params.category;
 		await db.Products.findAll({
-			where: {
-				[Op.and]: [{ category: category }, { units: { [Op.gt]: 0 } }],
-			},
+			where: { category: category },
 		})
 			.then((results) => {
 				res.status(200).json(results);
-				//	//console.log(JSON.stringify(results, null, 2));
+				//console.log(JSON.stringify(results, null, 2));
 			})
 			.catch((err) => console.error(err));
 	},
 
-	// all products
-	findAllRentalProducts: (req, res) => {
-		db.RentalProducts.findAll()
-			.then((results) => {
-				res.json(results);
-				console.log(JSON.stringify(results, null, 2));
-			})
-			.catch((err) => console.error(err));
-	},
 
 	// find one products
 	findProduct: (req, res) => {
@@ -126,21 +112,29 @@ module.exports = {
 			.catch((err) => console.error(err));
 	},
 
-	// all products to rent
-	findAllProductsForRent: (req, res) => {
-		db.Products.findAll({
-			where: {
-				rental: 1,
-			},
-		})
-			.then((products) => {
-				res.json(products);
-				console.log(JSON.stringify(products, null, 2));
+	// all products
+	findAllRentalProducts: (req, res) => {
+		db.RentalProducts.findAll()
+			.then((results) => {
+				res.json(results);
+				console.log(JSON.stringify(results, null, 2));
 			})
-
+			.catch((err) => console.error(err));
+	},
+	
+	// find one rental
+	findRentalProduct: (req, res) => {
+		db.RentalProducts.findOne({
+			where: { id: req.params.id },
+		})
+			.then((results) => {
+				res.json(results);
+				//console.log(JSON.stringify(results, null, 2));
+			})
 			.catch((err) => console.error(err));
 	},
 
+	
 	// all products out of stock
 	findAllProductsOutOfStock: (req, res) => {
 		db.Products.findAll({

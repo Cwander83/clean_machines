@@ -25,6 +25,9 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 // components
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		
+	},
     title: {
         display: 'flex',
         justifyContent: 'space-between'
@@ -33,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Features = ({ product }) => {
 	const classes = useStyles();
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(true);
 
 	const handleClick = () => setOpen(!open);
 	return (
-		<Grid container>
+		<Grid container className={classes.root}>
 			<Grid item xs={12}>
 				<Typography variant="h5" onClick={handleClick} className={classes.title}>
 					Features {!open ? <ExpandMore /> : <ExpandLess />}
