@@ -11,7 +11,6 @@ import { useParams } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-//import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -23,6 +22,7 @@ import Divider from '@material-ui/core/Divider';
 import ProductCarousel from '../../components/Carousels/ProductCarousel';
 import Features from './ProductSections/Features';
 import Specs from './ProductSections/Specs';
+import AddToCart from '../../components/AddToCart';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -42,7 +42,10 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'capitalize',
 	},
 	model: {
-		marginTop: '20px',
+		marginTop: '30px',
+		textTransform: 'uppercase',
+		fontSize: '40px',
+		fontWeight: 600,
 	},
 	divider: {
 		marginTop: '10px',
@@ -52,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 		fontStyle: 'italic',
 		marginBottom: '20px',
 		color: theme.palette.gold.main,
-		fontSize: '24px',
+		fontSize: '30px',
 	},
 	title: {
 		marginLeft: '10px',
@@ -71,19 +74,16 @@ function productFunc(obj, classes) {
 				<ProductCarousel />
 			</Grid>
 			<Grid item xs={1}></Grid>
-
-			<Grid item xs={12} sm={4} md={4}>
+			<Grid container justify="center">
 				<Grid item xs={12}>
 					<Typography
 						align="center"
-						gutterBottom
 						className={ClassNames(classes.model)}
 						variant="h4"
 					>
 						{product.model}
 					</Typography>
-				</Grid>
-				<Grid item xs={12}>
+
 					<Typography
 						align="center"
 						gutterBottom={true}
@@ -93,62 +93,63 @@ function productFunc(obj, classes) {
 						$ {(product.sale_price / 100).toFixed(2)}
 					</Typography>
 				</Grid>
-				<Divider variant="fullWidth" className={ClassNames(classes.divider)} />
-				<Grid item xs={12} className={classes.head}>
-					<Grid item xs={7} sm={8} md={7} lg={5}>
-						<Typography
-							align="left"
-							display="inline"
-							className={ClassNames(classes.title)}
-							variant="h6"
-						>
-							Availability
-						</Typography>
-					</Grid>
-					<Grid item xs={6} sm={4} md={5} lg>
-						<Typography
-							gutterBottom
-							display="inline"
-							className={ClassNames(classes.body1)}
-							variant="subtitle1"
-						>
-							{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
-						</Typography>
-					</Grid>
+				<Divider className={classes.divider} />
+
+				<Grid item xs={12}>
+					<Typography
+						align="left"
+						display="inline"
+						className={ClassNames(classes.title)}
+						variant="h6"
+					>
+						Availability
+					</Typography>
+
+					<Typography
+						gutterBottom
+						display="inline"
+						className={ClassNames(classes.body1)}
+						variant="subtitle1"
+					>
+						{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
+					</Typography>
+
+					<Typography
+						align="left"
+						display="inline"
+						className={ClassNames(classes.title)}
+						variant="h6"
+					>
+						Category
+					</Typography>
+
+					<Typography
+						gutterBottom
+						display="inline"
+						className={ClassNames(classes.body1, classes.uppercase)}
+						variant="body1"
+					>
+						{` : ${product.category}`}
+					</Typography>
 				</Grid>
-				<Grid item xs={12} className={classes.head}>
-					<Grid item xs={7} sm={8} md={7} lg={5}>
-						<Typography
-							align="left"
-							display="inline"
-							className={ClassNames(classes.title)}
-							variant="h6"
-						>
-							Category
-						</Typography>
-					</Grid>
-					<Grid item xs={6} sm={4} md={5} lg>
-						<Typography
-							gutterBottom
-							display="inline"
-							className={ClassNames(classes.body1, classes.uppercase)}
-							variant="body1"
-						>
-							{` : ${product.category}`}
-						</Typography>
-					</Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item xs={12} sm={8}>
+					<AddToCart product={product} />
 				</Grid>
-				<Divider variant="fullWidth" className={ClassNames(classes.divider)} />
+				<Grid item sm={2}></Grid>
 			</Grid>
 
-			<Grid item xs={12}>
+			<Grid item sm={2}></Grid>
+
+			<Grid item xs={12} sm={8}>
 				<Features product={product} />
-
-				
 			</Grid>
-			<Grid item xs={12}>
+			<Grid item sm={2}></Grid>
+			<Grid item sm={2}></Grid>
+			<Grid item xs={12} sm={8}>
 				<Specs product={product} />
 			</Grid>
+			<Grid item sm={2}></Grid>
 		</Grid>
 	);
 }
@@ -173,37 +174,6 @@ const SaleProduct = () => {
 		fetchData();
 	}, [id]);
 
-	// const handleClickOpen = () => {
-	// 	// dialog
-	// 	setOpen(true);
-	// };
-
-	// const handleClose = () => {
-	// 	// dialog
-	// 	setOpen(false);
-	// };
-
-	// const increment = () => {
-	// 	// inside dialog
-	// 	setAmount((prevState) =>
-	// 		prevState === product.units ? prevState : prevState + 1
-	// 	);
-	// };
-	// const decrement = () => {
-	// 	setAmount((prevState) => (prevState === 1 ? prevState : prevState - 1));
-	// };
-
-	// const addToCart = () => {
-	// 	// sends data to cart context
-	// 	let data = {
-	// 		productId: product.id,
-	// 		unitPrice: product.sale_price,
-	// 		amount: amount,
-	// 	};
-	// 	console.log(data);
-	// 	updateProduct({ data });
-	// };
-
 	const productSection = useMemo(() => productFunc(product, classes), [
 		product,
 		classes,
@@ -213,9 +183,6 @@ const SaleProduct = () => {
 		<div className={classes.root}>
 			<Grid alignContent="flex-start" container>
 				{productSection}
-				{/* 
-
-				<Button>add to cart</Button> */}
 			</Grid>
 		</div>
 	);
