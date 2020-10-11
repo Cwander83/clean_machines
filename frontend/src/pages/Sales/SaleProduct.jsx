@@ -21,6 +21,8 @@ import Divider from '@material-ui/core/Divider';
 
 // components
 import ProductCarousel from '../../components/Carousels/ProductCarousel';
+import Features from './ProductSections/Features';
+import Specs from './ProductSections/Specs';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -39,19 +41,22 @@ const useStyles = makeStyles((theme) => ({
 	uppercase: {
 		textTransform: 'capitalize',
 	},
+	model: {
+		marginTop: '20px',
+	},
 	divider: {
 		marginTop: '10px',
 		marginBottom: '20px',
 	},
 	price: {
 		fontStyle: 'italic',
-		marginBottom: '20px'
-		,color: theme.palette.gold.main,
-		fontSize: '24px'
+		marginBottom: '20px',
+		color: theme.palette.gold.main,
+		fontSize: '24px',
 	},
 	title: {
-		marginLeft: '10px'
-	}
+		marginLeft: '10px',
+	},
 }));
 
 function productFunc(obj, classes) {
@@ -66,14 +71,12 @@ function productFunc(obj, classes) {
 				<ProductCarousel />
 			</Grid>
 			<Grid item xs={1}></Grid>
-		
 
-		 
-			<Grid item xs={4} sm={12} md={4}>
+			<Grid item xs={12} sm={4} md={4}>
 				<Grid item xs={12}>
 					<Typography
 						align="center"
-						gutterBottom={true}
+						gutterBottom
 						className={ClassNames(classes.model)}
 						variant="h4"
 					>
@@ -109,7 +112,7 @@ function productFunc(obj, classes) {
 							className={ClassNames(classes.body1)}
 							variant="subtitle1"
 						>
-							{product.units > 0 ?` : In Stock` : ' : Call for Availability'}
+							{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
 						</Typography>
 					</Grid>
 				</Grid>
@@ -136,100 +139,15 @@ function productFunc(obj, classes) {
 					</Grid>
 				</Grid>
 				<Divider variant="fullWidth" className={ClassNames(classes.divider)} />
-			
 			</Grid>
 
 			<Grid item xs={12}>
-			{!product.weight ? (
-					<Grid item xs={12} className={classes.head}>
-						<Grid item xs={7} sm={8} md={7} lg={5}>
-							<Typography
-								align="left"
-								display="inline"
-								className={ClassNames(classes.title)}
-								variant="h6"
-							>
-								Weight
-							</Typography>
-						</Grid>
-						<Grid item xs={6} sm={4} md={5} lg>
-							<Typography
-								gutterBottom
-								display="inline"
-								className={ClassNames(classes.body1, classes.uppercase)}
-								variant="body1"
-							>
-								{product.weight}
-							</Typography>
-						</Grid>
-					</Grid>
-				) : (
-					<></>
-				)}
-				{!product.height ? (
-					<Grid item xs={12} className={classes.head}>
-						<Grid item xs={7} sm={8} md={7} lg={5}>
-							<Typography
-								align="left"
-								display="inline"
-								className={ClassNames(classes.title)}
-								variant="h6"
-							>
-								Height
-							</Typography>
-						</Grid>
-						<Grid item xs={6} sm={4} md={5} lg>
-							<Typography
-								gutterBottom
-								display="inline"
-								className={ClassNames(classes.body1, classes.uppercase)}
-								variant="body1"
-							>
-								{product.height}
-							</Typography>
-						</Grid>
-					</Grid>
-				) : (
-					<></>
-				)}
-				{product.cord ? (
-					<Grid item xs={12} className={classes.head}>
-						<Grid item xs={7} sm={8} md={7} lg={5}>
-							<Typography
-								align="left"
-								display="inline"
-								className={ClassNames(classes.title)}
-								variant="h6"
-							>
-								Cord
-							</Typography>
-						</Grid>
-						<Grid item xs={6} sm={4} md={5} lg>
-							<Typography
-								gutterBottom
-								display="inline"
-								className={ClassNames(classes.body1, classes.uppercase)}
-								variant="body1"
-							>
-								{product.cord}
-							</Typography>
-						</Grid>
-					</Grid>
-				) : (
-					<></>
-				)}
-				<Typography className={classes.model} variant="h6">
-					{product.model}
-				</Typography>
-				<Typography className={classes.name} variant="h6">
-					{!product.name ? null : product.name}
-				</Typography>
-				<Typography className={classes.category} variant="h6">
-					Category: {product.category}
-				</Typography>
-				<Typography className={classes.category} variant="h6">
-					Category: {product.category}
-				</Typography>
+				<Features product={product} />
+
+				
+			</Grid>
+			<Grid item xs={12}>
+				<Specs product={product} />
 			</Grid>
 		</Grid>
 	);
