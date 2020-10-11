@@ -25,12 +25,11 @@ import { SalesContext } from '../../context/sales-context';
 import picture from '../../images/BGFS5000.jpg';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		
-	},
+	root: {},
 	title: {
 		color: 'black',
 	},
+	card: {},
 
 	media: {
 		height: 350,
@@ -39,12 +38,16 @@ const useStyles = makeStyles((theme) => ({
 	content: {
 		backgroundColor: theme.palette.primary.light,
 		color: 'white',
+		paddingBottom: '0px',
+		textAlign: 'left',
 	},
 	description: {
 		color: theme.palette.gold.main,
+		//fontStyle: 'italic',
+	},
+	price: {
 		fontStyle: 'italic',
 	},
-	price: {},
 }));
 
 function productFunc(array, classes) {
@@ -63,7 +66,12 @@ function productFunc(array, classes) {
 				md={4}
 				className={classes.root}
 			>
-				<Card elevation={3}>
+				<Card
+					classes={{
+						root: classes.card,
+					}}
+					elevation={3}
+				>
 					<CardActionArea component={Link} to={`/sales/${product.id}`}>
 						<CardMedia image={picture} className={classes.media} />
 					</CardActionArea>
@@ -71,8 +79,9 @@ function productFunc(array, classes) {
 						<Typography gutterBottom variant="h5">
 							{product.name ? product.name : product.model}
 						</Typography>
+
 						<Typography
-							gutterBottom
+							
 							variant="body1"
 							className={classes.description}
 						>
