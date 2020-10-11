@@ -15,9 +15,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
-// context api
-//import { CartContext } from '../../context/cart-context';
-
 // components
 import ProductCarousel from '../../components/Carousels/ProductCarousel';
 import Features from './ProductSections/Features';
@@ -81,7 +78,7 @@ function productFunc(obj, classes) {
 						className={ClassNames(classes.model)}
 						variant="h4"
 					>
-						{product.model}
+						{product.name ? product.name : product.model}
 					</Typography>
 
 					<Typography
@@ -161,11 +158,6 @@ const SaleProduct = () => {
 
 	const [product, setProduct] = useState({});
 
-	//const [amount, setAmount] = useState(1); // inside dialog
-
-	// opens dialog
-	//const [open, setOpen] = useState(false);
-
 	useEffect(() => {
 		const fetchData = async () => {
 			const results = await axios(`/products/sales/${id}`);
@@ -189,3 +181,6 @@ const SaleProduct = () => {
 };
 
 export default SaleProduct;
+
+
+

@@ -1,7 +1,7 @@
 import React, { useState, memo, useContext } from 'react';
 
 // react router
-//import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -32,6 +32,83 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const vacuums = [
+	{
+		title: 'Upright Vacuums',
+		path: '/sales',
+		value: 'upright',
+		className: 'nested',
+	},
+	{
+		title: 'Canister Vacuums',
+		path: '/sales',
+		value: 'canister',
+		className: 'nested',
+	},
+	{
+		title: 'Backpack Vacuums',
+		path: '/sales',
+		value: 'backpack',
+		className: 'nested',
+	},
+	{
+		title: 'Extra-wide Vacuums',
+		path: '/sales',
+		value: 'extra-wide',
+		className: 'nested',
+	},
+];
+const otherLinks = [
+	{
+		title: 'Sweepers',
+		path: '/sales',
+		value: 'sweeper',
+		className: 'listedItem',
+	},
+	{
+		title: 'Power Sweepers',
+		path: '/sales',
+		value: 'power-sweeper',
+		className: 'listedItem',
+	},
+	{
+		title: 'Extractors',
+		path: '/sales',
+		value: 'extractor',
+		className: 'listedItem',
+	},
+	{
+		title: 'Air Movers',
+		path: '/sales',
+		value: 'air-mover',
+		className: 'listedItem',
+	},
+	{
+		title: 'Floor Machines',
+		path: '/sales',
+		value: 'floor-machine',
+		className: 'listedItem',
+	},
+	{
+		title: 'Steam Machines',
+		path: '/sales',
+		value: 'steam-machine',
+		className: 'listedItem',
+	},
+	{
+		title: 'Cleaning Formulas',
+		path: '/sales',
+		value: 'formulas',
+		className: 'listedItem',
+	},
+	{
+		title: 'Accessories',
+		path: '/sales',
+		value: 'accessories',
+		className: 'listedItem',
+	},
+];
+
 const SideNav = () => {
 	const classes = useStyles();
 
@@ -48,96 +125,33 @@ const SideNav = () => {
 				</ListItem>
 
 				<List component="div" disablePadding>
-					<ListItem
-						divider
-						button
-						className={classes.nested}
-						onClick={() => setCategory('upright')}
-					>
-						<ListItemText primary="Upright" />
-					</ListItem>
-					<ListItem
-						divider
-						button
-						className={classes.nested}
-						onClick={() => setCategory('backpack')}
-					>
-						<ListItemText primary="Backpack" />
-					</ListItem>
-					<ListItem
-						divider
-						button
-						className={classes.nested}
-						onClick={() => setCategory('canister')}
-					>
-						<ListItemText primary="Canister" />
-					</ListItem>
-					<ListItem
-						divider
-						button
-						className={classes.nested}
-						onClick={() => setCategory('extra-wide')}
-					>
-						<ListItemText primary="Extra-wide" />
-					</ListItem>
+					{vacuums.map((link) => (
+						<ListItem
+							key={link.title}
+							divider
+							button
+							component={Link}
+							className={`classes.${link.className}`}
+							to={link.path}
+							onClick={() => setCategory(link.value)}
+						>
+							<ListItemText primary={link.title} />
+						</ListItem>
+					))}
 				</List>
-
-				<ListItem
-					divider
-					button
-					className={classes.listItem}
-					onClick={() => setCategory('sweeper')}
-				>
-					<ListItemText primary="Sweepers" />
-				</ListItem>
-				<ListItem
-					divider
-					button
-					className={classes.listItem}
-					onClick={() => setCategory('extractor')}
-				>
-					<ListItemText primary="Extractors" />
-				</ListItem>
-				<ListItem
-					divider
-					button
-					className={classes.listItem}
-					onClick={() => setCategory('air-mover')}
-				>
-					<ListItemText primary="Air Movers" />
-				</ListItem>
-				<ListItem
-					divider
-					button
-					className={classes.listItem}
-					onClick={() => setCategory('power-sweeper')}
-				>
-					<ListItemText primary="Power Sweepers" />
-				</ListItem>
-				<ListItem
-					divider
-					button
-					className={classes.listItem}
-					onClick={() => setCategory('steam-machine')}
-				>
-					<ListItemText primary="Steam Machines" />
-				</ListItem>
-				<ListItem
-					divider
-					button
-					className={classes.listItem}
-					onClick={() => setCategory('formulas')}
-				>
-					<ListItemText primary="Cleaning Formulas" />
-				</ListItem>
-				<ListItem
-					divider
-					button
-					className={classes.listItem}
-					onClick={() => setCategory('accessories')}
-				>
-					<ListItemText primary="Accessories" />
-				</ListItem>
+				{otherLinks.map((link) => (
+					<ListItem
+						key={link.title}
+						divider
+						button
+						component={Link}
+						className={`classes.${link.className}`}
+						to={link.path}
+						onClick={() => setCategory(link.value)}
+					>
+						<ListItemText primary={link.title} />
+					</ListItem>
+				))}
 			</List>
 			<List className={classes.listMobile}>
 				<ListItem
@@ -155,94 +169,33 @@ const SideNav = () => {
 						<ListItem divider className={classes.listItem}>
 							<ListItemText primary="All Vacuums" />
 						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('upright')}
-						>
-							<ListItemText primary="Upright Vacuums" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('backpack')}
-						>
-							<ListItemText primary="Backpack Vacuums" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('canister')}
-						>
-							<ListItemText primary="Canister Vacuums" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('extra-wide')}
-						>
-							<ListItemText primary="extra-wide Vacuums" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('sweeper')}
-						>
-							<ListItemText primary="Sweepers" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('extractor')}
-						>
-							<ListItemText primary="Extractors" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('air-mover')}
-						>
-							<ListItemText primary="Air Movers" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('power-sweeper')}
-						>
-							<ListItemText primary="Power Sweepers" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('steam-machine')}
-						>
-							<ListItemText primary="Steam Machines" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('formulas')}
-						>
-							<ListItemText primary="Cleaning Formulas" />
-						</ListItem>
-						<ListItem
-							divider
-							button
-							className={classes.listItem}
-							onClick={() => setCategory('accessories')}
-						>
-							<ListItemText primary="Accessories" />
-						</ListItem>
+
+						{vacuums.map((link) => (
+							<ListItem
+								key={link.title}
+								divider
+								button
+								component={Link}
+								className={`classes.${link.className}`}
+								to={link.path}
+								onClick={() => setCategory(link.value)}
+							>
+								<ListItemText primary={link.title} />
+							</ListItem>
+						))}
+						{otherLinks.map((link) => (
+							<ListItem
+								key={link.title}
+								divider
+								button
+								component={Link}
+								className={`classes.${link.className}`}
+								to={link.path}
+								onClick={() => setCategory(link.value)}
+							>
+								<ListItemText primary={link.title} />
+							</ListItem>
+						))}
 					</List>
 				</Collapse>
 			</List>

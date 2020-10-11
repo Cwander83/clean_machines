@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, memo } from 'react';
 
 // axios
 // import axios from 'axios'
@@ -72,11 +72,14 @@ const AddToCart = ({ product }) => {
 		// sends data to cart context
 		let data = {
 			productId: product.id,
-			unitPrice: product.sale_price,
-			amount: count,
+			model: product.model,
+			price: product.sale_price,
+			quantity: count,
+			type: 'sale',
 		};
 		console.log(data);
 		updateProduct({ data });
+		setCount(1);
 	};
 
 	return (
@@ -98,4 +101,4 @@ const AddToCart = ({ product }) => {
 	);
 };
 
-export default AddToCart;
+export default memo(AddToCart);

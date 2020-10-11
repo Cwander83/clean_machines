@@ -13,22 +13,8 @@ const CartProvider = (props) => {
 			start_date: '2020-09-09',
 			end_date: '2020-09-15',
 		},
-		{
-			type: 'sale',
-			model: 'AG1000',
-			productId: 1,
-			quantity: 2,
-			total: 2000,
-			price_per_unit: 8000,
-		},
-		{
-			type: 'sale',
-			model: 'BG19',
-			productId: 1,
-			quantity: 1,
-			total: 2000,
-			price_per_unit: 99999,
-		},
+		
+	
 	]);
 
 	const [open, setOpen] = React.useState(false);
