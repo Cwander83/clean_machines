@@ -178,7 +178,10 @@ const SideNav = () => {
 								component={Link}
 								className={`classes.${link.className}`}
 								to={link.path}
-								onClick={() => setCategory(link.value)}
+								onClick={() => {
+									setOpen(false);
+									setCategory(link.value);
+								}}
 							>
 								<ListItemText primary={link.title} />
 							</ListItem>
@@ -191,7 +194,10 @@ const SideNav = () => {
 								component={Link}
 								className={`classes.${link.className}`}
 								to={link.path}
-								onClick={() => setCategory(link.value)}
+								onClick={() => {
+									setOpen(false);
+									setCategory(link.value);
+								}}
 							>
 								<ListItemText primary={link.title} />
 							</ListItem>

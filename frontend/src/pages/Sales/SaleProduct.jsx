@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, memo } from 'react';
 
 // classnames
 import ClassNames from 'classnames';
@@ -65,88 +65,64 @@ function productFunc(obj, classes) {
 	let product = obj;
 
 	return (
-		<Grid container spacing={2} className={classes.root} justify="flex-start">
-			<Grid item xs={1}></Grid>
-			<Grid item xs={10}>
-				<ProductCarousel />
+		<Grid container justify="center">
+			<Grid item xs={12}>
+				<Typography
+					align="center"
+					className={ClassNames(classes.model)}
+					variant="h4"
+				>
+					{product.name ? product.name : product.model}
+				</Typography>
+
+				<Typography
+					align="center"
+					gutterBottom={true}
+					className={ClassNames(classes.price)}
+					variant="h5"
+				>
+					$ {(product.sale_price / 100).toFixed(2)}
+				</Typography>
 			</Grid>
-			<Grid item xs={1}></Grid>
-			<Grid container justify="center">
-				<Grid item xs={12}>
-					<Typography
-						align="center"
-						className={ClassNames(classes.model)}
-						variant="h4"
-					>
-						{product.name ? product.name : product.model}
-					</Typography>
+			<Divider className={classes.divider} />
 
-					<Typography
-						align="center"
-						gutterBottom={true}
-						className={ClassNames(classes.price)}
-						variant="h5"
-					>
-						$ {(product.sale_price / 100).toFixed(2)}
-					</Typography>
-				</Grid>
-				<Divider className={classes.divider} />
+			<Grid item xs={12}>
+				<Typography
+					align="left"
+					display="inline"
+					className={ClassNames(classes.title)}
+					variant="h6"
+				>
+					Availability
+				</Typography>
 
-				<Grid item xs={12}>
-					<Typography
-						align="left"
-						display="inline"
-						className={ClassNames(classes.title)}
-						variant="h6"
-					>
-						Availability
-					</Typography>
+				<Typography
+					gutterBottom
+					display="inline"
+					className={ClassNames(classes.body1)}
+					variant="subtitle1"
+				>
+					{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
+				</Typography>
 
-					<Typography
-						gutterBottom
-						display="inline"
-						className={ClassNames(classes.body1)}
-						variant="subtitle1"
-					>
-						{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
-					</Typography>
+				<Typography
+					align="left"
+					display="inline"
+					className={ClassNames(classes.title)}
+					variant="h6"
+				>
+					Category
+				</Typography>
 
-					<Typography
-						align="left"
-						display="inline"
-						className={ClassNames(classes.title)}
-						variant="h6"
-					>
-						Category
-					</Typography>
-
-					<Typography
-						gutterBottom
-						display="inline"
-						className={ClassNames(classes.body1, classes.uppercase)}
-						variant="body1"
-					>
-						{` : ${product.category}`}
-					</Typography>
-				</Grid>
-				<Grid item sm={2}></Grid>
-				<Grid item xs={12} sm={8}>
-					<AddToCart product={product} />
-				</Grid>
-				<Grid item sm={2}></Grid>
+				<Typography
+					gutterBottom
+					display="inline"
+					className={ClassNames(classes.body1, classes.uppercase)}
+					variant="body1"
+				>
+					{` : ${product.category}`}
+				</Typography>
 			</Grid>
-
-			<Grid item sm={2}></Grid>
-
-			<Grid item xs={12} sm={8}>
-				<Features product={product} />
-			</Grid>
-			<Grid item sm={2}></Grid>
-			<Grid item sm={2}></Grid>
-			<Grid item xs={12} sm={8}>
-				<Specs product={product} />
-			</Grid>
-			<Grid item sm={2}></Grid>
 		</Grid>
 	);
 }
@@ -174,13 +150,39 @@ const SaleProduct = () => {
 	return (
 		<div className={classes.root}>
 			<Grid alignContent="flex-start" container>
-				{productSection}
+				<Grid
+					container
+					spacing={2}
+					className={classes.root}
+					justify="flex-start"
+				>
+					<Grid item xs={1}></Grid>
+					<Grid item xs={10}>
+						<ProductCarousel />
+					</Grid>
+					<Grid item xs={1}></Grid>
+					{productSection}
+					<Grid item sm={2}></Grid>
+					<Grid item xs={12} sm={8}>
+						<AddToCart product={product} />
+					</Grid>
+					<Grid item sm={2}></Grid>
+				</Grid>
+
+				<Grid item sm={2}></Grid>
+
+				<Grid item xs={12} sm={8}>
+					<Features product={product} />
+				</Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item xs={12} sm={8}>
+					<Specs product={product} />
+				</Grid>
+				<Grid item sm={2}></Grid>
 			</Grid>
 		</div>
 	);
 };
 
-export default SaleProduct;
-
-
-
+export default memo(SaleProduct);

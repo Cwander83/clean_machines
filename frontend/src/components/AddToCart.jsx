@@ -82,6 +82,8 @@ const AddToCart = ({ product }) => {
 		setCount(1);
 	};
 
+	console.log('ADD TO CART ');
+
 	return (
 		<div className={classes.root}>
 			<AddIcon className={ClassNames(classes.icon)} onClick={increment} />
