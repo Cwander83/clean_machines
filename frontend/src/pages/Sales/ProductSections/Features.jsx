@@ -27,7 +27,10 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 function featuresFunc(features, classes) {
 	if (!features) return {};
 
+	console.log('featuresFunction **');
+
 	let feature = features;
+
 	let section = Object.keys(feature).map((el) => (
 		<React.Fragment key={el}>
 			<Grid item xs={1}></Grid>
@@ -86,8 +89,9 @@ const Features = ({ product }) => {
 			feature_3,
 			feature_4,
 			feature_5,
-			tools
+			tools,
 		} = product;
+
 		setFeatures({
 			short_description,
 			feature_1,
@@ -95,8 +99,7 @@ const Features = ({ product }) => {
 			feature_3,
 			feature_4,
 			feature_5,
-			tools
-			
+			tools,
 		});
 	}, [product]);
 
@@ -131,4 +134,4 @@ const Features = ({ product }) => {
 	);
 };
 
-export default Features;
+export default memo(Features);

@@ -25,7 +25,6 @@ import { SalesContext } from '../../context/sales-context';
 // images
 import picture from '../../images/BGFS5000.jpg';
 
-
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	title: {
@@ -57,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
 		marginLeft: '5px',
 		fontSize: '22px',
 		fontWeight: 600,
-	}
+		textTransform: 'Capitalize',
+	},
 }));
 
 function productFunc(array, classes) {
@@ -136,7 +136,11 @@ const ProductGrid = () => {
 				<Grid item xs={12} sm={4}>
 					<Typography display="inline" variant="h5">
 						Category:
-						<Typography display="inline" variant="body1" className={classes.subtitle}>
+						<Typography
+							display="inline"
+							variant="body1"
+							className={classes.subtitle}
+						>
 							{!category ? 'all available' : category}
 						</Typography>
 					</Typography>
