@@ -29,7 +29,36 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2),
 		textAlign: 'center',
 	},
+	subHeader: {
+		textAlign: 'left',
+		fontSize: '20px',
+		color: 'black',
+	},
+	totalTitle: {
+		textAlign: 'center',
+	},
 }));
+
+function totalFunc(cart) {
+	let tax = 0.07;
+	let total = 0;
+	let newTax = 0;
+	console.log(cart);
+	cart.forEach((product) => {
+		let newPrice = product.quantity * product.price;
+		console.log(newPrice);
+		total = newPrice + total;
+	});
+
+	total = (total / 100).toFixed(2);
+	newTax = (total * tax).toFixed(2);
+
+	console.log('total' + total);
+	//console.log('totalWithTax' + totalWithTax);
+
+	total = total + newTax;
+	return parseInt(total) + parseInt(newTax);
+}
 
 const Cart = () => {
 	const classes = useStyles();
@@ -41,7 +70,7 @@ const Cart = () => {
 			<h1>Your Shopping Cart</h1>
 
 			<Grid container spacing={2} component={Paper}>
-				{cart.filter((order) => order.type === 'rental') === 0 ? (
+				{/* {cart.filter((order) => order.type === 'rental') === 0 ? (
 					<></>
 				) : (
 					<>
@@ -49,20 +78,30 @@ const Cart = () => {
 						<Grid item xs={12} sm={6}>
 							<List
 								disablePadding
-								aria-labelledby="nested-list-subheader"
+								aria-labelledby="subheader"
 								subheader={
-									<ListSubheader component="div" id="nested-list-subheader">
-										Rental order
+									<ListSubheader
+										inset
+										component="div"
+										id="subheader"
+										className={classes.subHeader}
+									>
+										Rental
 									</ListSubheader>
 								}
 							>
 								{cart
 									.filter((order) => order.type === 'rental')
 									.map((product, i) => (
-										<ListItem className={classes.listItem} key={i}>
+										<ListItem divider className={classes.listItem} key={i}>
 											<ListItemText
 												primary={product.model}
-												secondary={product.total}
+												secondary={
+													'rental dates: ' +
+													product.start_date +
+													' - ' +
+													product.end_date
+												}
 											/>
 											<Typography variant="body2">{product.price}</Typography>
 										</ListItem>
@@ -77,22 +116,27 @@ const Cart = () => {
 						</Grid>
 						<Grid item sm={3}></Grid>
 					</>
-				)}
+				)} */}
 				<Grid item sm={3}></Grid>
 				<Grid item xs={12} sm={6}>
 					<List
 						disablePadding
-						aria-labelledby="nested-list-subheader"
+						aria-labelledby="subheader"
 						subheader={
-							<ListSubheader component="div" id="nested-list-subheader">
-								Nested List Items
+							<ListSubheader
+								inset
+								component="div"
+								id="subheader"
+								className={classes.subHeader}
+							>
+								Purchases
 							</ListSubheader>
 						}
 					>
 						{cart
 							.filter((order) => order.type === 'sale')
 							.map((product, i) => (
-								<ListItem className={classes.listItem} key={i}>
+								<ListItem divider className={classes.listItem} key={i}>
 									<ListItemText
 										primary={product.model}
 										secondary={product.total}
@@ -101,9 +145,15 @@ const Cart = () => {
 								</ListItem>
 							))}
 						<ListItem className={classes.listItem}>
-							<ListItemText primary="Total" />
+							<ListItemText primary="sub total" className={classes.totalTitle} />
 							<Typography variant="subtitle1" className={classes.total}>
-								$34.06
+								{totalFunc(cart)}
+							</Typography>
+						</ListItem>
+						<ListItem className={classes.listItem}>
+							<ListItemText primary="Total" className={classes.totalTitle} />
+							<Typography variant="subtitle1" className={classes.total}>
+								{totalFunc(cart)}
 							</Typography>
 						</ListItem>
 					</List>
