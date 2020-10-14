@@ -30,7 +30,7 @@ import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLog
 
 // components
 import HeaderNavigation from '../components/HeaderNavigation';
-import ShoppingCartButton from '../components/Buttons/ShoppingCartButton'
+import ShoppingCartButton from '../components/Buttons/ShoppingCartButton';
 const useStyles = makeStyles((theme) => ({
 	toolbar: {},
 	appBar: {
