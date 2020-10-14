@@ -4,7 +4,7 @@ export const CartContext = React.createContext();
 
 const CartProvider = (props) => {
 	const [user, setUser] = React.useState({});
-	const [products, setProducts] = React.useState([
+	const [cart, setCart] = React.useState([
 		{
 			type: 'rental',
 			model: 'AG1000',
@@ -13,8 +13,28 @@ const CartProvider = (props) => {
 			start_date: '2020-09-09',
 			end_date: '2020-09-15',
 		},
-		
-	
+		{
+			productId: 2,
+			model: 'model name',
+			price: 300000,
+			quantity: 3,
+			type: 'sale',
+		},
+		{
+			type: 'rental',
+			model: 'AG1000',
+			productId: 1,
+			total: 2000,
+			start_date: '2020-09-09',
+			end_date: '2020-09-15',
+		},
+		{
+			productId: 2,
+			model: 'model name',
+			price: 300000,
+			quantity: 3,
+			type: 'sale',
+		},
 	]);
 
 	const [open, setOpen] = React.useState(false);
@@ -37,22 +57,22 @@ const CartProvider = (props) => {
 	const updateShippingUserHandler = (data) =>
 		setUser({ ...user, shipping: data });
 
-	const updateProductsHandler = ({ data }) => setProducts([...products, data]);
+	const updateCartHandler = ({ data }) => setCart([...cart, data]);
 
 	//console.log('PRODUCTS: ' + JSON.stringify(products, null, 2));
 
 	return (
 		<CartContext.Provider
 			value={{
-				user: user,
+				user,
 				updateUser: updateUserHandler,
 				updateDelivery: updateDeliveryUserHandler,
 				updateShipping: updateShippingUserHandler,
-				updateProduct: updateProductsHandler,
-				products: products,
-				open: open,
-				handleClickOpen: handleClickOpen,
-				handleClose: handleClose,
+				updateCart: updateCartHandler,
+				cart,
+				open,
+				handleClickOpen,
+				handleClose,
 			}}
 		>
 			{props.children}

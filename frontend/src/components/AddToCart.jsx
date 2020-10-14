@@ -32,8 +32,9 @@ const useStyles = makeStyles((theme) => ({
 		// paddingRight: ' 50px',
 		color: theme.palette.grey.main,
 		backgroundColor: theme.palette.primary.light,
-		'&:hover': {
-			color: 'black',
+
+		'&:active, &:hover': {
+			backgroundColor: theme.palette.primary.dark,
 		},
 	},
 	count: {
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 		margin: 'auto 5px',
 		backgroundColor: theme.palette.primary.light,
 		color: theme.palette.gold.main,
+		cursor: 'pointer',
 	},
 	cartIcon: {
 		marginLeft: '5px',
@@ -58,7 +60,7 @@ const AddToCart = ({ product }) => {
 
 	const [count, setCount] = useState(1);
 
-	let { updateProduct } = useContext(CartContext);
+	let { updateCart } = useContext(CartContext);
 
 	const increment = () =>
 		setCount((prevState) =>
@@ -78,7 +80,7 @@ const AddToCart = ({ product }) => {
 			type: 'sale',
 		};
 		console.log(data);
-		updateProduct({ data });
+		updateCart({ data });
 		setCount(1);
 	};
 

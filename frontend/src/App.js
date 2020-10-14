@@ -3,8 +3,6 @@ import React from 'react';
 // react router
 import { Route, Switch } from 'react-router-dom';
 
-// CSS
-import './App.css';
 
 // auth 0
 import { useAuth0 } from '@auth0/auth0-react';
@@ -18,7 +16,6 @@ import Admin from './pages/Admin/Admin';
 import Home from './pages/Home/Home';
 import Rentals from './pages/Rentals/Rentals';
 import Sales from './pages/Sales/Sales';
-import NavDrawer from './components/NavDrawer';
 import NotFound from './pages/NotFound';
 import Spinner from './UI/Spinner';
 import Contact from './pages/Contact/Contact';
@@ -26,15 +23,14 @@ import Videos from './pages/Videos/Videos';
 import AdminRentals from './pages/Admin/Rentals/AdminRentals';
 import AdminSales from './pages/Admin/Sales/AdminSales';
 import AdminCustomers from './pages/Admin/Customers/AdminCustomers';
+import Layout from './layout/Layout';
 import Cart from './pages/Cart/Cart';
-import Footer from './components/Footer';
 
 // context API
 import RentalContextProvider from './context/rental-context';
 import CartProvider from './context/cart-context';
 import SalesContextProvider from './context/sales-context';
-import AdminContextProvider from './context/admin-context';
-import ModalProvider from './context/modal-context';
+import AdminContextProvider from './context/admin-context';	
 
 // protected route
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -52,10 +48,8 @@ function App() {
 				<CartProvider>
 					<SalesContextProvider>
 						<AdminContextProvider>
-							<ModalProvider>
-								<div className="App">
-									<NavDrawer />
-
+							
+								<Layout>
 									<Switch>
 										<Route exact path="/" component={Home} />
 
@@ -81,9 +75,8 @@ function App() {
 										<Route path="/cart" component={Cart} />
 										<Route component={NotFound} />
 									</Switch>
-									<Footer />
-								</div>
-							</ModalProvider>
+								</Layout>
+							
 						</AdminContextProvider>
 					</SalesContextProvider>
 				</CartProvider>
