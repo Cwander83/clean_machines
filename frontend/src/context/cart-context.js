@@ -6,32 +6,17 @@ const CartProvider = (props) => {
 	const [user, setUser] = React.useState({});
 	const [cart, setCart] = React.useState([
 		{
-			type: 'rental',
-			model: 'AG1000',
-			productId: 1,
-			total: 2000,
-			start_date: '2020-09-09',
-			end_date: '2020-09-15',
-		},
-		{
 			productId: 2,
 			model: 'model name',
-			price: 300000,
+			price: 2000,
 			quantity: 3,
 			type: 'sale',
 		},
-		{
-			type: 'rental',
-			model: 'AG1000',
-			productId: 1,
-			total: 2000,
-			start_date: '2020-09-09',
-			end_date: '2020-09-15',
-		},
+
 		{
 			productId: 2,
 			model: 'model name',
-			price: 300000,
+			price: 2000,
 			quantity: 3,
 			type: 'sale',
 		},
