@@ -28,11 +28,8 @@ const useStyles = makeStyles((theme) => ({
 	button: {
 		marginLeft: '20px',
 		padding: '0 50px',
-		// paddingLeft: ' 50px',
-		// paddingRight: ' 50px',
 		color: theme.palette.grey.main,
 		backgroundColor: theme.palette.primary.light,
-
 		'&:active, &:hover': {
 			backgroundColor: theme.palette.primary.dark,
 		},
@@ -60,7 +57,7 @@ const AddToCart = ({ product }) => {
 
 	const [count, setCount] = useState(1);
 
-	let { updateCart } = useContext(CartContext);
+	let { cart, setCart, updateCart } = useContext(CartContext);
 
 	const increment = () =>
 		setCount((prevState) =>
@@ -77,10 +74,21 @@ const AddToCart = ({ product }) => {
 			model: product.model,
 			price: product.sale_price,
 			quantity: count,
+			category: product.category,
+			units: product.units,
+			// TODO update shipping on sales items
+			//shipping: product.shipping,
 			type: 'sale',
 		};
-		console.log(data);
-		updateCart({ data });
+
+		//let cartItem = cart.filter((obj) => obj.id === data.productId);
+
+		
+		
+			console.log(data);
+			updateCart({ data });
+		
+
 		setCount(1);
 	};
 
