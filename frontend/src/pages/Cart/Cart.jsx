@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react';
+import React, { useContext, memo, useState, useEffect } from 'react';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +10,11 @@ import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 // components
 import Checkout from '../../components/Checkout/Checkout';
@@ -37,86 +42,132 @@ const useStyles = makeStyles((theme) => ({
 	totalTitle: {
 		textAlign: 'center',
 	},
+	listItemText: {
+		marginLeft: '15px',
+	},
+	deleteIcon: {},
+	modelName: {
+		fontSize: '18px',
+	},
+	secondary: {
+		fontWeight: 700,
+	},
+	removeIcon: {
+		marginRight: '25%',
+	},
 }));
 
 function totalFunc(cart) {
-	let tax = 0.07;
+	const tax = 0.07;
+	let shipping = 0;
 	let total = 0;
-	let newTax = 0;
-	console.log(cart);
+	let subTotal = 0;
+	let taxAmount = 0;
+
 	cart.forEach((product) => {
 		let newPrice = product.quantity * product.price;
-		console.log(newPrice);
-		total = newPrice + total;
+
+		let newShipping = product.quantity * product.shipping;
+
+		subTotal = newPrice + subTotal;
+
+		shipping = shipping + newShipping;
 	});
 
-	total = (total / 100).toFixed(2);
-	newTax = (total * tax).toFixed(2);
+	total = (subTotal / 100).toFixed(2);
 
-	console.log('total' + total);
-	//console.log('totalWithTax' + totalWithTax);
+	shipping = (shipping / 100).toFixed(2);
 
-	total = total + newTax;
-	return parseInt(total) + parseInt(newTax);
+
+	taxAmount = (total * tax).toFixed(2);
+
+
+	total = (
+		parseFloat(total) +
+		parseFloat(taxAmount) +
+		parseFloat(shipping)
+	).toFixed(2);
+
+
+	return {
+		shipping,
+		subTotal: (subTotal / 100).toFixed(2),
+		total,
+		taxAmount: parseFloat(taxAmount).toFixed(2),
+	};
 }
 
 const Cart = () => {
 	const classes = useStyles();
 
-	const { cart } = useContext(CartContext);
+	const { cart,
+		 //updateCart
+		 } = useContext(CartContext);
+	const [subTotal, setSubTotal] = useState(0);
+	const [total, setTotal] = useState(0);
+	const [totalTax, setTotalTax] = useState(0);
+	const [totalShipping, setShipping] = useState(0);
+
+	useEffect(() => {
+		async function calculateTax() {
+			const response = totalFunc(cart);
+
+			setSubTotal(response.subTotal);
+			setTotal(response.total);
+			setTotalTax(response.taxAmount);
+			setShipping(response.shipping);
+		}
+
+		calculateTax();
+	}, [cart]);
+	console.log(cart)
+	const quantityHandler = (e) => {
+		console.log(e);
+	};
 
 	return (
 		<Container maxWidth="lg" className={classes.root}>
 			<h1>Your Shopping Cart</h1>
 
 			<Grid container spacing={2} component={Paper}>
-				{/* {cart.filter((order) => order.type === 'rental') === 0 ? (
-					<></>
-				) : (
-					<>
-						<Grid item sm={3}></Grid>
-						<Grid item xs={12} sm={6}>
-							<List
-								disablePadding
-								aria-labelledby="subheader"
-								subheader={
-									<ListSubheader
-										inset
-										component="div"
-										id="subheader"
-										className={classes.subHeader}
-									>
-										Rental
-									</ListSubheader>
-								}
+				<Grid item sm={3}></Grid>
+				<Grid item xs={12} sm={6}>
+					<List
+						disablePadding
+						aria-labelledby="subheader"
+						subheader={
+							<ListSubheader
+								inset
+								component="div"
+								id="subheader"
+								className={classes.subHeader}
 							>
-								{cart
-									.filter((order) => order.type === 'rental')
-									.map((product, i) => (
-										<ListItem divider className={classes.listItem} key={i}>
-											<ListItemText
-												primary={product.model}
-												secondary={
-													'rental dates: ' +
-													product.start_date +
-													' - ' +
-													product.end_date
-												}
-											/>
-											<Typography variant="body2">{product.price}</Typography>
-										</ListItem>
-									))}
-								<ListItem className={classes.listItem}>
-									<ListItemText primary="Total" />
-									<Typography variant="subtitle1" className={classes.total}>
-										$34.06
+								Rental
+							</ListSubheader>
+						}
+					>
+						{cart
+							.filter((order) => order.type === 'rental')
+							.map((product, i) => (
+								<ListItem divider className={classes.listItem} key={i}>
+									<ListItemText
+										primary={product.model}
+										secondary={
+											'rental period: ' +
+											product.start_date +
+											' to ' +
+											product.end_date
+										}
+									/>
+									<Typography variant="body2">
+										{(product.price / 100).toFixed(2)}
 									</Typography>
 								</ListItem>
-							</List>
-						</Grid>
-						<Grid item sm={3}></Grid>
-					</>
-				)} */}
+							))}
+					</List>
+				</Grid>
+				<Grid item sm={3}></Grid>
+
 				<Grid item sm={3}></Grid>
 				<Grid item xs={12} sm={6}>
 					<List
@@ -137,23 +188,68 @@ const Cart = () => {
 							.filter((order) => order.type === 'sale')
 							.map((product, i) => (
 								<ListItem divider className={classes.listItem} key={i}>
+									<IconButton
+										size="small"
+										aria-label="delete"
+										className={classes.deleteIcon}
+									>
+										<DeleteOutlineOutlinedIcon />
+									</IconButton>
+
 									<ListItemText
+										className={classes.listItemText}
 										primary={product.model}
-										secondary={product.total}
+										classes={{
+											primary: classes.modelName,
+											secondary: classes.secondary,
+										}}
+										secondary={'category: ' + product.category}
 									/>
-									<Typography variant="body2">{product.price}</Typography>
+									<IconButton>
+										<AddIcon />
+									</IconButton>
+									<TextField
+									size="small"
+									margin="none"
+									value={product.quantity}
+									onChange={(event)=> quantityHandler(event.target.value)}
+									type="number" variant="outlined" />
+
+									<IconButton className={classes.removeIcon}>
+										<RemoveIcon />
+									</IconButton>
+
+									<Typography variant="body2">
+										{(product.price / 100).toFixed(2)}
+									</Typography>
 								</ListItem>
 							))}
+
 						<ListItem className={classes.listItem}>
-							<ListItemText primary="sub total" className={classes.totalTitle} />
+							<ListItemText
+								primary="Sub Total"
+								className={classes.totalTitle}
+							/>
 							<Typography variant="subtitle1" className={classes.total}>
-								{totalFunc(cart)}
+								$ {subTotal}
+							</Typography>
+						</ListItem>
+						<ListItem className={classes.listItem}>
+							<ListItemText primary="Shipping" className={classes.totalTitle} />
+							<Typography variant="subtitle1" className={classes.total}>
+								$ {totalShipping}
+							</Typography>
+						</ListItem>
+						<ListItem className={classes.listItem}>
+							<ListItemText primary="Tax" className={classes.totalTitle} />
+							<Typography variant="subtitle1" className={classes.total}>
+								$ {totalTax}
 							</Typography>
 						</ListItem>
 						<ListItem className={classes.listItem}>
 							<ListItemText primary="Total" className={classes.totalTitle} />
 							<Typography variant="subtitle1" className={classes.total}>
-								{totalFunc(cart)}
+								$ {total}
 							</Typography>
 						</ListItem>
 					</List>
