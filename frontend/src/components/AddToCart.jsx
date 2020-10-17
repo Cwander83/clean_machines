@@ -57,7 +57,7 @@ const AddToCart = ({ product }) => {
 
 	const [count, setCount] = useState(1);
 
-	let { cart, setCart, updateCart } = useContext(CartContext);
+	let { addToCart } = useContext(CartContext);
 
 	const increment = () =>
 		setCount((prevState) =>
@@ -67,7 +67,7 @@ const AddToCart = ({ product }) => {
 	const decrement = () =>
 		setCount((prevState) => (prevState === 1 ? prevState : prevState - 1));
 
-	const addToCart = () => {
+	const addToCartHandler = () => {
 		// sends data to cart context
 		let data = {
 			productId: product.id,
@@ -81,13 +81,7 @@ const AddToCart = ({ product }) => {
 			type: 'sale',
 		};
 
-		//let cartItem = cart.filter((obj) => obj.id === data.productId);
-
-		
-		
-			console.log(data);
-			updateCart({ data });
-		
+		addToCart({ data });
 
 		setCount(1);
 	};
@@ -104,7 +98,7 @@ const AddToCart = ({ product }) => {
 			<Button
 				variant="contained"
 				className={classes.button}
-				onClick={addToCart}
+				onClick={addToCartHandler}
 			>
 				Add to cart
 				<AddShoppingCartIcon className={classes.cartIcon} />

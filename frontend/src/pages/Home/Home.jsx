@@ -23,7 +23,7 @@ import RentalSearch from './RentalSearch';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: '100%',
-		minHeight: '100vh',
+		//backgroundColor: theme.palette.gold.main,
 	},
 	titleBox: {
 		backgroundColor: theme.palette.primary.light,
@@ -187,11 +187,11 @@ const Home = () => {
 	return (
 		<Container disableGutters maxWidth={false} className={classes.root}>
 			<Grid container justify="center" classes={{ root: classes.mainGrid }}>
-				<Paper className={classes.backDesign} elevation={2}></Paper>
-				{/* <Paper className={classes.backDesign2} elevation={2}></Paper> */}
-				{/* <Paper className={classes.backDesign3} elevation={2}></Paper> */}
-				{/* <Paper className={classes.backDesign4} elevation={2}></Paper>
-			<Paper className={classes.backDesign5} elevation={2}></Paper> */}
+				{/* <Paper className={classes.backDesign} elevation={2}></Paper>
+				<Paper className={classes.backDesign2} elevation={2}></Paper>
+				<Paper className={classes.backDesign3} elevation={2}></Paper>
+				<Paper className={classes.backDesign4} elevation={2}></Paper>
+				<Paper className={classes.backDesign5} elevation={2}></Paper> */}
 				<Grid
 					item
 					xs={12}
