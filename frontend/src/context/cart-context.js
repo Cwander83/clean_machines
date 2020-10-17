@@ -7,7 +7,7 @@ const CartProvider = (props) => {
 	const [cart, setCart] = React.useState([
 		{
 			productId: 2,
-			model: 'model name',
+			model: 'AG1000',
 			price: 2000,
 			quantity: 1,
 			units: 3,
@@ -17,7 +17,7 @@ const CartProvider = (props) => {
 		},
 		{
 			productId: 2,
-			model: 'model name',
+			model: 'BGU19T',
 			price: 2000,
 			quantity: 1,
 
@@ -30,7 +30,7 @@ const CartProvider = (props) => {
 
 		{
 			productId: 2,
-			model: 'model name',
+			model: 'Mop',
 			price: 2000,
 			quantity: 1,
 			type: 'sale',
@@ -50,8 +50,6 @@ const CartProvider = (props) => {
 		setOpen(false);
 	};
 
-	//console.log('USER: ' + JSON.stringify(user, null, 2));
-
 	const updateUserHandler = (data) => setUser(data);
 
 	const updateDeliveryUserHandler = (data) =>
@@ -60,17 +58,16 @@ const CartProvider = (props) => {
 	const updateShippingUserHandler = (data) =>
 		setUser({ ...user, shipping: data });
 
-	const updateCartHandler = ({ data }) => {
-		console.log(data);
-
-		if (cart === []) setCart([...cart, data]);
-		if (cart.length !== 0) {
-			cart.findIndex((obj) => obj.productId === data.productId);
-			setCart({ ...cart, [cart.quantity]: data.quantity });
-		}
+	const addToCartHandler = ({ data }) => {
+		setCart([...cart, data]);
+	};
+	const removeFromCartHandler = (item) => {
+		const newCart = cart.filter((obj) => obj !== item);
+		setCart(newCart);
 	};
 
-	console.log('cart' + JSON.stringify(cart, null, 2));
+	//console.log('cart' + JSON.stringify(cart, null, 2));
+
 	return (
 		<CartContext.Provider
 			value={{
@@ -79,7 +76,8 @@ const CartProvider = (props) => {
 				updateUser: updateUserHandler,
 				updateDelivery: updateDeliveryUserHandler,
 				updateShipping: updateShippingUserHandler,
-				updateCart: updateCartHandler,
+				addToCart: addToCartHandler,
+				removeFromCart: removeFromCartHandler,
 				cart,
 				open,
 				handleClickOpen,

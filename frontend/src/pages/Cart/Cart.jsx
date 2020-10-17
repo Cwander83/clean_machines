@@ -10,20 +10,21 @@ import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 
 // components
 import Checkout from '../../components/Checkout/Checkout';
+import RentalsList from './RentalsList';
+import PurchasesList from './PurchasesList';
+
+// utils
+import { totalFunc } from '../../utils/cart';
 
 // context api
 import { CartContext } from '../../context/cart-context';
+import DialogRemove from '../../components/Dialogs/DialogRemove';
 
 const useStyles = makeStyles((theme) => ({
-	root: {},
+	root: {minHeight: 'calc(100vh-108px)'},
 	listItem: {
 		padding: theme.spacing(1, 0),
 	},
@@ -55,58 +56,23 @@ const useStyles = makeStyles((theme) => ({
 	removeIcon: {
 		marginRight: '25%',
 	},
+	textField: {
+		width: '60px',
+		marginRight: '25%',
+	},
 }));
-
-function totalFunc(cart) {
-	const tax = 0.07;
-	let shipping = 0;
-	let total = 0;
-	let subTotal = 0;
-	let taxAmount = 0;
-
-	cart.forEach((product) => {
-		let newPrice = product.quantity * product.price;
-
-		let newShipping = product.quantity * product.shipping;
-
-		subTotal = newPrice + subTotal;
-
-		shipping = shipping + newShipping;
-	});
-
-	total = (subTotal / 100).toFixed(2);
-
-	shipping = (shipping / 100).toFixed(2);
-
-
-	taxAmount = (total * tax).toFixed(2);
-
-
-	total = (
-		parseFloat(total) +
-		parseFloat(taxAmount) +
-		parseFloat(shipping)
-	).toFixed(2);
-
-
-	return {
-		shipping,
-		subTotal: (subTotal / 100).toFixed(2),
-		total,
-		taxAmount: parseFloat(taxAmount).toFixed(2),
-	};
-}
 
 const Cart = () => {
 	const classes = useStyles();
 
-	const { cart,
-		 //updateCart
-		 } = useContext(CartContext);
+	const { cart } = useContext(CartContext);
+
 	const [subTotal, setSubTotal] = useState(0);
 	const [total, setTotal] = useState(0);
 	const [totalTax, setTotalTax] = useState(0);
 	const [totalShipping, setShipping] = useState(0);
+	const [open, setOpen] = useState(false);
+	const [item, setProduct] = useState(null);
 
 	useEffect(() => {
 		async function calculateTax() {
@@ -120,9 +86,14 @@ const Cart = () => {
 
 		calculateTax();
 	}, [cart]);
-	console.log(cart)
-	const quantityHandler = (e) => {
-		console.log(e);
+
+	const handleClickOpen = () => {
+		// remove dialog
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
 	};
 
 	return (
@@ -130,43 +101,12 @@ const Cart = () => {
 			<h1>Your Shopping Cart</h1>
 
 			<Grid container spacing={2} component={Paper}>
-				<Grid item sm={3}></Grid>
-				<Grid item xs={12} sm={6}>
-					<List
-						disablePadding
-						aria-labelledby="subheader"
-						subheader={
-							<ListSubheader
-								inset
-								component="div"
-								id="subheader"
-								className={classes.subHeader}
-							>
-								Rental
-							</ListSubheader>
-						}
-					>
-						{cart
-							.filter((order) => order.type === 'rental')
-							.map((product, i) => (
-								<ListItem divider className={classes.listItem} key={i}>
-									<ListItemText
-										primary={product.model}
-										secondary={
-											'rental period: ' +
-											product.start_date +
-											' to ' +
-											product.end_date
-										}
-									/>
-									<Typography variant="body2">
-										{(product.price / 100).toFixed(2)}
-									</Typography>
-								</ListItem>
-							))}
-					</List>
-				</Grid>
-				<Grid item sm={3}></Grid>
+				<RentalsList
+					cart={cart}
+					classes={classes}
+					setProduct={setProduct}
+					handleClickOpen={handleClickOpen}
+				/>
 
 				<Grid item sm={3}></Grid>
 				<Grid item xs={12} sm={6}>
@@ -184,47 +124,12 @@ const Cart = () => {
 							</ListSubheader>
 						}
 					>
-						{cart
-							.filter((order) => order.type === 'sale')
-							.map((product, i) => (
-								<ListItem divider className={classes.listItem} key={i}>
-									<IconButton
-										size="small"
-										aria-label="delete"
-										className={classes.deleteIcon}
-									>
-										<DeleteOutlineOutlinedIcon />
-									</IconButton>
-
-									<ListItemText
-										className={classes.listItemText}
-										primary={product.model}
-										classes={{
-											primary: classes.modelName,
-											secondary: classes.secondary,
-										}}
-										secondary={'category: ' + product.category}
-									/>
-									<IconButton>
-										<AddIcon />
-									</IconButton>
-									<TextField
-									size="small"
-									margin="none"
-									value={product.quantity}
-									onChange={(event)=> quantityHandler(event.target.value)}
-									type="number" variant="outlined" />
-
-									<IconButton className={classes.removeIcon}>
-										<RemoveIcon />
-									</IconButton>
-
-									<Typography variant="body2">
-										{(product.price / 100).toFixed(2)}
-									</Typography>
-								</ListItem>
-							))}
-
+						<PurchasesList
+							cart={cart}
+							classes={classes}
+							setProduct={setProduct}
+							handleClickOpen={handleClickOpen}
+						/>
 						<ListItem className={classes.listItem}>
 							<ListItemText
 								primary="Sub Total"
@@ -259,6 +164,10 @@ const Cart = () => {
 					<Checkout />
 				</Grid>
 			</Grid>
+
+			{item !== null && (
+				<DialogRemove open={open} handleClose={handleClose} item={item} />
+			)}
 		</Container>
 	);
 };

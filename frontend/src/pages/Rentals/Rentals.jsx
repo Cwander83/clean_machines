@@ -1,98 +1,77 @@
-import React from 'react';
+import React, { memo } from 'react';
 
+// react router
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-import SingleRental from '../../components/SingleRental';
-import { RentalContext } from '../../context/rental-context';
-import RentalStepper from './RentalStepper';
+// components
+// import SaleProduct from './SaleProduct';
+// import SideNav from './SideNav';
+import RentalsGrid from './RentalsGrid';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		flexGrow: 1,
-	},
-	paper: {
-		padding: theme.spacing(2),
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
+		height: '100%',
+		minHeight: 'calc(100vh - 30px)',
 	},
 	title: {
-		// padding: theme.spacing(1),
+		fontFamily: 'Roboto Black',
+		width: '100%',
+		height: '200px',
+		backgroundColor: theme.palette.primary.light,
+		color: theme.palette.gold.main,
+		fontSize: '60px',
+		padding: 'auto',
+		display: 'flex',
+		justifyContent: 'center',
+		flexDirection: 'column',
 	},
-	gallery: {},
-	// productsContainer: {
-	// 	border: '1px green solid'
-	// },
+	productGrid: {
+		marginTop: '15px',
+		marginBottom: '15px',
+	},
 }));
 
 const Rentals = () => {
 	const classes = useStyles();
-	let { path } = useRouteMatch();
-	const { availableProducts } = React.useContext(RentalContext);
 
-	React.useEffect(() => {
-		return () => {};
-	}, [availableProducts]);
+	let { path } = useRouteMatch();
+
+	console.log('Rentals home page');
 
 	return (
-		<Container maxWidth="lg">
-			<Grid container spacing={2}>
-				<Grid item xs={12}></Grid>
-				<Grid item xs={12}></Grid>
+		<Container maxWidth="xl" className={classes.root}>
+			<Grid container>
 				<Grid item xs={12}>
-					<Grid container justify="center">
-						<Grid item xs={6}>
-							<Typography variant="h4" component="h4" className={classes.title}>
-								Rentals
-							</Typography>
-						</Grid>
-					</Grid>
+					<Typography variant="h3" className={classes.title}>
+						Rentals
+					</Typography>
 				</Grid>
-				<Grid item sm></Grid>
-				<Grid item xs={12} sm={8}>
-					<RentalStepper />
-				</Grid>
-				<Grid item sm></Grid>
+				{/* <Grid item xs sm={2}>
+					<SideNav />
+				</Grid> */}
 
 				<Switch>
-					{/* where the products to rent will show up */}
 					<Route exact path={path}>
-						<Grid
-							container
-							spacing={2}
-							justify="center"
-							alignContent="center"
-							className={classes.gallery}
-							component={Paper}
-						>
-							{availableProducts.length !== 0 ? (
-								availableProducts.map((obj, i) => {
-									return (
-										<React.Fragment key={obj.id}>
-											<Grid item xs={12} className={classes.productsContainer}>
-												<SingleRental product={obj} />
-											</Grid>
-										</React.Fragment>
-									);
-								})
-							) : (
-								<Typography variant="h5">coming soon</Typography>
-							)}
+						<Grid item xs={12} sm className={classes.productGrid}>
+							<RentalsGrid />
 						</Grid>
 					</Route>
-					{/* <Route
-						path={`${path}/:id`}
-						render={(routeProps) => <SingleRental {...routeProps} />}
-					/> */}
+					{/* <Route path={`${path}/:id`}>
+						<Grid item sm={1}></Grid>
+						<Grid item xs={12} sm={9}>
+							<SaleProduct />
+						</Grid>
+					</Route> */}
 				</Switch>
 			</Grid>
 		</Container>
 	);
 };
 
-export default Rentals;
+export default memo(Rentals);
