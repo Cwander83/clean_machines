@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 
 // react router
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
@@ -8,11 +8,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+
+// context
+import { RentalContext } from '../../context/rental-context';
 
 // components
 // import SaleProduct from './SaleProduct';
 // import SideNav from './SideNav';
 import RentalsGrid from './RentalsGrid';
+import LocationChecker from '../../components/LocationChecker';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -42,6 +52,8 @@ const Rentals = () => {
 
 	let { path } = useRouteMatch();
 
+	let { open, handleClose } = useContext(RentalContext);
+
 	console.log('Rentals home page');
 
 	return (
@@ -70,6 +82,29 @@ const Rentals = () => {
 					</Route> */}
 				</Switch>
 			</Grid>
+			<Dialog
+				maxWidth="md"
+				open={open}
+				onClose={handleClose}
+				aria-labelledby="alert-dialog-title"
+				aria-describedby="alert-dialog-description"
+			>
+				<DialogTitle id="alert-dialog-title">
+					{'Are you in the Central Florida Area?'}
+				</DialogTitle>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-description">
+						We only rent in the central florida area. Check here if we service
+						your area.
+					</DialogContentText>
+					<LocationChecker />
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleClose} color="primary" autoFocus>
+						I understand
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</Container>
 	);
 };

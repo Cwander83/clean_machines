@@ -1,40 +1,43 @@
 import React from 'react';
 
+//import { Link } from 'react-router-dom';
+
+// material ui
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-//import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+
+// images
 import GoogleImage from '../images/google-maps-central-fl.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
 	},
-	paper: {
-		padding: theme.spacing(2),
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
+
+	image: {
+		width: '100%',
 	},
-	title: {
-		// padding: theme.spacing(1),
+	button: {
+		// margin: '0 auto',
+		// height: '40px',
+		width: '100%',
+		margin: '10px 0 0 0',
+		backgroundColor: theme.palette.primary.light,
+		color: 'white',
 	},
-	searchField: {
-		display: 'flex',
-		
-		alignContent: 'center',
-		justifyContent: 'center',
+	disabled: {
+		backgroundColor: 'white',
+		color: 'black',
+		borderColor: theme.palette.primary.light,
 	},
-	gallery: {},
-	img: {
-		width: '200px',
-	},
-	searchButton: {
-		margin: '0 auto',
-		height: '40px',
-		width: '200px'
+	textField: {
+		marginTop: '10px',
+		width: '100%',
+		// marginLeft: 'auto',
+		// marginRight: 'auto',
 	},
 }));
 
@@ -97,42 +100,59 @@ const LocationChecker = () => {
 
 	console.log(distance);
 	return (
-		<Grid container spacing={2} className={classes.body} component={Paper}>
-			{/* <Grid item xs={12} className={classes.title}>
-				<Typography variant="h6">
-					STEP 1. Check if you're service area
-				</Typography>
-			</Grid> */}
-			<Grid item sm>
-				<img src={GoogleImage} alt="map" className={classes.img} />
+		<Grid container spacing={2} direction="row">
+			<Grid item xs={12} sm={6}>
+				<img src={GoogleImage} alt="map" className={classes.image} />
 			</Grid>
-			<Grid item xs={12} sm={6} className={classes.searchField}>
-				<TextField
-					name="line"
-					variant="standard"
-					label="Zipcode"
-					onChange={(e) =>
-						setLocation({ ...location, zipcode: e.target.value })
-					}
-				/>
-				<Button
-					className={classes.searchButton}
-					variant="outlined"
-					disabled={location.line === '' && location.zipcode === null}
-					onClick={getCoords}
-				>
-					Check address
-				</Button>	<Typography variant="h6">
-					{!error
-						? distance
-							? distance <= 60
-								? 'Yes we service your area'
-								: "Sorry, we don't service your area"
-							: null
-						: 'Sorry didnt get that'}
-				</Typography>
+
+			<Grid item xs={12} sm={6}>
+				<Grid container spacing={2} direction="row">
+					<Grid item xs={1}></Grid>
+					<Grid item xs={10}>
+						<TextField
+							className={classes.textField}
+							name="line"
+							variant="standard"
+							placeholder="32804"
+							label="Zipcode"
+							autoFocus={true}
+							onChange={(e) =>
+								setLocation({ ...location, zipcode: e.target.value })
+							}
+						/>
+					</Grid>
+					<Grid item xs={1}></Grid>
+					<Grid item xs={1}></Grid>
+					<Grid item xs={10}>
+						<Button
+							className={classes.button}
+							classes={{
+								disabled: classes.disabled,
+							}}
+							variant="contained"
+							disabled={location.line === '' && location.zipcode === null}
+							onClick={getCoords}
+						>
+							Check address
+						</Button>
+					</Grid>
+					<Grid item xs={1}></Grid>
+					<Grid item xs={1}></Grid>
+					<Grid item xs={10}>
+						<Typography variant="h6">
+							{!error
+								? distance
+									? distance <= 60
+										? 'Congratulations, we service your area'
+										: "Sorry, we don't service your area."
+									: null
+								: 'Sorry, Please enter valid 5-Digit Zipcode.'}
+						</Typography>
+					</Grid>
+					<Grid item xs={1}></Grid>
+				</Grid>
 			</Grid>
-			
+
 			{/* <p>lng: {coords.work.lng}</p>
 			<p>lat: {coords.work.lat}</p>
 			<p>client Lng: {coords.client.lng}</p>
