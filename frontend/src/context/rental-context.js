@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 
 // store default value
-export const RentalContext = React.createContext({
-
-});
+export const RentalContext = React.createContext({});
 
 // Provider
 const RentalContextProvider = (props) => {
-	const [rentalDates, setRentalDates] = React.useState({
+	const [rentalDates, setRentalDates] = useState({
 		days: 1,
 		startDate: null,
 		endDate: null,
 	});
-	const [availableProducts, setAvailableProducts] = React.useState([
+	const [availableProducts, setAvailableProducts] = useState([
 		{
 			id: 1,
 			name: 'thunder bucket',
@@ -82,9 +80,18 @@ const RentalContextProvider = (props) => {
 		setRentalDates({ ...rentalDates, endDate: endDate, days: days });
 	};
 
+	// location dialog in rentals page
+	const [open, setOpen] = useState(false);
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	return (
 		<RentalContext.Provider
 			value={{
+				open,
+				handleClose,
 				startDateHandler,
 				endDateHandler,
 				rentalDates,

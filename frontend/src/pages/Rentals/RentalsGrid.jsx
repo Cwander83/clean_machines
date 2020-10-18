@@ -6,6 +6,9 @@ import {
 	Link,
 } from 'react-router-dom';
 
+// classnames
+import ClassNames from 'classnames';
+
 // axios
 import axios from 'axios';
 
@@ -19,7 +22,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Divider from '@material-ui/core/Divider';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-import SearchIcon from '@material-ui/icons/Search';
+//import SearchIcon from '@material-ui/icons/Search';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 
 // context
@@ -49,8 +52,9 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.gold.main,
 		//fontStyle: 'italic',
 	},
-	price: {
-		fontStyle: 'italic',
+	prices: {
+		textTransform: 'Capitalize',
+		fontWeight: 500,
 	},
 	divider: {
 		backgroundColor: theme.palette.gold.main,
@@ -60,6 +64,21 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '22px',
 		fontWeight: 600,
 		textTransform: 'Capitalize',
+	},
+	priceTitle: {
+		textAlign: 'left',
+		marginLeft: '25%',
+	},
+	priceBody: {
+		textAlign: 'right',
+		marginRight: '35%',
+
+		fontStyle: 'italic',
+	},
+	icon: {
+		marginRight: '5px',
+		fontSize: '18px',
+		verticalAlign: 'middle',
 	},
 }));
 
@@ -71,7 +90,14 @@ function productFunc(array, classes) {
 
 	const result = array.map((product) => {
 		return (
-			<Grid item xs={12} sm={6} className={classes.root} key={product.id}>
+			<Grid
+				item
+				xs={12}
+				sm={6}
+				md={4}
+				className={classes.root}
+				key={product.id}
+			>
 				<Card
 					classes={{
 						root: classes.card,
@@ -80,57 +106,81 @@ function productFunc(array, classes) {
 				>
 					<CardActionArea component={Link} to={`/sales/${product.id}`}>
 						<CardMedia image={picture} className={classes.media} />
-						<Divider />
 					</CardActionArea>
 					<CardContent className={classes.content}>
 						<Typography gutterBottom variant="h5">
 							{product.name ? product.name : product.model}
 						</Typography>
 
-						<Typography variant="body1" className={classes.description}>
+						<Typography
+							gutterBottom
+							variant="body1"
+							className={classes.description}
+						>
 							{product.short_description}
 						</Typography>
 						<Divider />
-						<Grid container spacing={2} justify="space-between">
-							<Grid item>
-								<Typography align="left" display="inline" variant="body1">
-									<LocalOfferOutlinedIcon /> one day
+						<Grid container spacing={2} direction="row" alignItems="baseline">
+							<Grid item xs={6}>
+								<Typography
+									className={ClassNames(classes.priceTitle, classes.prices)}
+									variant="body1"
+								>
+									<LocalOfferOutlinedIcon className={classes.icon} />
+									one day
 								</Typography>
 							</Grid>
-							<Grid item>
-								<Typography align="right" display="inline" variant="body1">
-									{product.rental_day}
-								</Typography>
-							</Grid>
-						</Grid>
-						<Divider />
-						<Grid container spacing={2} justify="space-between">
-							<Grid item>
-								<Typography align="left" display="inline" variant="body1">
-									<LocalOfferOutlinedIcon />
-									two
-								</Typography>
-							</Grid>
-							<Grid item>
-								<Typography align="right" display="inline" variant="body1">
-									{product.rental_two_day}
+							<Grid item xs={6}>
+								<Typography
+									className={ClassNames(classes.prices, classes.priceBody)}
+									variant="body1"
+								>
+									$ {product.rental_day}
 								</Typography>
 							</Grid>
 						</Grid>
-						<Divider />
-						<Grid container spacing={2} justify="space-between">
-							<Grid item>
-								<Typography align="left" display="inline" variant="body1">
-									<LocalOfferOutlinedIcon />
+
+						<Grid container spacing={2} direction="row" alignItems="baseline">
+							<Grid item xs={6}>
+								<Typography
+									className={ClassNames(classes.priceTitle, classes.prices)}
+									variant="body1"
+								>
+									<LocalOfferOutlinedIcon className={classes.icon} />
+									two day
+								</Typography>
+							</Grid>
+							<Grid item xs={6}>
+								<Typography
+									className={ClassNames(classes.prices, classes.priceBody)}
+									variant="body1"
+								>
+									$ {product.rental_two_day}
+								</Typography>
+							</Grid>
+						</Grid>
+
+						<Grid container spacing={2} direction="row" alignItems="baseline">
+							<Grid item xs={6}>
+								<Typography
+									className={ClassNames(classes.priceTitle, classes.prices)}
+									variant="body1"
+								>
+									<LocalOfferOutlinedIcon className={classes.icon} />
 									week
 								</Typography>
 							</Grid>
-							<Grid item>
-								<Typography align="right" display="inline" variant="body1">
-									{product.rental_week}
+							<Grid item xs={6}>
+								<Typography
+									className={ClassNames(classes.prices, classes.priceBody)}
+									variant="body1"
+								>
+									$ {product.rental_week}
 								</Typography>
 							</Grid>
 						</Grid>
+						
+
 						<Typography variant="h6">Rent {product.model} now!</Typography>
 					</CardContent>
 				</Card>
@@ -150,7 +200,7 @@ const RentalsGrid = () => {
 		startDateHandler,
 		endDateHandler,
 		//	getAvailableRentals,
-	} = React.useContext(RentalContext);
+	} = useContext(RentalContext);
 
 	useEffect(() => {
 		const fetchData = async () => {
