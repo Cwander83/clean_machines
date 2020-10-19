@@ -19,10 +19,9 @@ import Button from '@material-ui/core/Button';
 import { RentalContext } from '../../context/rental-context';
 
 // components
-// import SaleProduct from './SaleProduct';
-// import SideNav from './SideNav';
 import RentalsGrid from './RentalsGrid';
 import LocationChecker from '../../components/LocationChecker';
+import RentalProduct from './RentalProduct';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -74,12 +73,12 @@ const Rentals = () => {
 							<RentalsGrid />
 						</Grid>
 					</Route>
-					{/* <Route path={`${path}/:id`}>
+					<Route path={`${path}/:id`}>
 						<Grid item sm={1}></Grid>
 						<Grid item xs={12} sm={9}>
-							<SaleProduct />
+							<RentalProduct />
 						</Grid>
-					</Route> */}
+					</Route>
 				</Switch>
 			</Grid>
 			<Dialog

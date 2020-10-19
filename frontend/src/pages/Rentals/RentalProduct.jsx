@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, memo } from 'react';
+import React, { useState,  useEffect, memo } from 'react';
 
 // classnames
 import ClassNames from 'classnames';
@@ -19,7 +19,7 @@ import Divider from '@material-ui/core/Divider';
 import ProductCarousel from '../../components/Carousels/ProductCarousel';
 import Features from '../../components/Features';
 import Specs from '../../components/Specs';
-import AddToCart from '../../components/AddToCart';
+import RentalButton from '../../components/Buttons/RentalButton';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -59,75 +59,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function productFunc(obj, classes) {
-	if (!obj) return {};
+// function productFunc(obj, classes) {
+// 	if (!obj) return {};
 
-	let product = obj;
+// 	let product = obj;
 
-	return (
-		<Grid container justify="center">
-			<Grid item xs={12}>
-				<Typography
-					align="center"
-					className={ClassNames(classes.model)}
-					variant="h4"
-				>
-					{product.name ? product.name : product.model}
-				</Typography>
+// 	return (
 
-				<Typography
-					align="center"
-					gutterBottom={true}
-					className={ClassNames(classes.price)}
-					variant="h5"
-				>
-					$ {(product.sale_price / 100).toFixed(2)}
-				</Typography>
-			</Grid>
-			<Divider className={classes.divider} />
+// 	);
+// }
 
-			<Grid item xs={12}>
-				<Typography
-					align="left"
-					display="inline"
-					className={ClassNames(classes.title)}
-					variant="h6"
-				>
-					Availability
-				</Typography>
-
-				<Typography
-					gutterBottom
-					display="inline"
-					className={ClassNames(classes.body1)}
-					variant="subtitle1"
-				>
-					{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
-				</Typography>
-
-				<Typography
-					align="left"
-					display="inline"
-					className={ClassNames(classes.title)}
-					variant="h6"
-				>
-					Category
-				</Typography>
-
-				<Typography
-					gutterBottom
-					display="inline"
-					className={ClassNames(classes.body1, classes.uppercase)}
-					variant="body1"
-				>
-					{` : ${product.category}`}
-				</Typography>
-			</Grid>
-		</Grid>
-	);
-}
-
-const SaleProduct = () => {
+const RentalProduct = () => {
 	const classes = useStyles();
 
 	let { id } = useParams();
@@ -142,11 +84,12 @@ const SaleProduct = () => {
 		fetchData();
 	}, [id]);
 
-	const productSection = useMemo(() => productFunc(product, classes), [
-		product,
-		classes,
-	]);
+	// const productSection = useMemo(() => productFunc(product, classes), [
+	// 	product,
+	// 	classes,
+	// ]);
 
+	console.log('rental product page **');
 	return (
 		<div className={classes.root}>
 			<Grid alignContent="flex-start" container>
@@ -161,10 +104,68 @@ const SaleProduct = () => {
 						<ProductCarousel />
 					</Grid>
 					<Grid item xs={1}></Grid>
-					{productSection}
+					<Grid container justify="center">
+						<Grid item xs={12}>
+							<Typography
+								align="center"
+								className={ClassNames(classes.model)}
+								variant="h4"
+							>
+								{product.name ? product.name : product.model}
+							</Typography>
+
+							<Typography
+								align="center"
+								gutterBottom={true}
+								className={ClassNames(classes.price)}
+								variant="h5"
+							>
+								$ {(product.sale_price / 100).toFixed(2)}
+							</Typography>
+						</Grid>
+						<Divider className={classes.divider} />
+
+						<Grid item xs={12}>
+							<Typography
+								align="left"
+								display="inline"
+								className={ClassNames(classes.title)}
+								variant="h6"
+							>
+								Availability
+							</Typography>
+
+							<Typography
+								gutterBottom
+								display="inline"
+								className={ClassNames(classes.body1)}
+								variant="subtitle1"
+							>
+								{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
+							</Typography>
+
+							<Typography
+								align="left"
+								display="inline"
+								className={ClassNames(classes.title)}
+								variant="h6"
+							>
+								Category
+							</Typography>
+
+							<Typography
+								gutterBottom
+								display="inline"
+								className={ClassNames(classes.body1, classes.uppercase)}
+								variant="body1"
+							>
+								{` : ${product.category}`}
+							</Typography>
+						</Grid>
+					</Grid>
 					<Grid item sm={2}></Grid>
 					<Grid item xs={12} sm={8}>
-						<AddToCart product={product} />
+						<RentalButton product={product} />
 					</Grid>
 					<Grid item sm={2}></Grid>
 				</Grid>
@@ -185,4 +186,4 @@ const SaleProduct = () => {
 	);
 };
 
-export default memo(SaleProduct);
+export default memo(RentalProduct);

@@ -24,14 +24,10 @@ const StyledBadge = withStyles((theme) => ({
 export default function CustomizedBadges() {
 	let { cart } = useContext(CartContext);
 	return (
-		<>
-			{cart.length > 0 ? (
-				<IconButton aria-label="cart" component={Link} to="/cart">
-					<StyledBadge badgeContent={cart.length} color="secondary">
-						<ShoppingCartIcon />
-					</StyledBadge>
-				</IconButton>
-			) : null}
-		</>
+		<IconButton aria-label="cart" component={Link} to="/cart">
+			<StyledBadge badgeContent={cart.length} color="secondary">
+				<ShoppingCartIcon />
+			</StyledBadge>
+		</IconButton>
 	);
 }

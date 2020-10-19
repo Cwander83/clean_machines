@@ -1,4 +1,4 @@
-import React, { useState, memo, useMemo, useEffect } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 
 // classnames
 import ClassNames from 'classnames';
@@ -24,39 +24,16 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 
 // components
 
-function featuresFunc(features, classes) {
-	if (!features) return {};
+// function featuresFunc(features, classes) {
+// 	if (!features) return {};
 
-	console.log('featuresFunction **');
+// 	console.log('featuresFunction **');
 
-	let feature = features;
+// 	let feature = features;
 
-	let section = Object.keys(feature).map((el) => (
-		<React.Fragment key={el}>
-			<Grid item xs={1}></Grid>
-			<Grid item xs={11} className={classes.spec}>
-				<Typography
-					align="left"
-					display="inline"
-					className={ClassNames(classes.itemTitle)}
-					variant="body1"
-				>
-					&bull;
-				</Typography>
-
-				<Typography
-					gutterBottom
-					display="inline"
-					className={ClassNames(classes.item)}
-					variant="body1"
-				>
-					{feature[el]}
-				</Typography>
-			</Grid>
-		</React.Fragment>
-	));
-	return section;
-}
+// 	let section =
+// 	return section;
+// }
 
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -105,10 +82,6 @@ const Features = ({ product }) => {
 
 	console.log('features page ***********');
 
-	const featuresSection = useMemo(() => featuresFunc(features, classes), [
-		features,
-		classes,
-	]);
 	return (
 		<Grid container justify="flex-start" style={{ marginBottom: '30px' }}>
 			<Grid item xs={12}>
@@ -127,7 +100,31 @@ const Features = ({ product }) => {
 					alignContent="flex-start"
 					style={{ paddingTop: '10px' }}
 				>
-					{featuresSection}
+					{features &&
+						Object.keys(features).map((el) => (
+							<React.Fragment key={el}>
+								<Grid item xs={1}></Grid>
+								<Grid item xs={11} className={classes.spec}>
+									<Typography
+										align="left"
+										display="inline"
+										className={ClassNames(classes.itemTitle)}
+										variant="body1"
+									>
+										&bull;
+									</Typography>
+
+									<Typography
+										gutterBottom
+										display="inline"
+										className={ClassNames(classes.item)}
+										variant="body1"
+									>
+										{features[el]}
+									</Typography>
+								</Grid>
+							</React.Fragment>
+						))}
 				</Grid>
 			</Collapse>
 		</Grid>

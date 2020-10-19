@@ -16,7 +16,7 @@ import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2
 
 // components
 import SalesBox from './SalesBox';
-import RentalSearch from './RentalSearch';
+import RentalSearch from '../../components/RentalSearch';
 
 // outside styles
 
