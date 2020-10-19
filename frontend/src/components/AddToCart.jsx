@@ -7,7 +7,8 @@ import React, { useState, useContext, memo } from 'react';
 import ClassNames from 'classnames';
 
 // material ui
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddIcon from '@material-ui/icons/Add';

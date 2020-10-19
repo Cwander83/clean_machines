@@ -1,4 +1,4 @@
-import React, { useMemo, memo, useEffect, useState, useContext } from 'react';
+import React, { useMemo, memo, useEffect, useState } from 'react';
 
 // react router
 import {
@@ -21,12 +21,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Divider from '@material-ui/core/Divider';
-import { KeyboardDatePicker } from '@material-ui/pickers';
-//import SearchIcon from '@material-ui/icons/Search';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 
 // context
-import { RentalContext } from '../../context/rental-context';
+//import { RentalContext } from '../../context/rental-context';
 
 // images
 import picture from '../../images/BGFS5000.jpg';
@@ -80,6 +78,15 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '18px',
 		verticalAlign: 'middle',
 	},
+	rentNowButton: {
+		marginTop: '15px',
+		fontStyle: 'italic',
+		textDecoration: 'underline',
+		textDecorationColor: theme.palette.gold.main,
+	},
+	firstOfType: {
+		marginTop: '10px',
+	},
 }));
 
 function productFunc(array, classes) {
@@ -102,9 +109,9 @@ function productFunc(array, classes) {
 					classes={{
 						root: classes.card,
 					}}
-					elevation={3}
+					elevation={4}
 				>
-					<CardActionArea component={Link} to={`/sales/${product.id}`}>
+					<CardActionArea component={Link} to={`/rentals/${product.id}`}>
 						<CardMedia image={picture} className={classes.media} />
 					</CardActionArea>
 					<CardContent className={classes.content}>
@@ -123,7 +130,11 @@ function productFunc(array, classes) {
 						<Grid container spacing={2} direction="row" alignItems="baseline">
 							<Grid item xs={6}>
 								<Typography
-									className={ClassNames(classes.priceTitle, classes.prices)}
+									className={ClassNames(
+										classes.priceTitle,
+										classes.prices,
+										classes.firstOfType
+									)}
 									variant="body1"
 								>
 									<LocalOfferOutlinedIcon className={classes.icon} />
@@ -135,7 +146,7 @@ function productFunc(array, classes) {
 									className={ClassNames(classes.prices, classes.priceBody)}
 									variant="body1"
 								>
-									$ {product.rental_day}
+									$ {(product.rental_day / 100).toFixed(2)}
 								</Typography>
 							</Grid>
 						</Grid>
@@ -155,7 +166,7 @@ function productFunc(array, classes) {
 									className={ClassNames(classes.prices, classes.priceBody)}
 									variant="body1"
 								>
-									$ {product.rental_two_day}
+									$ {(product.rental_two_day / 100).toFixed(2)}
 								</Typography>
 							</Grid>
 						</Grid>
@@ -175,13 +186,14 @@ function productFunc(array, classes) {
 									className={ClassNames(classes.prices, classes.priceBody)}
 									variant="body1"
 								>
-									$ {product.rental_week}
+									$ {(product.rental_week / 100).toFixed(2)}
 								</Typography>
 							</Grid>
 						</Grid>
-						
 
-						<Typography variant="h6">Rent {product.model} now!</Typography>
+						<Typography variant="h6" className={classes.rentNowButton}>
+							Rent {product.model} now!
+						</Typography>
 					</CardContent>
 				</Card>
 			</Grid>
@@ -195,12 +207,7 @@ const RentalsGrid = () => {
 	const classes = useStyles();
 
 	const [products, setProducts] = useState([]);
-	const {
-		rentalDates,
-		startDateHandler,
-		endDateHandler,
-		//	getAvailableRentals,
-	} = useContext(RentalContext);
+	
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -218,54 +225,7 @@ const RentalsGrid = () => {
 	return (
 		<>
 			<Grid container spacing={4}>
-				<Grid item xs sm={3}></Grid>
-				<Grid item xs={12} sm={6}>
-					<Typography display="inline" variant="h5">
-						Search Dates:
-						<KeyboardDatePicker
-							className={classes.textField}
-							label="Start date"
-							autoOk
-							variant="inline"
-							value={rentalDates.startDate}
-							animateYearScrolling
-							onChange={(date) => startDateHandler(date)}
-							placeholder="MM/DD/YYYY"
-							format="MM/dd/yyyy"
-							disablePast="true"
-						/>
-						<KeyboardDatePicker
-							className={classes.textField}
-							autoOk
-							animateYearScrolling
-							label="End date"
-							variant="inline"
-							value={rentalDates.endDate}
-							placeholder="MM/DD/YYYY"
-							onChange={(date) => endDateHandler(date)}
-							format="MM/dd/yyyy"
-							minDate={rentalDates.endDate}
-							disablePast="true"
-						/>
-					</Typography>
-					<Divider className={classes.divider} />
-				</Grid>
-				<Grid item sm={3}></Grid>
-				{/* <Grid item xs={12} sm={4}>
-					<Typography display="inline" variant="h5">
-						Category:
-						<Typography
-							display="inline"
-							variant="body1"
-							className={classes.subtitle}
-						>
-                           
-							{!category ? 'all available' : category}
-						</Typography>
-					</Typography>
-					<Divider className={classes.divider} />
-				</Grid> */}
-
+				
 				{productSection}
 			</Grid>
 		</>

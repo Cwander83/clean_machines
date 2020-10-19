@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 
 // context
-import { RentalContext } from '../../context/rental-context';
+import { RentalContext } from '../context/rental-context';
 
 // components
 
