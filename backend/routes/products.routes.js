@@ -10,6 +10,7 @@ router.get(
 	productController.findAllProductsByCategory
 );
 router.get('/rental', productController.findAllRentalProducts);
+router.get('/rental/:id', productController.findRentalProduct);
 
 router.get('/out', productController.findAllProductsOutOfStock); // all products out of stock
 

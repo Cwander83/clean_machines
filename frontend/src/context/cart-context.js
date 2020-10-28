@@ -40,6 +40,7 @@ const CartProvider = (props) => {
 		},
 	]);
 
+	console.log(JSON.stringify(cart, null, 2));
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {

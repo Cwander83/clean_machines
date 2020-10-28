@@ -1,4 +1,4 @@
-import React, { useState,  useEffect, memo } from 'react';
+import React, { useState, useMemo, useEffect, memo } from 'react';
 
 // classnames
 import ClassNames from 'classnames';
@@ -59,15 +59,73 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-// function productFunc(obj, classes) {
-// 	if (!obj) return {};
+function productFunc(obj, classes) {
+	if (!obj) return {};
 
-// 	let product = obj;
+	let product = obj;
 
-// 	return (
+	return (
+		<Grid container justify="center">
+			<Grid item xs={12}>
+				<Typography
+					align="center"
+					className={ClassNames(classes.model)}
+					variant="h4"
+				>
+					{product.name ? product.name : product.model}
+				</Typography>
 
-// 	);
-// }
+				<Typography
+					align="center"
+					gutterBottom={true}
+					className={ClassNames(classes.price)}
+					variant="h5"
+				>
+					$ {(product.rental_day / 100).toFixed(2)} per day
+				</Typography>
+			</Grid>
+			<Divider className={classes.divider} />
+
+			<Grid item xs={12}>
+				<Typography
+					align="left"
+					display="inline"
+					className={ClassNames(classes.title)}
+					variant="h6"
+				>
+					Availability
+				</Typography>
+
+				<Typography
+					gutterBottom
+					display="inline"
+					className={ClassNames(classes.body1)}
+					variant="subtitle1"
+				>
+					{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
+				</Typography>
+
+				<Typography
+					align="left"
+					display="inline"
+					className={ClassNames(classes.title)}
+					variant="h6"
+				>
+					Category
+				</Typography>
+
+				<Typography
+					gutterBottom
+					display="inline"
+					className={ClassNames(classes.body1, classes.uppercase)}
+					variant="body1"
+				>
+					{` : ${product.category}`}
+				</Typography>
+			</Grid>
+		</Grid>
+	);
+}
 
 const RentalProduct = () => {
 	const classes = useStyles();
@@ -78,18 +136,17 @@ const RentalProduct = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const results = await axios(`/products/sales/${id}`);
+			const results = await axios(`/products/rental/${id}`);
 			setProduct(results.data);
 		};
 		fetchData();
 	}, [id]);
 
-	// const productSection = useMemo(() => productFunc(product, classes), [
-	// 	product,
-	// 	classes,
-	// ]);
+	const productSection = useMemo(() => productFunc(product, classes), [
+		product,
+		classes,
+	]);
 
-	console.log('rental product page **');
 	return (
 		<div className={classes.root}>
 			<Grid alignContent="flex-start" container>
@@ -104,65 +161,7 @@ const RentalProduct = () => {
 						<ProductCarousel />
 					</Grid>
 					<Grid item xs={1}></Grid>
-					<Grid container justify="center">
-						<Grid item xs={12}>
-							<Typography
-								align="center"
-								className={ClassNames(classes.model)}
-								variant="h4"
-							>
-								{product.name ? product.name : product.model}
-							</Typography>
-
-							<Typography
-								align="center"
-								gutterBottom={true}
-								className={ClassNames(classes.price)}
-								variant="h5"
-							>
-								$ {(product.sale_price / 100).toFixed(2)}
-							</Typography>
-						</Grid>
-						<Divider className={classes.divider} />
-
-						<Grid item xs={12}>
-							<Typography
-								align="left"
-								display="inline"
-								className={ClassNames(classes.title)}
-								variant="h6"
-							>
-								Availability
-							</Typography>
-
-							<Typography
-								gutterBottom
-								display="inline"
-								className={ClassNames(classes.body1)}
-								variant="subtitle1"
-							>
-								{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
-							</Typography>
-
-							<Typography
-								align="left"
-								display="inline"
-								className={ClassNames(classes.title)}
-								variant="h6"
-							>
-								Category
-							</Typography>
-
-							<Typography
-								gutterBottom
-								display="inline"
-								className={ClassNames(classes.body1, classes.uppercase)}
-								variant="body1"
-							>
-								{` : ${product.category}`}
-							</Typography>
-						</Grid>
-					</Grid>
+					{productSection}
 					<Grid item sm={2}></Grid>
 					<Grid item xs={12} sm={8}>
 						<RentalButton product={product} />
