@@ -63,9 +63,7 @@ const Rentals = () => {
 						Rentals
 					</Typography>
 				</Grid>
-				{/* <Grid item xs sm={2}>
-					<SideNav />
-				</Grid> */}
+			
 
 				<Switch>
 					<Route exact path={path}>
@@ -75,9 +73,10 @@ const Rentals = () => {
 					</Route>
 					<Route path={`${path}/:id`}>
 						<Grid item sm={1}></Grid>
-						<Grid item xs={12} sm={9}>
+						<Grid item xs={12} sm={10}>
 							<RentalProduct />
 						</Grid>
+						<Grid item sm={1}></Grid>
 					</Route>
 				</Switch>
 			</Grid>
