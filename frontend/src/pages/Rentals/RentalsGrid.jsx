@@ -1,4 +1,4 @@
-import React, { useMemo, memo, useEffect, useState } from 'react';
+import React, { useMemo, memo, useEffect, useState, useContext } from 'react';
 
 // react router
 import {
@@ -12,6 +12,9 @@ import ClassNames from 'classnames';
 // axios
 import axios from 'axios';
 
+// moment
+import moment from 'moment';
+
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -24,7 +27,7 @@ import Divider from '@material-ui/core/Divider';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 
 // context
-//import { RentalContext } from '../../context/rental-context';
+import { RentalContext } from '../../context/rental-context';
 
 // images
 import picture from '../../images/BGFS5000.jpg';
@@ -41,14 +44,10 @@ const useStyles = makeStyles((theme) => ({
 		backgroundSize: 'contain',
 	},
 	content: {
-		//backgroundColor: theme.palette.primary.light,
-		//color: 'white',
 		paddingBottom: '0px',
-		//textAlign: 'left',
 	},
 	description: {
 		color: theme.palette.gold.main,
-		//fontStyle: 'italic',
 	},
 	prices: {
 		textTransform: 'Capitalize',
@@ -191,9 +190,9 @@ function productFunc(array, classes) {
 							</Grid>
 						</Grid>
 
-						<Typography variant="h6" className={classes.rentNowButton}>
+						{/* <Typography variant="h6" className={classes.rentNowButton}>
 							Rent {product.model} now!
-						</Typography>
+						</Typography> */}
 					</CardContent>
 				</Card>
 			</Grid>
@@ -207,15 +206,27 @@ const RentalsGrid = () => {
 	const classes = useStyles();
 
 	const [products, setProducts] = useState([]);
-	
+
+	let { rentalDates } = useContext(RentalContext);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const result = await axios('/products/rental');
-			setProducts(result.data);
-		};
-		fetchData();
-	}, []);
+		console.log('rental Dates: ' + JSON.stringify(rentalDates, null, 2));
+
+		if (rentalDates.startDate !== null && rentalDates.endDate !== null) {
+			console.log('inside if statement');
+
+			let start = moment(rentalDates.startDate).format('YYYY-MM-DD');
+			let end = moment(rentalDates.endDate).format('YYYY-MM-DD');
+
+			const fetchData = async () => {
+				const results = await axios(`/rentals/available-rent/${start}/${end}`);
+
+				setProducts(results.data);
+			};
+
+			fetchData();
+		}
+	}, [rentalDates]);
 
 	const productSection = useMemo(() => productFunc(products, classes), [
 		products,
@@ -225,7 +236,6 @@ const RentalsGrid = () => {
 	return (
 		<>
 			<Grid container spacing={4}>
-				
 				{productSection}
 			</Grid>
 		</>

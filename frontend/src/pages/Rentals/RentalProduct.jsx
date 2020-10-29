@@ -102,7 +102,7 @@ function productFunc(obj, classes) {
 					className={ClassNames(classes.body1)}
 					variant="subtitle1"
 				>
-					{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
+					{' : In Stock'}
 				</Typography>
 
 				<Typography
@@ -162,11 +162,10 @@ const RentalProduct = () => {
 					</Grid>
 					<Grid item xs={1}></Grid>
 					{productSection}
-					<Grid item sm={2}></Grid>
-					<Grid item xs={12} sm={8}>
+
+					<Grid item xs={12}>
 						<RentalButton product={product} />
 					</Grid>
-					<Grid item sm={2}></Grid>
 				</Grid>
 
 				<Grid item sm={2}></Grid>

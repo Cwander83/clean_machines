@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 
-	body: {},
 	button: {
 		margin: 'auto',
 		fontSize: '16px',
@@ -37,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.down('xs')]: {
 			marginTop: '15px',
 		},
-		
 	},
 
 	buttonLabel: {
@@ -49,14 +47,6 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: 'auto',
 	},
 
-	description: {
-		padding: '30px 40px',
-		textAlign: 'left',
-		fontStyle: 'italic',
-		fontSize: '16px',
-		fontWeight: '500',
-		letterSpacing: '0.1em',
-	},
 	searchSection: {
 		marginBottom: '30px',
 		[theme.breakpoints.down('xs')]: {
@@ -65,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const RentalSearch = () => {
+const RentalSearch = ({ show, size }) => {
 	const classes = useStyles();
 
 	const {
@@ -76,15 +66,7 @@ const RentalSearch = () => {
 	} = React.useContext(RentalContext);
 
 	return (
-		<Grid container className={classes.body}>
-			<Grid item xs={12}>
-				<Typography variant="body1" className={classes.description}>
-					We are Central Florida Based Rental company. we deliver the rental on
-					start date by noon. and pick up the rental at the end of the rental.
-					no need to worry about anything but enjoying the great products we
-					offer.
-				</Typography>
-			</Grid>
+		<>
 			<Grid item xs sm={1}></Grid>
 
 			<Grid item xs={12} sm={10}>
@@ -123,28 +105,30 @@ const RentalSearch = () => {
 							disablePast="true"
 						/>
 					</Grid>
-					<Grid item sx={12} sm={2}>
-						<Button
-							classes={{
-								label: classes.buttonLabel,
-							}}
-							className={classes.button}
-							component={Link}
-							variant="outlined"
-							to="/rentals"
-							onClick={getAvailableRentals}
-							disabled={rentalDates.startDate === null}
-						>
-							Search
-							<SearchIcon style={{ marginLeft: '5px' }} />
-						</Button>
-					</Grid>
+					{show ? (
+						<Grid item sx={12} sm={2} className={classes.buttonGrid}>
+							<Button
+								classes={{
+									label: classes.buttonLabel,
+								}}
+								className={classes.button}
+								component={Link}
+								variant="outlined"
+								to="/rentals"
+								onClick={getAvailableRentals}
+								disabled={rentalDates.startDate === null}
+							>
+								Search
+								<SearchIcon style={{ marginLeft: '5px' }} />
+							</Button>
+						</Grid>
+					) : null}
 
 					<Grid item xs={1}></Grid>
 				</Grid>
 			</Grid>
 			<Grid item xs sm={1}></Grid>
-		</Grid>
+		</>
 	);
 };
 
