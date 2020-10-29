@@ -21,6 +21,9 @@ import Grid from '@material-ui/core/Grid';
 // context api
 import { CartContext } from '../../context/cart-context';
 
+// helper functions
+import { rentalCost } from '../../utils/rental';
+
 // components
 //import Loading from '../../UI/Loading';
 
@@ -51,12 +54,19 @@ const useStyles = makeStyles((theme) => ({
 	error: {
 		color: 'red',
 	},
+	success: {
+		color: theme.palette.primary.light,
+		textAlign: 'center',
+		fontSize: '16px',
+	},
 }));
 
 const RentalButton = ({ product }) => {
 	const classes = useStyles();
 
 	const [error, setErrors] = useState(null);
+	const [success, setSuccess] = useState(false);
+	//const [cost, setCost] = useState(null);
 
 	const [rentalDates, setRentalDates] = useState({
 		//days: 1,
@@ -75,22 +85,26 @@ const RentalButton = ({ product }) => {
 			setErrors('not valid dates');
 		if (rentalDates.startDate > rentalDates.endDate)
 			setErrors("Sorry, rentals can't go in the past");
-			
-		let data = {
-			productId: product.id,
-			model: product.model,
-			price: product.sale_price,
-			quantity: 1,
 
-			start_date: moment(rentalDates.startDate).format('YYYY-MM-DD'),
-			end_date: moment(rentalDates.endDate).format('YYYY-MM-DD'),
-			category: product.category,
-			units: product.units,
+		const total = rentalCost({ product, rentalDates });
+		if (!error) {
+			console.log('total' + total);
+			let data = {
+				productId: product.id,
+				model: product.model,
+				price: total,
+				quantity: 1,
 
-			type: 'rental',
-		};
+				start_date: moment(rentalDates.startDate).format('YYYY-MM-DD'),
+				end_date: moment(rentalDates.endDate).format('YYYY-MM-DD'),
+				category: product.category,
+				units: product.units,
 
-		if (!error) addToCart({ data });
+				type: 'rental',
+			};
+			addToCart({ data });
+			setSuccess(true);
+		}
 	};
 	return (
 		<Grid
@@ -151,6 +165,11 @@ const RentalButton = ({ product }) => {
 			{error && (
 				<Typography className={classes.error} variant="caption">
 					{error}
+				</Typography>
+			)}
+			{success && (
+				<Typography className={classes.success} variant="caption">
+					** Rental added to cart
 				</Typography>
 			)}
 		</Grid>
