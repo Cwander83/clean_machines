@@ -1,4 +1,5 @@
 // TODO all rentals here
+const { Op } = require('sequelize');
 
 const db = require('../config/config');
 
@@ -60,7 +61,7 @@ module.exports = {
 						{
 							start_date: {
 								[Op.between]: [
-									sequelize.fn('date', sequelize.col('start_date')),
+									db.sequelize.fn('date', db.sequelize.col('start_date')),
 									end,
 								],
 							},
@@ -70,21 +71,21 @@ module.exports = {
 							end_date: {
 								[Op.between]: [
 									start,
-									sequelize.fn('date', sequelize.col('end_date')),
+									db.sequelize.fn('date', db.sequelize.col('end_date')),
 								],
 							},
 						},
 					],
 				},
 			}).then((rentals) => {
+				console.log('rentals: ' + JSON.stringify(rentals, null, 2));
 				let idArray = [];
-				rentals.forEach((product) => idArray.push(product.productId));
+				rentals.forEach((product) => idArray.push(product.rentalProductId));
 				return idArray;
 			});
 
 			let products = await db.RentalProducts.findAll({
 				where: {
-					rental: 1,
 					id: { [Op.notIn]: rentals },
 				},
 			});

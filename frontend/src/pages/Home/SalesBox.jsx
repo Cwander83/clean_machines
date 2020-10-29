@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			textDecoration: 'underline',
 			textDecorationColor: theme.palette.gold.main,
-			transform: 'scale(1.1)',
+			transform: 'scale(1.05)',
 		},
 	},
 	grid: {},
@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'uppercase',
 	},
 }));
+
 const SalesBox = () => {
 	const classes = useStyles();
 

@@ -1,35 +1,36 @@
-import moment from 'moment';
+
 export function rentalCost({ product, rentalDates }) {
 	let cost = 0;
-	let a = moment(rentalDates.endDate).format('MM/DD/YYYY');
-	let b = moment(rentalDates.startDate).format('MM/DD/YYYY');
-	let days = b.diff(a, 'days');
+	let days = 0;
+	let start = new Date(rentalDates.startDate);
+	let end = new Date(rentalDates.endDate);
 
-	console.log('days ' + days);
+	let differenceInTime = end.getTime() - start.getTime();
 
-	// do {
-	// 	switch (true) {
-	// 		case days >= 7:
-	// 			cost = cost + product.rental_week;
-	// 			days = days - 7;
-	// 			break;
+	days = differenceInTime / (1000 * 3600 * 24);
 
-	// 		case days >= 2:
-	// 			cost = cost + product.rental_two_day;
-	// 			days = days - 2;
 
-	// 			break;
-	// 		case days >= 1:
-	// 			cost = cost + product.day;
-	// 			days = days - 1;
+	do {
+		switch (true) {
+			case days >= 7:
+				cost = cost + parseInt(product.rental_week);
+				days = days - 7;
+				break;
 
-	// 			break;
-	// 		default:
-	// 			break;
-	// 	}
-	// } while (days !== 0);
+			case days >= 2:
+				cost = cost + parseInt(product.rental_two_day);
+				days = days - 2;
 
-	console.log('rentalDates' + JSON.stringify(rentalDates, null, 2));
-	console.log('product' + JSON.stringify(product, null, 2));
+				break;
+			case days >= 1:
+				cost = cost + parseInt(product.rental_day);
+				days = days - 1;
+
+				break;
+			default:
+				break;
+		}
+	} while (days !== 0);
+
 	return cost;
 }

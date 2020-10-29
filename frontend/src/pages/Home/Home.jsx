@@ -23,8 +23,8 @@ import RentalSearch from '../../components/RentalSearch';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: '100%',
-		//backgroundColor: theme.palette.gold.main,
 	},
+
 	titleBox: {
 		backgroundColor: theme.palette.primary.light,
 		margin: '5px 0 40px 0',
@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'row',
 		justifyContent: 'center',
 	},
+
 	slogan: {
 		textTransform: 'Capitalize',
 		fontSize: '24px',
@@ -48,12 +49,14 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
 	},
+
 	logo: {
 		width: '30%',
 		[theme.breakpoints.down('sm')]: {
 			width: '40%',
 		},
 	},
+
 	boxes: {
 		[theme.breakpoints.down('sm')]: {},
 		margin: 'auto',
@@ -66,26 +69,18 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.gold.main,
 		zIndex: '2',
 	},
+
 	box2: {
 		position: 'relative',
 		top: '-20px',
 		left: '15px',
 		width: 'auto',
-		//height: 'auto',
 		border: '2px solid',
 		padding: ' 5px',
 		zIndex: '10',
 		borderColor: theme.palette.primary.light,
 		backgroundColor: 'white',
-		//cursor: 'pointer',
 		[theme.breakpoints.down('sm')]: {},
-	},
-	boxSubtitle: {
-		paddingLeft: '1px',
-		width: '100%',
-		fontWeight: '400',
-		letterSpacing: '.05em',
-		backgroundColor: theme.palette.primary.light,
 	},
 
 	box3: {
@@ -94,23 +89,14 @@ const useStyles = makeStyles((theme) => ({
 		left: '820px',
 		width: '60px',
 		height: '40px',
-
 		backgroundColor: theme.palette.gold.main,
 	},
-	rentalLink: {
-		textTransform: 'Capitalize',
-		fontSize: '24px',
-		padding: '15px 0',
-		width: '100%',
-		fontWeight: '400',
-		letterSpacing: '.07em',
-		color: theme.palette.gold.main,
-		backgroundColor: theme.palette.primary.light,
-	},
+
 	span: {
 		fontSize: '28px',
 		fontFamily: 'YellowTail',
 	},
+
 	search: {
 		textTransform: 'Capitalize',
 		fontSize: '24px',
@@ -121,63 +107,18 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
 	},
-	backDesign: {
-		width: '50%',
-		height: '80%',
-		backgroundColor: theme.palette.gold.main,
-		position: 'absolute',
-		top: '80px',
-		right: '0',
-		borderBottomLeftRadius: '75%',
-		zIndex: '1',
-		[theme.breakpoints.down('sm')]: {
-			height: '70%',
-		},
-	},
-	backDesign2: {
-		width: '200px',
-		height: '150px',
-		backgroundColor: theme.palette.primary.light,
-		position: 'absolute',
-		top: '380px',
-		right: '10px',
-		borderRadius: '5%',
-		zIndex: '1',
-	},
-	backDesign3: {
-		width: '200px',
-		height: '150px',
-		backgroundColor: theme.palette.primary.light,
-		position: 'absolute',
-		top: '70%',
-		right: '40%',
-		borderRadius: '5%',
-		zIndex: '1',
-	},
-	backDesign4: {
-		width: '200px',
-		height: '150px',
-		backgroundColor: theme.palette.gold.main,
-		position: 'absolute',
-		bottom: '5%',
-		left: '0',
-		borderTopRightRadius: '75%',
-		borderBottomRightRadius: '75%',
-		zIndex: '1',
-	},
-	backDesign5: {
-		width: '300px',
-		height: '250px',
-		backgroundColor: theme.palette.primary.light,
-		position: 'absolute',
-		bottom: '10%',
-		left: '0',
-		//borderTopRightRadius: '100%',
-		borderBottomRightRadius: '75%',
-		zIndex: '1',
-	},
+
 	mainGrid: {
 		minHeight: '100%',
+	},
+	
+	description: {
+		padding: '30px 40px',
+		textAlign: 'left',
+		fontStyle: 'italic',
+		fontSize: '16px',
+		fontWeight: '500',
+		letterSpacing: '0.1em',
 	},
 }));
 
@@ -187,11 +128,6 @@ const Home = () => {
 	return (
 		<Container disableGutters maxWidth={false} className={classes.root}>
 			<Grid container justify="center" classes={{ root: classes.mainGrid }}>
-				{/* <Paper className={classes.backDesign} elevation={2}></Paper>
-				<Paper className={classes.backDesign2} elevation={2}></Paper>
-				<Paper className={classes.backDesign3} elevation={2}></Paper>
-				<Paper className={classes.backDesign4} elevation={2}></Paper>
-				<Paper className={classes.backDesign5} elevation={2}></Paper> */}
 				<Grid
 					item
 					xs={12}
@@ -216,16 +152,24 @@ const Home = () => {
 									elevation={2}
 								></Box>
 								<Box className={classes.box2} component={Paper} elevation={2}>
-									<Typography variant="h3" className={classes.rentalLink}>
-										Click here to view all available Rentals
-									</Typography>
-									<Typography variant="body1" className={classes.span}>
-										or
-									</Typography>
 									<Typography variant="h3" className={classes.search}>
 										Search for rental Dates
 									</Typography>
-									<RentalSearch />
+									<Grid container className={classes.body}>
+										<Grid item xs={12}>
+											<Typography
+												variant="body1"
+												className={classes.description}
+											>
+												We are Central Florida Based Rental company. we deliver
+												the rental on start date by noon. and pick up the rental
+												at the end of the rental. no need to worry about
+												anything but enjoying the great products we offer.
+											</Typography>
+										</Grid>
+
+										<RentalSearch show={true} />
+									</Grid>
 								</Box>
 							</Box>
 						</Grid>

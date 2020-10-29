@@ -29,15 +29,23 @@ import { rentalCost } from '../../utils/rental';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
+		flexDirection: 'row',
 		margin: '10px 0',
+		[theme.breakpoints.down('xs')]: {
+			flexDirection: 'column',
+		},
 	},
 	button: {
 		//padding: '0 50px',
 		color: theme.palette.grey.main,
 		backgroundColor: theme.palette.primary.light,
+		marginTop: '10px',
 		'&:active, &:hover': {
 			backgroundColor: theme.palette.primary.dark,
 		},
+	},
+	textField: {
+		margin: '0 10px 10px 10px',
 	},
 
 	icon: {
@@ -66,10 +74,8 @@ const RentalButton = ({ product }) => {
 
 	const [error, setErrors] = useState(null);
 	const [success, setSuccess] = useState(false);
-	//const [cost, setCost] = useState(null);
 
 	const [rentalDates, setRentalDates] = useState({
-		//days: 1,
 		startDate: null,
 		endDate: null,
 	});
@@ -80,93 +86,96 @@ const RentalButton = ({ product }) => {
 
 	const addToCartHandler = () => {
 		setErrors();
+
 		// sends data to cart context
 		if (rentalDates.startDate === null || rentalDates.endDate === null)
 			setErrors('not valid dates');
+
 		if (rentalDates.startDate > rentalDates.endDate)
 			setErrors("Sorry, rentals can't go in the past");
 
 		const total = rentalCost({ product, rentalDates });
+
 		if (!error) {
-			console.log('total' + total);
 			let data = {
 				productId: product.id,
 				model: product.model,
 				price: total,
 				quantity: 1,
-
 				start_date: moment(rentalDates.startDate).format('YYYY-MM-DD'),
 				end_date: moment(rentalDates.endDate).format('YYYY-MM-DD'),
 				category: product.category,
-				units: product.units,
-
 				type: 'rental',
+				shipping: 0,
 			};
+
 			addToCart({ data });
+
 			setSuccess(true);
 		}
 	};
 	return (
-		<Grid
-			container
-			spacing={2}
-			justify="space-between"
-			className={classes.root}
-		>
-			<DatePicker
-				className={classes.textField}
-				label="Start date"
-				variant="inline"
-				name="start_date"
-				autoOk
-				value={rentalDates.startDate}
-				animateYearScrolling
-				onChange={(date) =>
-					setRentalDates({
-						...rentalDates,
-						startDate: moment(date).format(),
-					})
-				}
-				placeholder="MM/DD/YYYY"
-				format="MM/dd/yyyy"
-				disablePast="true"
-				required
-			/>
-
-			<DatePicker
-				className={classes.textField}
-				label="End date"
-				variant="inline"
-				name="end_date"
-				autoOk
-				value={rentalDates.endDate}
-				animateYearScrolling
-				onChange={(date) =>
-					setRentalDates({
-						...rentalDates,
-						endDate: moment(date).format(),
-					})
-				}
-				placeholder="MM/DD/YYYY"
-				format="MM/dd/yyyy"
-				disablePast="true"
-				required
-				onError={console.log}
-			/>
-			<Button
-				variant="contained"
-				className={classes.button}
-				onClick={addToCartHandler}
-			>
-				Add Rental
-				<AddShoppingCartIcon className={classes.cartIcon} />
-			</Button>
+		<Grid container spacing={2} justify="center" className={classes.root}>
+			<Grid item>
+				<DatePicker
+					className={classes.textField}
+					label="Start date"
+					variant="inline"
+					name="start_date"
+					autoOk
+					value={rentalDates.startDate}
+					animateYearScrolling
+					onChange={(date) =>
+						setRentalDates({
+							...rentalDates,
+							startDate: moment(date).format(),
+						})
+					}
+					placeholder="MM/DD/YYYY"
+					format="MM/dd/yyyy"
+					disablePast="true"
+					required
+				/>
+			</Grid>
+			<Grid item>
+				<DatePicker
+					className={classes.textField}
+					label="End date"
+					variant="inline"
+					name="end_date"
+					autoOk
+					value={rentalDates.endDate}
+					animateYearScrolling
+					onChange={(date) =>
+						setRentalDates({
+							...rentalDates,
+							endDate: moment(date).format(),
+						})
+					}
+					placeholder="MM/DD/YYYY"
+					format="MM/dd/yyyy"
+					disablePast="true"
+					required
+					onError={console.log}
+				/>
+			</Grid>
+			<Grid item>
+				<Button
+					variant="contained"
+					className={classes.button}
+					onClick={addToCartHandler}
+				>
+					Add Rental
+					<AddShoppingCartIcon className={classes.cartIcon} />
+				</Button>
+			</Grid>
 
 			{error && (
 				<Typography className={classes.error} variant="caption">
 					{error}
 				</Typography>
 			)}
+
 			{success && (
 				<Typography className={classes.success} variant="caption">
 					** Rental added to cart
