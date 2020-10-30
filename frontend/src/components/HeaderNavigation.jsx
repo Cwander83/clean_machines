@@ -18,6 +18,7 @@ import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: 'auto',
+		marginLeft: 0,
 
 		[theme.breakpoints.down('sm')]: {
 			display: 'none',
@@ -40,18 +41,18 @@ const HeaderNavigation = () => {
 	const { isAuthenticated, logout } = useAuth0();
 
 	const links = [
+		{ icon: Logo, path: '/' },
 		{ title: 'Shop', path: '/sales' },
 		{ title: 'Rentals', path: '/rentals' },
-		{ icon: Logo, path: '/' },
 		{ title: 'Videos', path: '/videos' },
-		{ title: 'faq', path: '/contact' },
+		{ title: 'Contact', path: '/contact' },
 	];
 
 	const admin = [
+		{ icon: Logo, path: '/admin' },
 		{ title: 'Sales', path: '/admin/sales' },
 		{ title: 'Rentals', path: '/admin/rentals' },
-		{ icon: Logo, path: '/admin' },
-	
+
 		{ title: 'Customers', path: '/admin/customers' },
 		{ title: 'Logout', path: '/', logout: logout },
 	];

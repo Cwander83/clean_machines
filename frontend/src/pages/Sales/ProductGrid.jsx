@@ -1,10 +1,7 @@
 import React, { useMemo, memo, useEffect, useState, useContext } from 'react';
 
 // react router
-import {
-	// Switch, Route, useRouteMatch,
-	Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // axios
 import axios from 'axios';
@@ -26,7 +23,6 @@ import { SalesContext } from '../../context/sales-context';
 import picture from '../../images/BGFS5000.jpg';
 
 const useStyles = makeStyles((theme) => ({
-	root: {},
 	title: {
 		color: 'black',
 	},
@@ -40,11 +36,10 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.light,
 		color: 'white',
 		paddingBottom: '0px',
-		textAlign: 'left',
+		textAlign: 'center',
 	},
 	description: {
 		color: theme.palette.gold.main,
-		//fontStyle: 'italic',
 	},
 	price: {
 		fontStyle: 'italic',
@@ -132,8 +127,8 @@ const ProductGrid = () => {
 	return (
 		<>
 			<Grid container spacing={4}>
-				<Grid item xs sm={4}></Grid>
-				<Grid item xs={12} sm={4}>
+				<Grid item xs sm={3}></Grid>
+				<Grid item xs={12} sm={6}>
 					<Typography display="inline" variant="h5">
 						Category:
 						<Typography
@@ -146,7 +141,7 @@ const ProductGrid = () => {
 					</Typography>
 					<Divider className={classes.divider} />
 				</Grid>
-				<Grid item xs sm={4}></Grid>
+				<Grid item xs sm={3}></Grid>
 				{productSection}
 			</Grid>
 		</>

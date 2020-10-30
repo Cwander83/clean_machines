@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 
 // context
@@ -28,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 	button: {
 		margin: 'auto',
+		marginTop: '10px',
 		fontSize: '16px',
+		backgroundColor: theme.palette.primary.light,
 		[theme.breakpoints.down('sm')]: {
 			fontSize: '16px',
 			marginTop: '5px',
@@ -53,17 +54,17 @@ const useStyles = makeStyles((theme) => ({
 			flexDirection: 'column',
 		},
 	},
+	disabled: {
+		backgroundColor: theme.palette.primary.main,
+	},
 }));
 
 const RentalSearch = ({ show, size }) => {
 	const classes = useStyles();
 
-	const {
-		rentalDates,
-		startDateHandler,
-		endDateHandler,
-		getAvailableRentals,
-	} = React.useContext(RentalContext);
+	const { rentalDates, startDateHandler, endDateHandler } = React.useContext(
+		RentalContext
+	);
 
 	return (
 		<>
@@ -75,8 +76,8 @@ const RentalSearch = ({ show, size }) => {
 					alignItems="center"
 					classes={{ root: classes.searchSection }}
 				>
-					<Grid item xs={1}></Grid>
-					<Grid item xs={12} sm={4}>
+					
+					<Grid item xs={12} sm={size}>
 						<KeyboardDatePicker
 							className={classes.textField}
 							label="Start date"
@@ -90,7 +91,7 @@ const RentalSearch = ({ show, size }) => {
 							disablePast="true"
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} sm={size}>
 						<KeyboardDatePicker
 							className={classes.textField}
 							autoOk
@@ -101,7 +102,7 @@ const RentalSearch = ({ show, size }) => {
 							placeholder="MM/DD/YYYY"
 							onChange={(date) => endDateHandler(date)}
 							format="MM/dd/yyyy"
-							minDate={rentalDates.endDate}
+							minDate={rentalDates.startDate}
 							disablePast="true"
 						/>
 					</Grid>
@@ -110,12 +111,12 @@ const RentalSearch = ({ show, size }) => {
 							<Button
 								classes={{
 									label: classes.buttonLabel,
+									disabled: classes.disabled,
 								}}
 								className={classes.button}
 								component={Link}
 								variant="outlined"
 								to="/rentals"
-								onClick={getAvailableRentals}
 								disabled={rentalDates.startDate === null}
 							>
 								Search

@@ -42,7 +42,6 @@ const Sales = () => {
 
 	let { path } = useRouteMatch();
 
-	console.log('sales home page');
 
 	return (
 		<Container maxWidth="xl" className={classes.root}>
@@ -63,8 +62,8 @@ const Sales = () => {
 						</Grid>
 					</Route>
 					<Route path={`${path}/:id`}>
-						<Grid item sm={1}></Grid>
-						<Grid item xs={12} sm={9}>
+						
+						<Grid item xs={12} sm={10}>
 							<SaleProduct />
 						</Grid>
 					</Route>
