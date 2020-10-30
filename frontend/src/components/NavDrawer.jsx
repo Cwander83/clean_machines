@@ -16,13 +16,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import MailIcon from '@material-ui/icons/Mail';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 
 // images / logos
 //import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
@@ -33,11 +33,15 @@ import HeaderNavigation from '../components/HeaderNavigation';
 import ShoppingCartButton from '../components/Buttons/ShoppingCartButton';
 
 const useStyles = makeStyles((theme) => ({
-	toolbar: {},
+	toolbar: {
+		// maxWidth: '1232px',
+		// margin: 'auto',
+	},
 	appBar: {
 		backgroundColor: 'transparent',
-
+		maxWidth: '1232px',
 		boxShadow: 'none',
+		margin: 'auto'
 	},
 	menu: {
 		[theme.breakpoints.up('md')]: {
@@ -144,19 +148,19 @@ const NavDrawer = () => {
 			to: '/sales',
 		},
 		{
-			text: 'How to Videos',
+			text: 'Tutorials',
 			icon: <VideoLibraryIcon />,
 			to: '/videos',
 		},
 		{
-			text: 'Contact',
+			text: 'Support',
 			icon: <MailIcon />,
 			to: '/contact',
 		},
 		{
-			text: 'Admin',
-			icon: <SupervisorAccountIcon />,
-			to: '/admin',
+			text: 'FAQ',
+			icon: <ContactSupportIcon />,
+			to: '/faq',
 		},
 	];
 	const adminList = [

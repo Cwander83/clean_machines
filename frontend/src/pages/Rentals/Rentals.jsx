@@ -6,8 +6,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+//import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -22,12 +21,11 @@ import { RentalContext } from '../../context/rental-context';
 import RentalsGrid from './RentalsGrid';
 import LocationChecker from '../../components/LocationChecker';
 import RentalProduct from './RentalProduct';
+import PageHeader from '../../components/PageHeader';
+import Container from '../../containers/Container'
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		height: '100%',
-		minHeight: 'calc(100vh - 30px)',
-	},
+
 	title: {
 		fontFamily: 'Roboto Black',
 		width: '100%',
@@ -57,12 +55,10 @@ const Rentals = () => {
 	console.log('Rentals home page');
 
 	return (
-		<Container maxWidth="xl" className={classes.root}>
+		<Container>
 			<Grid container>
 				<Grid item xs={12}>
-					<Typography variant="h3" className={classes.title}>
-						Rentals
-					</Typography>
+				<PageHeader title="Rentals"/>
 				</Grid>
 
 				<Switch>

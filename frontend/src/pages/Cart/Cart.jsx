@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,16 +14,18 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import Checkout from '../../components/Checkout/Checkout';
 import RentalsList from './RentalsList';
 import PurchasesList from './PurchasesList';
+import Container from '../../containers/Container';
+import DialogRemove from '../../components/Dialogs/DialogRemove';
+import PageHeader from '../../components/PageHeader';
 
 // utils
 import { totalFunc } from '../../utils/cart';
 
 // context api
 import { CartContext } from '../../context/cart-context';
-import DialogRemove from '../../components/Dialogs/DialogRemove';
 
 const useStyles = makeStyles((theme) => ({
-	root: {minHeight: 'calc(100vh-108px)'},
+	root: { minHeight: 'calc(100vh-108px)' },
 	listItem: {
 		padding: theme.spacing(1, 0),
 	},
@@ -97,8 +98,8 @@ const Cart = () => {
 	};
 
 	return (
-		<Container maxWidth="lg" className={classes.root}>
-			<h1>Your Shopping Cart</h1>
+		<Container>
+			<PageHeader title="Your shopping Cart" />
 
 			<Grid container spacing={2} component={Paper}>
 				<RentalsList

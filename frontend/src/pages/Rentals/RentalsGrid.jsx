@@ -2,7 +2,6 @@ import React, { useMemo, memo, useEffect, useState, useContext } from 'react';
 
 // react router
 import {
-	// Switch, Route, useRouteMatch,
 	Link,
 } from 'react-router-dom';
 
@@ -207,10 +206,6 @@ function productFunc(array, classes) {
 								</Typography>
 							</Grid>
 						</Grid>
-
-						{/* <Typography variant="h6" className={classes.rentNowButton}>
-							Rent {product.model} now!
-						</Typography> */}
 					</CardContent>
 				</Card>
 			</Grid>
@@ -268,10 +263,10 @@ const RentalsGrid = () => {
 							Search Rental Dates </Typography>
 					</Grid>
 					<Grid item md={2}></Grid>
-					<Grid item md={2}></Grid>
-					<Grid item md={10}>
+					<Grid item sm={2}></Grid>
+					<Grid item xs={12} md={8}>
 					
-						<RentalSearch show={false} size={5} />
+						<RentalSearch show={false} size={6} />
 					</Grid>
 					<Grid item md={2}></Grid>
 				</Grid>
