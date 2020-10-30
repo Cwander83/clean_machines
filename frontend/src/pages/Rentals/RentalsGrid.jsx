@@ -29,11 +29,13 @@ import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 // context
 import { RentalContext } from '../../context/rental-context';
 
+// components
+import RentalSearch from '../../components/RentalSearch';
+
 // images
 import picture from '../../images/BGFS5000.jpg';
 
 const useStyles = makeStyles((theme) => ({
-	root: {},
 	title: {
 		color: 'black',
 	},
@@ -46,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 	content: {
 		paddingBottom: '0px',
 	},
-	description: {
+	productDescription: {
 		color: theme.palette.gold.main,
 	},
 	prices: {
@@ -54,6 +56,10 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 500,
 	},
 	divider: {
+		backgroundColor: theme.palette.gold.main,
+	},
+	divider2: {
+		marginBottom: "10px",
 		backgroundColor: theme.palette.gold.main,
 	},
 	subtitle: {
@@ -86,6 +92,18 @@ const useStyles = makeStyles((theme) => ({
 	firstOfType: {
 		marginTop: '10px',
 	},
+	description: {
+		padding: '30px 40px 20px 40px',
+		textAlign: 'left',
+		fontStyle: 'italic',
+		fontSize: '16px',
+		fontWeight: '500',
+		letterSpacing: '0.12em',
+	},
+	searchTitle: {
+		marginBottom: '10px',
+	}
+	
 }));
 
 function productFunc(array, classes) {
@@ -121,7 +139,7 @@ function productFunc(array, classes) {
 						<Typography
 							gutterBottom
 							variant="body1"
-							className={classes.description}
+							className={classes.shortDescription}
 						>
 							{product.short_description}
 						</Typography>
@@ -235,7 +253,31 @@ const RentalsGrid = () => {
 
 	return (
 		<>
-			<Grid container spacing={4}>
+			<Grid item xs={12}>
+				<Grid container>
+					<Grid item md={2}></Grid>
+					<Grid item xs={12} md={8}>
+						<Typography variant="body1" className={classes.description}>
+							We are Central Florida Based Rental company. we deliver the rental
+							on start date by noon. and pick up the rental at the end of the
+							rental. no need to worry about anything but enjoying the great
+							products we offer.
+						</Typography>
+						<Divider className={classes.divider2} />
+						<Typography variant="h4" className={classes.searchTitle}>
+							Search Rental Dates </Typography>
+					</Grid>
+					<Grid item md={2}></Grid>
+					<Grid item md={2}></Grid>
+					<Grid item md={10}>
+					
+						<RentalSearch show={false} size={5} />
+					</Grid>
+					<Grid item md={2}></Grid>
+				</Grid>
+			</Grid>
+
+			<Grid container spacing={4} className={classes.body}>
 				{productSection}
 			</Grid>
 		</>

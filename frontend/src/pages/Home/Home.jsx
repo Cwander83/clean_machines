@@ -168,7 +168,7 @@ const Home = () => {
 											</Typography>
 										</Grid>
 
-										<RentalSearch show={true} />
+										<RentalSearch show={true} size={4} />
 									</Grid>
 								</Box>
 							</Box>

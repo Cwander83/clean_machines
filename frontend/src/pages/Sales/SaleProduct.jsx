@@ -156,11 +156,11 @@ const SaleProduct = () => {
 					className={classes.root}
 					justify="flex-start"
 				>
-					<Grid item xs={1}></Grid>
-					<Grid item xs={10}>
+					<Grid item xs={1} sm={2}></Grid>
+					<Grid item xs={10} sm={8}>
 						<ProductCarousel />
 					</Grid>
-					<Grid item xs={1}></Grid>
+					<Grid item xs={1} sm={2}></Grid>
 					{productSection}
 					<Grid item sm={2}></Grid>
 					<Grid item xs={12} sm={8}>

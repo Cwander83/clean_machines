@@ -1,15 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, memo } from 'react';
 
 import moment from 'moment';
-
-// react forms
-//import { useForm } from 'react-hook-form';
-
-// axios
-// import axios from 'axios'
-
-// classnames
-//import ClassNames from 'classnames';
 
 // material ui
 import { makeStyles, Typography } from '@material-ui/core';
@@ -24,9 +15,6 @@ import { CartContext } from '../../context/cart-context';
 // helper functions
 import { rentalCost } from '../../utils/rental';
 
-// components
-//import Loading from '../../UI/Loading';
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexDirection: 'row',
@@ -36,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	button: {
-		//padding: '0 50px',
 		color: theme.palette.grey.main,
 		backgroundColor: theme.palette.primary.light,
 		marginTop: '10px',
@@ -56,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 		cursor: 'pointer',
 	},
 	cartIcon: {
+		fontSize: '20px',
 		marginLeft: '5px',
 		color: theme.palette.gold.main,
 	},
@@ -80,7 +68,7 @@ const RentalButton = ({ product }) => {
 		endDate: null,
 	});
 
-	console.log('rentalDates: ' + JSON.stringify(rentalDates, null, 2));
+	//console.log('rentalDates: ' + JSON.stringify(rentalDates, null, 2));
 
 	let { addToCart } = useContext(CartContext);
 
@@ -185,4 +173,4 @@ const RentalButton = ({ product }) => {
 	);
 };
 
-export default RentalButton;
+export default memo(RentalButton)	;

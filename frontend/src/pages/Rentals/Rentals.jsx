@@ -1,8 +1,5 @@
 import React, { memo, useContext } from 'react';
 
-// moment
-import moment from 'moment';
-
 // react router
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
@@ -25,7 +22,6 @@ import { RentalContext } from '../../context/rental-context';
 import RentalsGrid from './RentalsGrid';
 import LocationChecker from '../../components/LocationChecker';
 import RentalProduct from './RentalProduct';
-import RentalSearch from '../../components/RentalSearch';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -48,14 +44,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '15px',
 		marginBottom: '15px',
 	},
-	description: {
-		padding: '30px 40px',
-		textAlign: 'left',
-		fontStyle: 'italic',
-		fontSize: '16px',
-		fontWeight: '500',
-		letterSpacing: '0.1em',
-	},
+	
 }));
 
 const Rentals = () => {
@@ -63,7 +52,7 @@ const Rentals = () => {
 
 	let { path } = useRouteMatch();
 
-	let { open, handleClose, rentalDates } = useContext(RentalContext);
+	let { open, handleClose } = useContext(RentalContext);
 
 	console.log('Rentals home page');
 
@@ -74,36 +63,6 @@ const Rentals = () => {
 					<Typography variant="h3" className={classes.title}>
 						Rentals
 					</Typography>
-				</Grid>
-				<Grid item xs={12}>
-					<Grid container className={classes.body}>
-						<Grid item md={2}></Grid>
-						<Grid item xs={12} md={8}>
-							<Typography variant="body1" className={classes.description}>
-								We are Central Florida Based Rental company. we deliver the
-								rental on start date by noon. and pick up the rental at the end
-								of the rental. no need to worry about anything but enjoying the
-								great products we offer.
-							</Typography>
-						</Grid>
-						<Grid item md={2}></Grid>
-						<Grid item md={2}></Grid>
-						<Grid item md={10}>
-							<RentalSearch show={false} />
-						</Grid>
-						<Grid item md={2}></Grid>
-					</Grid>
-				</Grid>
-				<Grid item xs={12}>
-					<Typography variant="h5" className={classes.dateRange}></Typography>
-					Rentals Available for
-					{!rentalDates.startDate
-						? '______'
-						: moment(rentalDates.startDate).format('YYYY-MM-DD')}
-					to{' '}
-					{!rentalDates.endDate
-						? '______'
-						: moment(rentalDates.endDate).format('YYYY-MM-DD')}
 				</Grid>
 
 				<Switch>

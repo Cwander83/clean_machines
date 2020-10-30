@@ -36,8 +36,7 @@ const RentalContextProvider = (props) => {
 				startDateHandler,
 				endDateHandler,
 				rentalDates,
-				//availableProducts,
-				//	getAvailableRentals,
+				
 			}}
 		>
 			{props.children}
