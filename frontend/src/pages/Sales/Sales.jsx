@@ -6,19 +6,17 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+
 
 // components
 import SaleProduct from './SaleProduct';
 import SideNav from './SideNav';
 import ProductGrid from './ProductGrid';
+import PageHeader from '../../components/PageHeader';
+import Container from '../../containers/Container'
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		height: '100%',
-		minHeight: 'calc(100vh - 30px)',
-	},
+	
 	title: {
 		fontFamily: 'Roboto Black',
 		width: '100%',
@@ -42,15 +40,10 @@ const Sales = () => {
 
 	let { path } = useRouteMatch();
 
-
 	return (
-		<Container maxWidth="xl" className={classes.root}>
+		<Container>
 			<Grid container>
-				<Grid item xs={12}>
-					<Typography variant="h3" className={classes.title}>
-						Shop by Category
-					</Typography>
-				</Grid>
+				<PageHeader title="Shop By Category" />
 				<Grid item xs sm={2}>
 					<SideNav />
 				</Grid>
@@ -62,7 +55,6 @@ const Sales = () => {
 						</Grid>
 					</Route>
 					<Route path={`${path}/:id`}>
-						
 						<Grid item xs={12} sm={10}>
 							<SaleProduct />
 						</Grid>

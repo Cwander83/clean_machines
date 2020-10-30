@@ -70,7 +70,7 @@ const RentalSearch = ({ show, size }) => {
 		<>
 			<Grid item xs sm={1}></Grid>
 
-			<Grid item xs={12} sm={10}>
+			<Grid item xs={12}>
 				<Grid
 					container
 					alignItems="center"

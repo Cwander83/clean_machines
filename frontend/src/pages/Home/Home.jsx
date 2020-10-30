@@ -106,12 +106,15 @@ const useStyles = makeStyles((theme) => ({
 		letterSpacing: '.07em',
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '22px',
+		},
 	},
 
 	mainGrid: {
 		minHeight: '100%',
 	},
-	
+
 	description: {
 		padding: '30px 40px',
 		textAlign: 'left',

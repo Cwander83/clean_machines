@@ -1,11 +1,25 @@
-import React from 'react'
+import React from 'react';
+
+//import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+// components
+import PageHeader from '../../components/PageHeader';
+import Container from '../../containers/Container';
+
+//const useStyles = makeStyles((theme) => ({}));
 
 const Videos = () => {
-    return (
-        <div>
-            <h1>videos</h1>
-        </div>
-    )
-}
+	//const classes = useStyles();
 
-export default Videos
+	return (
+		<Container>
+			<Grid container>
+				<PageHeader title="Videos" />
+				<Grid item xs sm={2}></Grid>
+			</Grid>
+		</Container>
+	);
+};
+
+export default Videos;
