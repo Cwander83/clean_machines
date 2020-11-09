@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
 // images / icons
@@ -17,6 +16,7 @@ import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2
 // components
 import SalesBox from './SalesBox';
 import RentalSearch from '../../components/RentalSearch';
+import Container from '../../containers/Container';
 
 // outside styles
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 	logo: {
 		width: '30%',
 		[theme.breakpoints.down('sm')]: {
-			width: '40%',
+			width: '80%',
 		},
 	},
 
@@ -129,7 +129,7 @@ const Home = () => {
 	const classes = useStyles();
 
 	return (
-		<Container disableGutters maxWidth={false} className={classes.root}>
+		<Container>
 			<Grid container justify="center" classes={{ root: classes.mainGrid }}>
 				<Grid
 					item
@@ -171,7 +171,7 @@ const Home = () => {
 											</Typography>
 										</Grid>
 
-										<RentalSearch show={true} size={4} />
+										<RentalSearch show={true} size={4} buttonSize={2} />
 									</Grid>
 								</Box>
 							</Box>

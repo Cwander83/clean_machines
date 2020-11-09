@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import IconButton from '@material-ui/core/IconButton';
+import Divider from '@material-ui/core/Divider';
 
 const RentalsList = ({ cart, classes, handleClickOpen, setProduct }) => {
 	return (
@@ -29,6 +30,7 @@ const RentalsList = ({ cart, classes, handleClickOpen, setProduct }) => {
 						</ListSubheader>
 					}
 				>
+					<Divider variant="middle" />
 					{cart
 						.filter((order) => order.type === 'rental')
 						.map((product, i) => (

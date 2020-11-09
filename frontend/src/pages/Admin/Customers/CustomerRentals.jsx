@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // react router
 // import {
@@ -31,4 +31,4 @@ const CustomerRentals = () => {
 	);
 };
 
-export default CustomerRentals;
+export default memo(CustomerRentals);

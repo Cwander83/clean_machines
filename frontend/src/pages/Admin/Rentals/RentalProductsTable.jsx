@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 // React router
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ import Button from '@material-ui/core/Button';
 import TableHead from '@material-ui/core/TableHead';
 
 // context
-import { AdminContext } from '../../../context/admin-context';
+//import { AdminContext } from '../../../context/admin-context';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -114,22 +114,17 @@ const useStyles2 = makeStyles((theme) => ({
 	},
 }));
 
-const RentalProductsTable = React.memo(() => {
-	const {
-		product,
-		//	setProduct,
-		// setDeleteBtn,
-		//	setEditBtn,
-	} = React.useContext(AdminContext);
+const RentalProductsTable = memo(() => {
+	//const { product } = useContext(AdminContext);
 	const classes = useStyles2();
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const [rows, setData] = React.useState([]);
+	const [rows, setData] = useState([]);
 
-	console.log(JSON.stringify(product, null, 2));
+	//console.log(JSON.stringify(product, null, 2));
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchData = async () => {
 			const result = await axios(`/products/rental`);
 
@@ -166,7 +161,6 @@ const RentalProductsTable = React.memo(() => {
 					</TableCell>
 					<TableCell>{row.model}</TableCell>
 					<TableCell>{row.category}</TableCell>
-					
 				</TableRow>
 			</React.Fragment>
 		);
@@ -181,7 +175,6 @@ const RentalProductsTable = React.memo(() => {
 						<TableCell>Name</TableCell>
 						<TableCell>Model</TableCell>
 						<TableCell>Category</TableCell>
-						
 					</TableRow>
 				</TableHead>
 				<TableBody>

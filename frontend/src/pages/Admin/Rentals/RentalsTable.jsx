@@ -1,6 +1,6 @@
 // TODO fix and update table with current data
 
-import React from 'react';
+import React, { useEffect, useState, memo } from 'react';
 
 // axios
 import axios from 'axios';
@@ -115,14 +115,14 @@ const RentalsTable = () => {
 
 	let { path } = useRouteMatch();
 
-	const [loading, setLoading] = React.useState(false);
+	const [loading, setLoading] = useState(false);
 
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const [rows, setData] = React.useState([]);
+	const [rows, setData] = useState([]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchData = async () => {
 			//setLoading(true);
 			const result = await axios(`/rentals/`);
@@ -234,4 +234,4 @@ const RentalsTable = () => {
 	);
 };
 
-export default RentalsTable;
+export default memo(RentalsTable);

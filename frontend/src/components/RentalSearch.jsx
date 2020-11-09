@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const RentalSearch = ({ show, size }) => {
+const RentalSearch = ({ show, size, buttonSize }) => {
 	const classes = useStyles();
 
 	const { rentalDates, startDateHandler, endDateHandler } = React.useContext(
@@ -70,13 +70,12 @@ const RentalSearch = ({ show, size }) => {
 		<>
 			<Grid item xs sm={1}></Grid>
 
-			<Grid item xs={12}>
+			<Grid item xs={12} sm={10}>
 				<Grid
 					container
 					alignItems="center"
 					classes={{ root: classes.searchSection }}
 				>
-					
 					<Grid item xs={12} sm={size}>
 						<KeyboardDatePicker
 							className={classes.textField}
@@ -107,7 +106,7 @@ const RentalSearch = ({ show, size }) => {
 						/>
 					</Grid>
 					{show ? (
-						<Grid item sx={12} sm={2} className={classes.buttonGrid}>
+						<Grid item xs={12} sm={buttonSize} className={classes.buttonGrid}>
 							<Button
 								classes={{
 									label: classes.buttonLabel,

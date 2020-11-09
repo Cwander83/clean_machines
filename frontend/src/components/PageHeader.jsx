@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 		flexDirection: 'column',
+		[theme.breakpoints.down('xs')]: {
+		fontSize: '28px'
+		},
 	},
 
 }));

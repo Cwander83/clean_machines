@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, memo, useContext } from 'react';
 
 // axios
 import axios from 'axios';
@@ -19,57 +19,39 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import ExpandLess from '@material-ui/icons/ExpandLess';
+import Divider from '@material-ui/core/Divider';
 
 // components
 import CustomersCreateRental from './CustomersCreateRental';
 import UpdateCustomer from './UpdateCustomer';
 import CustomerRentals from './CustomerRentals';
 import CustomerSales from './CustomerSales';
+import CustomerBilling from './CustomerBilling';
+import CustomerShipping from './CustomerShipping';
 
-const CustomersDetails = React.memo(() => {
+// context api
+import { AdminContext } from '../../../context/admin-context';
+
+const CustomersDetails = () => {
 	let { url, path } = useRouteMatch();
-	let { id } = useParams();
-	//let history = useHistory();
 
-	const [customer, setCustomer] = React.useState({});
+	let { id } = useParams(); //let history = useHistory();
 
-	const [open1, setOpen1] = React.useState(false);
-	const [open2, setOpen2] = React.useState(false);
+	//const [customer, setCustomer] = useState({});
 
-	const [billing, setBilling] = React.useState({});
+	let {customer, setCustomer } = useContext(AdminContext);
 
-	const [shipping, setShipping] = React.useState({});
-	const [shippingAddress, setShippingAddress] = React.useState({});
+	console.log(customer);
 
-	//const [rentals, setRentals] = React.useState({});
-
-	//const [isLoading, setIsLoading] = React.useState(false);
-
-	console.log(shipping);
-
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchData = async () => {
-		//	setIsLoading(true);
 			const stripeData = await axios.get(`/customers/${id}`);
-		//	const salesData = await axios.get(`/customers/sales/${id}`);
-			//	const rentalData = await axios.get(`/customers/rentals/${id}`);
 
 			setCustomer(stripeData.data);
-			setBilling(stripeData.data.address);
-			setShipping(stripeData.data.shipping);
-			setShippingAddress(stripeData.data.shipping.address);
-
-			//setIsLoading(false);
 		};
 
 		fetchData();
-	}, [id]);
-
-	const handleClick1 = () => setOpen1(!open1);
-	const handleClick2 = () => setOpen2(!open2);
+	}, [id, setCustomer]);
 
 	return (
 		<Grid container spacing={2} justify="center" component={Paper}>
@@ -80,79 +62,53 @@ const CustomersDetails = React.memo(() => {
 				<Button component={Link} to={`${url}`}>
 					details
 				</Button>
-				<Button component={Link} to={`${url}/rental`}>
+				<Button component={Link} to={`${url}/rentals`}>
+					rentals
+				</Button>
+				<Button component={Link} to={`${url}/sales`}>
+					sales
+				</Button>
+				<Button component={Link} to={`${url}/create-rental`}>
 					create rental
 				</Button>
 				<Button component={Link} to={`${url}/update`}>
 					update
 				</Button>
-
-				<Typography variant="h3">Customer details</Typography>
+				<Divider />
 			</Grid>
 
 			<Switch>
 				<Route exact path={path}>
 					<Grid item xs={12} sm={6}>
-						<Typography variant="h3">Billing</Typography>
-
-						<address>
-							{customer.name}
-							<br />
-							{customer.email}
-							<br />
-							{customer.phone}
-							<br />
-							{billing.line1}
-							<br />
-							{billing.line2}
-							<br />
-							{billing.city}, {billing.state}, {billing.postal_code}
-						</address>
+						<Typography variant="h4">Billing</Typography>
+						<CustomerBilling />
 					</Grid>
 					<Grid item xs={12} sm={6}>
-						<Typography variant="h3">Shipping</Typography>
-
-						<address>
-							{shipping.name}
-							<br />
-							{shipping.phone}
-							<br />
-							{shippingAddress.line1}
-							<br />
-							{shippingAddress.line2}
-							<br />
-							{shippingAddress.city}, {shippingAddress.state},
-							{shippingAddress.postal_code}
-						</address>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Typography variant="h3" onClick={handleClick1}>
-							rentals {open1 ? <ExpandLess /> : <ExpandMore />}
-						</Typography>
-						<Collapse in={open1} timeout="auto" unmountOnExit>
-							<CustomerRentals />
-						</Collapse>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<Typography variant="h3" onClick={handleClick2}>
-							sales {open2 ? <ExpandLess /> : <ExpandMore />}
-						</Typography>
-						<Collapse in={open2} timeout="auto" unmountOnExit>
-							<CustomerSales />
-						</Collapse>
+						<Typography variant="h4">Shipping</Typography>
+						<CustomerShipping  />
 					</Grid>
 				</Route>
 				<Route path={`${url}/update`}>
 					<UpdateCustomer />
 				</Route>
-				<Route path={`${path}/rental`}>
+				<Route path={`${path}/create-rental`}>
 					<Grid item xs={12} sm={10}>
 						<CustomersCreateRental />
+					</Grid>
+				</Route>
+				<Route path={`${path}/rentals`}>
+					<Grid item xs={12} sm={10}>
+						<CustomerRentals />
+					</Grid>
+				</Route>
+				<Route path={`${path}/sales`}>
+					<Grid item xs={12} sm={10}>
+						<CustomerSales />
 					</Grid>
 				</Route>
 			</Switch>
 		</Grid>
 	);
-});
+};
 
-export default CustomersDetails;
+export default memo(CustomersDetails);

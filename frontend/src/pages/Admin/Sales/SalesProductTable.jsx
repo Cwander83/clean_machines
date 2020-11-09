@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useContext, memo } from 'react';
 
 // React router
 import { Link } from 'react-router-dom';
@@ -114,22 +114,17 @@ const useStyles2 = makeStyles((theme) => ({
 	},
 }));
 
-const SalesProductTable = React.memo(() => {
-	const {
-		product,
-		//	setProduct,
-		// setDeleteBtn,
-		//	setEditBtn,
-	} = React.useContext(AdminContext);
+const SalesProductTable = () => {
+	const { product } = useContext(AdminContext);
 	const classes = useStyles2();
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const [rows, setData] = React.useState([]);
+	const [rows, setData] = useState([]);
 
 	console.log(JSON.stringify(product, null, 2));
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchData = async () => {
 			const result = await axios(`/products/sales`);
 
@@ -166,7 +161,6 @@ const SalesProductTable = React.memo(() => {
 					</TableCell>
 					<TableCell>{row.model}</TableCell>
 					<TableCell>{row.category}</TableCell>
-					
 				</TableRow>
 			</React.Fragment>
 		);
@@ -181,7 +175,6 @@ const SalesProductTable = React.memo(() => {
 						<TableCell>Name</TableCell>
 						<TableCell>Model</TableCell>
 						<TableCell>Category</TableCell>
-						
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -219,6 +212,6 @@ const SalesProductTable = React.memo(() => {
 			</Table>
 		</TableContainer>
 	);
-});
+};
 
-export default SalesProductTable;
+export default memo(SalesProductTable);

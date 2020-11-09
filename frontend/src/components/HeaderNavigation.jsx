@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 // components
 
 // images / icons
-import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
+import Logo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: 'transparent',
 		},
 	},
-	icon: { width: '35px' },
+	icon: { height: '75px' },
 }));
 const HeaderNavigation = () => {
 	const classes = useStyles();
