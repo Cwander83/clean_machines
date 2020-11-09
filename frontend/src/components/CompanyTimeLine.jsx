@@ -9,58 +9,73 @@ import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import Typography from '@material-ui/core/Typography';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import CheckIcon from '@material-ui/icons/Check';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 
-const useStyles = makeStyles({
-	timeline: {},
-});
+const useStyles = makeStyles((theme) => ({
+	timeline: {
+		textTransform: 'Capitalize',
+	},
+	checkIcon: {
+		backgroundColor: theme.palette.gold.main,
+	},
+	shoppingCartIcon: {
+		backgroundColor: theme.palette.primary.main,
+	},
+	truckIcon: {
+		backgroundColor: theme.palette.primary.light,
+	}
+}));
 
 const CompanyTimeline = () => {
 	const classes = useStyles();
 	return (
 		<Timeline align="alternate" className={classes.timeline}>
 			<TimelineItem align="left">
+				<TimelineOppositeContent>
+					<Typography variant="body2" color="textSecondary">
+						step 1
+					</Typography>
+				</TimelineOppositeContent>
 				<TimelineSeparator>
-					<TimelineDot variant="outlined" />
+					<TimelineDot className={classes.shoppingCartIcon}>
+						<ShoppingCartIcon />
+					</TimelineDot>
 					<TimelineConnector />
 				</TimelineSeparator>
-				<TimelineContent></TimelineContent>
-			</TimelineItem>
-			<TimelineItem>
-				<TimelineSeparator>
-					<TimelineDot variant="outlined" />
-					<TimelineConnector />
-				</TimelineSeparator>
-				<TimelineContent>check if we service your area </TimelineContent>
-			</TimelineItem>
-
-			<TimelineItem align="left">
-				<TimelineSeparator>
-					<TimelineDot variant="outlined" />
-					<TimelineConnector />
-				</TimelineSeparator>
-				<TimelineContent>search dates for rental</TimelineContent>
-			</TimelineItem>
-			<TimelineItem align="left">
-				<TimelineSeparator>
-					<TimelineDot variant="outlined" />
-					<TimelineConnector />
-				</TimelineSeparator>
-				<TimelineContent>checkout</TimelineContent>
+				<TimelineContent>Checkout with your Rentals</TimelineContent>
 			</TimelineItem>
 
 			<TimelineItem>
+				<TimelineOppositeContent>
+					<Typography variant="body2" color="textSecondary">
+						step 2
+					</Typography>
+				</TimelineOppositeContent>
 				<TimelineSeparator>
-					<TimelineDot variant="outlined" />
+					<TimelineDot className={classes.truckIcon}>
+						<LocalShippingIcon />
+					</TimelineDot>
 					<TimelineConnector />
 				</TimelineSeparator>
-				<TimelineContent>We deliver to you before noon</TimelineContent>
+				<TimelineContent>We Deliver To You Before Noon</TimelineContent>
 			</TimelineItem>
 
 			<TimelineItem align="left">
+				<TimelineOppositeContent>
+					<Typography variant="body2" color="textSecondary">
+						step 3
+					</Typography>
+				</TimelineOppositeContent>
 				<TimelineSeparator>
-					<TimelineDot variant="outlined" />
+					<TimelineDot className={classes.checkIcon}>
+						<CheckIcon />
+					</TimelineDot>
 				</TimelineSeparator>
-				<TimelineContent>We pick up anytime til 9pm</TimelineContent>
+				<TimelineContent>We Pick Up Anytime Til 9PM </TimelineContent>
 			</TimelineItem>
 		</Timeline>
 	);

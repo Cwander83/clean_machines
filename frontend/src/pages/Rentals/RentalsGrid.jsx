@@ -1,9 +1,7 @@
 import React, { useMemo, memo, useEffect, useState, useContext } from 'react';
 
 // react router
-import {
-	Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // classnames
 import ClassNames from 'classnames';
@@ -33,8 +31,12 @@ import RentalSearch from '../../components/RentalSearch';
 
 // images
 import picture from '../../images/BGFS5000.jpg';
+import CompanyTimeline from '../../components/CompanyTimeLine';
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		
+	},
 	title: {
 		color: 'black',
 	},
@@ -45,12 +47,15 @@ const useStyles = makeStyles((theme) => ({
 		backgroundSize: 'contain',
 	},
 	content: {
+		color: theme.palette.grey.main,
 		paddingBottom: '0px',
+		backgroundColor: theme.palette.primary.light,
 	},
 	productDescription: {
 		color: theme.palette.gold.main,
 	},
 	prices: {
+		color: theme.palette.gold.main,
 		textTransform: 'Capitalize',
 		fontWeight: 500,
 	},
@@ -58,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.gold.main,
 	},
 	divider2: {
-		marginBottom: "10px",
+		marginBottom: '10px',
 		backgroundColor: theme.palette.gold.main,
 	},
 	subtitle: {
@@ -100,9 +105,9 @@ const useStyles = makeStyles((theme) => ({
 		letterSpacing: '0.12em',
 	},
 	searchTitle: {
-		marginBottom: '10px',
-	}
-	
+		marginTop: '10px',
+		marginBottom: '20px',
+	},
 }));
 
 function productFunc(array, classes) {
@@ -250,27 +255,28 @@ const RentalsGrid = () => {
 		<>
 			<Grid item xs={12}>
 				<Grid container>
-					<Grid item md={2}></Grid>
-					<Grid item xs={12} md={8}>
-						<Typography variant="body1" className={classes.description}>
-							We are Central Florida Based Rental company. we deliver the rental
-							on start date by noon. and pick up the rental at the end of the
-							rental. no need to worry about anything but enjoying the great
-							products we offer.
-						</Typography>
-						<Divider className={classes.divider2} />
+					<Grid item md={1}></Grid>
+					<Grid item xs={12} md={5}>
+						<CompanyTimeline />
+					</Grid>
+
+					<Grid item xs={12} md={5}>
 						<Typography variant="h4" className={classes.searchTitle}>
-							Search Rental Dates </Typography>
+							Search Rental Dates
+						</Typography>
+
+						<RentalSearch
+							show={false}
+							size={6}
+							buttonSize={0}
+							direction="column"
+							space="10px"
+						/>
 					</Grid>
-					<Grid item md={2}></Grid>
-					<Grid item sm={2}></Grid>
-					<Grid item xs={12} md={8}>
-					
-						<RentalSearch show={false} size={6} buttonSize={0} />
-					</Grid>
-					<Grid item md={2}></Grid>
+					<Grid item md={1}></Grid>
 				</Grid>
 			</Grid>
+			<Divider className={classes.divider2} />
 
 			<Grid container spacing={4} className={classes.body}>
 				{productSection}

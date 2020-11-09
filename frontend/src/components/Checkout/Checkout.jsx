@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
-//import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
+// components
 import CheckoutStepper from './CheckoutStepper';
 
+// context api
 import { CartContext } from '../../context/cart-context';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,20 +38,21 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '40px',
 		padding: '15px 30px',
 		letterSpacing: '0.2em',
-		color: theme.palette.grey.main,
+		color: theme.palette.gold.main,
+		backgroundColor: theme.palette.primary.light,
 	},
 }));
 
 const Checkout = () => {
 	const classes = useStyles();
-	const { open, handleClickOpen, handleClose } = React.useContext(CartContext);
+	const { open, handleClickOpen, handleClose } = useContext(CartContext);
 
 	return (
 		<React.Fragment>
 			<CssBaseline />
 			<Button
 				variant="contained"
-				color="primary"
+				
 				onClick={handleClickOpen}
 				className={classes.button}
 			>

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+
+// react hooks form
+import { useForm, Controller } from 'react-hook-form';
+
+// material ui
 import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
-import { useForm, Controller } from 'react-hook-form';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+// context api
 import { CartContext } from '../../context/cart-context.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,17 +41,15 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 
 	const { register, handleSubmit, errors, control } = useForm();
 
-	const { updateDelivery, user } = React.useContext(CartContext);
-	const [checked, setChecked] = React.useState(false);
+	const { updateDelivery, user } = useContext(CartContext);
+	const [checked, setChecked] = useState(false);
 
-	console.log(checked);
+	//console.log(checked);
+
 	const onSubmit = (data) => {
 		console.log(data);
-		if (!checked && data) {
+		if (data) {
 			updateDelivery(data);
-			nextStep();
-		}
-		if (checked) {
 			nextStep();
 		}
 	};
@@ -64,6 +68,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 					<Checkbox
 						checked={checked}
 						onChange={handleChange}
+						onClick={nextStep}
 						inputProps={{ 'aria-label': 'primary checkbox' }}
 					/>
 				}
@@ -75,8 +80,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					
-					<Grid item xs={12} >
+					<Grid item xs={12}>
 						<TextField
 							required
 							id="name"
@@ -197,15 +201,10 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 						<Button color="primary" variant="contained" onClick={prevStep}>
 							back
 						</Button>
-						{checked ? (
-							<Button color="primary" variant="contained" onClick={nextStep}>
-								skip
-							</Button>
-						) : (
-							<Button color="primary" variant="contained" type="submit">
-								next
-							</Button>
-						)}
+
+						<Button color="primary" variant="contained" type="submit" style={{ marginLeft: '10px'}}>
+							next
+						</Button>
 					</Grid>
 				</Grid>
 			</form>

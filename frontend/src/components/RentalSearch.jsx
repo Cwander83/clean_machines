@@ -17,7 +17,7 @@ import { RentalContext } from '../context/rental-context';
 
 const useStyles = makeStyles((theme) => ({
 	textField: {
-		margin: 'auto ',
+		margin: `auto`,
 		width: '90%',
 		color: theme.palette.primary.light,
 		[theme.breakpoints.down('xs')]: {
@@ -55,12 +55,12 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	disabled: {
-		backgroundColor: theme.palette.primary.main,
+		backgroundColor: theme.palette.grey.main,
 	},
 }));
 
-const RentalSearch = ({ show, size, buttonSize }) => {
-	const classes = useStyles();
+const RentalSearch = ({ show, size, buttonSize, direction, space }) => {
+	const classes = useStyles(space);
 
 	const { rentalDates, startDateHandler, endDateHandler } = React.useContext(
 		RentalContext
@@ -68,12 +68,13 @@ const RentalSearch = ({ show, size, buttonSize }) => {
 
 	return (
 		<>
-			<Grid item xs sm={1}></Grid>
+			<Grid item sm={1}></Grid>
 
-			<Grid item xs={12} sm={10}>
+			<Grid item xs={12}>
 				<Grid
 					container
 					alignItems="center"
+					direction={direction ? direction : 'row'}
 					classes={{ root: classes.searchSection }}
 				>
 					<Grid item xs={12} sm={size}>
@@ -88,6 +89,10 @@ const RentalSearch = ({ show, size, buttonSize }) => {
 							placeholder="MM/DD/YYYY"
 							format="MM/dd/yyyy"
 							disablePast="true"
+							style={{
+								marginTop: space,
+								marginBottom: space,
+							}}
 						/>
 					</Grid>
 					<Grid item xs={12} sm={size}>
@@ -103,6 +108,10 @@ const RentalSearch = ({ show, size, buttonSize }) => {
 							format="MM/dd/yyyy"
 							minDate={rentalDates.startDate}
 							disablePast="true"
+							style={{
+								marginTop: space,
+								marginBottom: space,
+							}}
 						/>
 					</Grid>
 					{show ? (
@@ -116,18 +125,16 @@ const RentalSearch = ({ show, size, buttonSize }) => {
 								component={Link}
 								variant="outlined"
 								to="/rentals"
-								disabled={rentalDates.startDate === null}
+								disabled={rentalDates.endDate === null}
 							>
 								Search
 								<SearchIcon style={{ marginLeft: '5px' }} />
 							</Button>
 						</Grid>
 					) : null}
-
-					<Grid item xs={1}></Grid>
 				</Grid>
 			</Grid>
-			<Grid item xs sm={1}></Grid>
+			<Grid item sm={1}></Grid>
 		</>
 	);
 };

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -7,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
+// context api
 import { CartContext } from '../../context/cart-context';
 
 const products = [
@@ -38,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Review({ nextStep, prevStep }) {
-	const { user } = React.useContext(CartContext);
+	const { user } = useContext(CartContext);
 
-	React.useEffect(() => {}, []);
+	useEffect(() => {}, []);
 
 	const classes = useStyles();
 
@@ -103,6 +106,7 @@ export default function Review({ nextStep, prevStep }) {
 						variant="contained"
 						type="submit"
 						onClick={nextStep}
+						style={{ marginLeft: '10px' }}
 					>
 						payment
 					</Button>
