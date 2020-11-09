@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+
+// react hooks form
+import { useForm, Controller } from 'react-hook-form';
+
+// material ui
 import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
-import { useForm, Controller } from 'react-hook-form';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+// context api
 import { CartContext } from '../../context/cart-context.js';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
 export default function ShippingForm({ nextStep, prevStep }) {
 	const classes = useStyles();
 	const { register, handleSubmit, errors, control } = useForm();
-	const { user, updateShipping } = React.useContext(CartContext);
+	const { user, updateShipping } = useContext(CartContext);
 
-	const [checked, setChecked] = React.useState(false);
+	const [checked, setChecked] = useState(false);
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -59,10 +65,11 @@ export default function ShippingForm({ nextStep, prevStep }) {
 					<Checkbox
 						checked={checked}
 						onChange={handleChange}
+						onClick={nextStep}
 						inputProps={{ 'aria-label': 'primary checkbox' }}
 					/>
 				}
-				label="check here if not renting"
+				label="check here if nothing is being shipped"
 			/>
 			<form
 				className={classes.form}
@@ -70,7 +77,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					<Grid item xs={12} >
+					<Grid item xs={12}>
 						<TextField
 							required
 							id="firstName"
@@ -82,7 +89,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-					
+
 					<Grid item xs={12}>
 						<TextField
 							id="companyName"
@@ -192,22 +199,16 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						<Button color="primary" variant="contained" onClick={prevStep}>
 							back
 						</Button>
-						{!checked ? (
-							<Button color="primary" variant="contained" type="submit">
-								Review order
-							</Button>
-						) : (
-							<Button color="primary" variant="contained" onClick={nextStep}>
-								Review order
-							</Button>
-						)}
+
+						<Button color="primary" variant="contained" onClick={nextStep} style={{ marginLeft: '10px'}}>
+							Review order
+						</Button>
 					</Grid>
 				</Grid>
 			</form>
 		</React.Fragment>
 	);
 }
-
 
 const states = [
 	'AL',

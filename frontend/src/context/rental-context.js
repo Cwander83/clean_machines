@@ -22,7 +22,7 @@ const RentalContextProvider = (props) => {
 		setRentalDates({ ...rentalDates, endDate: moment(date).format() });
 
 	// location dialog in rentals page
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(true);
 
 	const handleClose = () => {
 		setOpen(false);

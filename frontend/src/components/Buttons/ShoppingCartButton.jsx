@@ -27,7 +27,7 @@ export default function CustomizedBadges() {
 		<IconButton aria-label="cart" component={Link} to="/cart">
 			<StyledBadge
 				badgeContent={cart.length === 0 ? "0" : cart.length}
-				color="secondary"
+				color="primary"
 			>
 				<ShoppingCartIcon />
 			</StyledBadge>

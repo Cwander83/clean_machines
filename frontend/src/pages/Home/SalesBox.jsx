@@ -104,7 +104,7 @@ const SalesBox = () => {
 	];
 
 	return (
-		<Grid container direction="row" justify="flex-start" spacing={2}>
+		<Grid container direction="row" justify="flex-start" spacing={2} style={{ marginTop: '10px'}}>
 			<Grid item xs={12} sm={6}>
 				<Typography variant="h6" className={classes.sectionTitle}>
 					Vacuums

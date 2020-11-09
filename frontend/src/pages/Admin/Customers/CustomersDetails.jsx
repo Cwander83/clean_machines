@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useContext } from 'react';
+import React, { useEffect, memo, useContext } from 'react';
 
 // axios
 import axios from 'axios';
@@ -39,7 +39,7 @@ const CustomersDetails = () => {
 
 	//const [customer, setCustomer] = useState({});
 
-	let {customer, setCustomer } = useContext(AdminContext);
+	let { customer, setCustomer } = useContext(AdminContext);
 
 	console.log(customer);
 
@@ -85,7 +85,7 @@ const CustomersDetails = () => {
 					</Grid>
 					<Grid item xs={12} sm={6}>
 						<Typography variant="h4">Shipping</Typography>
-						<CustomerShipping  />
+						<CustomerShipping />
 					</Grid>
 				</Route>
 				<Route path={`${url}/update`}>

@@ -17,6 +17,7 @@ import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2
 import SalesBox from './SalesBox';
 import RentalSearch from '../../components/RentalSearch';
 import Container from '../../containers/Container';
+import CompanyTimeLine from '../../components/CompanyTimeLine'
 
 // outside styles
 
@@ -30,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
 		margin: '5px 0 40px 0',
 		borderRadius: '0',
 		zIndex: '2',
+		height: '200px',
+		justifyContent: 'center',
+		alignItems: 'center',
+		display: 'flex'
 	},
 
 	section: {
@@ -38,22 +43,30 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 	},
 
-	slogan: {
+	boxTitle: {
 		textTransform: 'Capitalize',
-		fontSize: '24px',
-		padding: '15px 0 ',
+		fontSize: '26px',
+		padding: '25px 0',
 		width: '100%',
+		fontFamily: theme.typography.fontFamily.yellowTail,
 		fontWeight: '400',
-		marginBottom: '20px',
-		letterSpacing: '.05em',
+		letterSpacing: '.07em',
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
+		[theme.breakpoints.down('sm')]: {
+			fontSize: '22px',
+		},
 	},
 
 	logo: {
+		marginTop: 'auto',
+		marginBottom: 'auto',
 		width: '30%',
 		[theme.breakpoints.down('sm')]: {
-			width: '80%',
+			width: '60%',
+		},
+		[theme.breakpoints.down('xs')]: {
+			width: '75%',
 		},
 	},
 
@@ -78,37 +91,10 @@ const useStyles = makeStyles((theme) => ({
 		border: '2px solid',
 		padding: ' 5px',
 		zIndex: '10',
+	
 		borderColor: theme.palette.primary.light,
 		backgroundColor: 'white',
 		[theme.breakpoints.down('sm')]: {},
-	},
-
-	box3: {
-		position: 'relative',
-		top: '-40px',
-		left: '820px',
-		width: '60px',
-		height: '40px',
-		backgroundColor: theme.palette.gold.main,
-	},
-
-	span: {
-		fontSize: '28px',
-		fontFamily: 'YellowTail',
-	},
-
-	search: {
-		textTransform: 'Capitalize',
-		fontSize: '24px',
-		padding: '15px 0',
-		width: '100%',
-		fontWeight: '400',
-		letterSpacing: '.07em',
-		color: theme.palette.gold.main,
-		backgroundColor: theme.palette.primary.light,
-		[theme.breakpoints.down('sm')]: {
-			fontSize: '22px',
-		},
 	},
 
 	mainGrid: {
@@ -118,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
 	description: {
 		padding: '30px 40px',
 		textAlign: 'left',
-		fontStyle: 'italic',
+		//fontStyle: 'italic',
 		fontSize: '16px',
 		fontWeight: '500',
 		letterSpacing: '0.1em',
@@ -155,23 +141,16 @@ const Home = () => {
 									elevation={2}
 								></Box>
 								<Box className={classes.box2} component={Paper} elevation={2}>
-									<Typography variant="h3" className={classes.search}>
+									<Typography variant="h6" className={classes.boxTitle}>
 										Search for rental Dates
 									</Typography>
 									<Grid container className={classes.body}>
 										<Grid item xs={12}>
-											<Typography
-												variant="body1"
-												className={classes.description}
-											>
-												We are Central Florida Based Rental company. we deliver
-												the rental on start date by noon. and pick up the rental
-												at the end of the rental. no need to worry about
-												anything but enjoying the great products we offer.
-											</Typography>
+										
+											<CompanyTimeLine />
 										</Grid>
 
-										<RentalSearch show={true} size={4} buttonSize={2} />
+										<RentalSearch show={true} size={5} buttonSize={2} />
 									</Grid>
 								</Box>
 							</Box>
@@ -184,7 +163,7 @@ const Home = () => {
 									elevation={2}
 								></Box>
 								<Box className={classes.box2} component={Paper} elevation={2}>
-									<Typography variant="h3" className={classes.slogan}>
+									<Typography variant="h6" className={classes.boxTitle}>
 										browse our award winning products!
 									</Typography>
 									<SalesBox />
@@ -199,11 +178,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// TODO
-// * LANDING
-// * DESC OF COMPANY
-// * HOW THE RENTALS WORK
-// * SEARCH FOR RENTALS
-// * SHOW TOP SELLING PRODUCT
-// * DEMO VIDEOS
