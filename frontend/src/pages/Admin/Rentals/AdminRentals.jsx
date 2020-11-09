@@ -53,12 +53,12 @@ const AdminRentals = () => {
 
 			<Switch>
 				<Route exact path={path}>
-					<Grid item xs={12} md={10}>
+					<Grid item xs={12} md={10} style={{ marginTop: '20px' }}>
 						<Typography variant="h4">Active Rentals</Typography>
 						<CurrentRentals />
 					</Grid>
-					<Grid item xs={12} md={10}>
-						<Typography variant="h4">All Rentals</Typography>
+					<Grid item xs={12} md={10} style={{ marginTop: '20px' }}>
+						<Typography variant="h4">Rental History</Typography>
 						<RentalsTable />
 					</Grid>
 				</Route>

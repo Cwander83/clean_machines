@@ -25,7 +25,10 @@ export default function CustomizedBadges() {
 	let { cart } = useContext(CartContext);
 	return (
 		<IconButton aria-label="cart" component={Link} to="/cart">
-			<StyledBadge badgeContent={cart.length} color="secondary">
+			<StyledBadge
+				badgeContent={cart.length === 0 ? "0" : cart.length}
+				color="secondary"
+			>
 				<ShoppingCartIcon />
 			</StyledBadge>
 		</IconButton>
