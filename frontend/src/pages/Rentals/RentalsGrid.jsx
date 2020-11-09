@@ -266,7 +266,7 @@ const RentalsGrid = () => {
 					<Grid item sm={2}></Grid>
 					<Grid item xs={12} md={8}>
 					
-						<RentalSearch show={false} size={6} />
+						<RentalSearch show={false} size={6} buttonSize={0} />
 					</Grid>
 					<Grid item md={2}></Grid>
 				</Grid>

@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState, memo, useEffect } from 'react';
 
+// react router
 import { useParams } from 'react-router-dom';
 
+// axios
 import axios from 'axios';
 
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
-
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-//import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
-//import EditIcon from '@material-ui/icons/Edit'
 
 const useStyles = makeStyles((theme) => ({
 	list: {
@@ -29,14 +29,15 @@ const useStyles = makeStyles((theme) => ({
 
 const RentalsDetails = () => {
 	const classes = useStyles();
-	//let { url, path } = useRouteMatch();
+
 	let { id } = useParams();
 
 	console.log('id: ' + id);
 
-	const [data, setData] = React.useState({});
-	const [product, setProduct] = React.useState({});
-	React.useEffect(() => {
+	const [data, setData] = useState({});
+	const [product, setProduct] = useState({});
+
+	useEffect(() => {
 		const fetchData = async () => {
 			const result = await axios(`/rentals/${id}`);
 
@@ -159,4 +160,4 @@ const RentalsDetails = () => {
 	);
 };
 
-export default RentalsDetails;
+export default memo(RentalsDetails);

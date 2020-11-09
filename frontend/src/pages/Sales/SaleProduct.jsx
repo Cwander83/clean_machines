@@ -81,7 +81,7 @@ function productFunc(obj, classes) {
 					className={ClassNames(classes.price)}
 					variant="h5"
 				>
-					$ {(product.sale_price / 100).toFixed(2)}
+					$ {product.sale_price ? ((product.sale_price / 100).toFixed(2)): ""}
 				</Typography>
 			</Grid>
 			<Divider className={classes.divider} />

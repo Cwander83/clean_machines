@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
 			padding: theme.spacing(3),
 		},
 	},
+	button: {
+		marginTop: '40px',
+		padding: '15px 30px',
+		letterSpacing: '0.2em',
+		color: theme.palette.grey.main,
+	},
 }));
 
 const Checkout = () => {
@@ -41,14 +47,17 @@ const Checkout = () => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<Button variant="outlined" color="primary" onClick={handleClickOpen}>
-				Checkout
+			<Button
+				variant="contained"
+				color="primary"
+				onClick={handleClickOpen}
+				className={classes.button}
+			>
+				Proceed to checkout
 			</Button>
 			<Dialog open={open} fullWidth maxWidth="md" onClose={handleClose}>
 				<main className={classes.layout}>
 					<Paper className={classes.paper}>
-
-
 						<CheckoutStepper />
 					</Paper>
 				</main>

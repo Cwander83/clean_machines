@@ -2,13 +2,13 @@ import React, { useContext, memo, useState, useEffect } from 'react';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import Divider from '@material-ui/core/Divider';
 
 // components
 import Checkout from '../../components/Checkout/Checkout';
@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
 		width: '60px',
 		marginRight: '25%',
 	},
+	gridContainer: {
+		marginTop: '20px',
+	},
 }));
 
 const Cart = () => {
@@ -101,7 +104,7 @@ const Cart = () => {
 		<Container>
 			<PageHeader title="Your shopping Cart" />
 
-			<Grid container spacing={2} component={Paper}>
+			<Grid container spacing={2} className={classes.gridContainer}>
 				<RentalsList
 					cart={cart}
 					classes={classes}
@@ -125,6 +128,7 @@ const Cart = () => {
 							</ListSubheader>
 						}
 					>
+						<Divider variant="middle" />
 						<PurchasesList
 							cart={cart}
 							classes={classes}
@@ -159,11 +163,11 @@ const Cart = () => {
 							</Typography>
 						</ListItem>
 					</List>
+					<Grid item xs={12}>
+						<Checkout />
+					</Grid>
 				</Grid>
 				<Grid item sm={3}></Grid>
-				<Grid item xs={12}>
-					<Checkout />
-				</Grid>
 			</Grid>
 
 			{item !== null && (

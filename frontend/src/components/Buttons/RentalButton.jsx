@@ -76,15 +76,15 @@ const RentalButton = ({ product }) => {
 		setErrors();
 
 		// sends data to cart context
-		if (rentalDates.startDate === null || rentalDates.endDate === null)
+		if (rentalDates.startDate === null || rentalDates.endDate === null) {
 			setErrors('not valid dates');
-
-		if (rentalDates.startDate > rentalDates.endDate)
+			console.error('valid dates error');
+		} else if (rentalDates.startDate > rentalDates.endDate) {
 			setErrors("Sorry, rentals can't go in the past");
-
-		const total = rentalCost({ product, rentalDates });
-
-		if (!error) {
+			console.error('past error');
+		} else if (!error) {
+			console.log('i see this here');
+			const total = rentalCost({ product, rentalDates });
 			let data = {
 				productId: product.id,
 				model: product.model,
@@ -148,14 +148,20 @@ const RentalButton = ({ product }) => {
 				/>
 			</Grid>
 			<Grid item>
-				<Button
-					variant="contained"
-					className={classes.button}
-					onClick={addToCartHandler}
-				>
-					Add Rental
-					<AddShoppingCartIcon className={classes.cartIcon} />
-				</Button>
+				{success ? (
+					<Typography className={classes.success} variant="caption">
+						** Rental added to cart
+					</Typography>
+				) : (
+					<Button
+						variant="contained"
+						className={classes.button}
+						onClick={addToCartHandler}
+					>
+						Add Rental
+						<AddShoppingCartIcon className={classes.cartIcon} />
+					</Button>
+				)}
 			</Grid>
 
 			{error && (
@@ -163,14 +169,8 @@ const RentalButton = ({ product }) => {
 					{error}
 				</Typography>
 			)}
-
-			{success && (
-				<Typography className={classes.success} variant="caption">
-					** Rental added to cart
-				</Typography>
-			)}
 		</Grid>
 	);
 };
 
-export default memo(RentalButton)	;
+export default memo(RentalButton);

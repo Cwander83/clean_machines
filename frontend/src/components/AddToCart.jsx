@@ -8,12 +8,13 @@ import ClassNames from 'classnames';
 
 // material ui
 import { makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Paper from '@material-ui/core/Paper';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 // context api
 import { CartContext } from '../context/cart-context';
@@ -51,12 +52,18 @@ const useStyles = makeStyles((theme) => ({
 		marginLeft: '5px',
 		color: theme.palette.gold.main,
 	},
+	checkmarkIcon: {
+		marginRight: '5px',
+		color: theme.palette.primary.light,
+		fontSize: '26px',
+	}
 }));
 
 const AddToCart = ({ product }) => {
 	const classes = useStyles();
 
 	const [count, setCount] = useState(1);
+	const [success, setSuccess] = useState(false);
 
 	let { addToCart } = useContext(CartContext);
 
@@ -83,7 +90,7 @@ const AddToCart = ({ product }) => {
 		};
 
 		addToCart({ data });
-
+		setSuccess(true);
 		setCount(1);
 	};
 
@@ -91,19 +98,31 @@ const AddToCart = ({ product }) => {
 
 	return (
 		<div className={classes.root}>
-			<AddIcon className={ClassNames(classes.icon)} onClick={increment} />
-			<Typography variant="h6" className={classes.count} component={Paper}>
-				{count}
-			</Typography>
-			<RemoveIcon className={ClassNames(classes.icon)} onClick={decrement} />
-			<Button
-				variant="contained"
-				className={classes.button}
-				onClick={addToCartHandler}
-			>
-				Add to cart
-				<AddShoppingCartIcon className={classes.cartIcon} />
-			</Button>
+			{!success ? (
+				<>
+					<AddIcon className={ClassNames(classes.icon)} onClick={increment} />
+					<Typography variant="h6" className={classes.count} component={Paper}>
+						{count}
+					</Typography>
+					<RemoveIcon
+						className={ClassNames(classes.icon)}
+						onClick={decrement}
+					/>
+					<Button
+						variant="contained"
+						className={classes.button}
+						onClick={addToCartHandler}
+					>
+						Add to cart
+						<AddShoppingCartIcon className={classes.cartIcon} />
+					</Button>
+				</>
+			) : (
+				<Typography variant="h5">
+					<CheckCircleIcon className={classes.checkmarkIcon}/>
+					 Added to Cart!
+				</Typography>
+			)}
 		</div>
 	);
 };
