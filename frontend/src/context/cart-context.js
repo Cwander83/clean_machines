@@ -38,6 +38,8 @@ const CartProvider = (props) => {
 		// },
 	]);
 
+	const [totals, setTotals] = useState({});
+
 	const [open, setOpen] = useState(false);
 
 	const handleClickOpen = () => {
@@ -80,6 +82,8 @@ const CartProvider = (props) => {
 				open,
 				handleClickOpen,
 				handleClose,
+				totals,
+				setTotals,
 			}}
 		>
 			{props.children}

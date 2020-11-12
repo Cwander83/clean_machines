@@ -16,6 +16,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 // context api
 import { CartContext } from '../../context/cart-context.js';
 
+// utils
+import { states } from '../../utils/cart';
+
 const useStyles = makeStyles((theme) => ({
 	form: {
 		width: '100%',
@@ -27,10 +30,6 @@ const useStyles = makeStyles((theme) => ({
 	buttons: {
 		display: 'flex',
 		justifyContent: 'flex-end',
-	},
-	button: {
-		marginTop: theme.spacing(3),
-		marginLeft: theme.spacing(1),
 	},
 }));
 
@@ -61,8 +60,7 @@ export default function BillingAddressForm({ nextStep }) {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					
-					<Grid item xs={12} >
+					<Grid item xs={12}>
 						<TextField
 							required
 							id="name"
@@ -75,7 +73,7 @@ export default function BillingAddressForm({ nextStep }) {
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-					<Grid item xs={12}>
+					{/* <Grid item xs={12}>
 						<TextField
 							id="company"
 							name="billing_company_name"
@@ -85,7 +83,7 @@ export default function BillingAddressForm({ nextStep }) {
 							autoComplete="company-name"
 							inputRef={register}
 						/>
-					</Grid>
+					</Grid> */}
 					<Grid item xs={12} sm={6}>
 						<TextField
 							required
@@ -187,7 +185,7 @@ export default function BillingAddressForm({ nextStep }) {
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}></Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12} className={classes.buttons}>
 						<Button color="primary" variant="contained" type="submit">
 							next
 						</Button>
@@ -197,63 +195,3 @@ export default function BillingAddressForm({ nextStep }) {
 		</React.Fragment>
 	);
 }
-
-const states = [
-	'AL',
-	'AK',
-	'AS',
-	'AZ',
-	'AR',
-	'CA',
-	'CO',
-	'CT',
-	'DE',
-	'DC',
-	'FM',
-	'FL',
-	'GA',
-	'GU',
-	'HI',
-	'ID',
-	'IL',
-	'IN',
-	'IA',
-	'KS',
-	'KY',
-	'LA',
-	'ME',
-	'MH',
-	'MD',
-	'MA',
-	'MI',
-	'MN',
-	'MS',
-	'MO',
-	'MT',
-	'NE',
-	'NV',
-	'NH',
-	'NJ',
-	'NM',
-	'NY',
-	'NC',
-	'ND',
-	'MP',
-	'OH',
-	'OK',
-	'OR',
-	'PW',
-	'PA',
-	'RI',
-	'SC',
-	'SD',
-	'TN',
-	'TX',
-	'UT',
-	'VT',
-	'VA',
-	'WA',
-	'WV',
-	'WI',
-	'WY',
-];

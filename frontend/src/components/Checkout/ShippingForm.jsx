@@ -18,6 +18,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 // context api
 import { CartContext } from '../../context/cart-context.js';
 
+// utils
+import { states } from '../../utils/cart';
+
 const useStyles = makeStyles((theme) => ({
 	form: {
 		width: '100%',
@@ -29,10 +32,6 @@ const useStyles = makeStyles((theme) => ({
 	buttons: {
 		display: 'flex',
 		justifyContent: 'flex-end',
-	},
-	button: {
-		marginTop: theme.spacing(3),
-		marginLeft: theme.spacing(1),
 	},
 }));
 
@@ -90,7 +89,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						/>
 					</Grid>
 
-					<Grid item xs={12}>
+					{/* <Grid item xs={12}>
 						<TextField
 							id="companyName"
 							name="shipping_company_name"
@@ -99,7 +98,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							autoComplete="company-name"
 							inputRef={register}
 						/>
-					</Grid>
+					</Grid> */}
 					<Grid item xs={12} sm={6}>
 						<TextField
 							required
@@ -195,12 +194,17 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						/>
 					</Grid>
 					<Grid item xs={12} sm={6}></Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12} className={classes.buttons}>
 						<Button color="primary" variant="contained" onClick={prevStep}>
 							back
 						</Button>
 
-						<Button color="primary" variant="contained" onClick={nextStep} style={{ marginLeft: '10px'}}>
+						<Button
+							color="primary"
+							variant="contained"
+							onClick={nextStep}
+							style={{ marginLeft: '10px' }}
+						>
 							Review order
 						</Button>
 					</Grid>
@@ -209,63 +213,3 @@ export default function ShippingForm({ nextStep, prevStep }) {
 		</React.Fragment>
 	);
 }
-
-const states = [
-	'AL',
-	'AK',
-	'AS',
-	'AZ',
-	'AR',
-	'CA',
-	'CO',
-	'CT',
-	'DE',
-	'DC',
-	'FM',
-	'FL',
-	'GA',
-	'GU',
-	'HI',
-	'ID',
-	'IL',
-	'IN',
-	'IA',
-	'KS',
-	'KY',
-	'LA',
-	'ME',
-	'MH',
-	'MD',
-	'MA',
-	'MI',
-	'MN',
-	'MS',
-	'MO',
-	'MT',
-	'NE',
-	'NV',
-	'NH',
-	'NJ',
-	'NM',
-	'NY',
-	'NC',
-	'ND',
-	'MP',
-	'OH',
-	'OK',
-	'OR',
-	'PW',
-	'PA',
-	'RI',
-	'SC',
-	'SD',
-	'TN',
-	'TX',
-	'UT',
-	'VT',
-	'VA',
-	'WA',
-	'WV',
-	'WI',
-	'WY',
-];

@@ -17,7 +17,7 @@ import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2
 import SalesBox from './SalesBox';
 import RentalSearch from '../../components/RentalSearch';
 import Container from '../../containers/Container';
-import CompanyTimeLine from '../../components/CompanyTimeLine'
+import CompanyTimeLine from '../../components/CompanyTimeLine';
 
 // outside styles
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 		height: '200px',
 		justifyContent: 'center',
 		alignItems: 'center',
-		display: 'flex'
+		display: 'flex',
 	},
 
 	section: {
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
 		border: '2px solid',
 		padding: ' 5px',
 		zIndex: '10',
-	
+
 		borderColor: theme.palette.primary.light,
 		backgroundColor: 'white',
 		[theme.breakpoints.down('sm')]: {},
@@ -146,11 +146,13 @@ const Home = () => {
 									</Typography>
 									<Grid container className={classes.body}>
 										<Grid item xs={12}>
-										
 											<CompanyTimeLine />
 										</Grid>
-
-										<RentalSearch show={true} size={5} buttonSize={2} />
+										<Grid item xs={12} sm={2}></Grid>
+										<Grid item xs={12} sm={8}>
+											<RentalSearch show={true} size={5} buttonSize={2} />
+										</Grid>
+										<Grid item xs={12} sm={2}></Grid>
 									</Grid>
 								</Box>
 							</Box>
