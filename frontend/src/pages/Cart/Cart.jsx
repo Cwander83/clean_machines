@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 const Cart = () => {
 	const classes = useStyles();
 
-	const { cart } = useContext(CartContext);
+	const { cart, setTotals } = useContext(CartContext);
 
 	const [subTotal, setSubTotal] = useState(0);
 	const [total, setTotal] = useState(0);
@@ -86,10 +86,11 @@ const Cart = () => {
 			setTotal(response.total);
 			setTotalTax(response.taxAmount);
 			setShipping(response.shipping);
+			setTotals(response);
 		}
 
 		calculateTax();
-	}, [cart]);
+	}, [cart, setTotals]);
 
 	const handleClickOpen = () => {
 		// remove dialog
@@ -102,7 +103,7 @@ const Cart = () => {
 
 	return (
 		<Container>
-			<PageHeader title="Your shopping Cart" />
+			<PageHeader title="Your Shopping Cart" />
 
 			<Grid container spacing={2} className={classes.gridContainer}>
 				<RentalsList

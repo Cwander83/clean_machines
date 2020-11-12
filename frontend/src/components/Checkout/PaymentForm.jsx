@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -25,10 +25,18 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 		borderBottom: '1px solid grey',
 	},
+	buttons: {
+		marginTop: '20px',
+		display: 'flex',
+		justifyContent: 'flex-end',
+	},
+	buttonPrev: {
+		marginRight: '10px',
+	},
 }));
 
 export default function PaymentForm({ prevStep, nextStep }) {
-	const { products, user } = React.useContext(CartContext);
+	const { cart, user } = useContext(CartContext);
 	const classes = useStyles();
 
 	const stripe = useStripe();
@@ -54,7 +62,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 	const handlePaymentMethodResult = async (result) => {
 		console.log('hit');
 		console.log('results: ' + result);
-		console.log('products: ' + JSON.stringify(products, null, 2));
+		console.log('cart: ' + JSON.stringify(cart, null, 2));
 		if (result.error) {
 			// An error happened when collecting card details,
 			// show `result.error.message` in the payment form.
@@ -67,7 +75,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 					payment_method_id: result.paymentMethod.id,
 
 					userData: user,
-					productData: products,
+					productData: cart,
 				}),
 			});
 
@@ -112,8 +120,9 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						<CardCvcElement className={classes.stripe} />
 					</Grid>
 				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs={12} className={classes.buttons}>
 					<Button
+						className={classes.buttonPrev}
 						color="primary"
 						variant="contained"
 						type="submit"
