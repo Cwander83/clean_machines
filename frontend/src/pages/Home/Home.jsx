@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: 'auto',
 		marginBottom: 'auto',
 		width: '30%',
+		maxWidth: '425px',
 		[theme.breakpoints.down('sm')]: {
 			width: '60%',
 		},

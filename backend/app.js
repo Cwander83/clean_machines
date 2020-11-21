@@ -4,7 +4,6 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 
-
 // Database
 const db = require('./config/config');
 

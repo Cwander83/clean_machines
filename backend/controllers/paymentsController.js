@@ -4,11 +4,11 @@ const { createPurchase } = require('../db/db');
 
 const { calculateOrderAmount } = require('../stripe/helpers');
 
-const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
+//const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
 
 module.exports = {
 	createPayment: async (req, res) => {
-		let { payment_method_id, userData, productData } = req.body;
+		let { payment_method_id, userData, productData, totals } = req.body;
 
 		console.log('1');
 		console.log('userData: ' + JSON.stringify(userData, null, 2));
@@ -18,12 +18,12 @@ module.exports = {
 
 		const purchase = await createPurchase(userData, productData, customer);
 
-		const totalPrice = await calculateOrderAmount(productData);
+		const totalPrice = await calculateOrderAmount(totals);
 
 		const paymentIntent = await createPayment(
 			payment_method_id,
-
 			totalPrice,
+			
 			customer
 		);
 		const sendOff = await res.send({

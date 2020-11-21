@@ -148,3 +148,56 @@ items: {
       "url": "/v1/customers/cus_HlhKCRP6goxlxN/tax_ids"
     }
   }
+
+
+
+  PaymentForm.jsx:48 [
+    [
+      {
+        "productId": 2,
+        "model": "ABG1000",
+        "price": 200900,
+        "quantity": 1,
+        "category": "floor-machine",
+        "shipping": 3000,
+        "type": "sale"
+      },
+      {
+        "productId": 3,
+        "model": "ABG1000",
+        "price": 30000,
+        "quantity": 1,
+        "start_date": "2020-11-27",
+        "end_date": "2020-11-28",
+        "category": "floor-machine",
+        "type": "rental",
+        "shipping": 0
+      }
+    ],
+    {
+      "billing_name": "Chris Wander",
+      "billing_email": "chriswandermail@gmail.com",
+      "billing_phone": "6145065435",
+      "billing_line1": "26 Japonica Drive",
+      "billing_line2": "",
+      "billing_city": "Orlando",
+      "billing_postal_code": "32807",
+      "billing_state": "FL",
+      "delivery": {
+        "delivery_name": "Christopher S Wander",
+        "delivery_email": "chriswandermail@gmail.com",
+        "delivery_phone": "6145065435",
+        "delivery_line1": "26 Japonica Drive",
+        "delivery_line2": "",
+        "delivery_city": "Orlando",
+        "delivery_postal_code": "32807",
+        "delivery_state": "FL"
+      }
+    },
+    {
+      "shipping": "30.00",
+      "subTotal": "2309.00",
+      "total": "2500.63",
+      "taxAmount": "161.63"
+    }
+  ]

@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
+// material ui
 import { makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
 import Button from '@material-ui/core/Button';
 
+// stripe elements
 import {
 	CardNumberElement,
 	CardExpiryElement,
@@ -15,6 +16,7 @@ import {
 	useElements,
 } from '@stripe/react-stripe-js';
 
+// context api
 import { CartContext } from '../../context/cart-context';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,11 +38,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PaymentForm({ prevStep, nextStep }) {
-	const { cart, user } = useContext(CartContext);
+	const { cart, user, totals } = useContext(CartContext);
 	const classes = useStyles();
+	const [errors, setErrors] = useState(null);
 
 	const stripe = useStripe();
 	const elements = useElements();
+
+	console.log(JSON.stringify([cart, user, totals], null, 2));
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -66,6 +71,8 @@ export default function PaymentForm({ prevStep, nextStep }) {
 		if (result.error) {
 			// An error happened when collecting card details,
 			// show `result.error.message` in the payment form.
+			console.log('result error ' + JSON.stringify(result.error, null, 2));
+			setErrors(result.error.message);
 		} else {
 			// Otherwise send paymentMethod.id to your server (see Step 3)
 			const response = await fetch('/customers/pay', {
@@ -73,9 +80,9 @@ export default function PaymentForm({ prevStep, nextStep }) {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 					payment_method_id: result.paymentMethod.id,
-
 					userData: user,
 					productData: cart,
+					totals: totals,
 				}),
 			});
 
@@ -89,6 +96,10 @@ export default function PaymentForm({ prevStep, nextStep }) {
 		if (serverResponse.error) {
 			// An error happened when charging the card,
 			// show the error in the payment form.
+			console.log(
+				'serverResponse.error ' + JSON.stringify(serverResponse.error, null, 2)
+			);
+			setErrors(serverResponse.error.message);
 		} else {
 			// Show a success message
 		}
@@ -118,6 +129,14 @@ export default function PaymentForm({ prevStep, nextStep }) {
 					</Grid>
 					<Grid item xs={3}>
 						<CardCvcElement className={classes.stripe} />
+					</Grid>
+					<Grid item xs={10}>
+						<ul>
+							<li></li>
+						</ul>
+					</Grid>
+					<Grid item xs={10}>
+						<Typography variant="h6">{errors ? errors : null}</Typography>
 					</Grid>
 				</Grid>
 				<Grid item xs={12} className={classes.buttons}>
