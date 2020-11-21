@@ -137,9 +137,10 @@ const RentalsDetails = () => {
 					</ListSubheader>
 					<Divider />
 					<ListItem>
-						<Typography variant="body1">
+						<Typography variant="body1">Rental Model: TEST MODEL</Typography>
+						{/* <Typography variant="body1">
 							Rental Model: {product.model}
-						</Typography>
+						</Typography> */}
 					</ListItem>
 					<ListItem>
 						<Typography variant="body1">

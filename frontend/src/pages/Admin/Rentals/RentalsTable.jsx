@@ -160,10 +160,12 @@ const RentalsTable = () => {
 						</Button>
 					</TableCell>
 					<TableCell>{row.delivery_name}</TableCell>
-					<TableCell>{row.delivery_company_name}</TableCell>
-					<TableCell>{row.product.model}</TableCell>
-					<TableCell>{row.start_date}</TableCell>
 
+					{/*
+					// TODO
+					 <TableCell>{row.product.model}</TableCell> */}
+					<TableCell>test model</TableCell>
+					<TableCell>{row.start_date}</TableCell>
 					<TableCell>{row.end_date}</TableCell>
 					<TableCell>
 						<Button
@@ -187,7 +189,7 @@ const RentalsTable = () => {
 							<TableCell>Id</TableCell>
 							<TableCell>Billing Name</TableCell>
 							<TableCell>Delivery Name</TableCell>
-							<TableCell>Delivery Company Name</TableCell>
+
 							<TableCell>Model</TableCell>
 							<TableCell>Start Date</TableCell>
 							<TableCell>End Date</TableCell>

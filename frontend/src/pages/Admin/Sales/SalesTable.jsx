@@ -141,8 +141,7 @@ const SalesTable = () => {
 					<TableCell>{row.id}</TableCell>
 					<TableCell>{row.billing_name}</TableCell>
 					<TableCell>{row.shipping_name}</TableCell>
-					<TableCell>{row.shipping_company_name}</TableCell>
-					<TableCell>{row.product.model}</TableCell>
+					<TableCell>{row.model}</TableCell>
 					<TableCell>{row.quantity_purchased}</TableCell>
 					<TableCell>{row.total_price}</TableCell>
 					<TableCell>
@@ -165,7 +164,6 @@ const SalesTable = () => {
 						<TableCell>Id</TableCell>
 						<TableCell>Billing Name</TableCell>
 						<TableCell>Delivery Name</TableCell>
-						<TableCell>Delivery Company Name</TableCell>
 						<TableCell>Model</TableCell>
 						<TableCell>Quantity</TableCell>
 						<TableCell>Total Price</TableCell>
