@@ -1,5 +1,5 @@
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
-const moment = require('moment');
+//const moment = require('moment');
 
 module.exports = {
 	createPayment: (payment_method_id, totalPrice, customer) => {

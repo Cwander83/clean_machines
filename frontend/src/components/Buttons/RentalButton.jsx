@@ -68,8 +68,6 @@ const RentalButton = ({ product }) => {
 		endDate: null,
 	});
 
-	//console.log('rentalDates: ' + JSON.stringify(rentalDates, null, 2));
-
 	let { addToCart } = useContext(CartContext);
 
 	const addToCartHandler = () => {

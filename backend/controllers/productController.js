@@ -47,6 +47,7 @@ module.exports = {
 			model: req.body.model,
 			category: req.body.category,
 			sale_price: req.body.sale_price,
+			shipping_cost: req.body.shipping_cost,
 			units: req.body.units,
 			short_description: req.body.short_description,
 			cord: req.body.cord,

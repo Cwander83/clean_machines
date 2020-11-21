@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 
 // component
 import CreateProduct from '../../../components/Forms/CreateProduct';
@@ -22,7 +22,7 @@ const inputs = [
 		sm: 6,
 	},
 	{
-		name: 'shipping',
+		name: 'shipping_cost',
 		required: true,
 		label: 'shipping',
 		xs: 12,

@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: '5px',
 		color: theme.palette.primary.light,
 		fontSize: '26px',
-	}
+	},
 }));
 
 const AddToCart = ({ product }) => {
@@ -83,9 +83,8 @@ const AddToCart = ({ product }) => {
 			price: product.sale_price,
 			quantity: count,
 			category: product.category,
-			units: product.units,
-			// TODO update shipping on sales items
-			//shipping: product.shipping,
+
+			shipping: product.shipping_cost,
 			type: 'sale',
 		};
 
@@ -119,8 +118,8 @@ const AddToCart = ({ product }) => {
 				</>
 			) : (
 				<Typography variant="h5">
-					<CheckCircleIcon className={classes.checkmarkIcon}/>
-					 Added to Cart!
+					<CheckCircleIcon className={classes.checkmarkIcon} />
+					Added to Cart!
 				</Typography>
 			)}
 		</div>
