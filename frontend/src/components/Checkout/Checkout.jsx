@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	paper: {
-		marginTop: theme.spacing(3),
-		marginBottom: theme.spacing(3),
+		margin: theme.spacing(3),
+
 		padding: theme.spacing(2),
 		[theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
 			marginTop: theme.spacing(6),
@@ -52,15 +52,14 @@ const Checkout = () => {
 			<CssBaseline />
 			<Button
 				variant="contained"
-				
 				onClick={handleClickOpen}
 				className={classes.button}
 			>
 				Proceed to checkout
 			</Button>
-			<Dialog open={open} fullWidth maxWidth="md" onClose={handleClose}>
+			<Dialog open={open} fullWidth onClose={handleClose}>
 				<main className={classes.layout}>
-					<Paper className={classes.paper}>
+					<Paper className={classes.paper} elevation={0}>
 						<CheckoutStepper />
 					</Paper>
 				</main>

@@ -14,6 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 // context api
 import { CartContext } from '../../context/cart-context.js';
@@ -32,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
 	buttons: {
 		display: 'flex',
 		justifyContent: 'flex-end',
+	},
+	arrowIcon: {
+		fontSize: '16px',
+		color: theme.palette.gold.main,
 	},
 }));
 
@@ -205,7 +210,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 							type="submit"
 							style={{ marginLeft: '10px' }}
 						>
-							next
+							next <ArrowForwardIcon className={classes.arrowIcon} />
 						</Button>
 					</Grid>
 				</Grid>

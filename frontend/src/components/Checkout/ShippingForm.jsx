@@ -200,9 +200,9 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						</Button>
 
 						<Button
+							type="submit"
 							color="primary"
 							variant="contained"
-							onClick={nextStep}
 							style={{ marginLeft: '10px' }}
 						>
 							Review order

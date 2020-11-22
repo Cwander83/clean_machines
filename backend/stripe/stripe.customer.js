@@ -1,10 +1,10 @@
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
-//const moment = require('moment');
+
 
 module.exports = {
 	createCustomer: (userData) => {
 		console.log('2');
-		//console.log('stripe customer: ' + JSON.stringify(items, null, 2));
+		console.log('stripe customer: ' + JSON.stringify(userData, null, 2));
 		return stripe.customers.create({
 			address: {
 				line1: userData.billing_line1,
