@@ -66,7 +66,7 @@ const Features = ({ product }) => {
 			feature_3,
 			feature_4,
 			feature_5,
-			tools,
+			
 		} = product;
 
 		setFeatures({
@@ -76,7 +76,7 @@ const Features = ({ product }) => {
 			feature_3,
 			feature_4,
 			feature_5,
-			tools,
+			
 		});
 	}, [product]);
 
@@ -103,26 +103,30 @@ const Features = ({ product }) => {
 					{features &&
 						Object.keys(features).map((el) => (
 							<React.Fragment key={el}>
-								<Grid item xs={1}></Grid>
-								<Grid item xs={11} className={classes.spec}>
-									<Typography
-										align="left"
-										display="inline"
-										className={ClassNames(classes.itemTitle)}
-										variant="body1"
-									>
-										&bull;
-									</Typography>
+								{features[el] !== '' ? (
+									<>
+										<Grid item xs={1}></Grid>
+										<Grid item xs={11} className={classes.spec}>
+											<Typography
+												align="left"
+												display="inline"
+												className={ClassNames(classes.itemTitle)}
+												variant="body1"
+											>
+												&bull;
+											</Typography>
 
-									<Typography
-										gutterBottom
-										display="inline"
-										className={ClassNames(classes.item)}
-										variant="body1"
-									>
-										{features[el]}
-									</Typography>
-								</Grid>
+											<Typography
+												gutterBottom
+												display="inline"
+												className={ClassNames(classes.item)}
+												variant="body1"
+											>
+												{features[el]}
+											</Typography>
+										</Grid>
+									</>
+								) : null}
 							</React.Fragment>
 						))}
 				</Grid>

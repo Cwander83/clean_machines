@@ -9,9 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 		billing_name: {
 			type: DataTypes.STRING,
 		},
-		billing_company_name: {
-			type: DataTypes.STRING,
-		},
+
 		billing_email: {
 			type: DataTypes.STRING,
 		},
@@ -36,9 +34,7 @@ module.exports = (sequelize, DataTypes) => {
 		shipping_name: {
 			type: DataTypes.STRING,
 		},
-		shipping_company_name: {
-			type: DataTypes.STRING,
-		},
+
 		shipping_email: {
 			type: DataTypes.STRING,
 		},

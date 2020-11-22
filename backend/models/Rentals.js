@@ -1,4 +1,3 @@
-
 module.exports = (sequelize, DataTypes) => {
 	const Rentals = sequelize.define('rentals', {
 		id: {
@@ -12,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 		rental_total: {
 			type: DataTypes.INTEGER,
 		},
-		
+
 		start_date: {
 			type: DataTypes.DATEONLY,
 		},
@@ -25,9 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 		billing_name: {
 			type: DataTypes.STRING,
 		},
-		billing_company_name: {
-			type: DataTypes.STRING,
-		},
+
 		billing_email: {
 			type: DataTypes.STRING,
 		},
@@ -52,9 +49,7 @@ module.exports = (sequelize, DataTypes) => {
 		delivery_name: {
 			type: DataTypes.STRING,
 		},
-		delivery_company_name: {
-			type: DataTypes.STRING,
-		},
+
 		delivery_email: {
 			type: DataTypes.STRING,
 		},

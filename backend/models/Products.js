@@ -22,13 +22,10 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
-
 		category: {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		
-		
 		units: {
 			type: DataTypes.INTEGER,
 			defaultValue: 0,

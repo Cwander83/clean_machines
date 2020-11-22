@@ -7,7 +7,7 @@ const container = ({ children }) => (
 		maxWidth="xl"
 		style={{
 			height: '100%',
-			minHeight: 'calc(100vh - 30px)',
+			minHeight: '90vh',
 		}}
 	>
 		{children}

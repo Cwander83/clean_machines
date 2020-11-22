@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 // context api
 import { CartContext } from '../../context/cart-context.js';
@@ -30,6 +31,20 @@ const useStyles = makeStyles((theme) => ({
 	buttons: {
 		display: 'flex',
 		justifyContent: 'flex-end',
+	},
+	button: {
+		backgroundColor: theme.palette.primary.light,
+		color: theme.palette.grey.main,
+	},
+	arrowIcon: {
+		fontSize: '16px',
+	},
+	title: {
+		padding: theme.spacing(2),
+		letterSpacing: '.035em',
+		textTransform: 'uppercase',
+		color: theme.palette.gold.main,
+		backgroundColor: theme.palette.primary.light,
 	},
 }));
 
@@ -50,7 +65,7 @@ export default function BillingAddressForm({ nextStep }) {
 
 	return (
 		<React.Fragment>
-			<Typography variant="h6" gutterBottom>
+			<Typography className={classes.title} variant="h6" gutterBottom>
 				Billing Address
 			</Typography>
 
@@ -186,8 +201,12 @@ export default function BillingAddressForm({ nextStep }) {
 					</Grid>
 					<Grid item xs={12} sm={6}></Grid>
 					<Grid item xs={12} className={classes.buttons}>
-						<Button color="primary" variant="contained" type="submit">
-							next
+						<Button
+							variant="contained"
+							type="submit"
+							className={classes.button}
+						>
+							next <ArrowForwardIcon className={classes.arrowIcon} />
 						</Button>
 					</Grid>
 				</Grid>
