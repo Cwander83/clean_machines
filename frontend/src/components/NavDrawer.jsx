@@ -23,6 +23,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import PhoneIcon from '@material-ui/icons/Phone';
+import EmailIcon from '@material-ui/icons/Email';
+import Box from '@material-ui/core/Box';
 
 // images / logos
 //import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
@@ -41,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: 'transparent',
 		maxWidth: '1232px',
 		boxShadow: 'none',
-		margin: 'auto'
+		margin: 'auto',
 	},
 	menu: {
 		[theme.breakpoints.up('md')]: {
@@ -115,6 +118,23 @@ const useStyles = makeStyles((theme) => ({
 	listItem: {
 		color: theme.palette.grey.main,
 	},
+	phone: {
+		color: theme.palette.primary.light,
+		marginLeft: '20px',
+		marginRight: '4px',
+	},
+	email: {
+		color: theme.palette.primary.light,
+	},
+	box: {
+		marginLeft: 'auto',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		[theme.breakpoints.down('md')]: {
+			marginRight: '30px',
+		},
+	},
 }));
 
 const NavDrawer = () => {
@@ -138,14 +158,14 @@ const NavDrawer = () => {
 		},
 
 		{
-			text: 'Rentals',
-			icon: <ViewComfyIcon />,
-			to: '/rentals',
-		},
-		{
 			text: 'Shop',
 			icon: <ViewComfyIcon />,
 			to: '/sales',
+		},
+		{
+			text: 'Rentals',
+			icon: <ViewComfyIcon />,
+			to: '/rentals',
 		},
 		{
 			text: 'Tutorials',
@@ -211,13 +231,28 @@ const NavDrawer = () => {
 							}}
 						/>
 					</IconButton>
-					{/* <img
-						className={classes.logo}
-						src={Logo}
-						alt="clean machine rentals"
-					/> */}
 					<HeaderNavigation />
-					<ShoppingCartButton />
+					<Box className={classes.box}>
+						<ShoppingCartButton />
+						<IconButton
+							size="small"
+							href="tel:+6145065435"
+							disableRipple
+							disableFocusRipple
+							disableTouchRipple
+						>
+							<PhoneIcon className={classes.phone} />
+						</IconButton>
+						<IconButton
+							size="small"
+							href="mailto:chriswandermail@gmail.com"
+							disableRipple
+							disableFocusRipple
+							disableTouchRipple
+						>
+							<EmailIcon className={classes.email} />
+						</IconButton>
+					</Box>
 				</Toolbar>
 			</AppBar>
 

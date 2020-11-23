@@ -38,6 +38,8 @@ const CartProvider = (props) => {
 		// },
 	]);
 
+	console.log('*** user Data : ' + JSON.stringify(user, null, 2));
+
 	const [totals, setTotals] = useState({});
 
 	const [open, setOpen] = useState(false);

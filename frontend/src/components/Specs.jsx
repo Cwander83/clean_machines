@@ -3,26 +3,14 @@ import React, { useState, memo, useMemo, useEffect } from 'react';
 // classnames
 import ClassNames from 'classnames';
 
-// axios
-//import axios from 'axios';
-
-// react router
-//import { useParams } from 'react-router-dom';
-
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-//import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
-
-// context api
-
-// components
 
 function specsFunc(specs, classes) {
 	if (!specs) return {};
@@ -30,26 +18,30 @@ function specsFunc(specs, classes) {
 	let spec = specs;
 	return Object.keys(spec).map((el) => (
 		<React.Fragment key={el}>
-			<Grid item xs={1}></Grid>
-			<Grid item xs={11} className={classes.spec}>
-				<Typography
-					align="left"
-					display="inline"
-					className={ClassNames(classes.itemTitle)}
-					variant="body1"
-				>
-					{[el.replace('_', ' ')]}:
-				</Typography>
+			{spec[el] !== '' ? (
+				<>
+					<Grid item xs={1}></Grid>
+					<Grid item xs={11} className={classes.spec}>
+						<Typography
+							align="left"
+							display="inline"
+							className={ClassNames(classes.itemTitle)}
+							variant="body1"
+						>
+							{[el.replace('_', ' ')]}:
+						</Typography>
 
-				<Typography
-					gutterBottom
-					display="inline"
-					className={ClassNames(classes.item)}
-					variant="body1"
-				>
-					{spec[el]}
-				</Typography>
-			</Grid>
+						<Typography
+							gutterBottom
+							display="inline"
+							className={ClassNames(classes.item)}
+							variant="body1"
+						>
+							{spec[el]}
+						</Typography>
+					</Grid>
+				</>
+			) : null}
 		</React.Fragment>
 	));
 }
@@ -89,6 +81,7 @@ const Specs = ({ product }) => {
 			tank_capacity,
 			speed,
 			size,
+			tools,
 		} = product;
 		setSpecs({
 			model,
@@ -101,6 +94,7 @@ const Specs = ({ product }) => {
 			tank_capacity,
 			speed,
 			size,
+			tools,
 		});
 	}, [product]);
 

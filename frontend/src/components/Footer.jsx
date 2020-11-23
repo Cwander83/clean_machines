@@ -77,9 +77,7 @@ const useStyles = makeStyles((theme) => ({
 		color: 'black',
 	},
 	adminGrid: {
-		marginTop: '10px',
 		fontSize: '16px',
-
 		[theme.breakpoints.down('sm')]: {
 			marginTop: '0',
 		},
@@ -136,9 +134,6 @@ const Footer = () => {
 				</Grid>
 			</Grid>
 			<Grid item xs={12} sm={3}>
-				{/* <Typography variant="h6" className={ClassNames(classes.title, classes.middleTitle)}>
-					CONTACT
-				</Typography> */}
 				<Grid item xs={12} className={classes.section}>
 					<img
 						src={Logo}
@@ -245,7 +240,7 @@ const Footer = () => {
 					variant="body1"
 					display="inline"
 					component="a"
-					href="www.chriswander.om"
+					href="https://www.chriswander.com"
 				>
 					chris wander
 				</Typography>
