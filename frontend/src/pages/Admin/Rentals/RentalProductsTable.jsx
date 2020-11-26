@@ -155,7 +155,7 @@ const RentalProductsTable = memo(() => {
 				<TableRow className={classes.root}>
 					<TableCell>{row.id}</TableCell>
 					<TableCell>
-						<Button component={Link} to={`admin/rentals/products/${row.id}`}>
+						<Button component={Link} to={`product/${row.id}`}>
 							{row.name}
 						</Button>
 					</TableCell>

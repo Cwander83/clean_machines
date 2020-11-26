@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // axios
 import axios from 'axios';
+
+// React router
+import { Link } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,11 +26,10 @@ const useStyles = makeStyles({
 export default function RecentSalesTable() {
 	const classes = useStyles();
 
-	const [rows, setData] = React.useState([]);
+	const [rows, setData] = useState([]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchData = async () => {
-			
 			const result = await axios(`/sales/recent`);
 
 			setData(result.data);
@@ -35,7 +37,7 @@ export default function RecentSalesTable() {
 		fetchData();
 	}, []);
 
-
+	
 	return (
 		<>
 			{rows ? (
@@ -45,9 +47,9 @@ export default function RecentSalesTable() {
 							<TableRow>
 								<TableCell>ID</TableCell>
 								<TableCell>Billing Name</TableCell>
+								<TableCell>Shipping Name</TableCell>
 								<TableCell>Model</TableCell>
 								<TableCell>Total Price</TableCell>
-								<TableCell></TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -55,11 +57,18 @@ export default function RecentSalesTable() {
 								return (
 									<TableRow key={i}>
 										<TableCell>{row.id}</TableCell>
+										<TableCell>
+											<Button
+												component={Link}
+												to={`admin/sales/sale/${row.id}`}
+											>
+												{row.billing_name}
+											</Button>
+										</TableCell>
 										<TableCell>{row.shipping_name}</TableCell>
 										<TableCell>{row.product.model}</TableCell>
-										<TableCell>{row.total_price}</TableCell>
 										<TableCell>
-											<Button>view</Button>
+											$ {(row.total_price / 100).toFixed(2)}
 										</TableCell>
 									</TableRow>
 								);

@@ -1,9 +1,13 @@
-// TODO fix and update table with current data
+import React, { useState, useEffect } from 'react';
+// moment
 
-import React from 'react';
-
+// axios
 import axios from 'axios';
 
+// React router
+import { Link } from 'react-router-dom';
+
+// material ui
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -19,9 +23,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
-//import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -104,12 +106,11 @@ const useStyles2 = makeStyles((theme) => ({
 
 const SalesTable = () => {
 	const classes = useStyles2();
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(5);
+	const [rows, setData] = useState([]);
 
-	const [rows, setData] = React.useState([]);
-
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchData = async () => {
 			const result = await axios(`/sales`);
 
@@ -117,8 +118,7 @@ const SalesTable = () => {
 		};
 		fetchData();
 	}, []);
-
-	//console.log(rows);
+	//console.log(JSON.stringify(rows, null, 1));
 
 	const emptyRows =
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -139,18 +139,16 @@ const SalesTable = () => {
 			<React.Fragment>
 				<TableRow className={classes.root}>
 					<TableCell>{row.id}</TableCell>
-					<TableCell>{row.billing_name}</TableCell>
-					<TableCell>{row.shipping_name}</TableCell>
-					<TableCell>{row.model}</TableCell>
-					<TableCell>{row.quantity_purchased}</TableCell>
-					<TableCell>{row.total_price}</TableCell>
 					<TableCell>
-						<ButtonGroup>
-							<Button>View</Button>
-
-							<Button>Remove</Button>
-						</ButtonGroup>
+						<Button component={Link} to={`sales/sale/${row.id}`}>
+							{row.billing_name}
+						</Button>
 					</TableCell>
+					<TableCell>{row.shipping_name}</TableCell>
+					<TableCell>{row.product.model}</TableCell>
+					<TableCell>{row.quantity_purchased}</TableCell>
+					<TableCell>$ {(row.total_price / 100).toFixed(2)}</TableCell>
+					<TableCell>{new Date(row.createdAt).toLocaleString()}</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -167,8 +165,7 @@ const SalesTable = () => {
 						<TableCell>Model</TableCell>
 						<TableCell>Quantity</TableCell>
 						<TableCell>Total Price</TableCell>
-
-						<TableCell></TableCell>
+						<TableCell>Created At</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
