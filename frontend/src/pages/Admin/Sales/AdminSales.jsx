@@ -18,7 +18,7 @@ import Button from '@material-ui/core/Button';
 // components
 import SalesTable from './SalesTable';
 import SalesDetails from './SalesDetails';
-import SalesProductDetails from './SalesProductDetails';
+import AdminProductDetails from '../../../components/AdminProductDetails';
 import SalesProductsTable from './SalesProductTable';
 import AdminCreateSalesProducts from './AdminCreateSalesProduct';
 
@@ -32,6 +32,7 @@ const AdminSales = () => {
 	const classes = useStyles();
 
 	let { url, path } = useRouteMatch();
+
 	return (
 		<Grid container justify="center" className={classes.root}>
 			<Grid item xs={12}>
@@ -40,7 +41,7 @@ const AdminSales = () => {
 				<Button component={Link} to={`${url}`}>
 					Sales
 				</Button>
-				<Button component={Link} to={`${path}/products`}>
+				<Button component={Link} to={`${path}/products-table`}>
 					Products
 				</Button>
 				<Button component={Link} to={`${path}/create`}>
@@ -54,17 +55,17 @@ const AdminSales = () => {
 						<SalesTable />
 					</Grid>
 				</Route>
-				<Route path={`${path}/sales/:id`}>
+				<Route path={`${path}/sale/:id`}>
 					<SalesDetails />
 				</Route>
-				<Route path={`${path}/products`}>
+				<Route path={`${path}/products-table`}>
 					<Grid item xs={12} md={10}>
 						<SalesProductsTable />
 					</Grid>
 				</Route>
-				<Route path={`${path}/products/:id`}>
+				<Route path={`${path}/product/:id`}>
 					<Grid item xs={12} md={10}>
-						<SalesProductDetails />
+					<AdminProductDetails type="sales" />
 					</Grid>
 				</Route>
 				<Route path={`${path}/create`}>

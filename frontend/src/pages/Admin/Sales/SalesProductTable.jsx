@@ -25,7 +25,7 @@ import Button from '@material-ui/core/Button';
 import TableHead from '@material-ui/core/TableHead';
 
 // context
-import { AdminContext } from '../../../context/admin-context';
+// import { AdminContext } from '../../../context/admin-context';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -115,14 +115,14 @@ const useStyles2 = makeStyles((theme) => ({
 }));
 
 const SalesProductTable = () => {
-	const { product } = useContext(AdminContext);
+	
 	const classes = useStyles2();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
 	const [rows, setData] = useState([]);
 
-	console.log(JSON.stringify(product, null, 2));
+	
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -132,6 +132,8 @@ const SalesProductTable = () => {
 		};
 		fetchData();
 	}, []);
+
+	console.log(JSON.stringify(rows, null, 1));
 
 	const emptyRows =
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -155,12 +157,15 @@ const SalesProductTable = () => {
 				<TableRow className={classes.root}>
 					<TableCell>{row.id}</TableCell>
 					<TableCell>
-						<Button component={Link} to={`admin/rentals/products/${row.id}`}>
+						<Button component={Link} to={`product/${row.id}`}>
 							{row.name}
 						</Button>
 					</TableCell>
 					<TableCell>{row.model}</TableCell>
 					<TableCell>{row.category}</TableCell>
+					<TableCell>$ {(row.sale_price / 100).toFixed(2)}</TableCell>
+					<TableCell>$ {(row.shipping_cost / 100).toFixed(2)}</TableCell>
+					<TableCell>{row.units}</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -175,6 +180,9 @@ const SalesProductTable = () => {
 						<TableCell>Name</TableCell>
 						<TableCell>Model</TableCell>
 						<TableCell>Category</TableCell>
+						<TableCell>Price</TableCell>
+						<TableCell>Shipping</TableCell>
+						<TableCell>Inventory</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
