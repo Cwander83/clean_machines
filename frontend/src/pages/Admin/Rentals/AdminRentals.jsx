@@ -20,7 +20,7 @@ import RentalsTable from './RentalsTable';
 import RentalsDetails from './RentalsDetails';
 import CurrentRentals from '../CurrentRentals';
 import RentalProductsTable from './RentalProductsTable';
-import RentalsProductDetails from './RentalsProductDetails';
+import AdminProductDetails from '../../../components/AdminProductDetails';
 import AdminCreateRentalProducts from './AdminCreateRentalProduct';
 
 const useStyles2 = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ const AdminRentals = () => {
 				<Button component={Link} to={`${url}`}>
 					Rentals
 				</Button>
-				<Button component={Link} to={`${path}/products`}>
+				<Button component={Link} to={`${path}/rental-products-table`}>
 					Products
 				</Button>
 				<Button component={Link} to={`${path}/create`}>
@@ -66,14 +66,14 @@ const AdminRentals = () => {
 				<Route path={`${path}/rental/:id`}>
 					<RentalsDetails />
 				</Route>
-				<Route path={`${path}/products`}>
+				<Route path={`${path}/rental-products-table`}>
 					<Grid item xs={12} md={10}>
 						<RentalProductsTable />
 					</Grid>
 				</Route>
-				<Route path={`${path}/products/:id`}>
+				<Route exact path={`${path}/product/:id`}>
 					<Grid item xs={12} md={10}>
-						<RentalsProductDetails />
+						<AdminProductDetails type="rental" />
 					</Grid>
 				</Route>
 				<Route path={`${path}/create`}>
