@@ -6,6 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import icon1 from '../../assets/CCLOGOS/1.png';
+import icon2 from '../../assets/CCLOGOS/2.png';
+import icon3 from '../../assets/CCLOGOS/14.png';
+import icon4 from '../../assets/CCLOGOS/22.png';
 
 // stripe elements
 import {
@@ -35,12 +39,32 @@ const useStyles = makeStyles((theme) => ({
 	buttonPrev: {
 		marginRight: '10px',
 	},
+	iconList: {
+		display: 'flex',
+		justifyContent: 'center',
+		listStyleType: 'none',
+	},
+	icon: {
+		width: '50px',
+		margin: '0 5px',
+	},
+	title: {
+		padding: theme.spacing(2),
+		letterSpacing: '.035em',
+		textTransform: 'uppercase',
+		color: theme.palette.gold.main,
+		backgroundColor: theme.palette.primary.light,
+	},
 }));
 
 export default function PaymentForm({ prevStep, nextStep }) {
-	const { cart, user, totals } = useContext(CartContext);
+	const { cart, user, totals, setUser, setCart, setTotals } = useContext(
+		CartContext
+	);
 	const classes = useStyles();
+
 	const [errors, setErrors] = useState(null);
+	const [success, setSuccess] = useState(null);
 
 	const stripe = useStripe();
 	const elements = useElements();
@@ -66,7 +90,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 
 	const handlePaymentMethodResult = async (result) => {
 		console.log('hit');
-		console.log('results: ' + result);
+		console.log('results: ' + JSON.stringify(result, null, 2));
 		console.log('cart: ' + JSON.stringify(cart, null, 2));
 		if (result.error) {
 			// An error happened when collecting card details,
@@ -87,7 +111,9 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			});
 
 			const serverResponse = await response.json();
-
+			console.log(
+				'server response: ' + JSON.stringify(serverResponse, null, 2)
+			);
 			handleServerResponse(serverResponse);
 		}
 	};
@@ -102,13 +128,19 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			setErrors(serverResponse.error.message);
 		} else {
 			// Show a success message
+			setSuccess('payment sent');
+			setUser({});
+			setCart([]);
+			setTotals({});
+
+			// TODO navigate to success page
 		}
 	};
 
 	return (
 		<React.Fragment>
-			<Typography variant="h6" gutterBottom>
-				Payment method
+			<Typography className={classes.title} variant="h6" gutterBottom>
+				Payment Processing
 			</Typography>
 			<form noValidate className={classes.form} onSubmit={handleSubmit}>
 				<Grid container spacing={3} justify="center">
@@ -131,12 +163,42 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						<CardCvcElement className={classes.stripe} />
 					</Grid>
 					<Grid item xs={10}>
-						<ul>
-							<li></li>
+						<ul className={classes.iconList}>
+							<li>
+								<img
+									src={icon1}
+									className={classes.icon}
+									alt="clean machines rental"
+								/>
+							</li>
+							<li>
+								<img
+									src={icon2}
+									className={classes.icon}
+									alt="clean machines rental"
+								/>
+							</li>
+							<li>
+								<img
+									src={icon3}
+									className={classes.icon}
+									alt="clean machines rental"
+								/>
+							</li>
+							<li>
+								<img
+									src={icon4}
+									className={classes.icon}
+									alt="clean machines rental"
+								/>
+							</li>
 						</ul>
 					</Grid>
 					<Grid item xs={10}>
 						<Typography variant="h6">{errors ? errors : null}</Typography>
+					</Grid>
+					<Grid item xs={10}>
+						<Typography variant="h6">{success ? success : null}</Typography>
 					</Grid>
 				</Grid>
 				<Grid item xs={12} className={classes.buttons}>

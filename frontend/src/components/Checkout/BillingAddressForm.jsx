@@ -32,13 +32,11 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'flex-end',
 	},
-	button: {
-		backgroundColor: theme.palette.primary.light,
-		color: theme.palette.grey.main,
-	},
 	arrowIcon: {
 		fontSize: '16px',
+		color: theme.palette.gold.main,
 	},
+
 	title: {
 		padding: theme.spacing(2),
 		letterSpacing: '.035em',
@@ -204,6 +202,7 @@ export default function BillingAddressForm({ nextStep }) {
 						<Button
 							variant="contained"
 							type="submit"
+							color="primary"
 							className={classes.button}
 						>
 							next <ArrowForwardIcon className={classes.arrowIcon} />
