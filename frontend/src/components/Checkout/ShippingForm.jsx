@@ -14,6 +14,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+
 
 // context api
 import { CartContext } from '../../context/cart-context.js';
@@ -32,6 +34,17 @@ const useStyles = makeStyles((theme) => ({
 	buttons: {
 		display: 'flex',
 		justifyContent: 'flex-end',
+	},
+	arrowIcon: {
+		fontSize: '16px',
+		color: theme.palette.gold.main,
+	},
+	title: {
+		padding: theme.spacing(2),
+		letterSpacing: '.035em',
+		textTransform: 'uppercase',
+		color: theme.palette.gold.main,
+		backgroundColor: theme.palette.primary.light,
 	},
 }));
 
@@ -56,7 +69,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 
 	return (
 		<React.Fragment>
-			<Typography variant="h6" gutterBottom>
+			<Typography variant="h6" gutterBottom className={classes.title}>
 				Shipping Address
 			</Typography>
 			<FormControlLabel
@@ -205,7 +218,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							variant="contained"
 							style={{ marginLeft: '10px' }}
 						>
-							Review order
+							Review order <ArrowForwardIcon className={classes.arrowIcon}/>
 						</Button>
 					</Grid>
 				</Grid>

@@ -3,19 +3,11 @@ import React, { useState, memo, useEffect } from 'react';
 // classnames
 import ClassNames from 'classnames';
 
-// axios
-//import axios from 'axios';
-
-// react router
-//import { useParams } from 'react-router-dom';
-
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-//import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -66,7 +58,6 @@ const Features = ({ product }) => {
 			feature_3,
 			feature_4,
 			feature_5,
-			
 		} = product;
 
 		setFeatures({
@@ -76,7 +67,6 @@ const Features = ({ product }) => {
 			feature_3,
 			feature_4,
 			feature_5,
-			
 		});
 	}, [product]);
 

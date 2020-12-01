@@ -74,6 +74,7 @@ const CartProvider = (props) => {
 		<CartContext.Provider
 			value={{
 				user,
+				setUser,
 				setCart,
 				updateUser: updateUserHandler,
 				updateDelivery: updateDeliveryUserHandler,

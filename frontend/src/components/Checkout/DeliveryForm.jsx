@@ -38,6 +38,13 @@ const useStyles = makeStyles((theme) => ({
 		fontSize: '16px',
 		color: theme.palette.gold.main,
 	},
+	title: {
+		padding: theme.spacing(2),
+		letterSpacing: '.035em',
+		textTransform: 'uppercase',
+		color: theme.palette.gold.main,
+		backgroundColor: theme.palette.primary.light,
+	},
 }));
 
 export default function DeliveryForm({ nextStep, prevStep }) {
@@ -62,7 +69,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 
 	return (
 		<React.Fragment>
-			<Typography variant="h6" gutterBottom>
+			<Typography variant="h6" gutterBottom className={classes.title}>
 				Rental Delivery Address
 			</Typography>
 			<FormControlLabel
@@ -94,16 +101,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-					{/* <Grid item xs={12}>
-						<TextField
-							id="companyName"
-							name="delivery_company_name"
-							label="Company name"
-							fullWidth
-							autoComplete="company-name"
-							inputRef={register}
-						/>
-					</Grid> */}
+
 					<Grid item xs={12} sm={6}>
 						<TextField
 							required

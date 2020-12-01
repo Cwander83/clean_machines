@@ -12,6 +12,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 // context api
 import { CartContext } from '../../context/cart-context';
@@ -38,9 +39,17 @@ const useStyles = makeStyles((theme) => ({
 	total: {
 		fontWeight: 700,
 	},
+
 	title: {
-		marginTop: theme.spacing(2),
-		textAlign: 'center',
+		padding: theme.spacing(2),
+		letterSpacing: '.035em',
+		textTransform: 'uppercase',
+		color: theme.palette.gold.main,
+		backgroundColor: theme.palette.primary.light,
+	},
+	arrowIcon: {
+		fontSize: '16px',
+		color: theme.palette.gold.main,
 	},
 	totalItems: {
 		paddingLeft: '25%',
@@ -60,7 +69,7 @@ export default function Review({ nextStep, prevStep }) {
 
 	return (
 		<React.Fragment>
-			<Typography variant="h6" gutterBottom>
+			<Typography className={classes.title} variant="h6" gutterBottom>
 				Order summary
 			</Typography>
 
@@ -145,7 +154,7 @@ export default function Review({ nextStep, prevStep }) {
 						onClick={nextStep}
 						style={{ marginLeft: '10px' }}
 					>
-						payment
+						payment <ArrowForwardIcon className={classes.arrowIcon} />
 					</Button>
 				</Grid>
 			</Grid>

@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 		paddingLeft: '30px',
 		paddingRight: '30px',
 		marginTop: '10px',
+		marginBottom: '30px',
 		'&:active, &:hover': {
 			backgroundColor: theme.palette.primary.dark,
 		},
