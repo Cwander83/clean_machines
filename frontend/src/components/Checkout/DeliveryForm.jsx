@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
 	},
+	checkbox: {
+		margin: '0 auto',
+	},
 }));
 
 export default function DeliveryForm({ nextStep, prevStep }) {
@@ -53,6 +56,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 	const { register, handleSubmit, errors, control } = useForm();
 
 	const { updateDelivery, user } = useContext(CartContext);
+
 	const [checked, setChecked] = useState(false);
 
 	const onSubmit = (data) => {
@@ -73,6 +77,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 				Rental Delivery Address
 			</Typography>
 			<FormControlLabel
+				className={classes.checkbox}
 				control={
 					<Checkbox
 						checked={checked}

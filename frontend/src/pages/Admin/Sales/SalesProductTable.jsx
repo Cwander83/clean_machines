@@ -1,4 +1,9 @@
-import React, { useEffect, useState, useContext, memo } from 'react';
+import React, {
+	useEffect,
+	useState,
+	// useContext,
+	memo,
+} from 'react';
 
 // React router
 import { Link } from 'react-router-dom';
@@ -115,14 +120,11 @@ const useStyles2 = makeStyles((theme) => ({
 }));
 
 const SalesProductTable = () => {
-	
 	const classes = useStyles2();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
 	const [rows, setData] = useState([]);
-
-	
 
 	useEffect(() => {
 		const fetchData = async () => {

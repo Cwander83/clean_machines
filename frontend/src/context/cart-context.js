@@ -36,6 +36,15 @@ const CartProvider = (props) => {
 		// 	shipping: 3000,
 		// 	category: 'upright',
 		// },
+		{
+			"productId": 2,
+			"model": "test",
+			"price": 20030,
+			"quantity": 1,
+			"category": "backpack",
+			"shipping": 3000,
+			"type": "sale"
+		  }
 	]);
 
 	console.log('*** user Data : ' + JSON.stringify(user, null, 2));

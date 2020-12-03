@@ -86,17 +86,7 @@ export default function BillingAddressForm({ nextStep }) {
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-					{/* <Grid item xs={12}>
-						<TextField
-							id="company"
-							name="billing_company_name"
-							label="Company Name"
-							fullWidth
-							defaultValue={user.billing_company_name}
-							autoComplete="company-name"
-							inputRef={register}
-						/>
-					</Grid> */}
+			
 					<Grid item xs={12} sm={6}>
 						<TextField
 							required
