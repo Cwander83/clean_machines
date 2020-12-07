@@ -66,8 +66,6 @@ const CartProvider = (props) => {
 	const updateDeliveryUserHandler = (data) =>
 		setUser({ ...user, delivery: data });
 
-	const updateBillingUserHandler = (data) =>
-		setUser({ ...user, billing: data });
 
 	const updateShippingUserHandler = (data) =>
 		setUser({ ...user, shipping: data });
@@ -88,7 +86,7 @@ const CartProvider = (props) => {
 				user,
 				setUser,
 				setCart,
-				updateBilling: updateBillingUserHandler,
+				
 				updateDelivery: updateDeliveryUserHandler,
 				updateShipping: updateShippingUserHandler,
 				addToCart: addToCartHandler,

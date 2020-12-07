@@ -6,7 +6,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 import SuccessMessage from './SuccessMessage';
 import ShippingForm from './ShippingForm';
-//import BillingAddressForm from './BillingAddressForm';
+import BillingAddressForm from './BillingAddressForm';
 
 // stripe
 import { Elements } from '@stripe/react-stripe-js';
@@ -27,21 +27,21 @@ export default function Checkout() {
 	};
 
 	switch (step) {
-		// case 1:
-		// 	return <BillingAddressForm nextStep={nextStep} />;
-		// case 1:
-		// 	return <DeliveryForm nextStep={nextStep} prevStep={prevStep} />;
-		// case 2:
-		// 	return <ShippingForm nextStep={nextStep} prevStep={prevStep} />;
-		// case 3:
-		// 	return <Review nextStep={nextStep} prevStep={prevStep} />;
 		case 1:
+			return <BillingAddressForm nextStep={nextStep} />;
+		case 2:
+			return <DeliveryForm nextStep={nextStep} prevStep={prevStep} />;
+		case 3:
+			return <ShippingForm nextStep={nextStep} prevStep={prevStep} />;
+		case 4:
+			return <Review nextStep={nextStep} prevStep={prevStep} />;
+		case 5:
 			return (
 				<Elements stripe={stripePromise}>
 					<PaymentForm prevStep={prevStep} />
 				</Elements>
 			);
-		case 5:
+		case 6:
 			return <SuccessMessage />;
 		default:
 			throw new Error('Unknown step');
