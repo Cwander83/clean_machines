@@ -61,10 +61,13 @@ const CartProvider = (props) => {
 		setOpen(false);
 	};
 
-	const updateUserHandler = (data) => setUser(data);
+	//const updateUserHandler = (data) => setUser(data);
 
 	const updateDeliveryUserHandler = (data) =>
 		setUser({ ...user, delivery: data });
+
+	const updateBillingUserHandler = (data) =>
+		setUser({ ...user, billing: data });
 
 	const updateShippingUserHandler = (data) =>
 		setUser({ ...user, shipping: data });
@@ -85,7 +88,7 @@ const CartProvider = (props) => {
 				user,
 				setUser,
 				setCart,
-				updateUser: updateUserHandler,
+				updateBilling: updateBillingUserHandler,
 				updateDelivery: updateDeliveryUserHandler,
 				updateShipping: updateShippingUserHandler,
 				addToCart: addToCartHandler,

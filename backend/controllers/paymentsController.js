@@ -1,6 +1,6 @@
 const { createCustomer } = require('../stripe/stripe.customer');
 const { createPayment } = require('../stripe/stripe.payments');
-const { createPurchase } = require('../db/db');
+const { createPurchase, findCustomerById } = require('../db/db');
 
 const { calculateOrderAmount } = require('../stripe/helpers');
 
@@ -13,17 +13,20 @@ module.exports = {
 		console.log('1');
 		console.log('userData: ' + JSON.stringify(userData, null, 2));
 		console.log('productData: ' + JSON.stringify(productData, null, 2));
-
+		//const findSalesCustomerByEmail = await findCustomerById(userData)
+		//console.log(findSalesCustomerByEmail);
 		const customer = await createCustomer(userData); //
 
 		const purchase = await createPurchase(userData, productData, customer);
 
-		const totalPrice = await calculateOrderAmount(totals);
+		// TODO update DB with new inventory
+
+		//const totalPrice = await calculateOrderAmount(totals);
 
 		const paymentIntent = await createPayment(
 			payment_method_id,
-			totalPrice,
-			
+			(totalPrice = calculateOrderAmount(totals)),
+
 			customer
 		);
 		const sendOff = await res.send({

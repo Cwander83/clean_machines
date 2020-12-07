@@ -7,12 +7,12 @@ module.exports = {
 		console.log('stripe customer: ' + JSON.stringify(userData, null, 2));
 		return stripe.customers.create({
 			address: {
-				line1: userData.billing_line1,
-				city: userData.billing_city,
-				line2: userData.billing_line2,
-				postal_code: userData.billing_postal_code,
-				country: userData.billing_country,
-				state: userData.billing_state,
+				line1: userData.billing.billing_line1,
+				city: userData.billing.billing_city,
+				line2: userData.billing.billing_line2,
+				postal_code: userData.billing.billing_postal_code,
+				country: userData.billing.billing_country,
+				state: userData.billing.billing_state,
 			},
 			shipping: {
 				name: userData.shipping.shipping_name,
@@ -26,9 +26,9 @@ module.exports = {
 					postal_code: userData.shipping.shipping_postal_code,
 				},
 			},
-			name: userData.billing_name,
-			email: userData.billing_email,
-			phone: userData.billing_phone,
+			name: userData.billing.billing_name,
+			email: userData.billing.billing_email,
+			phone: userData.billing.billing_phone,
 			//description: 'My First Test Customer (created for API docs)',
 		});
 	},
