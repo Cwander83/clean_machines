@@ -51,12 +51,12 @@ export default function BillingAddressForm({ nextStep }) {
 
 	const { register, handleSubmit, errors, control } = useForm();
 
-	const { updateUser, user } = React.useContext(CartContext);
+	const { setUser, user } = React.useContext(CartContext);
 
 	const onSubmit = (data) => {
 		console.log(data);
 		if (data) {
-			updateUser(data);
+			setUser(data);
 			nextStep();
 		}
 	};
@@ -86,7 +86,7 @@ export default function BillingAddressForm({ nextStep }) {
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-			
+
 					<Grid item xs={12} sm={6}>
 						<TextField
 							required
