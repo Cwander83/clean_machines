@@ -19,14 +19,14 @@ module.exports = {
 					end_date: obj.end_date,
 					customer_stripe_id: customer.id,
 					// billing
-					billing_name: userData.billing_name,
-					billing_email: userData.billing_email,
-					billing_phone: userData.billing_phone,
-					billing_line1: userData.billing_line1,
-					billing_line2: userData.billing_line2,
-					billing_city: userData.billing_city,
-					billing_zipcode: userData.billing_postal_code,
-					billing_state: userData.billing_state,
+					billing_name: userDatabilling.billing_name,
+					billing_email: userData.billing.billing_email,
+					billing_phone: userData.billing.billing_phone,
+					billing_line1: userData.billing.billing_line1,
+					billing_line2: userData.billing.billing_line2,
+					billing_city: userData.billing.billing_city,
+					billing_zipcode: userData.billing.billing_postal_code,
+					billing_state: userData.billing.billing_state,
 					// delivery
 					delivery_name: userData.delivery.delivery_name,
 					delivery_email: userData.delivery.delivery_email,
@@ -48,14 +48,14 @@ module.exports = {
 					price_per_unit: obj.price,
 					customer_stripe_id: customer.id,
 					// billing
-					billing_name: userData.billing_name,
-					billing_email: userData.billing_email,
-					billing_phone: userData.billing_phone,
-					billing_line1: userData.billing_line1,
-					billing_line2: userData.billing_line2,
-					billing_city: userData.billing_city,
-					billing_zipcode: userData.billing_postal_code,
-					billing_state: userData.billing_state,
+					billing_name: userData.billing.billing_name,
+					billing_email: userData.billing.billing_email,
+					billing_phone: userData.billing.billing_phone,
+					billing_line1: userData.billing.billing_line1,
+					billing_line2: userData.billing.billing_line2,
+					billing_city: userData.billing.billing_city,
+					billing_zipcode: userData.billing.billing_postal_code,
+					billing_state: userData.billing.billing_state,
 					// shipping
 					shipping_name: userData.shipping.shipping_name,
 					shipping_email: userData.shipping.shipping_email,
@@ -161,5 +161,10 @@ module.exports = {
 
 				.catch((err) => console.error(err));
 		}
+	},
+	findCustomerById: (data) => {
+		return db.Sales.findOne({
+			where: { billing_email: data.billing.billing_email },
+		});
 	},
 };

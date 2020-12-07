@@ -16,7 +16,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-
 // context api
 import { CartContext } from '../../context/cart-context.js';
 
@@ -101,17 +100,6 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-
-					{/* <Grid item xs={12}>
-						<TextField
-							id="companyName"
-							name="shipping_company_name"
-							label="Company name"
-							fullWidth
-							autoComplete="company-name"
-							inputRef={register}
-						/>
-					</Grid> */}
 					<Grid item xs={12} sm={6}>
 						<TextField
 							required
@@ -218,7 +206,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							variant="contained"
 							style={{ marginLeft: '10px' }}
 						>
-							Review order <ArrowForwardIcon className={classes.arrowIcon}/>
+							Review order <ArrowForwardIcon className={classes.arrowIcon} />
 						</Button>
 					</Grid>
 				</Grid>
