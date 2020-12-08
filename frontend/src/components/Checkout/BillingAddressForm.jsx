@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 // react hooks form
 import { useForm, Controller } from 'react-hook-form';
@@ -51,10 +51,10 @@ export default function BillingAddressForm({ nextStep }) {
 
 	const { register, handleSubmit, errors, control } = useForm();
 
-	const { setUser, user } = React.useContext(CartContext);
+	const { setUser, user } = useContext(CartContext);
 
 	const onSubmit = (data) => {
-		console.log(data);
+		
 		if (data) {
 			setUser(data);
 			nextStep();
@@ -138,7 +138,7 @@ export default function BillingAddressForm({ nextStep }) {
 							inputRef={register}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={4}>
 						<TextField
 							required
 							id="city"
@@ -151,7 +151,7 @@ export default function BillingAddressForm({ nextStep }) {
 							inputRef={register({ required: true })}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={2}>
 						<InputLabel id="select-state">State</InputLabel>
 						<Controller
 							as={

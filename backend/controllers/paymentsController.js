@@ -15,20 +15,22 @@ module.exports = {
 		console.log('productData: ' + JSON.stringify(productData, null, 2));
 		//const findSalesCustomerByEmail = await findCustomerById(userData)
 		//console.log(findSalesCustomerByEmail);
-		const customer = await createCustomer(userData); //
+		const customer = await createCustomer(userData);
+		
+		const totalPrice = await calculateOrderAmount(totals);
 
-		const purchase = await createPurchase(userData, productData, customer);
+		const purchase = await createPurchase(userData, productData, customer, totalPrice);
 
 		// TODO update DB with new inventory
 
-		//const totalPrice = await calculateOrderAmount(totals);
 
 		const paymentIntent = await createPayment(
 			payment_method_id,
-			(totalPrice = calculateOrderAmount(totals)),
+			totalPrice
 
-			customer
+			//	customer
 		);
+		console.log('paymentIntent: ' + paymentIntent);
 		const sendOff = await res.send({
 			clientSecret: paymentIntent.client_secret,
 		});

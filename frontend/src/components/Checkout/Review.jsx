@@ -17,25 +17,12 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 // context api
 import { CartContext } from '../../context/cart-context';
 
-// const products = [
-// 	{ name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-// 	{ name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-// 	{ name: 'Product 3', desc: 'Something else', price: '$6.51' },
-// 	{ name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-// 	// { name: 'Deposit', desc: '', price: 'Free' },
-// ];
-// const addresses = [
-// 	'1 Material-UI Drive',
-// 	'Reactville',
-// 	'Anytown',
-// 	'99999',
-// 	'USA',
-// ];
-
 const useStyles = makeStyles((theme) => ({
 	listItem: {
 		padding: theme.spacing(1, 0),
 	},
+	list: { marginBottom: '30px' },
+
 	total: {
 		fontWeight: 700,
 	},
@@ -46,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'uppercase',
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
+		marginBottom: '15px',
 	},
 	arrowIcon: {
 		fontSize: '16px',
@@ -73,7 +61,7 @@ export default function Review({ nextStep, prevStep }) {
 				Order summary
 			</Typography>
 
-			<List disablePadding>
+			<List className={classes.list} disablePadding>
 				{cart.map((product, key) => (
 					<ListItem className={classes.listItem} key={key}>
 						<ListItemText
@@ -112,37 +100,6 @@ export default function Review({ nextStep, prevStep }) {
 				</ListItem>
 			</List>
 			<Grid container spacing={2} justify="center">
-				{/* 
-				<Grid item xs={12} sm={6}>
-					<Typography variant="h6" gutterBottom className={classes.title}>
-						Delivery Address
-					</Typography>
-					<Typography gutterBottom>
-						{user.firstName} {user.lastName}
-					</Typography>
-					<Typography gutterBottom>
-						{user.shipping_line1}
-						<br /> {user.shipping_line2}
-						<br />
-						{user.shipping_city} {user.shipping_state}{' '}
-						{user.shipping_postal_code}
-					</Typography>
-				</Grid> */}
-				{/* <Grid item xs={12} sm={6}>
-					<Typography variant="h6" gutterBottom className={classes.title}>
-						Shipping Address
-					</Typography>
-					<Typography gutterBottom>
-						{user.firstName} {user.lastName}
-					</Typography>
-					<Typography gutterBottom>
-						{user.shipping_line1}
-						<br /> {user.shipping_line2}
-						<br />
-						{user.shipping_city} {user.shipping_state}{' '}
-						{user.shipping_postal_code}
-					</Typography>
-				</Grid> */}
 				<Grid item xs={12} className={classes.buttons}>
 					<Button color="primary" variant="contained" onClick={prevStep}>
 						back

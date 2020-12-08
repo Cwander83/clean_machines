@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -53,17 +53,21 @@ const useStyles = makeStyles((theme) => ({
 		textTransform: 'uppercase',
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
+		marginBottom: '15px',
 	},
 }));
 
 export default function PaymentForm({ prevStep, nextStep }) {
-	const { cart, user } = useContext(CartContext);
+	const { cart, user, totals, setUser, setTotals, setCart } = useContext(
+		CartContext
+	);
 	const classes = useStyles();
 
 	const stripe = useStripe();
 	const elements = useElements();
 
 	const [errors, setErrors] = useState(null);
+	const [success, setSuccess] = useState(null);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -77,6 +81,18 @@ export default function PaymentForm({ prevStep, nextStep }) {
 		const payload = await stripe.createPaymentMethod({
 			type: 'card',
 			card: elements.getElement(CardNumberElement),
+			billing_details: {
+				name: user.billing_name,
+				email: user.billing_email,
+				phone: user.billing_phone,
+				address: {
+					city: user.billing_city,
+					state: user.billing_state,
+					line1: user.billing_line1,
+					line2: user.billing_line2,
+					postal_code: user.billing_postal_code,
+				},
+			},
 		});
 		console.log('[PaymentMethod]', payload);
 		handlePaymentMethodResult(payload);
@@ -101,6 +117,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 
 					userData: user,
 					productData: cart,
+					totals,
 				}),
 			});
 
@@ -124,14 +141,13 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			setUser({});
 			setCart([]);
 			setTotals({});
-
 			// TODO navigate to success page
 		}
 	};
 
 	return (
 		<React.Fragment>
-			<Typography variant="h6" gutterBottom>
+			<Typography className={classes.title} variant="h6" gutterBottom>
 				Payment method
 			</Typography>
 			<form noValidate className={classes.form} onSubmit={handleSubmit}>
@@ -141,6 +157,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 							required
 							id="cardName"
 							label="Name on card"
+							defaultValue={user.billing_name}
 							fullWidth
 							autoComplete="cc-name"
 						/>
@@ -185,6 +202,12 @@ export default function PaymentForm({ prevStep, nextStep }) {
 								/>
 							</li>
 						</ul>
+					</Grid>
+					<Grid item xs={10}>
+						<Typography variant="h6">{errors ? errors : null}</Typography>
+					</Grid>
+					<Grid item xs={10}>
+						<Typography variant="h6">{success ? success : null}</Typography>
 					</Grid>
 				</Grid>
 				<Grid item xs={12} className={classes.buttons}>

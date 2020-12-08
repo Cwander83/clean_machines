@@ -86,7 +86,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 						inputProps={{ 'aria-label': 'primary checkbox' }}
 					/>
 				}
-				label="check here if not renting"
+				label="Skip to Shipping"
 			/>
 			<form
 				className={classes.form}

@@ -1,36 +1,55 @@
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
-
 module.exports = {
 	createCustomer: (userData) => {
 		console.log('2');
 		console.log('stripe customer: ' + JSON.stringify(userData, null, 2));
-		return stripe.customers.create({
-			address: {
-				line1: userData.billing_line1,
-				city: userData.billing_city,
-				line2: userData.billing_line2,
-				postal_code: userData.billing_postal_code,
-				country: userData.billing_country,
-				state: userData.billing_state,
-			},
-			shipping: {
-				name: userData.shipping.shipping_name,
-				phone: userData.shipping.shipping_phone,
+		let userShipping = userData.shipping;
+		if (userShipping) {
+			return stripe.customers.create({
 				address: {
-					city: userData.shipping.shipping_city,
-					line1: userData.shipping.shipping_line1,
-					line2: userData.shipping.shipping_line2,
-					country: userData.shipping.shipping_country,
-					state: userData.shipping.shipping_state,
-					postal_code: userData.shipping.shipping_postal_code,
+					line1: userData.billing_line1,
+					city: userData.billing_city,
+					line2: userData.billing_line2,
+					postal_code: userData.billing_postal_code,
+					country: userData.billing_country,
+					state: userData.billing_state,
 				},
-			},
-			name: userData.billing_name,
-			email: userData.billing_email,
-			phone: userData.billing_phone,
-			//description: 'My First Test Customer (created for API docs)',
-		});
+				shipping: {
+					name: userShipping.shipping_name,
+					phone: userShipping.shipping_phone,
+					address: {
+						city: userShipping.shipping_city,
+						line1: userShipping.shipping_line1,
+						line2: userShipping.shipping_line2,
+						country: userShipping.shipping_country,
+						state: userShipping.shipping_state,
+						postal_code: userShipping.shipping_postal_code,
+					},
+				},
+				name: userData.billing_name,
+				email: userData.billing_email,
+				phone: userData.billing_phone,
+				//description: 'My First Test Customer (created for API docs)',
+			});
+		}
+		if (!userShipping) {
+			return stripe.customers.create({
+				address: {
+					line1: userData.billing_line1,
+					city: userData.billing_city,
+					line2: userData.billing_line2,
+					postal_code: userData.billing_postal_code,
+					country: userData.billing_country,
+					state: userData.billing_state,
+				},
+
+				name: userData.billing_name,
+				email: userData.billing_email,
+				phone: userData.billing_phone,
+				//description: 'My First Test Customer (created for API docs)',
+			});
+		}
 	},
 
 	findSingleCustomer: (id) => {

@@ -12,63 +12,62 @@ module.exports = {
 		// console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
 
 		productData.forEach((obj) => {
-			if (obj.type === 'rental') {
-				db.Rentals.create({
-					productId: obj.productId,
-					start_date: obj.start_date,
-					end_date: obj.end_date,
-					customer_stripe_id: customer.id,
-					// billing
-					billing_name: userData.billing_name,
-					billing_email: userData.billing_email,
-					billing_phone: userData.billing_phone,
-					billing_line1: userData.billing_line1,
-					billing_line2: userData.billing_line2,
-					billing_city: userData.billing_city,
-					billing_zipcode: userData.billing_postal_code,
-					billing_state: userData.billing_state,
-					// delivery
-					delivery_name: userData.delivery.delivery_name,
-					delivery_email: userData.delivery.delivery_email,
-					delivery_phone: userData.delivery.delivery_phone,
-					delivery_line1: userData.delivery.delivery_line1,
-					delivery_line2: userData.delivery.delivery_line2,
-					delivery_city: userData.delivery.delivery_city,
-					delivery_zipcode: userData.delivery.delivery_postal_code,
-					delivery_state: userData.delivery.delivery_state,
-				})
-					.then((result) => console.log('created Rental: ' + result))
-					.catch((err) => console.error(err));
-			}
-			if (obj.type === 'sale') {
-				db.Sales.create({
-					productId: obj.productId,
-					quantity_purchased: obj.quantity,
-					total_price: obj.price * obj.quantity + obj.shipping,
-					price_per_unit: obj.price,
-					customer_stripe_id: customer.id,
-					// billing
-					billing_name: userData.billing_name,
-					billing_email: userData.billing_email,
-					billing_phone: userData.billing_phone,
-					billing_line1: userData.billing_line1,
-					billing_line2: userData.billing_line2,
-					billing_city: userData.billing_city,
-					billing_zipcode: userData.billing_postal_code,
-					billing_state: userData.billing_state,
-					// shipping
-					shipping_name: userData.shipping.shipping_name,
-					shipping_email: userData.shipping.shipping_email,
-					shipping_phone: userData.shipping.shipping_phone,
-					shipping_line1: userData.shipping.shipping_line1,
-					shipping_line2: userData.shipping.shipping_line2,
-					shipping_city: userData.shipping.shipping_city,
-					shipping_zipcode: userData.shipping.shipping_postal_code,
-					shipping_state: userData.shipping.shipping_state,
-				})
-					.then((result) => console.log('created Sale: ' + result))
-					.catch((err) => console.error(err));
-			}
+			obj.type === 'rental'
+				? db.Rentals.create({
+						productId: obj.productId,
+						start_date: obj.start_date,
+						end_date: obj.end_date,
+						customer_stripe_id: customer.id,
+						// billing
+						billing_name: userData.billing_name,
+						billing_email: userData.billing_email,
+						billing_phone: userData.billing_phone,
+						billing_line1: userData.billing_line1,
+						billing_line2: userData.billing_line2,
+						billing_city: userData.billing_city,
+						billing_zipcode: userData.billing_postal_code,
+						billing_state: userData.billing_state,
+						// delivery
+						delivery_name: userData.delivery.delivery_name,
+						delivery_email: userData.delivery.delivery_email,
+						delivery_phone: userData.delivery.delivery_phone,
+						delivery_line1: userData.delivery.delivery_line1,
+						delivery_line2: userData.delivery.delivery_line2,
+						delivery_city: userData.delivery.delivery_city,
+						delivery_zipcode: userData.delivery.delivery_postal_code,
+						delivery_state: userData.delivery.delivery_state,
+				  })
+				  // TODO remove before prod
+				  
+						.then((result) => console.log('created Rental: ' + result))
+						.catch((err) => console.error(err))
+				: db.Sales.create({
+						productId: obj.productId,
+						quantity_purchased: obj.quantity,
+						total_price: obj.price * obj.quantity + obj.shipping,
+						price_per_unit: obj.price,
+						customer_stripe_id: customer.id,
+						// billing
+						billing_name: userData.billing_name,
+						billing_email: userData.billing_email,
+						billing_phone: userData.billing_phone,
+						billing_line1: userData.billing_line1,
+						billing_line2: userData.billing_line2,
+						billing_city: userData.billing_city,
+						billing_zipcode: userData.billing_postal_code,
+						billing_state: userData.billing_state,
+						// shipping
+						shipping_name: userData.shipping.shipping_name,
+						shipping_email: userData.shipping.shipping_email,
+						shipping_phone: userData.shipping.shipping_phone,
+						shipping_line1: userData.shipping.shipping_line1,
+						shipping_line2: userData.shipping.shipping_line2,
+						shipping_city: userData.shipping.shipping_city,
+						shipping_zipcode: userData.shipping.shipping_postal_code,
+						shipping_state: userData.shipping.shipping_state,
+				  })
+						.then((result) => console.log('created Sale: ' + result))
+						.catch((err) => console.error(err));
 		});
 	},
 	findAllSalesById: (id) => {

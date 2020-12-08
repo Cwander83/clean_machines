@@ -80,7 +80,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 						inputProps={{ 'aria-label': 'primary checkbox' }}
 					/>
 				}
-				label="check here if nothing is being shipped"
+				label="Skip to review"
 			/>
 			<form
 				className={classes.form}
