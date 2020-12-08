@@ -16,8 +16,8 @@ module.exports = {
 					state: userData.billing_state,
 				},
 				shipping: {
-					name: userShipping.shipping_name,
-					phone: userShipping.shipping_phone,
+					name: userData.billing_name,
+					phone: userData.billing_phone,
 					address: {
 						city: userShipping.shipping_city,
 						line1: userShipping.shipping_line1,

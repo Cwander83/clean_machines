@@ -88,7 +88,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					<Grid item xs={12}>
+					{/* <Grid item xs={12}>
 						<TextField
 							required
 							id="firstName"
@@ -99,8 +99,8 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							error={!!errors.shipping_name}
 							inputRef={register({ required: true })}
 						/>
-					</Grid>
-					<Grid item xs={12} sm={6}>
+					</Grid> */}
+					{/* <Grid item xs={12} sm={6}>
 						<TextField
 							required
 							id="email"
@@ -112,8 +112,8 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
 						/>
 						<p>{errors.email && 'not valid email'}</p>
-					</Grid>
-					<Grid item xs={12} sm={6}>
+					</Grid> */}
+					{/* <Grid item xs={12} sm={6}>
 						<TextField
 							required
 							id="phone"
@@ -124,7 +124,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							error={!!errors.shipping_phone}
 							inputRef={register({ required: true })}
 						/>
-					</Grid>
+					</Grid> */}
 					<Grid item xs={12}>
 						<TextField
 							required

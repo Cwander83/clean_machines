@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // icons
 import icon1 from '../../assets/CCLOGOS/1.png';
@@ -25,6 +26,7 @@ import { CartContext } from '../../context/cart-context';
 const useStyles = makeStyles((theme) => ({
 	form: {
 		width: '100%',
+		marginTop: '20px',
 	},
 	stripe: {
 		padding: theme.spacing(2),
@@ -55,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.primary.light,
 		marginBottom: '15px',
 	},
+	loading: {
+		color: 'white',
+	},
 }));
 
 export default function PaymentForm({ prevStep, nextStep }) {
@@ -67,10 +72,13 @@ export default function PaymentForm({ prevStep, nextStep }) {
 	const elements = useElements();
 
 	const [errors, setErrors] = useState(null);
-	const [success, setSuccess] = useState(null);
+	const [success, setSuccess] = useState(false);
+	const [isProcessing, setIsProcessing] = useState(false);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+
+		setIsProcessing(true);
 
 		if (!stripe || !elements) {
 			// Stripe.js has not loaded yet. Make sure to disable
@@ -107,6 +115,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			// show `result.error.message` in the payment form.
 			console.log('result error ' + JSON.stringify(result.error, null, 2));
 			setErrors(result.error.message);
+			setIsProcessing(false);
 		} else {
 			// Otherwise send paymentMethod.id to your server (see Step 3)
 			const response = await fetch('/customers/pay', {
@@ -135,9 +144,11 @@ export default function PaymentForm({ prevStep, nextStep }) {
 				'serverResponse.error ' + JSON.stringify(serverResponse.error, null, 2)
 			);
 			setErrors(serverResponse.error.message);
+			setIsProcessing(false);
 		} else {
 			// Show a success message
-			setSuccess('payment sent');
+			setSuccess(true);
+			setIsProcessing(false);
 			setUser({});
 			setCart([]);
 			setTotals({});
@@ -204,6 +215,9 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						</ul>
 					</Grid>
 					<Grid item xs={10}>
+						<Typography variant="h6">POWERED BY STRIPE</Typography>
+					</Grid>
+					<Grid item xs={10}>
 						<Typography variant="h6">{errors ? errors : null}</Typography>
 					</Grid>
 					<Grid item xs={10}>
@@ -224,10 +238,15 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						color="primary"
 						variant="contained"
 						type="submit"
-						onClick={nextStep}
+						// onClick={nextStep}
 						disabled={!stripe}
 					>
-						complete purchase
+						Complete purchase
+						{isProcessing ? (
+							<CircularProgress className={classes.loading} />
+						) : (
+							<></>
+						)}
 					</Button>
 				</Grid>
 			</form>
