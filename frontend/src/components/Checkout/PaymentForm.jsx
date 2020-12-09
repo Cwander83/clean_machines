@@ -243,11 +243,8 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						// onClick={nextStep}
 						disabled={!stripe || isProcessing}
 					>
-<<<<<<< Updated upstream
 						Complete purchase
 						
-=======
->>>>>>> Stashed changes
 						{isProcessing ? (
 							<CircularProgress size={16} className={classes.loading} />
 						) : (
