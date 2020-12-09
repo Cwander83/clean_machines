@@ -242,6 +242,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						disabled={!stripe}
 					>
 						Complete purchase
+						
 						{isProcessing ? (
 							<CircularProgress className={classes.loading} />
 						) : (
