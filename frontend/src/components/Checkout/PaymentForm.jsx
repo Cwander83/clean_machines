@@ -59,6 +59,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	loading: {
 		color: 'white',
+		marginLeft: '30px',
+		marginRight: '30px',
 	},
 }));
 
@@ -239,14 +241,17 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						variant="contained"
 						type="submit"
 						// onClick={nextStep}
-						disabled={!stripe}
+						disabled={!stripe || isProcessing}
 					>
+<<<<<<< Updated upstream
 						Complete purchase
 						
+=======
+>>>>>>> Stashed changes
 						{isProcessing ? (
-							<CircularProgress className={classes.loading} />
+							<CircularProgress size={16} className={classes.loading} />
 						) : (
-							<></>
+							'Complete payment'
 						)}
 					</Button>
 				</Grid>
