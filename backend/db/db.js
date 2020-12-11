@@ -1,15 +1,11 @@
 const db = require('../config/config');
-//const moment = require('moment');
-//const { Op } = require('sequelize');
 
 module.exports = {
-	createPurchase: async (userData, productData, customer) => {
+	createPurchase: async (userData, productData, payment_method_id) => {
 		console.log(`create Rentals`);
 		console.log(
-			'product CREATEPURCHASE: ' + JSON.stringify(productData, null, 2)
+			'product CREATE PURCHASE: ' + JSON.stringify(productData, null, 2)
 		);
-		// console.log('length: ' + items.rental.length);
-		// console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
 
 		productData.forEach((obj) => {
 			obj.type === 'rental'
@@ -17,7 +13,7 @@ module.exports = {
 						productId: obj.productId,
 						start_date: obj.start_date,
 						end_date: obj.end_date,
-						customer_stripe_id: customer.id,
+						order_stripe_id: payment_method_id,
 						// billing
 						billing_name: userData.billing_name,
 						billing_email: userData.billing_email,
@@ -28,17 +24,17 @@ module.exports = {
 						billing_zipcode: userData.billing_postal_code,
 						billing_state: userData.billing_state,
 						// delivery
-						delivery_name: userData.delivery.delivery_name,
-						delivery_email: userData.delivery.delivery_email,
-						delivery_phone: userData.delivery.delivery_phone,
-						delivery_line1: userData.delivery.delivery_line1,
-						delivery_line2: userData.delivery.delivery_line2,
-						delivery_city: userData.delivery.delivery_city,
-						delivery_zipcode: userData.delivery.delivery_postal_code,
-						delivery_state: userData.delivery.delivery_state,
+						delivery_name: userData.billing_name,
+						delivery_email: userData.billing_email,
+						delivery_phone: userData.shipping.shipping_phone,
+						delivery_line1: userData.shipping.shipping_line1,
+						delivery_line2: userData.shipping.shipping_line2,
+						delivery_city: userData.shipping.shipping_city,
+						delivery_zipcode: userData.shipping.shipping_postal_code,
+						delivery_state: userData.shipping.shipping_state,
 				  })
-				  // TODO remove before prod
-				  
+						// TODO remove before prod
+
 						.then((result) => console.log('created Rental: ' + result))
 						.catch((err) => console.error(err))
 				: db.Sales.create({
@@ -46,7 +42,7 @@ module.exports = {
 						quantity_purchased: obj.quantity,
 						total_price: obj.price * obj.quantity + obj.shipping,
 						price_per_unit: obj.price,
-						customer_stripe_id: customer.id,
+						order_stripe_id: payment_method_id,
 						// billing
 						billing_name: userData.billing_name,
 						billing_email: userData.billing_email,
@@ -57,8 +53,8 @@ module.exports = {
 						billing_zipcode: userData.billing_postal_code,
 						billing_state: userData.billing_state,
 						// shipping
-						shipping_name: userData.shipping.shipping_name,
-						shipping_email: userData.shipping.shipping_email,
+						shipping_name: userData.billing_name,
+						shipping_email: userData.billing_email,
 						shipping_phone: userData.shipping.shipping_phone,
 						shipping_line1: userData.shipping.shipping_line1,
 						shipping_line2: userData.shipping.shipping_line2,
@@ -79,7 +75,6 @@ module.exports = {
 		});
 	},
 
-	// TODO change to rental dates
 	findAllRentalsById: (id) => {
 		return db.Rentals.findAll({
 			where: {
@@ -97,73 +92,16 @@ module.exports = {
 		});
 	},
 
-	createRentalAndSales: async (items, customer) => {
-		console.log(`create Rentals`);
-		// console.log('items: ' + JSON.stringify(items, null, 2));
-		// console.log('length: ' + items.rental.length);
-		// console.log('customer: ' + JSON.stringify(customer, null, 2));
 
-		for (let i = 0; i < items.rental.length; i++) {
-			db.Products.findOne({
-				where: { id: items.rental[i].product_id },
-			})
-				.then((product) => {
-					db.Rentals.create({
-						customerId: customer[0].id,
-						productId: product.id,
-						rental_price_day: items.rental[i].rental_price_day,
-						rental_days: items.rental[i].rental_days,
-						start_date: items.rental[i].rental_start_date,
-						location: items.rental[i].location,
-						end_date: items.rental[i].rental_end_date,
-						deposit: items.rental[i].deposit,
-					});
-				})
-
-				.catch((err) => console.error(err));
-		}
-
-		for (let i = 0; i < items.sales.length; i++) {
-			db.Products.findOne({
-				where: { id: items.sales[i].product_id },
-			})
-				.then((product) => {
-					db.Sales.create({
-						customerId: customer[0].id,
-						productId: product.id,
-						units: items.sales[i].units,
-						price_per_unit: items.sales[i].price_per_unit,
-					});
-				})
-
-				.catch((err) => console.error(err));
-		}
-	},
-	createSales: async (items, dbCustomer) => {
-		console.log(`create Rentals`);
-		// console.log('items: ' + JSON.stringify(items, null, 2));
-		// console.log('length: ' + items.rental.length);
-		// console.log('customer: ' + JSON.stringify(dbCustomer, null, 2));
-
-		for (let i = 0; i < items.rental.length; i++) {
-			db.Products.findOne({
-				where: { id: items.sales[i].product_id },
-			})
-				.then((product) => {
-					db.Sales.create({
-						customerId: dbCustomer[0].id,
-						productId: product.id,
-						units: items.sales[i].units,
-						price_per_unit: items.sales[i].price_per_unit,
-					});
-				})
-
-				.catch((err) => console.error(err));
-		}
-	},
-	findCustomerById: (data) => {
-		return db.Sales.findOne({
-			where: { billing_email: data.billing.billing_email },
+	// updates products(sales table) with new quantity
+	updateProducts: (data) => {
+		data.forEach((obj) => {
+			if (obj.type === 'sale')
+				db.Products.findOne({ where: obj.id })
+					.then((result) =>
+						result.update({ units: result.units - obj.quantity })
+					)
+					.catch((err) => console.error(err));
 		});
 	},
 };

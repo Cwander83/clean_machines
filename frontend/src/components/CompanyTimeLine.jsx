@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	truckIcon: {
 		backgroundColor: theme.palette.primary.light,
-	}
+	},
 }));
 
 const CompanyTimeline = () => {
@@ -46,7 +46,13 @@ const CompanyTimeline = () => {
 					</TimelineDot>
 					<TimelineConnector />
 				</TimelineSeparator>
-				<TimelineContent>Checkout with your Rentals</TimelineContent>
+				<TimelineContent
+					style={{
+						textAlign: 'left',
+					}}
+				>
+					Checkout with your Rentals
+				</TimelineContent>
 			</TimelineItem>
 
 			<TimelineItem>
@@ -75,7 +81,13 @@ const CompanyTimeline = () => {
 						<CheckIcon />
 					</TimelineDot>
 				</TimelineSeparator>
-				<TimelineContent>We Pick Up Anytime Til 9PM </TimelineContent>
+				<TimelineContent
+					style={{
+						textAlign: 'left',
+					}}
+				>
+					We Pick Up Anytime Til 9PM{' '}
+				</TimelineContent>
 			</TimelineItem>
 		</Timeline>
 	);

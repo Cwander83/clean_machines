@@ -63,7 +63,7 @@ export default function BillingAddressForm({ nextStep }) {
 	return (
 		<React.Fragment>
 			<Typography className={classes.title} variant="h6" gutterBottom>
-				Billing Address
+				Billing Information
 			</Typography>
 
 			<form

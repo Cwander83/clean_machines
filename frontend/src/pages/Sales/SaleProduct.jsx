@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import Link from '@material-ui/core/Link';
 
 // components
 import ProductCarousel from '../../components/Carousels/ProductCarousel';
@@ -81,47 +82,60 @@ function productFunc(obj, classes) {
 					className={ClassNames(classes.price)}
 					variant="h5"
 				>
-					$ {product.sale_price ? ((product.sale_price / 100).toFixed(2)): ""}
+					$ {product.sale_price ? (product.sale_price / 100).toFixed(2) : ''}
 				</Typography>
 			</Grid>
 			<Divider className={classes.divider} />
 
-			<Grid item xs={12}>
-				<Typography
-					align="left"
-					display="inline"
-					className={ClassNames(classes.title)}
-					variant="h6"
-				>
-					Availability
-				</Typography>
+			<Grid item xs={12} className={classes.section1}>
+				<Grid item xs={12}>
+					<Typography
+						align="left"
+						display="inline"
+						className={ClassNames(classes.title)}
+						variant="h6"
+					>
+						Availability
+					</Typography>
 
-				<Typography
-					gutterBottom
-					display="inline"
-					className={ClassNames(classes.body1)}
-					variant="subtitle1"
-				>
-					{product.units > 0 ? ` : In Stock` : ' : Call for Availability'}
-				</Typography>
+					<Typography
+						gutterBottom
+						display="inline"
+						className={ClassNames(classes.body1)}
+						variant="subtitle1"
+					>
+						{product.units > 0 ? (
+							` : In Stock`
+						) : (
+							<Link
+								
+								href="tel:+6145065435"
+							
+							>
+								: Call for Availability
+							</Link>
+						)}
+					</Typography>
+				</Grid>
+				<Grid item xs={12}>
+					<Typography
+						align="left"
+						display="inline"
+						className={ClassNames(classes.title)}
+						variant="h6"
+					>
+						Category
+					</Typography>
 
-				<Typography
-					align="left"
-					display="inline"
-					className={ClassNames(classes.title)}
-					variant="h6"
-				>
-					Category
-				</Typography>
-
-				<Typography
-					gutterBottom
-					display="inline"
-					className={ClassNames(classes.body1, classes.uppercase)}
-					variant="body1"
-				>
-					{` : ${product.category}`}
-				</Typography>
+					<Typography
+						gutterBottom
+						display="inline"
+						className={ClassNames(classes.body1, classes.uppercase)}
+						variant="body1"
+					>
+						{` : ${product.category}`}
+					</Typography>
+				</Grid>
 			</Grid>
 		</Grid>
 	);
@@ -163,9 +177,13 @@ const SaleProduct = () => {
 					<Grid item xs={1} sm={2}></Grid>
 					{productSection}
 					<Grid item sm={2}></Grid>
-					<Grid item xs={12} sm={8}>
-						<AddToCart product={product} />
-					</Grid>
+					{product.units > 0 ? (
+						<Grid item xs={12} sm={8}>
+							<AddToCart product={product} />
+						</Grid>
+					) : (
+						<></>
+					)}
 					<Grid item sm={2}></Grid>
 				</Grid>
 

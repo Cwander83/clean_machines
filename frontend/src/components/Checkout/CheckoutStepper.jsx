@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // components
-import DeliveryForm from './DeliveryForm';
+//import DeliveryForm from './DeliveryForm';
+import ShippingForm from './ShippingForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import SuccessMessage from './SuccessMessage';
-import ShippingForm from './ShippingForm';
 import BillingAddressForm from './BillingAddressForm';
 
 // stripe
@@ -16,7 +16,7 @@ import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 export default function Checkout() {
-	const [step, setStep] = React.useState(1);
+	const [step, setStep] = useState(1);
 
 	const nextStep = () => {
 		setStep(step + 1);
@@ -29,19 +29,19 @@ export default function Checkout() {
 	switch (step) {
 		case 1:
 			return <BillingAddressForm nextStep={nextStep} />;
+		// case 2:
+		// 	return <DeliveryForm nextStep={nextStep} prevStep={prevStep} />;
 		case 2:
-			return <DeliveryForm nextStep={nextStep} prevStep={prevStep} />;
-		case 3:
 			return <ShippingForm nextStep={nextStep} prevStep={prevStep} />;
-		case 4:
+		case 3:
 			return <Review nextStep={nextStep} prevStep={prevStep} />;
-		case 5:
+		case 4:
 			return (
 				<Elements stripe={stripePromise}>
-					<PaymentForm prevStep={prevStep} />
+					<PaymentForm prevStep={prevStep} nextStep={nextStep} />
 				</Elements>
 			);
-		case 6:
+		case 5:
 			return <SuccessMessage />;
 		default:
 			throw new Error('Unknown step');

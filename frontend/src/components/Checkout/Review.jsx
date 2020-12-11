@@ -66,7 +66,11 @@ export default function Review({ nextStep, prevStep }) {
 					<ListItem className={classes.listItem} key={key}>
 						<ListItemText
 							primary={product.model}
-							secondary={product.category}
+							secondary={
+								product.type === 'sale'
+									? product.category
+									: `Rental ${product.category}`
+							}
 						/>
 						<Typography variant="body2">
 							{product.quantity} x {(product.price / 100).toFixed(2)}
