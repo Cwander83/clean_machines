@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 		listStyleType: 'none',
+		paddingLeft: 0,
 	},
 	icon: {
 		width: '50px',
@@ -59,8 +60,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 	loading: {
 		color: 'white',
-		marginLeft: '30px',
-		marginRight: '30px',
+		marginLeft: '10px',
+		marginRight: '10px',
+	},
+	stripeCaption: {
+		textAlign: 'center',
+		fontStyle: 'italic',
+		color: theme.palette.grey.main,
 	},
 }));
 
@@ -76,6 +82,8 @@ export default function PaymentForm({ prevStep, nextStep }) {
 	const [errors, setErrors] = useState(null);
 	const [success, setSuccess] = useState(false);
 	const [isProcessing, setIsProcessing] = useState(false);
+
+	console.log(JSON.stringify(cart, null, 2));
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -103,6 +111,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 					postal_code: user.billing_postal_code,
 				},
 			},
+		
 		});
 		console.log('[PaymentMethod]', payload);
 		handlePaymentMethodResult(payload);
@@ -116,7 +125,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			// An error happened when collecting card details,
 			// show `result.error.message` in the payment form.
 			console.log('result error ' + JSON.stringify(result.error, null, 2));
-			setErrors(result.error.message);
+			setErrors('Card Read Error: ' + result.error.message);
 			setIsProcessing(false);
 		} else {
 			// Otherwise send paymentMethod.id to your server (see Step 3)
@@ -128,7 +137,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 
 					userData: user,
 					productData: cart,
-					totals,
+					totalData: totals,
 				}),
 			});
 
@@ -139,22 +148,25 @@ export default function PaymentForm({ prevStep, nextStep }) {
 	};
 
 	const handleServerResponse = (serverResponse) => {
+		console.log('serverResponse' + JSON.stringify(serverResponse, null, 2));
 		if (serverResponse.error) {
 			// An error happened when charging the card,
 			// show the error in the payment form.
 			console.log(
 				'serverResponse.error ' + JSON.stringify(serverResponse.error, null, 2)
 			);
-			setErrors(serverResponse.error.message);
+			setErrors('Server Error: ' + serverResponse.error);
 			setIsProcessing(false);
 		} else {
 			// Show a success message
+
 			setSuccess(true);
 			setIsProcessing(false);
 			setUser({});
 			setCart([]);
 			setTotals({});
 			// TODO navigate to success page
+			nextStep()
 		}
 	};
 
@@ -165,7 +177,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			</Typography>
 			<form noValidate className={classes.form} onSubmit={handleSubmit}>
 				<Grid container spacing={3} justify="center">
-					<Grid item xs={10}>
+					<Grid item xs={12} sm={10}>
 						<TextField
 							required
 							id="cardName"
@@ -175,16 +187,16 @@ export default function PaymentForm({ prevStep, nextStep }) {
 							autoComplete="cc-name"
 						/>
 					</Grid>
-					<Grid item xs={10}>
+					<Grid item xs={12} sm={10}>
 						<CardNumberElement className={classes.stripe} />
 					</Grid>
-					<Grid item xs={7}>
+					<Grid item xs={7} sm={7}>
 						<CardExpiryElement className={classes.stripe} />
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={5} sm={3}>
 						<CardCvcElement className={classes.stripe} />
 					</Grid>
-					<Grid item xs={12} sm={10}>
+					<Grid item xs={12}>
 						<ul className={classes.iconList}>
 							<li>
 								<img
@@ -217,13 +229,19 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						</ul>
 					</Grid>
 					<Grid item xs={10}>
-						<Typography variant="h6">POWERED BY STRIPE</Typography>
+						<Typography variant="h6" className={classes.stripeCaption}>
+							POWERED BY STRIPE
+						</Typography>
 					</Grid>
 					<Grid item xs={10}>
-						<Typography variant="h6">{errors ? errors : null}</Typography>
+						<Typography variant="h6" color="error">
+							{errors ? errors : null}
+						</Typography>
 					</Grid>
 					<Grid item xs={10}>
-						<Typography variant="h6">{success ? success : null}</Typography>
+						<Typography variant="h6">
+							{success ? 'payment completed' : null}
+						</Typography>
 					</Grid>
 				</Grid>
 				<Grid item xs={12} className={classes.buttons}>
@@ -241,10 +259,9 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						variant="contained"
 						type="submit"
 						// onClick={nextStep}
-						disabled={!stripe || isProcessing}
+						// disabled={!stripe || isProcessing}
+						disabled={true}
 					>
-						Complete purchase
-						
 						{isProcessing ? (
 							<CircularProgress size={16} className={classes.loading} />
 						) : (

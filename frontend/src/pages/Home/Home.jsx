@@ -146,9 +146,11 @@ const Home = () => {
 										Search for rental Dates
 									</Typography>
 									<Grid container className={classes.body}>
+										
 										<Grid item xs={12}>
 											<CompanyTimeLine />
 										</Grid>
+										
 										<Grid item xs={12} sm={2}></Grid>
 										<Grid item xs={12} sm={8}>
 											<RentalSearch show={true} size={5} buttonSize={2} />

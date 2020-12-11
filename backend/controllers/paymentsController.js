@@ -1,45 +1,61 @@
-const { createCustomer } = require('../stripe/stripe.customer');
-const { createPayment } = require('../stripe/stripe.payments');
-const { createPurchase, findCustomerById } = require('../db/db');
+const { createPurchase, updateProducts } = require('../db/db');
 
 const { calculateOrderAmount } = require('../stripe/helpers');
+//const stripeCustomer = require('../stripe/stripe.customer');
 
-//const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 module.exports = {
 	createPayment: async (req, res) => {
-		let { payment_method_id, userData, productData, totals } = req.body;
+		if (req.method === 'POST') {
+			const { payment_method_id, userData, productData, totalData } = req.body;
 
-		console.log('1');
-		console.log('userData: ' + JSON.stringify(userData, null, 2));
-		console.log('productData: ' + JSON.stringify(productData, null, 2));
-		//const findSalesCustomerByEmail = await findCustomerById(userData)
-		//console.log(findSalesCustomerByEmail);
-		//const customer = await createCustomer(userData);
+			try {
+			
+				const totalPrice = await calculateOrderAmount(totalData);
 
-		const totalPrice = await calculateOrderAmount(totals);
+				// TODO check inventory if still there
 
-		// const purchase = await createPurchase(
-		// 	userData,
-		// 	productData,
-		// 	//customer,
-		// 	totalPrice
-		// );
+				await stripe.paymentIntents.create({
+					payment_method: payment_method_id,
 
-		// TODO update DB with new inventory
+					amount: totalPrice,
+					confirm: true,
 
-		const paymentIntent = await createPayment(
-			payment_method_id,
-			totalPrice,
-			userData,
+					setup_future_usage: 'on_session',
+					receipt_email: userData.billing_email,
+					shipping: {
+						name: userData.billing_name,
+						phone: userData.billing_phone,
+						address: {
+							city: userData.shipping.shipping_city,
+							state: userData.shipping.shipping_state,
+							line1: userData.shipping.shipping_line1,
+							line2: userData.shipping.shipping_line2,
+							postal_code: userData.shipping.shipping_postal_code,
+						},
+					},
+					currency: 'usd',
+					description: ` ordered 16 items`,
+				});
+				
+				await createPurchase(userData, productData, totalPrice);
 
-			//customer
-		);
-		//await console.log('paymentIntent: ' + JSON.stringify(paymentIntent, null, 2));
-		const sendOff = await res.send({
-			clientSecret: paymentIntent.client_secret,
-		});
+				await updateProducts( productData);
+				return await res.status(200).send({
+					confirm: true,
+				});
+			} catch (error) {
+				console.error(error);
+				return await res.status(400).json({
+					error: error.message,
+				});
+			}
 
-		return sendOff;
+			
+		} else {
+			res.setHeader('Allow', 'POST');
+			res.status(405).end('Method Not Allowed');
+		}
 	},
 };

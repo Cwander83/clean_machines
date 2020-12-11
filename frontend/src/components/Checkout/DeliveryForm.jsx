@@ -94,44 +94,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					{/* <Grid item xs={12}>
-						<TextField
-							required
-							id="name"
-							name="delivery_name"
-							label="Name"
-							fullWidth
-							autoComplete="name"
-							error={!!errors.delivery_name}
-							inputRef={register({ required: true })}
-						/>
-					</Grid>
-
-					<Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="email"
-							name="delivery_email"
-							label="Email"
-							fullWidth
-							autoComplete="email"
-							error={!!errors.delivery_email}
-							inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
-						/>
-						<p>{errors.email && 'not valid email'}</p>
-					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="phone"
-							name="delivery_phone"
-							label="Phone Number"
-							fullWidth
-							autoComplete="phone"
-							error={!!errors.delivery_phone}
-							inputRef={register({ required: true })}
-						/>
-					</Grid> */}
+				
 					<Grid item xs={12}>
 						<TextField
 							required

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, {  useContext, useEffect } from 'react';
 
 // react hooks form
 import { useForm, Controller } from 'react-hook-form';
@@ -50,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
 export default function ShippingForm({ nextStep, prevStep }) {
 	const classes = useStyles();
 	const { register, handleSubmit, errors, control } = useForm();
-	const { user, updateShipping } = useContext(CartContext);
-
-	const [checked, setChecked] = useState(false);
+	const { user, updateShipping, checked, handleChange } = useContext(
+		CartContext
+	);
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -62,69 +62,20 @@ export default function ShippingForm({ nextStep, prevStep }) {
 		}
 	};
 
-	const handleChange = (event) => {
-		setChecked(event.target.checked);
-	};
+	useEffect(() => {}, []);
 
 	return (
 		<React.Fragment>
 			<Typography variant="h6" gutterBottom className={classes.title}>
-				Shipping Address
+				Shipping / Delivery Information
 			</Typography>
-			<FormControlLabel
-				control={
-					<Checkbox
-						checked={checked}
-						onChange={handleChange}
-						onClick={nextStep}
-						inputProps={{ 'aria-label': 'primary checkbox' }}
-					/>
-				}
-				label="Skip to review"
-			/>
+
 			<form
 				className={classes.form}
 				noValidate
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Grid container spacing={3}>
-					{/* <Grid item xs={12}>
-						<TextField
-							required
-							id="firstName"
-							name="shipping_name"
-							label="First name"
-							fullWidth
-							autoComplete="given-name"
-							error={!!errors.shipping_name}
-							inputRef={register({ required: true })}
-						/>
-					</Grid> */}
-					{/* <Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="email"
-							name="shipping_email"
-							label="Email"
-							fullWidth
-							autoComplete="email"
-							error={!!errors.shipping_email}
-							inputRef={register({ required: true, pattern: /\S+@\S+\.\S+/ })}
-						/>
-						<p>{errors.email && 'not valid email'}</p>
-					</Grid> */}
-					{/* <Grid item xs={12} sm={6}>
-						<TextField
-							required
-							id="phone"
-							name="shipping_phone"
-							label="Phone Number"
-							fullWidth
-							autoComplete="phone"
-							error={!!errors.shipping_phone}
-							inputRef={register({ required: true })}
-						/>
-					</Grid> */}
 					<Grid item xs={12}>
 						<TextField
 							required
@@ -133,6 +84,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							label="Address line 1"
 							fullWidth
 							autoComplete="address-line1"
+							defaultValue={user.billing_line1}
 							error={!!errors.shipping_line1}
 							inputRef={register({ required: true })}
 						/>
@@ -144,6 +96,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							label="Address line 2"
 							fullWidth
 							autoComplete="shipping address-line2"
+							defaultValue={user.billing_line2}
 							inputRef={register}
 						/>
 					</Grid>
@@ -155,6 +108,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							label="City"
 							fullWidth
 							autoComplete="shipping address-level2"
+							defaultValue={user.billing_city}
 							error={!!errors.shipping_city}
 							inputRef={register({ required: true })}
 						/>
@@ -187,6 +141,7 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							label="Zip / Postal code"
 							fullWidth
 							autoComplete="shipping postal-code"
+							defaultValue={user.billing_postal_code}
 							error={!!errors.shipping_postal_code}
 							inputRef={register({
 								required: true,
@@ -194,7 +149,18 @@ export default function ShippingForm({ nextStep, prevStep }) {
 							})}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}></Grid>
+					<Grid item xs={12} sm={6}>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={checked}
+									onChange={handleChange}
+									inputProps={{ 'aria-label': 'primary checkbox' }}
+								/>
+							}
+							label="Check if Items purchased are being delivered with Rental"
+						/>
+					</Grid>
 					<Grid item xs={12} className={classes.buttons}>
 						<Button color="primary" variant="contained" onClick={prevStep}>
 							back
