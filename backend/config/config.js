@@ -13,9 +13,9 @@ const sequelize = new Sequelize(
 	process.env.NODECHEF_PASSWORD,
 	{
 		host: process.env.NODECHEF_HOST,
+		port: process.env.NODECHEF_PORT,
 		dialect: 'mysql',
 	}
-	
 );
 
 const db = {};
@@ -26,7 +26,10 @@ db.sequelize = sequelize;
 //Models/tables
 db.Products = require('../models/Products.js')(sequelize, Sequelize);
 
-db.RentalProducts = require('../models/RentalProducts.js')(sequelize, Sequelize);
+db.RentalProducts = require('../models/RentalProducts.js')(
+	sequelize,
+	Sequelize
+);
 
 db.Rentals = require('../models/Rentals.js')(sequelize, Sequelize);
 
