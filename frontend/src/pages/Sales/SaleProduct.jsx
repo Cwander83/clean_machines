@@ -107,13 +107,7 @@ function productFunc(obj, classes) {
 						{product.units > 0 ? (
 							` : In Stock`
 						) : (
-							<Link
-								
-								href="tel:+6145065435"
-							
-							>
-								: Call for Availability
-							</Link>
+							<Link href="tel:+6145065435">: Call for Availability</Link>
 						)}
 					</Typography>
 				</Grid>
@@ -150,7 +144,7 @@ const SaleProduct = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const results = await axios(`/products/sales/${id}`);
+			const results = await axios(`/api/products/sales/${id}`);
 			setProduct(results.data);
 		};
 		fetchData();

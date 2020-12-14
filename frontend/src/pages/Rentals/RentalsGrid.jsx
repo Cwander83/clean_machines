@@ -33,10 +33,11 @@ import RentalSearch from '../../components/RentalSearch';
 import picture from '../../images/BGFS5000.jpg';
 import CompanyTimeline from '../../components/CompanyTimeLine';
 
+// ui
+import Spinner from '../../UI/Spinner';
+
 const useStyles = makeStyles((theme) => ({
-	root: {
-		
-	},
+	root: {},
 	title: {
 		color: 'black',
 	},
@@ -279,7 +280,13 @@ const RentalsGrid = () => {
 			<Divider className={classes.divider2} />
 
 			<Grid container spacing={4} className={classes.body}>
-				{productSection}
+				{products.length === 0 ? (
+					<Grid item xs={12}>
+						<Spinner />
+					</Grid>
+				) : (
+					productSection
+				)}
 			</Grid>
 		</>
 	);

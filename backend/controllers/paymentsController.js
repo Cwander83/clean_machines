@@ -1,7 +1,6 @@
 const { createPurchase, updateProducts } = require('../db/db');
 
 const { calculateOrderAmount } = require('../stripe/helpers');
-//const stripeCustomer = require('../stripe/stripe.customer');
 
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 

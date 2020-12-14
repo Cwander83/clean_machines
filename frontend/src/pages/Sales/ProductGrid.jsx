@@ -22,6 +22,9 @@ import { SalesContext } from '../../context/sales-context';
 // images
 import picture from '../../images/BGFS5000.jpg';
 
+// ui
+import Spinner from '../../UI/Spinner';
+
 const useStyles = makeStyles((theme) => ({
 	title: {
 		color: 'black',
@@ -109,10 +112,10 @@ const ProductGrid = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			if (category === null) {
-				const result = await axios('/products/sales');
+				const result = await axios('/api/products/sales');
 				setProducts(result.data);
 			} else {
-				const result = await axios(`/products/sales/category/${category}`);
+				const result = await axios(`/api/products/sales/category/${category}`);
 				setProducts(result.data);
 			}
 		};
@@ -142,7 +145,13 @@ const ProductGrid = () => {
 					<Divider className={classes.divider} />
 				</Grid>
 				<Grid item xs sm={3}></Grid>
-				{productSection}
+				{products.length === 0 ? (
+				
+						<Spinner />
+					
+				) : (
+					productSection
+				)}
 			</Grid>
 		</>
 	);

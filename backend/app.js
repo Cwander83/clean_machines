@@ -29,8 +29,8 @@ app.use(express.urlencoded({ extended: false })); // for parsing application/x-w
 app.use(express.json());
 
 // routes folder
-const routes = require('./routes');
-app.use(routes);
+const apiRoutes = require('./routes');
+app.use("/api",apiRoutes);
 
 // Set up our port to be either the host's designated port, or 8282
 var PORT = process.env.PORT || 8282;
