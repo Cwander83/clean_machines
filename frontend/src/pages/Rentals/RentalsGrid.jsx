@@ -34,7 +34,7 @@ import picture from '../../images/BGFS5000.jpg';
 import CompanyTimeline from '../../components/CompanyTimeLine';
 
 // ui
-import Spinner from '../../UI/Spinner';
+//import Spinner from '../../UI/Spinner';
 
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -115,7 +115,7 @@ function productFunc(array, classes) {
 	if (!array) {
 		return [];
 	}
-	console.log(array);
+	//console.log(array);
 
 	const result = array.map((product) => {
 		return (
@@ -229,7 +229,7 @@ const RentalsGrid = () => {
 	let { rentalDates } = useContext(RentalContext);
 
 	useEffect(() => {
-		console.log('rental Dates: ' + JSON.stringify(rentalDates, null, 2));
+	//	console.log('rental Dates: ' + JSON.stringify(rentalDates, null, 2));
 
 		if (rentalDates.startDate !== null && rentalDates.endDate !== null) {
 			console.log('inside if statement');
@@ -280,13 +280,15 @@ const RentalsGrid = () => {
 			<Divider className={classes.divider2} />
 
 			<Grid container spacing={4} className={classes.body}>
-				{products.length === 0 ? (
-					<Grid item xs={12}>
-						<Spinner />
-					</Grid>
-				) : (
+				{
+					// products.length === 0 ? (
+					// 	<Grid item xs={12}>
+					// 		<Spinner />
+					// 	</Grid>
+					// ) : (
 					productSection
-				)}
+					//)
+				}
 			</Grid>
 		</>
 	);

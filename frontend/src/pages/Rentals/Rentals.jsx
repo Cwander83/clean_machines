@@ -53,7 +53,7 @@ const Rentals = () => {
 
 	let { open, handleClose } = useContext(RentalContext);
 
-	console.log('Rentals home page');
+	//console.log('Rentals home page');
 
 	return (
 		<Container>

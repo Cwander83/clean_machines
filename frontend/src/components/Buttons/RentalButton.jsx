@@ -61,6 +61,7 @@ const RentalButton = ({ product }) => {
 	const classes = useStyles();
 
 	const [error, setErrors] = useState(null);
+
 	const [success, setSuccess] = useState(false);
 
 	const [rentalDates, setRentalDates] = useState({
@@ -71,7 +72,7 @@ const RentalButton = ({ product }) => {
 	let { addToCart } = useContext(CartContext);
 
 	const addToCartHandler = () => {
-		setErrors();
+		setErrors(null);
 
 		// sends data to cart context
 		if (rentalDates.startDate === null || rentalDates.endDate === null) {
@@ -81,7 +82,7 @@ const RentalButton = ({ product }) => {
 			setErrors("Sorry, rentals can't go in the past");
 			console.error('past error');
 		} else if (!error) {
-			console.log('i see this here');
+		//	console.log('i see this here');
 			const total = rentalCost({ product, rentalDates });
 			let data = {
 				productId: product.id,

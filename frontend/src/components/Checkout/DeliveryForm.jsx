@@ -60,7 +60,7 @@ export default function DeliveryForm({ nextStep, prevStep }) {
 	const [checked, setChecked] = useState(false);
 
 	const onSubmit = (data) => {
-		console.log(data);
+	//	console.log(data);
 		if (data) {
 			updateDelivery(data);
 			nextStep();

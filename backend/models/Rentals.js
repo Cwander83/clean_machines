@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 		end_date: {
 			type: DataTypes.DATEONLY,
 		},
-		customer_stripe_id: {
+		order_number: {
 			type: DataTypes.STRING,
 		},
 		billing_name: {

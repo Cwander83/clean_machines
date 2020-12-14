@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // react router
 import { Link } from 'react-router-dom';
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const RentalSearch = ({ show, size, buttonSize, direction, space }) => {
 	const classes = useStyles(space);
 
-	const { rentalDates, startDateHandler, endDateHandler } = React.useContext(
+	const { rentalDates, startDateHandler, endDateHandler } = useContext(
 		RentalContext
 	);
 

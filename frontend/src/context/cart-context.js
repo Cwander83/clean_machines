@@ -28,16 +28,15 @@ const CartProvider = (props) => {
 		// 	type: 'rental',
 		// 	shipping: 0,
 		// },
-
-		{
-			productId: 2,
-			model: 'test',
-			price: 20030,
-			quantity: 1,
-			category: 'backpack',
-			shipping: 3000,
-			type: 'sale',
-		},
+		// {
+		// 	productId: 2,
+		// 	model: 'test',
+		// 	price: 20030,
+		// 	quantity: 1,
+		// 	category: 'backpack',
+		// 	shipping: 3000,
+		// 	type: 'sale',
+		// },
 	]);
 
 	console.log('*** user Data : ' + JSON.stringify(user, null, 2));
@@ -51,9 +50,6 @@ const CartProvider = (props) => {
 	const handleClickOpen = () => setOpen(true);
 
 	const handleClose = () => setOpen(false);
-
-	const updateDeliveryUserHandler = (data) =>
-		setUser({ ...user, delivery: data });
 
 	const updateShippingUserHandler = (data) =>
 		setUser({ ...user, shipping: data });
@@ -86,7 +82,6 @@ const CartProvider = (props) => {
 				user,
 				setUser,
 				setCart,
-				updateDelivery: updateDeliveryUserHandler,
 				updateShipping: updateShippingUserHandler,
 				addToCart: addToCartHandler,
 				removeFromCart: removeFromCartHandler,

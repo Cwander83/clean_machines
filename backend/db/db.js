@@ -1,11 +1,11 @@
 const db = require('../config/config');
 
 module.exports = {
-	createPurchase: async (userData, productData, payment_method_id) => {
-		console.log(`create Rentals`);
-		console.log(
-			'product CREATE PURCHASE: ' + JSON.stringify(productData, null, 2)
-		);
+	createPurchase: async (userData, productData, order_number) => {
+		// console.log(`create Rentals`);
+		// console.log(
+		// 	'product CREATE PURCHASE: ' + JSON.stringify(productData, null, 2)
+		// );
 
 		productData.forEach((obj) => {
 			obj.type === 'rental'
@@ -13,7 +13,7 @@ module.exports = {
 						productId: obj.productId,
 						start_date: obj.start_date,
 						end_date: obj.end_date,
-						order_stripe_id: payment_method_id,
+						order_number: order_number,
 						// billing
 						billing_name: userData.billing_name,
 						billing_email: userData.billing_email,
@@ -42,7 +42,7 @@ module.exports = {
 						quantity_purchased: obj.quantity,
 						total_price: obj.price * obj.quantity + obj.shipping,
 						price_per_unit: obj.price,
-						order_stripe_id: payment_method_id,
+						order_number: order_number,
 						// billing
 						billing_name: userData.billing_name,
 						billing_email: userData.billing_email,
@@ -91,7 +91,6 @@ module.exports = {
 			order: [['id', 'DESC']],
 		});
 	},
-
 
 	// updates products(sales table) with new quantity
 	updateProducts: (data) => {

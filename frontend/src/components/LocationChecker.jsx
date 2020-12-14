@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //import { Link } from 'react-router-dom';
-
-// axios
-import axios from 'axios';
 
 // material ui
 import Typography from '@material-ui/core/Typography';
@@ -46,23 +43,34 @@ const useStyles = makeStyles((theme) => ({
 
 const LocationChecker = () => {
 	const classes = useStyles();
-	const [distance, setDistance] = React.useState();
-	const [zipcode, setZipCode] = React.useState('');
-	const [error, setError] = React.useState();
+	const [distance, setDistance] = useState();
+	const [location, setLocation] = useState({
+		line: '',
+		zipcode: null,
+	});
+	const [error, setError] = useState();
 
 	//const location = '26 japonica dr, orlando, fl 32807';
 
-	const getCoords = async () => {
-		let search = `${zipcode}`;
-		await axios
-			.get(`/api/location/search/`, { params: zipcode })
+	const getCoords = () => {
+		let searchField = `${location.line} ${location.zipcode}`;
+		fetch(
+			`http://www.mapquestapi.com/geocoding/v1/address?key=${process.env.REACT_APP_MAPQUEST_KEY}&location=${searchField}`
+		)
+			.then((res) => {
+				return res.json();
+			})
 			.then((data) => {
-				console.log('data: ', data);
-				// let client = {
-				// 	lat: data.results[0].locations[0].latLng.lat,
-				// 	lng: data.results[0].locations[0].latLng.lng,
-				// };
-				// getDistanceFromLatLonInKm(client);
+				let client = {
+					lat: data.results[0].locations[0].latLng.lat,
+					lng: data.results[0].locations[0].latLng.lng,
+				};
+				getDistanceFromLatLonInKm(client);
+			})
+
+			.catch((err) => {
+				setError(err);
+				console.error(err);
 			});
 	};
 
@@ -90,7 +98,7 @@ const LocationChecker = () => {
 		return deg * (Math.PI / 180);
 	}
 
-	console.log(zipcode);
+	//console.log(distance);
 	return (
 		<Grid container spacing={2} direction="row">
 			<Grid item xs={12} sm={6}>
@@ -108,7 +116,9 @@ const LocationChecker = () => {
 							placeholder="32804"
 							label="Zipcode"
 							autoFocus={true}
-							onChange={(e) => setZipCode({ zipcode: e.target.value })}
+							onChange={(e) =>
+								setLocation({ ...location, zipcode: e.target.value })
+							}
 						/>
 					</Grid>
 					<Grid item xs={1}></Grid>
@@ -120,7 +130,7 @@ const LocationChecker = () => {
 								disabled: classes.disabled,
 							}}
 							variant="contained"
-							disabled={zipcode === ''}
+							disabled={location.line === '' && location.zipcode === null}
 							onClick={getCoords}
 						>
 							Check address
@@ -132,7 +142,7 @@ const LocationChecker = () => {
 						<Typography variant="h6">
 							{!error
 								? distance
-									? distance <= 60
+									? distance <= 38
 										? 'Congratulations, we service your area'
 										: "Sorry, we don't service your area."
 									: null

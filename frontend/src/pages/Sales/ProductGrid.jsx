@@ -62,7 +62,7 @@ function productFunc(array, classes) {
 	if (!array) {
 		return [];
 	}
-	console.log(array);
+	//console.log(array);
 
 	const result = array.map((product) => {
 		return (
@@ -107,6 +107,7 @@ const ProductGrid = () => {
 	const classes = useStyles();
 
 	const [products, setProducts] = useState([]);
+	
 	let { category } = useContext(SalesContext);
 
 	useEffect(() => {

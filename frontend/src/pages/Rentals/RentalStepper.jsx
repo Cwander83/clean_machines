@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -8,10 +10,11 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+// components
 import LocationChecker from '../../components/LocationChecker';
 //import RentalSearch from '../../components/RentalSearch';
 import RentalCategory from '../../components/RentalCategory';
-//import { Grid } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -55,7 +58,7 @@ function getStepContent(step) {
 
 export default function RentalStepper() {
 	const classes = useStyles();
-	const [activeStep, setActiveStep] = React.useState(0);
+	const [activeStep, setActiveStep] = useState(0);
 	const steps = getSteps();
 
 	const handleNext = () => {

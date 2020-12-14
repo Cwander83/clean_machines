@@ -55,7 +55,7 @@ const CreateProduct = ({ inputs, product, method, path }) => {
 
 	const { register, handleSubmit, errors, control } = useForm();
 	const onSubmit = (data) => {
-		console.log('created data: ' + data);
+	//	console.log('created data: ' + data);
 
 		fetch(`${path}`, {
 			method: method,

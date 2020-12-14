@@ -49,13 +49,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShippingForm({ nextStep, prevStep }) {
 	const classes = useStyles();
+
 	const { register, handleSubmit, errors, control } = useForm();
+	
 	const { user, updateShipping, checked, handleChange } = useContext(
 		CartContext
 	);
 
 	const onSubmit = (data) => {
-		console.log(data);
+		//console.log(data);
 		if (data) {
 			updateShipping(data);
 			nextStep();

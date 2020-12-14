@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 
 // react router
 import { Link } from 'react-router-dom';
@@ -104,7 +104,13 @@ const SalesBox = () => {
 	];
 
 	return (
-		<Grid container direction="row" justify="flex-start" spacing={2} style={{ marginTop: '10px'}}>
+		<Grid
+			container
+			direction="row"
+			justify="flex-start"
+			spacing={2}
+			style={{ marginTop: '10px' }}
+		>
 			<Grid item xs={12} sm={6}>
 				<Typography variant="h6" className={classes.sectionTitle}>
 					Vacuums
@@ -378,4 +384,4 @@ const SalesBox = () => {
 	);
 };
 
-export default SalesBox;
+export default memo(SalesBox);
