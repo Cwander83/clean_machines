@@ -166,7 +166,7 @@ const SaleProduct = () => {
 				>
 					<Grid item xs={1} sm={2}></Grid>
 					<Grid item xs={10} sm={8}>
-						<ProductCarousel />
+						<ProductCarousel model={product.model} />
 					</Grid>
 					<Grid item xs={1} sm={2}></Grid>
 					{productSection}

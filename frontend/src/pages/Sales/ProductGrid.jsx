@@ -20,7 +20,6 @@ import Divider from '@material-ui/core/Divider';
 import { SalesContext } from '../../context/sales-context';
 
 // images
-import picture from '../../images/BGFS5000.jpg';
 
 // ui
 import Spinner from '../../UI/Spinner';
@@ -65,6 +64,8 @@ function productFunc(array, classes) {
 	//console.log(array);
 
 	const result = array.map((product) => {
+		let imageUrl = `https://products.oss.nodechef.com/${product.model}-1.jpg`;
+		console.log(imageUrl);
 		return (
 			<Grid
 				item
@@ -81,7 +82,7 @@ function productFunc(array, classes) {
 					elevation={3}
 				>
 					<CardActionArea component={Link} to={`/sales/${product.id}`}>
-						<CardMedia image={picture} className={classes.media} />
+						<CardMedia image={imageUrl} className={classes.media} />
 					</CardActionArea>
 					<CardContent className={classes.content}>
 						<Typography gutterBottom variant="h5">
@@ -107,18 +108,13 @@ const ProductGrid = () => {
 	const classes = useStyles();
 
 	const [products, setProducts] = useState([]);
-	
+
 	let { category } = useContext(SalesContext);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			if (category === null) {
-				const result = await axios('/api/products/sales');
-				setProducts(result.data);
-			} else {
-				const result = await axios(`/api/products/sales/category/${category}`);
-				setProducts(result.data);
-			}
+			const result = await axios(`/api/products/sales/category/${category}`);
+			setProducts(result.data);
 		};
 		fetchData();
 	}, [category]);
@@ -128,6 +124,17 @@ const ProductGrid = () => {
 		classes,
 	]);
 
+	const categoryFunc = (x) => {
+		let array = x.split('');
+		let secondArray = [];
+		array.forEach((char) => {
+			if (char !== '-') secondArray.push(char);
+			else secondArray.push(' ');
+		});
+		let newString = secondArray.join('');
+
+		return newString;
+	};
 	return (
 		<>
 			<Grid container spacing={4}>
@@ -140,19 +147,13 @@ const ProductGrid = () => {
 							variant="body1"
 							className={classes.subtitle}
 						>
-							{!category ? 'all available' : category}
+							{!category ? 'all available' : categoryFunc(category)}
 						</Typography>
 					</Typography>
 					<Divider className={classes.divider} />
 				</Grid>
 				<Grid item xs sm={3}></Grid>
-				{products.length === 0 ? (
-				
-						<Spinner />
-					
-				) : (
-					productSection
-				)}
+				{products.length === 0 ? <Spinner /> : productSection}
 			</Grid>
 		</>
 	);

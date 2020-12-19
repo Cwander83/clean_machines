@@ -14,25 +14,22 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		
+
 		rental_day: {
 			type: DataTypes.INTEGER,
-			
 		},
 		rental_two_day: {
 			type: DataTypes.INTEGER,
-		
 		},
 		rental_week: {
 			type: DataTypes.INTEGER,
-			
 		},
 
 		category: {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		
+
 		short_description: { type: DataTypes.STRING },
 		cord: {
 			type: DataTypes.STRING,
@@ -85,6 +82,9 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		feature_5: {
 			type: DataTypes.STRING,
+		},
+		number_of_images: {
+			type: DataTypes.INTEGER,
 		},
 	});
 

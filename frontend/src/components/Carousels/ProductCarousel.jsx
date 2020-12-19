@@ -1,16 +1,10 @@
-import React from 'react';
-
-// react router
-//import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-//import Grid from '@material-ui/core/Grid';
-//import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 
 // images
-import image from '../../images/BGFS5000.jpg';
 
 // carousel
 import Carousel from 'react-slick';
@@ -21,6 +15,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../../styles/Carousel.css';
 import 'react-magic-slider-dots/dist/magic-dots.css';
+//import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
 	image: {
@@ -34,8 +29,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ProductCarousel = () => {
+const ProductCarousel = ({ model }) => {
 	const classes = useStyles();
+	const numberOfUrls = 4;
+
+	const [numberUrls, setNumber] = useState([]);
 
 	const settings = {
 		dots: true,
@@ -44,30 +42,31 @@ const ProductCarousel = () => {
 		infinite: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		lazyLoad: true,
 		speed: 500,
 		appendDots: (dots) => {
 			return <MagicSliderDots dots={dots} numDotsToShow={6} dotWidth={30} />;
 		},
 	};
 
+	useEffect(() => {
+		setNumber([...new Array(numberOfUrls)]);
+	}, [model]);
+
 	return (
 		<Carousel className={classes.carousel} {...settings}>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
+			{model &&
+				numberUrls.map((ele, index) => (
+					<div key={index}>
+						<img
+							src={`https://products.oss.nodechef.com/${model}-${
+								index + 1
+							}.jpg`}
+							alt={'Clean Machines Rentals - ' + model}
+							className={classes.image}
+						/>
+					</div>
+				))}
 		</Carousel>
 	);
 };

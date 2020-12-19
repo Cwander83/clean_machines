@@ -39,6 +39,7 @@ const Sales = () => {
 	const classes = useStyles();
 
 	let { path } = useRouteMatch();
+	console.log(path);
 
 	return (
 		<Container>

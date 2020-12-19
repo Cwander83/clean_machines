@@ -136,7 +136,7 @@ const RentalProduct = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const results = await axios(`/products/rental/${id}`);
+			const results = await axios(`/api/products/rental/${id}`);
 			setProduct(results.data);
 		};
 		fetchData();

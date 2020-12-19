@@ -7,7 +7,8 @@ const productRoutes = require('./products.routes');
 const emailRoutes = require('./contact.routes');
 const rentalRoutes = require('./rentals.routes');
 const salesRoutes = require('./sales.routes');
-const locationRoutes = require('./location.routes')
+const locationRoutes = require('./location.routes');
+const imagesRoutes = require('./images.routes');
 
 router.use('/customers', customerRoutes);
 router.use('/charges', chargesRoutes);
@@ -16,5 +17,6 @@ router.use('/mail', emailRoutes);
 router.use('/rentals', rentalRoutes);
 router.use('/sales', salesRoutes);
 router.use('/location', locationRoutes);
+router.use('/images', imagesRoutes);
 
 module.exports = router;

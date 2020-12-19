@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 // axios
 //import axios from 'axios';
@@ -8,7 +8,7 @@ export const SalesContext = React.createContext();
 
 // Provider
 const SalesContextProvider = (props) => {
-	const [category, setCategory] = React.useState(null);
+	const [category, setCategory] = useState('upright');
 
 	return (
 		<SalesContext.Provider
