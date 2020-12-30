@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 // react router
 //import { Link } from 'react-router-dom';
@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.gold.main,
 		backgroundColor: theme.palette.primary.light,
 		[theme.breakpoints.down('sm')]: {
-			fontSize: '22px',
+			fontSize: '20px',
+			
 		},
 	},
 
@@ -146,11 +147,10 @@ const Home = () => {
 										Search for rental Dates
 									</Typography>
 									<Grid container className={classes.body}>
-										
 										<Grid item xs={12}>
 											<CompanyTimeLine />
 										</Grid>
-										
+
 										<Grid item xs={12} sm={2}></Grid>
 										<Grid item xs={12} sm={8}>
 											<RentalSearch show={true} size={5} buttonSize={2} />
@@ -182,4 +182,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default memo(Home);

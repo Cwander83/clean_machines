@@ -6,7 +6,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-//import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -19,13 +19,14 @@ import { RentalContext } from '../../context/rental-context';
 
 // components
 import RentalsGrid from './RentalsGrid';
-import LocationChecker from '../../components/LocationChecker';
+//import LocationChecker from '../../components/LocationChecker';
 import RentalProduct from './RentalProduct';
 import PageHeader from '../../components/PageHeader';
-import Container from '../../containers/Container'
+import Container from '../../containers/Container';
+
+import GoogleImage from '../../images/google-maps-central-fl.jpg';
 
 const useStyles = makeStyles((theme) => ({
-
 	title: {
 		fontFamily: 'Roboto Black',
 		width: '100%',
@@ -41,9 +42,13 @@ const useStyles = makeStyles((theme) => ({
 	productGrid: {
 		marginTop: '15px',
 		marginBottom: '15px',
-		
 	},
-	
+	image: {
+		width: '100%',
+	},
+	phone: {
+		textDecoration: 'underline',
+	},
 }));
 
 const Rentals = () => {
@@ -59,7 +64,7 @@ const Rentals = () => {
 		<Container>
 			<Grid container>
 				<Grid item xs={12}>
-				<PageHeader title="Rentals"/>
+					<PageHeader title="Rentals" />
 				</Grid>
 
 				<Switch>
@@ -78,7 +83,7 @@ const Rentals = () => {
 				</Switch>
 			</Grid>
 			<Dialog
-				maxWidth="md"
+				maxWidth="sm"
 				open={open}
 				onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
@@ -89,10 +94,28 @@ const Rentals = () => {
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-description">
-						We only rent in the central florida area. Check here if we service
-						your area.
+						<Typography variant="h6" color="secondary">
+							* Notice:{' '}
+						</Typography>
+						<Typography variant="h6">
+							At this time we only rent in the Central Florida Area.
+						</Typography>
+						<Typography
+							color="secondary"
+							className={classes.phone}
+							variant="h6"
+							component="a"
+							href="tel:+1-800-444-4444"
+							display="inline"
+						>
+							Call here
+						</Typography>{' '}
+						<Typography  variant="h6" display="inline">
+							if we service your area.
+						</Typography>
 					</DialogContentText>
-					<LocationChecker />
+					<img src={GoogleImage} alt="map" className={classes.image} />
+					{/* <LocationChecker /> */}
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose} color="primary" autoFocus>

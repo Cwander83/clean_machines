@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 //import Typography from '@material-ui/core/Typography';
 
-// images
-
 // carousel
 import Carousel from 'react-slick';
 import MagicSliderDots from 'react-magic-slider-dots';
@@ -15,7 +13,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../../styles/Carousel.css';
 import 'react-magic-slider-dots/dist/magic-dots.css';
-//import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
 	image: {
@@ -26,12 +23,14 @@ const useStyles = makeStyles((theme) => ({
 	center: {},
 	carousel: {
 		width: '100%',
+		[theme.breakpoints.down('sm')]: {
+			display: 'none',
+		},
 	},
 }));
 
-const ProductCarousel = ({ model }) => {
+const ProductCarousel = ({ model, numberOfUrls }) => {
 	const classes = useStyles();
-	const numberOfUrls = 4;
 
 	const [numberUrls, setNumber] = useState([]);
 
@@ -51,13 +50,13 @@ const ProductCarousel = ({ model }) => {
 
 	useEffect(() => {
 		setNumber([...new Array(numberOfUrls)]);
-	}, [model]);
+	}, [model, numberOfUrls]);
 
 	return (
 		<Carousel className={classes.carousel} {...settings}>
 			{model &&
 				numberUrls.map((ele, index) => (
-					<div key={index}>
+					<div key={index} className={classes.slide}>
 						<img
 							src={`https://products.oss.nodechef.com/${model}-${
 								index + 1

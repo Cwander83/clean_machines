@@ -19,4 +19,8 @@
 	color: #000;
 }
 
-
+@media only screen and (max-width: 599px) {
+	.slick-slider {
+		display: none;
+	}
+}

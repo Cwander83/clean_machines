@@ -9,21 +9,21 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 // icons
 import canister from '../../images/icons/canister.jpg';
 import backpack from '../../images/icons/backpack.jpg';
 import airmover from '../../images/icons/airmover.jpg';
-import extractor from '../../images/icons/extractors.jpg';
-import extrawide from '../../images/icons/extrawide.jpg';
-import floormachine from '../../images/icons/floormachine.jpg';
+// import extractor from '../../images/icons/extractors.jpg';
+// import extrawide from '../../images/icons/extrawide.jpg';
+// import floormachine from '../../images/icons/floormachine.jpg';
 import formula from '../../images/icons/formula.jpg';
-import powersweeper from '../../images/icons/powersweeper.jpg';
-import steammachine from '../../images/icons/steammachine.jpg';
+// import powersweeper from '../../images/icons/powersweeper.jpg';
+// import steammachine from '../../images/icons/steammachine.jpg';
 import sweeper from '../../images/icons/sweeper.jpg';
 import upright from '../../images/icons/upright.jpg';
 import accessories from '../../images/icons/accessories.jpg';
-import Divider from '@material-ui/core/Divider';
 
 // context api
 import { SalesContext } from '../../context/sales-context';
@@ -95,12 +95,12 @@ const SalesBox = () => {
 			path: '/sales',
 			value: 'backpack',
 		},
-		{
-			title: 'Extra-wide Vacuums',
-			image: extrawide,
-			path: '/sales',
-			value: 'extra-wide',
-		},
+		// {
+		// 	title: 'Extra-wide Vacuums',
+		// 	image: extrawide,
+		// 	path: '/sales',
+		// 	value: 'extra-wide',
+		// },
 	];
 
 	return (
@@ -176,7 +176,7 @@ const SalesBox = () => {
 						</Button>
 					</Grid>
 				</Grid>
-				<Grid item xs={12}>
+				{/* <Grid item xs={12}>
 					<Typography variant="h6" className={classes.sectionTitle}>
 						steam machines
 					</Typography>
@@ -205,10 +205,10 @@ const SalesBox = () => {
 							</Typography>
 						</Button>
 					</Grid>
-				</Grid>
+				</Grid> */}
 			</Grid>
 			<Grid item xs={12} sm={6}>
-				<Grid item xs={12}>
+				{/* <Grid item xs={12}>
 					<Typography variant="h6" className={classes.sectionTitle}>
 						extractors
 					</Typography>
@@ -238,14 +238,14 @@ const SalesBox = () => {
 							</Typography>
 						</Button>
 					</Grid>
-				</Grid>
+				</Grid> */}
 				<Grid item xs={12}>
 					<Typography variant="h6" className={classes.sectionTitle}>
 						sweepers
 					</Typography>
 					<Divider />
 
-					<Grid item xs={12} className={classes.grid}>
+					{/* <Grid item xs={12} className={classes.grid}>
 						<Button
 							disableFocusRipple
 							disableRipple
@@ -268,7 +268,7 @@ const SalesBox = () => {
 								Power sweepers
 							</Typography>
 						</Button>
-					</Grid>
+					</Grid> */}
 					<Grid item xs={12} className={classes.grid}>
 						<Button
 							disableFocusRipple
@@ -294,7 +294,7 @@ const SalesBox = () => {
 						</Button>
 					</Grid>
 				</Grid>
-				<Grid item xs={12}>
+				{/* <Grid item xs={12}>
 					<Typography variant="h6" className={classes.sectionTitle}>
 						floor machines
 					</Typography>
@@ -324,7 +324,7 @@ const SalesBox = () => {
 							</Typography>
 						</Button>
 					</Grid>
-				</Grid>
+				</Grid> */}
 				<Grid item xs={12}>
 					<Typography variant="h6" className={classes.sectionTitle}>
 						Accessories

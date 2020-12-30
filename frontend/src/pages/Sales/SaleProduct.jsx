@@ -58,6 +58,11 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		marginLeft: '10px',
 	},
+	image: {
+		[theme.breakpoints.up('sm')]: {
+			display: 'none',
+		},
+	}
 }));
 
 function productFunc(obj, classes) {
@@ -166,7 +171,19 @@ const SaleProduct = () => {
 				>
 					<Grid item xs={1} sm={2}></Grid>
 					<Grid item xs={10} sm={8}>
-						<ProductCarousel model={product.model} />
+						{product.model && (
+							<img
+								src={`https://products.oss.nodechef.com/${product.model}-1
+								
+							.jpg`}
+								alt={'Clean Machines Rentals - ' + product.model}
+								className={classes.image}
+							/>
+						)}
+						<ProductCarousel
+							model={product.model}
+							numberOfUrls={product.number_of_images}
+						/>
 					</Grid>
 					<Grid item xs={1} sm={2}></Grid>
 					{productSection}

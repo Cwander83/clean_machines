@@ -158,7 +158,17 @@ const RentalProduct = () => {
 				>
 					<Grid item xs={1}></Grid>
 					<Grid item xs={10}>
-						<ProductCarousel />
+						<img
+							src={`https://products.oss.nodechef.com/${product.model}-1
+								
+							.jpg`}
+							alt={'Clean Machines Rentals - ' + product.model}
+							className={classes.image}
+						/>
+						<ProductCarousel
+							model={product.model}
+							numberOfUrls={product.number_of_images}
+						/>
 					</Grid>
 					<Grid item xs={1}></Grid>
 					{productSection}
