@@ -11,21 +11,22 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
 
 // components
-import Logout from '../../components/Logout';
+//import Logout from '../../components/Logout';
+import RentalsTable from './Rentals/RentalsTable';
 import CurrentRentals from './CurrentRentals';
 import RecentSalesTable from './RecentSalesTable';
 import Spinner from '../../UI/Spinner';
 
-
 const useStyles = makeStyles((theme) => ({
-	// root: {
-	// 	flexShrink: 3,
-	// },
+	root: {
+		marginBottom: '20px',
+	},
 	table: {
 		minWidth: 400,
 	},
 	section: {
 		height: 'auto',
+		marginTop: '20px',
 	},
 }));
 
@@ -33,19 +34,82 @@ const Admin = () => {
 	const classes = useStyles();
 
 	return (
-		<Container maxWidth="xl">
+		<Container maxWidth="xl" className={classes.root}>
 			<Grid container spacing={2} justify="center">
-				<Grid item xs={12} sm={5} component={Paper} className={classes.section}>
-					<Typography variant="h4">rentals in progress</Typography>
+				{/* active rentals */}
+				<Grid item sm={1}></Grid>
+				<Grid
+					item
+					xs={12}
+					sm={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<Typography variant="h4">Active Rentals</Typography>
 					<CurrentRentals />
 				</Grid>
-				<Grid item xs={12} sm={5} component={Paper} className={classes.section}>
-					<Typography variant="h4">recent sales</Typography>
+				<Grid item sm={1}></Grid>
+				{/* recent sales */}
+				<Grid item sm={1}></Grid>
+
+				<Grid
+					item
+					xs={12}
+					sm={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<Typography variant="h4">Recent Sales</Typography>
 					<RecentSalesTable />
 				</Grid>
-				<Grid item xs={12}>
-					<Logout />
+				<Grid item sm={1}></Grid>
+				{/* future rentals */}
+				<Grid item sm={1}></Grid>
+
+				<Grid
+					item
+					xs={12}
+					sm={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<Typography variant="h4">Upcoming Rentals</Typography>
+					<RecentSalesTable />
 				</Grid>
+				<Grid item sm={1}></Grid>
+				{/* past rentals */}
+				<Grid item sm={1}></Grid>
+
+				<Grid
+					item
+					xs={12}
+					sm={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<Typography variant="h4">Past Rentals</Typography>
+					<RecentSalesTable />
+				</Grid>
+				<Grid item sm={1}></Grid>
+				{/* all rentals */}
+				<Grid item sm={1}></Grid>
+
+				<Grid
+					item
+					xs={12}
+					sm={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<Typography variant="h4">All Rentals</Typography>
+					<RentalsTable />
+				</Grid>
+				<Grid item sm={1}></Grid>
+
+
+				{/* <Grid item xs={12}>
+					<Logout />
+				</Grid> */}
 			</Grid>
 		</Container>
 	);

@@ -10,6 +10,6 @@ module.exports = {
 		let day = new Date().getDay();
 		let random = Math.floor(10000 + Math.random() * 90000);
 
-		return `${month}${day}${year}-${random}`;
+		return `${month}${day}${year}${random}`;
 	},
 };

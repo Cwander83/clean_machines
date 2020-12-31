@@ -10,7 +10,7 @@ module.exports = {
 		productData.forEach((obj) => {
 			obj.type === 'rental'
 				? db.Rentals.create({
-						productId: obj.productId,
+						rentalProductId: obj.productId,
 						start_date: obj.start_date,
 						end_date: obj.end_date,
 						order_number: order_number,
@@ -26,7 +26,7 @@ module.exports = {
 						// delivery
 						delivery_name: userData.billing_name,
 						delivery_email: userData.billing_email,
-						delivery_phone: userData.shipping.shipping_phone,
+						delivery_phone: userData.billing_phone,
 						delivery_line1: userData.shipping.shipping_line1,
 						delivery_line2: userData.shipping.shipping_line2,
 						delivery_city: userData.shipping.shipping_city,
@@ -55,7 +55,7 @@ module.exports = {
 						// shipping
 						shipping_name: userData.billing_name,
 						shipping_email: userData.billing_email,
-						shipping_phone: userData.shipping.shipping_phone,
+						shipping_phone: userData.billing_phone,
 						shipping_line1: userData.shipping.shipping_line1,
 						shipping_line2: userData.shipping.shipping_line2,
 						shipping_city: userData.shipping.shipping_city,

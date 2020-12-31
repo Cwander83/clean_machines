@@ -1,6 +1,9 @@
 const { createPurchase, updateProducts } = require('../db/db');
 
-const { calculateOrderAmount, createOrderNumber } = require('../stripe/helpers');
+const {
+	calculateOrderAmount,
+	createOrderNumber,
+} = require('../stripe/helpers');
 
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
@@ -15,6 +18,7 @@ module.exports = {
 				const order_number = await createOrderNumber();
 
 				// TODO check inventory if still there
+				console.log(`order_number: ${order_number}`);
 
 				await stripe.paymentIntents.create({
 					payment_method: payment_method_id,
@@ -36,9 +40,9 @@ module.exports = {
 						},
 					},
 					currency: 'usd',
-					description: `${userData.billing_name} order number: ${
-						order_number
-					}, at ${new Date().toDateString()}`,
+					description: `${
+						userData.billing_name
+					} order number: ${order_number}, at ${new Date().toDateString()}`,
 				});
 
 				await createPurchase(userData, productData, totalPrice, order_number);

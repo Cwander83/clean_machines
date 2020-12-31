@@ -157,7 +157,7 @@ const RentalProduct = () => {
 					justify="flex-start"
 				>
 					<Grid item xs={1}></Grid>
-					<Grid item xs={10}>
+					{/* <Grid item xs={10}>
 						<img
 							src={`https://products.oss.nodechef.com/${product.model}-1
 								
@@ -169,7 +169,7 @@ const RentalProduct = () => {
 							model={product.model}
 							numberOfUrls={product.number_of_images}
 						/>
-					</Grid>
+					</Grid> */}
 					<Grid item xs={1}></Grid>
 					{productSection}
 

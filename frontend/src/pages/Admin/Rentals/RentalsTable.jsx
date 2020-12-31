@@ -23,13 +23,10 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
+import DirectionsIcon from '@material-ui/icons/Directions';
 
 // react router
-import {
-	Link,
-	useRouteMatch,
-	//useParams,
-} from 'react-router-dom';
+//import { Link, useRouteMatch, useParams } from 'react-router-dom';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -113,7 +110,7 @@ const useStyles2 = makeStyles((theme) => ({
 const RentalsTable = () => {
 	const classes = useStyles2();
 
-	let { path } = useRouteMatch();
+	//let { path } = useRouteMatch();
 
 	const [loading, setLoading] = useState(false);
 
@@ -125,7 +122,7 @@ const RentalsTable = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			//setLoading(true);
-			const result = await axios(`/rentals/`);
+			const result = await axios(`/api/rentals/`);
 
 			setData(result.data);
 			setLoading(false);
@@ -153,28 +150,22 @@ const RentalsTable = () => {
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					<TableCell>{row.id}</TableCell>
-					<TableCell>
-						<Button component={Link} to={`${path}/rental/${row.id}`}>
-							{row.billing_name}
-						</Button>
-					</TableCell>
-					<TableCell>{row.delivery_name}</TableCell>
-
-					{/*
-					// TODO
-					 <TableCell>{row.product.model}</TableCell> */}
-					<TableCell>test model</TableCell>
-					<TableCell>{row.start_date}</TableCell>
-					<TableCell>{row.end_date}</TableCell>
 					<TableCell>
 						<Button
 							target="_blank"
 							href={`https://maps.google.com/?q=${row.delivery_line1},${row.delivery_line2},${row.delivery_city},${row.delivery_state},${row.delivery_zipcode}`}
 						>
-							Map it
+							<DirectionsIcon />
 						</Button>
 					</TableCell>
+					<TableCell>{row.order_number}</TableCell>
+					<TableCell>{row.rentalProduct.model}</TableCell>
+					<TableCell>{row.start_date}</TableCell>
+					<TableCell>{row.end_date}</TableCell>
+					<TableCell>{row.billing_name}</TableCell>
+					<TableCell>{row.delivery_name}</TableCell>
+					<TableCell>{row.delivery_phone}</TableCell>
+					<TableCell>{row.delivery_email}</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -186,14 +177,15 @@ const RentalsTable = () => {
 				<Table className={classes.table} aria-label="products table">
 					<TableHead>
 						<TableRow>
-							<TableCell>Id</TableCell>
-							<TableCell>Billing Name</TableCell>
-							<TableCell>Delivery Name</TableCell>
-
+							<TableCell></TableCell>
+							<TableCell>Order Number</TableCell>
 							<TableCell>Model</TableCell>
 							<TableCell>Start Date</TableCell>
 							<TableCell>End Date</TableCell>
-							<TableCell></TableCell>
+							<TableCell>Billing Name</TableCell>
+							<TableCell>Delivery Name</TableCell>
+							<TableCell>Phone #</TableCell>
+							<TableCell>Email</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>

@@ -93,27 +93,25 @@ const Rentals = () => {
 					{'Are you in the Central Florida Area?'}
 				</DialogTitle>
 				<DialogContent>
-					<DialogContentText id="alert-dialog-description">
-						<Typography variant="h6" color="secondary">
-							* Notice:{' '}
-						</Typography>
-						<Typography variant="h6">
-							At this time we only rent in the Central Florida Area.
-						</Typography>
-						<Typography
-							color="secondary"
-							className={classes.phone}
-							variant="h6"
-							component="a"
-							href="tel:+1-800-444-4444"
-							display="inline"
-						>
-							Call here
-						</Typography>{' '}
-						<Typography  variant="h6" display="inline">
-							if we service your area.
-						</Typography>
-					</DialogContentText>
+					<Typography variant="h6" color="secondary">
+						* Notice:{' '}
+					</Typography>
+					<Typography variant="h6">
+						At this time we only rent in the Central Florida Area.
+					</Typography>
+					<Typography
+						color="secondary"
+						className={classes.phone}
+						variant="h6"
+						component="a"
+						href="tel:+1-800-444-4444"
+						display="inline"
+					>
+						Call here
+					</Typography>{' '}
+					<Typography variant="h6" display="inline">
+						if we service your area.
+					</Typography>
 					<img src={GoogleImage} alt="map" className={classes.image} />
 					{/* <LocationChecker /> */}
 				</DialogContent>

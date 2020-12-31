@@ -34,7 +34,7 @@ import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLog
 // components
 import HeaderNavigation from '../components/HeaderNavigation';
 import ShoppingCartButton from '../components/Buttons/ShoppingCartButton';
-
+import Logout from './Logout';
 const useStyles = makeStyles((theme) => ({
 	toolbar: {
 		// maxWidth: '1232px',
@@ -299,24 +299,25 @@ const NavDrawer = () => {
 						})}
 					</List>
 				) : (
-					<List className={classes.list}>
-						{adminList.map((item, index) => {
-							const { text, icon, to } = item;
-							return (
-								<ListItem
-									component={Link}
-									to={to}
-									button
-									key={index}
-									onClick={handleDrawerClose}
-									divider
-								>
-									{icon && <ListItemIcon>{icon}</ListItemIcon>}
-									<ListItemText primary={text} />
-								</ListItem>
-							);
-						})}
-					</List>
+					<Logout/>
+					// <List className={classes.list}>
+					// 	{adminList.map((item, index) => {
+					// 		const { text, icon, to } = item;
+					// 		return (
+					// 			<ListItem
+					// 				component={Link}
+					// 				to={to}
+					// 				button
+					// 				key={index}
+					// 				onClick={handleDrawerClose}
+					// 				divider
+					// 			>
+					// 				{icon && <ListItemIcon>{icon}</ListItemIcon>}
+					// 				<ListItemText primary={text} />
+					// 			</ListItem>
+					// 		);
+					// 	})}
+					// </List>
 				)}
 			</Drawer>
 		</div>
