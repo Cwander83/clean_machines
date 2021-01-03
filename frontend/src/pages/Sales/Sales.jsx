@@ -7,16 +7,15 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-
 // components
 import SaleProduct from './SaleProduct';
 import SideNav from './SideNav';
 import ProductGrid from './ProductGrid';
 import PageHeader from '../../components/PageHeader';
-import Container from '../../containers/Container'
+import Container from '../../containers/Container';
+import NotFound from '../NotFound';
 
 const useStyles = makeStyles((theme) => ({
-	
 	title: {
 		fontFamily: 'Roboto Black',
 		width: '100%',
@@ -60,6 +59,7 @@ const Sales = () => {
 							<SaleProduct />
 						</Grid>
 					</Route>
+					
 				</Switch>
 			</Grid>
 		</Container>

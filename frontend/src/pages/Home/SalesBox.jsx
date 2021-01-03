@@ -15,7 +15,7 @@ import Divider from '@material-ui/core/Divider';
 import canister from '../../images/icons/canister.jpg';
 import backpack from '../../images/icons/backpack.jpg';
 import airmover from '../../images/icons/airmover.jpg';
-// import extractor from '../../images/icons/extractors.jpg';
+ import extractor from '../../images/icons/extractors.jpg';
 // import extrawide from '../../images/icons/extrawide.jpg';
 // import floormachine from '../../images/icons/floormachine.jpg';
 import formula from '../../images/icons/formula.jpg';
@@ -208,7 +208,7 @@ const SalesBox = () => {
 				</Grid> */}
 			</Grid>
 			<Grid item xs={12} sm={6}>
-				{/* <Grid item xs={12}>
+				<Grid item xs={12}>
 					<Typography variant="h6" className={classes.sectionTitle}>
 						extractors
 					</Typography>
@@ -238,7 +238,7 @@ const SalesBox = () => {
 							</Typography>
 						</Button>
 					</Grid>
-				</Grid> */}
+				</Grid>
 				<Grid item xs={12}>
 					<Typography variant="h6" className={classes.sectionTitle}>
 						sweepers

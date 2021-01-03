@@ -43,12 +43,13 @@ export const otherLinks = [
 	// 	value: 'power-sweeper',
 	// 	className: 'listedItem',
 	// },
-	// {
-	// 	title: 'Extractors',
-	// 	path: '/sales',
-	// 	value: 'extractor',
-	// 	className: 'listedItem',
-	// },
+	{
+		title: 'Extractors',
+		path: '/sales',
+		value: 'extractor',
+		className: 'listedItem',
+	},
+
 	{
 		title: 'Air Movers',
 		path: '/sales',

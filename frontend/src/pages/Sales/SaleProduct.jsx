@@ -21,6 +21,7 @@ import ProductCarousel from '../../components/Carousels/ProductCarousel';
 import Features from '../../components/Features';
 import Specs from '../../components/Specs';
 import AddToCart from '../../components/AddToCart';
+import ImagesDropdown from '../../components/ImagesDropdown';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -59,10 +60,11 @@ const useStyles = makeStyles((theme) => ({
 		marginLeft: '10px',
 	},
 	image: {
+		width: '300px',
 		[theme.breakpoints.up('sm')]: {
 			display: 'none',
 		},
-	}
+	},
 }));
 
 function productFunc(obj, classes) {
@@ -207,6 +209,11 @@ const SaleProduct = () => {
 				<Grid item sm={2}></Grid>
 				<Grid item xs={12} sm={8}>
 					<Specs product={product} />
+				</Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item xs={12} sm={8}>
+					<ImagesDropdown model={product.model} numberOfUrls={product.number_of_images} />
 				</Grid>
 				<Grid item sm={2}></Grid>
 			</Grid>

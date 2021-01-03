@@ -105,7 +105,7 @@ const Specs = ({ product }) => {
 		specs,
 		classes,
 	]);
-	
+
 	return (
 		<Grid container justify="flex-start" style={{ marginBottom: '30px' }}>
 			<Grid item xs={12}>
