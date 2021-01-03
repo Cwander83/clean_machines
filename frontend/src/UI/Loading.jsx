@@ -23,11 +23,7 @@ const Loading = () => {
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
-			<CircularProgress
-				size="10rem"
-				classes={{ root: classes.circle }}
-				color="primary"
-			/>
+			<CircularProgress classes={{ root: classes.circle }} color="primary" />
 		</div>
 	);
 };

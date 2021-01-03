@@ -30,14 +30,13 @@ export default function RecentSalesTable() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/sales/recent`);
+			const result = await axios(`/api/sales/recent`);
 
 			setData(result.data);
 		};
 		fetchData();
 	}, []);
 
-	
 	return (
 		<>
 			{rows ? (

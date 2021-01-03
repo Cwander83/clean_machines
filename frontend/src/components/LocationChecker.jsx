@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //import { Link } from 'react-router-dom';
 
@@ -43,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
 
 const LocationChecker = () => {
 	const classes = useStyles();
-	const [distance, setDistance] = React.useState();
-	const [location, setLocation] = React.useState({
+	const [distance, setDistance] = useState();
+	const [location, setLocation] = useState({
 		line: '',
 		zipcode: null,
 	});
-	const [error, setError] = React.useState();
+	const [error, setError] = useState();
 
 	//const location = '26 japonica dr, orlando, fl 32807';
 
@@ -98,7 +98,7 @@ const LocationChecker = () => {
 		return deg * (Math.PI / 180);
 	}
 
-	console.log(distance);
+	//console.log(distance);
 	return (
 		<Grid container spacing={2} direction="row">
 			<Grid item xs={12} sm={6}>
@@ -142,7 +142,7 @@ const LocationChecker = () => {
 						<Typography variant="h6">
 							{!error
 								? distance
-									? distance <= 60
+									? distance <= 38
 										? 'Congratulations, we service your area'
 										: "Sorry, we don't service your area."
 									: null

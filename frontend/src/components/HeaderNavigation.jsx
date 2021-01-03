@@ -51,10 +51,10 @@ const HeaderNavigation = () => {
 
 	const admin = [
 		{ icon: Logo, path: '/admin' },
-		{ title: 'Sales', path: '/admin/sales' },
-		{ title: 'Rentals', path: '/admin/rentals' },
+		// { title: 'Sales', path: '/admin/sales' },
+		// { title: 'Rentals', path: '/admin/rentals' },
 
-		{ title: 'Customers', path: '/admin/customers' },
+		// { title: 'Customers', path: '/admin/customers' },
 		{ title: 'Logout', path: '/', logout: logout },
 	];
 

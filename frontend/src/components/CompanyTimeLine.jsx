@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 //import { Link } from 'react-router-dom';
 
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -93,4 +94,4 @@ const CompanyTimeline = () => {
 	);
 };
 
-export default CompanyTimeline;
+export default memo(CompanyTimeline);

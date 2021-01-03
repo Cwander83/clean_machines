@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState,memo } from 'react';
+
+// material ui
 import { makeStyles } from '@material-ui/core/styles';
-
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -14,9 +14,10 @@ const useStyles = makeStyles((theme) => ({
 		paddingLeft: '15px',
 	},
 }));
+
 const SalesList = () => {
 	const classes = useStyles();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 
 	const handleClick = () => {
 		setOpen(!open);
@@ -41,8 +42,8 @@ const SalesList = () => {
 					<List component="div" disablePadding>
 						{vacuums.map((vacuum, i) => {
 							return (
-								<ListItem key={i} button >
-									<ListItemText primary={vacuum} className={classes.nested}/>
+								<ListItem key={i} button>
+									<ListItemText primary={vacuum} className={classes.nested} />
 								</ListItem>
 							);
 						})}
@@ -77,4 +78,4 @@ const SalesList = () => {
 	);
 };
 
-export default SalesList;
+export default memo(SalesList);

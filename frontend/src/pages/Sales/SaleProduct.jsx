@@ -21,6 +21,7 @@ import ProductCarousel from '../../components/Carousels/ProductCarousel';
 import Features from '../../components/Features';
 import Specs from '../../components/Specs';
 import AddToCart from '../../components/AddToCart';
+import ImagesDropdown from '../../components/ImagesDropdown';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -57,6 +58,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		marginLeft: '10px',
+	},
+	image: {
+		width: '300px',
+		[theme.breakpoints.up('sm')]: {
+			display: 'none',
+		},
 	},
 }));
 
@@ -107,13 +114,7 @@ function productFunc(obj, classes) {
 						{product.units > 0 ? (
 							` : In Stock`
 						) : (
-							<Link
-								
-								href="tel:+6145065435"
-							
-							>
-								: Call for Availability
-							</Link>
+							<Link href="tel:+6145065435">: Call for Availability</Link>
 						)}
 					</Typography>
 				</Grid>
@@ -150,7 +151,7 @@ const SaleProduct = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const results = await axios(`/products/sales/${id}`);
+			const results = await axios(`/api/products/sales/${id}`);
 			setProduct(results.data);
 		};
 		fetchData();
@@ -172,7 +173,19 @@ const SaleProduct = () => {
 				>
 					<Grid item xs={1} sm={2}></Grid>
 					<Grid item xs={10} sm={8}>
-						<ProductCarousel />
+						{product.model && (
+							<img
+								src={`https://products.oss.nodechef.com/${product.model}-1
+								
+							.jpg`}
+								alt={'Clean Machines Rentals - ' + product.model}
+								className={classes.image}
+							/>
+						)}
+						<ProductCarousel
+							model={product.model}
+							numberOfUrls={product.number_of_images}
+						/>
 					</Grid>
 					<Grid item xs={1} sm={2}></Grid>
 					{productSection}
@@ -196,6 +209,11 @@ const SaleProduct = () => {
 				<Grid item sm={2}></Grid>
 				<Grid item xs={12} sm={8}>
 					<Specs product={product} />
+				</Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item xs={12} sm={8}>
+					<ImagesDropdown model={product.model} numberOfUrls={product.number_of_images} />
 				</Grid>
 				<Grid item sm={2}></Grid>
 			</Grid>

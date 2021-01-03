@@ -63,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Specs = ({ product }) => {
 	const classes = useStyles();
+
 	const [open, setOpen] = useState(false);
 
 	const [specs, setSpecs] = useState({});
@@ -98,12 +99,13 @@ const Specs = ({ product }) => {
 		});
 	}, [product]);
 
-	console.log('specs page ***********');
+	//console.log('specs page ***********');
 
 	const specsSection = useMemo(() => specsFunc(specs, classes), [
 		specs,
 		classes,
 	]);
+
 	return (
 		<Grid container justify="flex-start" style={{ marginBottom: '30px' }}>
 			<Grid item xs={12}>

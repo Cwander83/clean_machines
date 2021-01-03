@@ -1,16 +1,8 @@
-import React from 'react';
-
-// react router
-//import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
-//import Grid from '@material-ui/core/Grid';
-//import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
-// images
-import image from '../../images/BGFS5000.jpg';
+//import Typography from '@material-ui/core/Typography';
 
 // carousel
 import Carousel from 'react-slick';
@@ -31,11 +23,16 @@ const useStyles = makeStyles((theme) => ({
 	center: {},
 	carousel: {
 		width: '100%',
+		[theme.breakpoints.down('sm')]: {
+			display: 'none',
+		},
 	},
 }));
 
-const ProductCarousel = () => {
+const ProductCarousel = ({ model, numberOfUrls }) => {
 	const classes = useStyles();
+
+	const [numberUrls, setNumber] = useState([]);
 
 	const settings = {
 		dots: true,
@@ -44,30 +41,31 @@ const ProductCarousel = () => {
 		infinite: true,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		lazyLoad: true,
 		speed: 500,
 		appendDots: (dots) => {
 			return <MagicSliderDots dots={dots} numDotsToShow={6} dotWidth={30} />;
 		},
 	};
 
+	useEffect(() => {
+		setNumber([...new Array(numberOfUrls)]);
+	}, [model, numberOfUrls]);
+
 	return (
 		<Carousel className={classes.carousel} {...settings}>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
-			<div>
-				<img src={image} alt="bisssell" className={classes.image} />
-				<Typography variant="caption">Vacuum</Typography>
-			</div>
+			{model &&
+				numberUrls.map((ele, index) => (
+					<div key={index} className={classes.slide}>
+						<img
+							src={`https://products.oss.nodechef.com/${model}-${
+								index + 1
+							}.jpg`}
+							alt={'Clean Machines Rentals - ' + model}
+							className={classes.image}
+						/>
+					</div>
+				))}
 		</Carousel>
 	);
 };

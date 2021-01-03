@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Features = ({ product }) => {
 	const classes = useStyles();
+
 	const [open, setOpen] = useState(false);
 
 	const [features, setFeatures] = useState({});
@@ -70,7 +71,7 @@ const Features = ({ product }) => {
 		});
 	}, [product]);
 
-	console.log('features page ***********');
+	//	console.log('features page ***********');
 
 	return (
 		<Grid container justify="flex-start" style={{ marginBottom: '30px' }}>

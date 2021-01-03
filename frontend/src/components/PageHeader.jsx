@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		flexDirection: 'column',
 		[theme.breakpoints.down('xs')]: {
-		fontSize: '28px'
+		fontSize: '32px'
 		},
 	},
 

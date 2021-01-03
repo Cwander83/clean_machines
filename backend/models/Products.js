@@ -83,6 +83,9 @@ module.exports = (sequelize, DataTypes) => {
 		feature_5: {
 			type: DataTypes.STRING,
 		},
+		number_of_images: {
+			type: DataTypes.INTEGER,
+		},
 	});
 
 	return Products;

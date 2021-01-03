@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
 		shipping_state: {
 			type: DataTypes.STRING,
 		},
-		customer_stripe_id: {
+		order_number: {
 			type: DataTypes.STRING,
 		},
 

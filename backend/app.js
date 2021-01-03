@@ -1,5 +1,5 @@
 require('dotenv').config();
-const colors = require('colors');
+
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -10,8 +10,8 @@ const db = require('./config/config');
 //Test
 db.sequelize
 	.authenticate()
-	.then(() => console.log('Database connected...'.blue))
-	.catch((err) => console.log(`error: ${err}`.bgRed));
+	.then(() => console.log('Database connected...'))
+	.catch((err) => console.log(`error: ${err}`));
 
 /*
  * to wipe and reset set mysql
@@ -29,11 +29,11 @@ app.use(express.urlencoded({ extended: false })); // for parsing application/x-w
 app.use(express.json());
 
 // routes folder
-const routes = require('./routes');
-app.use(routes);
+const apiRoutes = require('./routes');
+app.use('/api', apiRoutes);
 
 // Set up our port to be either the host's designated port, or 8282
 var PORT = process.env.PORT || 8282;
 
 // listen
-app.listen(PORT, () => console.log(`LISTENING AT PORT ${PORT}`.magenta));
+app.listen(PORT, () => console.log(`LISTENING AT PORT ${PORT}`));

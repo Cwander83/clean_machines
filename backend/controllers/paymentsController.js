@@ -1,7 +1,9 @@
 const { createPurchase, updateProducts } = require('../db/db');
 
-const { calculateOrderAmount } = require('../stripe/helpers');
-//const stripeCustomer = require('../stripe/stripe.customer');
+const {
+	calculateOrderAmount,
+	createOrderNumber,
+} = require('../stripe/helpers');
 
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
@@ -11,10 +13,12 @@ module.exports = {
 			const { payment_method_id, userData, productData, totalData } = req.body;
 
 			try {
-			
 				const totalPrice = await calculateOrderAmount(totalData);
 
+				const order_number = await createOrderNumber();
+
 				// TODO check inventory if still there
+				console.log(`order_number: ${order_number}`);
 
 				await stripe.paymentIntents.create({
 					payment_method: payment_method_id,
@@ -36,12 +40,15 @@ module.exports = {
 						},
 					},
 					currency: 'usd',
-					description: ` ordered 16 items`,
+					description: `${
+						userData.billing_name
+					} order number: ${order_number}, at ${new Date().toDateString()}`,
 				});
-				
-				await createPurchase(userData, productData, totalPrice);
 
-				await updateProducts( productData);
+				await createPurchase(userData, productData, totalPrice, order_number);
+
+				await updateProducts(productData);
+
 				return await res.status(200).send({
 					confirm: true,
 				});
@@ -51,8 +58,6 @@ module.exports = {
 					error: error.message,
 				});
 			}
-
-			
 		} else {
 			res.setHeader('Allow', 'POST');
 			res.status(405).end('Method Not Allowed');

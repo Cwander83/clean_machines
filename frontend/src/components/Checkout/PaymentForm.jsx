@@ -83,7 +83,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 	const [success, setSuccess] = useState(false);
 	const [isProcessing, setIsProcessing] = useState(false);
 
-	console.log(JSON.stringify(cart, null, 2));
+	//console.log(JSON.stringify(cart, null, 2));
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -111,7 +111,6 @@ export default function PaymentForm({ prevStep, nextStep }) {
 					postal_code: user.billing_postal_code,
 				},
 			},
-		
 		});
 		console.log('[PaymentMethod]', payload);
 		handlePaymentMethodResult(payload);
@@ -129,7 +128,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			setIsProcessing(false);
 		} else {
 			// Otherwise send paymentMethod.id to your server (see Step 3)
-			const response = await fetch('/customers/pay', {
+			const response = await fetch('/api/customers/pay', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
@@ -166,7 +165,7 @@ export default function PaymentForm({ prevStep, nextStep }) {
 			setCart([]);
 			setTotals({});
 			// TODO navigate to success page
-			nextStep()
+			nextStep();
 		}
 	};
 
@@ -259,8 +258,8 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						variant="contained"
 						type="submit"
 						// onClick={nextStep}
-						// disabled={!stripe || isProcessing}
-						disabled={true}
+						disabled={!stripe || isProcessing}
+						//disabled={true}
 					>
 						{isProcessing ? (
 							<CircularProgress size={16} className={classes.loading} />

@@ -49,11 +49,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Review({ nextStep, prevStep }) {
+	const classes = useStyles();
+
 	const { cart, totals } = useContext(CartContext);
 
 	useEffect(() => {}, []);
-
-	const classes = useStyles();
 
 	return (
 		<React.Fragment>

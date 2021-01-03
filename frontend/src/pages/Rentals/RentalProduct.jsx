@@ -19,6 +19,7 @@ import Divider from '@material-ui/core/Divider';
 import ProductCarousel from '../../components/Carousels/ProductCarousel';
 import Features from '../../components/Features';
 import Specs from '../../components/Specs';
+import ImagesDropdown from '../../components/ImagesDropdown';
 import RentalButton from '../../components/Buttons/RentalButton';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +57,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		marginLeft: '10px',
+	},
+	image: {
+		width: '300px',
+		[theme.breakpoints.up('sm')]: {
+			display: 'none',
+		},
 	},
 }));
 
@@ -136,7 +143,7 @@ const RentalProduct = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const results = await axios(`/products/rental/${id}`);
+			const results = await axios(`/api/products/rental/${id}`);
 			setProduct(results.data);
 		};
 		fetchData();
@@ -158,7 +165,17 @@ const RentalProduct = () => {
 				>
 					<Grid item xs={1}></Grid>
 					<Grid item xs={10}>
-						<ProductCarousel />
+						<img
+							src={`https://products.oss.nodechef.com/${product.model}-1
+								
+							.jpg`}
+							alt={'Clean Machines Rentals - ' + product.model}
+							className={classes.image}
+						/>
+						<ProductCarousel
+							model={product.model}
+							numberOfUrls={product.number_of_images}
+						/>
 					</Grid>
 					<Grid item xs={1}></Grid>
 					{productSection}
@@ -177,6 +194,14 @@ const RentalProduct = () => {
 				<Grid item sm={2}></Grid>
 				<Grid item xs={12} sm={8}>
 					<Specs product={product} />
+				</Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item sm={2}></Grid>
+				<Grid item xs={12} sm={8}>
+					<ImagesDropdown
+						model={product.model}
+						numberOfUrls={product.number_of_images}
+					/>
 				</Grid>
 				<Grid item sm={2}></Grid>
 			</Grid>

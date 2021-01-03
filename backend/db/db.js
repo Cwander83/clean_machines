@@ -1,19 +1,19 @@
 const db = require('../config/config');
 
 module.exports = {
-	createPurchase: async (userData, productData, payment_method_id) => {
-		console.log(`create Rentals`);
-		console.log(
-			'product CREATE PURCHASE: ' + JSON.stringify(productData, null, 2)
-		);
+	createPurchase: async (userData, productData, order_number) => {
+		// console.log(`create Rentals`);
+		// console.log(
+		// 	'product CREATE PURCHASE: ' + JSON.stringify(productData, null, 2)
+		// );
 
 		productData.forEach((obj) => {
 			obj.type === 'rental'
 				? db.Rentals.create({
-						productId: obj.productId,
+						rentalProductId: obj.productId,
 						start_date: obj.start_date,
 						end_date: obj.end_date,
-						order_stripe_id: payment_method_id,
+						order_number: order_number,
 						// billing
 						billing_name: userData.billing_name,
 						billing_email: userData.billing_email,
@@ -26,7 +26,7 @@ module.exports = {
 						// delivery
 						delivery_name: userData.billing_name,
 						delivery_email: userData.billing_email,
-						delivery_phone: userData.shipping.shipping_phone,
+						delivery_phone: userData.billing_phone,
 						delivery_line1: userData.shipping.shipping_line1,
 						delivery_line2: userData.shipping.shipping_line2,
 						delivery_city: userData.shipping.shipping_city,
@@ -42,7 +42,7 @@ module.exports = {
 						quantity_purchased: obj.quantity,
 						total_price: obj.price * obj.quantity + obj.shipping,
 						price_per_unit: obj.price,
-						order_stripe_id: payment_method_id,
+						order_number: order_number,
 						// billing
 						billing_name: userData.billing_name,
 						billing_email: userData.billing_email,
@@ -55,7 +55,7 @@ module.exports = {
 						// shipping
 						shipping_name: userData.billing_name,
 						shipping_email: userData.billing_email,
-						shipping_phone: userData.shipping.shipping_phone,
+						shipping_phone: userData.billing_phone,
 						shipping_line1: userData.shipping.shipping_line1,
 						shipping_line2: userData.shipping.shipping_line2,
 						shipping_city: userData.shipping.shipping_city,
@@ -91,7 +91,6 @@ module.exports = {
 			order: [['id', 'DESC']],
 		});
 	},
-
 
 	// updates products(sales table) with new quantity
 	updateProducts: (data) => {

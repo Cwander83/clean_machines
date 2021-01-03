@@ -28,15 +28,15 @@ import { RentalContext } from '../../context/rental-context';
 
 // components
 import RentalSearch from '../../components/RentalSearch';
-
-// images
-import picture from '../../images/BGFS5000.jpg';
 import CompanyTimeline from '../../components/CompanyTimeLine';
 
+// images
+
+// ui
+//import Spinner from '../../UI/Spinner';
+
 const useStyles = makeStyles((theme) => ({
-	root: {
-		
-	},
+	root: {},
 	title: {
 		color: 'black',
 	},
@@ -114,9 +114,10 @@ function productFunc(array, classes) {
 	if (!array) {
 		return [];
 	}
-	console.log(array);
+	//console.log(array);
 
 	const result = array.map((product) => {
+		let imageUrl = `https://products.oss.nodechef.com/${product.model}-1.jpg`;
 		return (
 			<Grid
 				item
@@ -133,7 +134,7 @@ function productFunc(array, classes) {
 					elevation={4}
 				>
 					<CardActionArea component={Link} to={`/rentals/${product.id}`}>
-						<CardMedia image={picture} className={classes.media} />
+						<CardMedia image={imageUrl} className={classes.media} />
 					</CardActionArea>
 					<CardContent className={classes.content}>
 						<Typography gutterBottom variant="h5">
@@ -228,7 +229,7 @@ const RentalsGrid = () => {
 	let { rentalDates } = useContext(RentalContext);
 
 	useEffect(() => {
-		console.log('rental Dates: ' + JSON.stringify(rentalDates, null, 2));
+		//	console.log('rental Dates: ' + JSON.stringify(rentalDates, null, 2));
 
 		if (rentalDates.startDate !== null && rentalDates.endDate !== null) {
 			console.log('inside if statement');
@@ -237,7 +238,7 @@ const RentalsGrid = () => {
 			let end = moment(rentalDates.endDate).format('YYYY-MM-DD');
 
 			const fetchData = async () => {
-				const results = await axios(`/rentals/available-rent/${start}/${end}`);
+				const results = await axios(`/api/rentals/available-rent/${start}/${end}`);
 
 				setProducts(results.data);
 			};
@@ -245,6 +246,8 @@ const RentalsGrid = () => {
 			fetchData();
 		}
 	}, [rentalDates]);
+
+	console.log(JSON.stringify(products, null, 2));
 
 	const productSection = useMemo(() => productFunc(products, classes), [
 		products,
@@ -279,7 +282,15 @@ const RentalsGrid = () => {
 			<Divider className={classes.divider2} />
 
 			<Grid container spacing={4} className={classes.body}>
-				{productSection}
+				{
+					// products.length === 0 ? (
+					// 	<Grid item xs={12}>
+					// 		<Spinner />
+					// 	</Grid>
+					// ) : (
+					productSection
+					//)
+				}
 			</Grid>
 		</>
 	);

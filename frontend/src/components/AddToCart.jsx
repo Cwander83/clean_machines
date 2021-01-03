@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
 		'&:active, &:hover': {
 			backgroundColor: theme.palette.primary.dark,
 		},
+		[theme.breakpoints.down('sm')]: {
+			padding: '0 15px',
+		},
 	},
 	count: {
 		border: '1px solid black',
@@ -93,7 +96,7 @@ const AddToCart = ({ product }) => {
 		setCount(1);
 	};
 
-	console.log('ADD TO CART ');
+	//console.log('ADD TO CART ');
 
 	return (
 		<div className={classes.root}>
