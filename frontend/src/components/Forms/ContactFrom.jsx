@@ -46,7 +46,7 @@ const Contact = () => {
 		e.preventDefault();
 		axios({
 			method: 'POST',
-			url: '/mail/send',
+			url: '/api/mail/send',
 			data: data,
 		})
 			.then((response) => {

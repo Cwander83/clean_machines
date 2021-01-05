@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+//import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
@@ -110,7 +110,7 @@ const Rentals = () => {
 						Call here
 					</Typography>{' '}
 					<Typography variant="h6" display="inline">
-						if we service your area.
+						to check if we service your location.
 					</Typography>
 					<img src={GoogleImage} alt="map" className={classes.image} />
 					{/* <LocationChecker /> */}

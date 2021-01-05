@@ -13,7 +13,7 @@ import SideNav from './SideNav';
 import ProductGrid from './ProductGrid';
 import PageHeader from '../../components/PageHeader';
 import Container from '../../containers/Container';
-import NotFound from '../NotFound';
+
 
 const useStyles = makeStyles((theme) => ({
 	title: {
@@ -38,7 +38,6 @@ const Sales = () => {
 	const classes = useStyles();
 
 	let { path } = useRouteMatch();
-	console.log(path);
 
 	return (
 		<Container>

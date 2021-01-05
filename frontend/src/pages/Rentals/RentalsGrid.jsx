@@ -232,7 +232,7 @@ const RentalsGrid = () => {
 		//	console.log('rental Dates: ' + JSON.stringify(rentalDates, null, 2));
 
 		if (rentalDates.startDate !== null && rentalDates.endDate !== null) {
-			console.log('inside if statement');
+		//	console.log('inside if statement');
 
 			let start = moment(rentalDates.startDate).format('YYYY-MM-DD');
 			let end = moment(rentalDates.endDate).format('YYYY-MM-DD');
@@ -247,7 +247,7 @@ const RentalsGrid = () => {
 		}
 	}, [rentalDates]);
 
-	console.log(JSON.stringify(products, null, 2));
+	//console.log(JSON.stringify(products, null, 2));
 
 	const productSection = useMemo(() => productFunc(products, classes), [
 		products,

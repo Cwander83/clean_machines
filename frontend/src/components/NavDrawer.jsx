@@ -189,11 +189,7 @@ const NavDrawer = () => {
 			icon: <HomeIcon />,
 			to: '/admin',
 		},
-		{
-			text: 'Customers',
-			icon: <ArrowForwardIosIcon />,
-			to: '/admin/customers',
-		},
+	
 
 		{
 			text: 'Rentals',
@@ -299,25 +295,26 @@ const NavDrawer = () => {
 						})}
 					</List>
 				) : (
-					<Logout/>
-					// <List className={classes.list}>
-					// 	{adminList.map((item, index) => {
-					// 		const { text, icon, to } = item;
-					// 		return (
-					// 			<ListItem
-					// 				component={Link}
-					// 				to={to}
-					// 				button
-					// 				key={index}
-					// 				onClick={handleDrawerClose}
-					// 				divider
-					// 			>
-					// 				{icon && <ListItemIcon>{icon}</ListItemIcon>}
-					// 				<ListItemText primary={text} />
-					// 			</ListItem>
-					// 		);
-					// 	})}
-					// </List>
+					
+					<List className={classes.list}>
+						{adminList.map((item, index) => {
+							const { text, icon, to } = item;
+							return (
+								<ListItem
+									component={Link}
+									to={to}
+									button
+									key={index}
+									onClick={handleDrawerClose}
+									divider
+								>
+									{icon && <ListItemIcon>{icon}</ListItemIcon>}
+									<ListItemText primary={text} />
+								</ListItem>
+							);
+						})}
+						<Logout/>
+					</List>
 				)}
 			</Drawer>
 		</div>
