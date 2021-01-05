@@ -7,14 +7,14 @@ export const CartContext = React.createContext();
 
 const CartProvider = (props) => {
 	const [user, setUser] = useState({
-		billing_name: 'Christopher Wander',
-		billing_email: 'weaze1234@hotmail.com',
-		billing_phone: '6145065435',
-		billing_line1: '26 JAPONICA DR',
-		billing_line2: '',
-		billing_city: 'ORLANDO',
-		billing_postal_code: '32807',
-		billing_state: 'FL',
+		// billing_name: 'Christopher Wander',
+		// billing_email: 'weaze1234@hotmail.com',
+		// billing_phone: '6145065435',
+		// billing_line1: '26 JAPONICA DR',
+		// billing_line2: '',
+		// billing_city: 'ORLANDO',
+		// billing_postal_code: '32807',
+		// billing_state: 'FL',
 	});
 	const [cart, setCart] = useState([
 		// {
@@ -39,8 +39,8 @@ const CartProvider = (props) => {
 		// },
 	]);
 
-	console.log('*** user Data : ' + JSON.stringify(user, null, 2));
-	console.log('*** cart Data : ' + JSON.stringify(cart, null, 2));
+//	console.log('*** user Data : ' + JSON.stringify(user, null, 2));
+//	console.log('*** cart Data : ' + JSON.stringify(cart, null, 2));
 
 	const [totals, setTotals] = useState({});
 

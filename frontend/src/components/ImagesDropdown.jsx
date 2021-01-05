@@ -1,4 +1,4 @@
-import React, { useState, memo, useMemo, useEffect } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 
 // classnames
 //import ClassNames from 'classnames';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		marginBottom: '30px',
 		justifyContent: 'flex-start',
-        [theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('sm')]: {
 			display: 'none',
 		},
 	},
@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 	},
-	
 
 	image: {
 		width: '100%',
@@ -44,8 +43,6 @@ const ImagesDropdown = ({ model, numberOfUrls }) => {
 	useEffect(() => {
 		setNumber([...new Array(numberOfUrls)]);
 	}, [model, numberOfUrls]);
-
-	
 
 	return (
 		<Grid className={classes.root} container>

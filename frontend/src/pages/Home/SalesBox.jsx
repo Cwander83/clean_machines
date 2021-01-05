@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
 // icons
-import canister from '../../images/icons/canister.jpg';
+//import canister from '../../images/icons/canister.jpg';
 import backpack from '../../images/icons/backpack.jpg';
 import airmover from '../../images/icons/airmover.jpg';
  import extractor from '../../images/icons/extractors.jpg';
@@ -83,12 +83,12 @@ const SalesBox = () => {
 			path: '/sales',
 			value: 'upright',
 		},
-		{
-			title: 'Canister Vacuums',
-			image: canister,
-			path: '/sales',
-			value: 'canister',
-		},
+		// {
+		// 	title: 'Canister Vacuums',
+		// 	image: canister,
+		// 	path: '/sales',
+		// 	value: 'canister',
+		// },
 		{
 			title: 'Backpack Vacuums',
 			image: backpack,
@@ -340,7 +340,7 @@ const SalesBox = () => {
 							}}
 							component={Link}
 							to="/sales"
-							onClick={() => setCategory('formula')}
+							onClick={() => setCategory('cleaning-formula')}
 						>
 							<Box className={classes.imageBox}>
 								<img

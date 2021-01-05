@@ -65,7 +65,7 @@ function productFunc(array, classes) {
 
 	const result = array.map((product) => {
 		let imageUrl = `https://products.oss.nodechef.com/${product.model}-1.jpg`;
-		console.log(imageUrl);
+		//console.log(imageUrl);
 		return (
 			<Grid
 				item
