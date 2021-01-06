@@ -170,7 +170,7 @@ const NavDrawer = () => {
 		{
 			text: 'Tutorials',
 			icon: <VideoLibraryIcon />,
-			to: '/videos',
+			to: '/Tutorials',
 		},
 		{
 			text: 'Support',

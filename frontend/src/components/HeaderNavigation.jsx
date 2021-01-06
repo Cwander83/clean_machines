@@ -44,7 +44,7 @@ const HeaderNavigation = () => {
 		{ icon: Logo, path: '/' },
 		{ title: 'Shop', path: '/sales' },
 		{ title: 'Rentals', path: '/rentals' },
-		{ title: 'Tutorials', path: '/videos' },
+		{ title: 'Tutorials', path: '/tutorials' },
 		{ title: 'Support', path: '/contact' },
 		{ title: 'FAQ', path: '/faq' },
 	];
