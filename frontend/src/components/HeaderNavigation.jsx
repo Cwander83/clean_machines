@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	icon: { height: '75px' },
 }));
+
 const HeaderNavigation = () => {
 	const classes = useStyles();
 
@@ -51,10 +52,10 @@ const HeaderNavigation = () => {
 
 	const admin = [
 		{ icon: Logo, path: '/admin' },
-		// { title: 'Sales', path: '/admin/sales' },
-		// { title: 'Rentals', path: '/admin/rentals' },
-
-		// { title: 'Customers', path: '/admin/customers' },
+		{ title: 'Orders', path: '/admin/Orders' },
+		{ title: 'Sales', path: '/admin/sales' },
+		{ title: 'Rentals', path: '/admin/rentals' },
+	//	{ title: 'Products', path: '/admin/products' },
 		{ title: 'Logout', path: '/', logout: logout },
 	];
 

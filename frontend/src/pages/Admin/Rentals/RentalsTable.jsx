@@ -22,8 +22,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
-import DirectionsIcon from '@material-ui/icons/Directions';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 // react router
 //import { Link, useRouteMatch, useParams } from 'react-router-dom';
@@ -150,22 +149,24 @@ const RentalsTable = () => {
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					<TableCell>
-						<Button
-							target="_blank"
-							href={`https://maps.google.com/?q=${row.delivery_line1},${row.delivery_line2},${row.delivery_city},${row.delivery_state},${row.delivery_zipcode}`}
-						>
-							<DirectionsIcon />
-						</Button>
-					</TableCell>
+					<TableCell>{row.active && <CheckCircleIcon />}</TableCell>
+					<TableCell>{row.picked_up && <CheckCircleIcon />}</TableCell>
 					<TableCell>{row.order_number}</TableCell>
 					<TableCell>{row.rentalProduct.model}</TableCell>
 					<TableCell>{row.start_date}</TableCell>
 					<TableCell>{row.end_date}</TableCell>
 					<TableCell>{row.billing_name}</TableCell>
-					<TableCell>{row.delivery_name}</TableCell>
-					<TableCell>{row.delivery_phone}</TableCell>
-					<TableCell>{row.delivery_email}</TableCell>
+
+					<TableCell>{row.billing_phone}</TableCell>
+					<TableCell>{row.billing_email}</TableCell>
+					<TableCell>
+						{row.delivery_line1} {row.delivery_line2}, {row.delivery_city},{' '}
+						{row.delivery_state} {row.delivery_zipcode}
+					</TableCell>
+					<TableCell>
+						{row.billing_line1} {row.billing_line2}, {row.billing_city},{' '}
+						{row.billing_state} {row.billing_zipcode}
+					</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -177,15 +178,18 @@ const RentalsTable = () => {
 				<Table className={classes.table} aria-label="products table">
 					<TableHead>
 						<TableRow>
-							<TableCell></TableCell>
+							<TableCell>Active</TableCell>
+							<TableCell>Picked Up</TableCell>
 							<TableCell>Order Number</TableCell>
 							<TableCell>Model</TableCell>
 							<TableCell>Start Date</TableCell>
 							<TableCell>End Date</TableCell>
-							<TableCell>Billing Name</TableCell>
-							<TableCell>Delivery Name</TableCell>
-							<TableCell>Phone #</TableCell>
+							<TableCell>Name</TableCell>
+
+							<TableCell>Phone </TableCell>
 							<TableCell>Email</TableCell>
+							<TableCell>Delivery Address</TableCell>
+							<TableCell>Billing Address</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>

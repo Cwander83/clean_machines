@@ -11,6 +11,16 @@ module.exports = (sequelize, DataTypes) => {
 		rental_total: {
 			type: DataTypes.INTEGER,
 		},
+		active: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			autoIncrement: false,
+		},
+		picked_up: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			autoIncrement: false,
+		},
 
 		start_date: {
 			type: DataTypes.DATEONLY,

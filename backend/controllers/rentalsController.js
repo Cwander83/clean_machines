@@ -24,19 +24,7 @@ module.exports = {
 
 		db.Rentals.findAll({
 			where: {
-				[Op.or]: [
-					{
-						start_date: {
-							[Op.gte]: currentDate,
-						},
-					},
-
-					{
-						end_date: {
-							[Op.gte]: currentDate,
-						},
-					},
-				],
+				active: true,
 			},
 			include: db.RentalProducts,
 			order: [['end_date', 'ASC']],
@@ -96,6 +84,25 @@ module.exports = {
 		}
 	},
 
+	// find all active rentals by the current date
+	findUpComingRentals: async (req, res) => {
+		let currentDate = new Date();
+
+		await db.Rentals.findAll({
+			where: {
+				active: false,
+			},
+			include: db.RentalProducts,
+			order: [['end_date', 'ASC']],
+		})
+			.then((result) => {
+				res.status(200).json(result);
+				console.log(result);
+				return result;
+			})
+			.catch((err) => console.error(err));
+	},
+
 	// search by id of the rental
 	findRentalById: async (req, res) => {
 		await db.Rentals.findOne({
@@ -107,6 +114,16 @@ module.exports = {
 			.then((result) => {
 				res.status(200).json(result);
 				return result;
+			})
+			.catch((err) => console.error(err));
+	},
+	updateRental: async (req, res) => {
+		db.Rentals.update(req.body, {
+			where: { id: req.params.id },
+		})
+			.then((results) => {
+				res.json(results);
+				console.log(JSON.stringify(results, null, 2));
 			})
 			.catch((err) => console.error(err));
 	},

@@ -189,8 +189,11 @@ const NavDrawer = () => {
 			icon: <HomeIcon />,
 			to: '/admin',
 		},
-	
-
+		{
+			text: 'Orders',
+			icon: <ArrowForwardIosIcon />,
+			to: '/admin/orders',
+		},
 		{
 			text: 'Rentals',
 			icon: <ArrowForwardIosIcon />,
@@ -201,6 +204,11 @@ const NavDrawer = () => {
 			icon: <ArrowForwardIosIcon />,
 			to: '/admin/sales',
 		},
+		// {
+		// 	text: 'Products',
+		// 	icon: <ArrowForwardIosIcon />,
+		// 	to: '/admin/products',
+		// },
 	];
 
 	return (
@@ -295,7 +303,6 @@ const NavDrawer = () => {
 						})}
 					</List>
 				) : (
-					
 					<List className={classes.list}>
 						{adminList.map((item, index) => {
 							const { text, icon, to } = item;
@@ -313,7 +320,7 @@ const NavDrawer = () => {
 								</ListItem>
 							);
 						})}
-						<Logout/>
+						<Logout />
 					</List>
 				)}
 			</Drawer>

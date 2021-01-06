@@ -12,10 +12,10 @@ import { makeStyles } from '@material-ui/core';
 
 // components
 //import Logout from '../../components/Logout';
-import RentalsTable from './Rentals/RentalsTable';
 import CurrentRentals from './CurrentRentals';
 import RecentSalesTable from './RecentSalesTable';
 import Spinner from '../../UI/Spinner';
+import UpComingRentals from './Rentals/UpComingRentals';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -50,19 +50,8 @@ const Admin = () => {
 				</Grid>
 				<Grid item sm={1}></Grid>
 				{/* recent sales */}
-				<Grid item sm={1}></Grid>
-
-				<Grid
-					item
-					xs={12}
-					sm={10}
-					component={Paper}
-					className={classes.section}
-				>
-					<Typography variant="h4">Recent Sales</Typography>
-					<RecentSalesTable />
-				</Grid>
-				<Grid item sm={1}></Grid>
+			
+	
 				{/* future rentals */}
 				<Grid item sm={1}></Grid>
 
@@ -74,37 +63,11 @@ const Admin = () => {
 					className={classes.section}
 				>
 					<Typography variant="h4">Upcoming Rentals</Typography>
-					<RecentSalesTable />
+					<UpComingRentals />
 				</Grid>
 				<Grid item sm={1}></Grid>
-				{/* past rentals */}
-				<Grid item sm={1}></Grid>
-
-				<Grid
-					item
-					xs={12}
-					sm={10}
-					component={Paper}
-					className={classes.section}
-				>
-					<Typography variant="h4">Past Rentals</Typography>
-					<RecentSalesTable />
-				</Grid>
-				<Grid item sm={1}></Grid>
-				{/* all rentals */}
-				<Grid item sm={1}></Grid>
-
-				<Grid
-					item
-					xs={12}
-					sm={10}
-					component={Paper}
-					className={classes.section}
-				>
-					<Typography variant="h4">All Rentals</Typography>
-					<RentalsTable />
-				</Grid>
-				<Grid item sm={1}></Grid>
+		
+	
 
 
 				{/* <Grid item xs={12}>

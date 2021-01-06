@@ -70,6 +70,11 @@ module.exports = (sequelize, DataTypes) => {
 		quantity_purchased: {
 			type: DataTypes.INTEGER,
 		},
+		shipped: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			autoIncrement: false,
+		},
 	});
 	Sales.associate = function (models) {
 		Sales.belongsTo(models.Products, {
