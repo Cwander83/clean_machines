@@ -124,8 +124,8 @@ const ProductGrid = () => {
 		classes,
 	]);
 
-	const categoryFunc = (x) => {
-		let array = x.split('');
+	const categoryFunc = (string) => {
+		let array = string.split('');
 		let secondArray = [];
 		array.forEach((char) => {
 			if (char !== '-') secondArray.push(char);
@@ -133,7 +133,7 @@ const ProductGrid = () => {
 		});
 		let newString = secondArray.join('');
 
-		return newString;
+		return newString.toUpperCase();
 	};
 	return (
 		<>
@@ -141,13 +141,13 @@ const ProductGrid = () => {
 				<Grid item xs sm={3}></Grid>
 				<Grid item xs={12} sm={6}>
 					<Typography display="inline" variant="h5">
-						Category:
+						CATEGORY:
 						<Typography
 							display="inline"
 							variant="body1"
 							className={classes.subtitle}
 						>
-							{!category ? 'all available' : categoryFunc(category)}
+							{categoryFunc(category)}
 						</Typography>
 					</Typography>
 					<Divider className={classes.divider} />

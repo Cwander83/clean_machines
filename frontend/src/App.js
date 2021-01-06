@@ -18,7 +18,7 @@ import Sales from './pages/Sales/Sales';
 import NotFound from './pages/NotFound';
 import Spinner from './UI/Spinner';
 import Contact from './pages/Contact/Contact';
-import Videos from './pages/Videos/Videos';
+import Tutorials from './pages/Tutorials/Tutorials';
 import AdminRentals from './pages/Admin/Rentals/AdminRentals';
 import AdminSales from './pages/Admin/Sales/AdminSales';
 import AdminCustomers from './pages/Admin/Customers/AdminCustomers';
@@ -65,7 +65,7 @@ function App() {
 									/>
 
 									<Route path="/rentals" component={Rentals} />
-									<Route path="/videos" component={Videos} />
+									<Route path="/tutorials" component={Tutorials} />
 									<Route path="/contact" component={Contact} />
 									<Route path="/sales" component={Sales} />
 									<Route path="/faq" component={Faq} />
@@ -82,4 +82,3 @@ function App() {
 }
 
 export default App;
-

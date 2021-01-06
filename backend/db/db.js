@@ -1,11 +1,15 @@
 const db = require('../config/config');
 
+const { Op } = require('sequelize');
+
 module.exports = {
 	createPurchase: async (userData, productData, order_number) => {
 		// console.log(`create Rentals`);
 		// console.log(
 		// 	'product CREATE PURCHASE: ' + JSON.stringify(productData, null, 2)
 		// );
+
+		console.log('order number: ' + order_number);
 
 		productData.forEach((obj) => {
 			obj.type === 'rental'
@@ -32,6 +36,8 @@ module.exports = {
 						delivery_city: userData.shipping.shipping_city,
 						delivery_zipcode: userData.shipping.shipping_postal_code,
 						delivery_state: userData.shipping.shipping_state,
+						active: false,
+						picked_up: false,
 				  })
 						// TODO remove before prod
 
@@ -61,6 +67,7 @@ module.exports = {
 						shipping_city: userData.shipping.shipping_city,
 						shipping_zipcode: userData.shipping.shipping_postal_code,
 						shipping_state: userData.shipping.shipping_state,
+						shipped: false,
 				  })
 						.then((result) => console.log('created Sale: ' + result))
 						.catch((err) => console.error(err));
@@ -96,7 +103,11 @@ module.exports = {
 	updateProducts: (data) => {
 		data.forEach((obj) => {
 			if (obj.type === 'sale')
-				db.Products.findOne({ where: obj.id })
+				db.Products.findOne({
+					where: {
+						[Op.and]: [{ model: obj.model }, { sale_price: obj.price }],
+					},
+				})
 					.then((result) =>
 						result.update({ units: result.units - obj.quantity })
 					)

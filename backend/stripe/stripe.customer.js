@@ -2,8 +2,8 @@ const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 module.exports = {
 	createCustomer: (userData) => {
-		console.log('2');
-		console.log('stripe customer: ' + JSON.stringify(userData, null, 2));
+	
+		//console.log('stripe customer: ' + JSON.stringify(userData, null, 2));
 		let userShipping = userData.shipping;
 		if (userShipping) {
 			return stripe.customers.create({
@@ -53,7 +53,7 @@ module.exports = {
 	},
 
 	findSingleCustomer: (id) => {
-		console.log(id);
+		//console.log(id);
 		return stripe.customers.retrieve(id);
 	},
 

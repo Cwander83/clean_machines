@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Videos = () => {
+const Tutorials = () => {
 	const classes = useStyles();
 
 	return (
@@ -120,4 +120,4 @@ const Videos = () => {
 	);
 };
 
-export default Videos;
+export default Tutorials;

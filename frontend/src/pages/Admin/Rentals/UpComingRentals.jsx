@@ -27,14 +27,16 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function CurrentRentals() {
+export default function UpComingRentals() {
 	const classes = useStyles();
 
+	//let { path } = useRouteMatch();
+	//console.log('path' + path);
 	const [rows, setData] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/api/rentals/active-rentals`);
+			const result = await axios(`/api/rentals/upcoming`);
 
 			setData(result.data);
 		};
@@ -42,7 +44,7 @@ export default function CurrentRentals() {
 	}, []);
 
 	const activeHandler = (id) => {
-		axios.post(`/api/rentals/update-rental/${id}`, { picked_up: true });
+		axios.post(`/api/rentals/update-rental/${id}`, { active: true });
 	};
 
 	return (
@@ -50,7 +52,7 @@ export default function CurrentRentals() {
 			<Table className={classes.table} aria-label="simple table">
 				<TableHead>
 					<TableRow>
-						<TableCell>Picked Up</TableCell>
+						<TableCell>Activate</TableCell>
 						<TableCell>Directions</TableCell>
 
 						<TableCell>Order Number</TableCell>
@@ -70,8 +72,7 @@ export default function CurrentRentals() {
 							return (
 								<TableRow key={row.id}>
 									<TableCell>
-										<CheckBoxOutlineBlankIcon
-											style={{ cursor: 'pointer' }}
+										<CheckBoxOutlineBlankIcon style={{cursor: 'pointer'}}
 											onClick={() => activeHandler(row.id)}
 										/>
 									</TableCell>
