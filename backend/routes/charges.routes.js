@@ -1,30 +1,30 @@
-const express = require('express');
-const router = express.Router();
-//const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
-const {
-	customerController,
-	paymentController,
-	chargesController,
-} = require('../controllers');
+// const express = require('express');
+// const router = express.Router();
+// //const stripe = require('stripe')(`${process.env.SECRET_KEY}`);
+// const {
+// 	customerController,
+// 	paymentController,
+// 	chargesController,
+// } = require('../controllers');
 
-// routes
+// // routes
 
-//
-// GET
-//
-router.get('/', chargesController.findAllCharges);
-router.get('/:id', chargesController.findChargesById);
+// //
+// // GET
+// //
+// router.get('/', chargesController.findAllCharges);
+// router.get('/:id', chargesController.findChargesById);
 
-//
-// POST
-//
-router.post('/add_charge/:id', chargesController.createCharge);
-//
-// PUT
-//
+// //
+// // POST
+// //
+// router.post('/add_charge/:id', chargesController.createCharge);
+// //
+// // PUT
+// //
 
-//
-// DELETE
-//
+// //
+// // DELETE
+// //
 
-module.exports = router;
+// module.exports = router;

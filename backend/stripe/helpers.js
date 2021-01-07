@@ -1,3 +1,4 @@
+
 module.exports = {
 	calculateOrderAmount: (totals) => {
 		let number = totals.total.replace('.', '');
@@ -6,9 +7,9 @@ module.exports = {
 	},
 	createOrderNumber: () => {
 		let year = new Date().getFullYear();
-		let month = new Date().getMonth();
-		let day = new Date().getDay();
-		let random = Math.floor(10000 + Math.random() * 90000);
+		let month = new Date().getMonth() + 1;
+		let day = new Date().getDate();
+		let random = Math.floor(1000 + Math.random() * 9000);
 
 		return `${month}${day}${year}${random}`;
 	},

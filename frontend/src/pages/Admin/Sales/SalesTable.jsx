@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // React router
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 // material ui
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -23,7 +23,8 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
-import Button from '@material-ui/core/Button';
+
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -112,13 +113,12 @@ const SalesTable = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/sales`);
+			const result = await axios(`/api/sales`);
 
 			setData(result.data);
 		};
 		fetchData();
 	}, []);
-	//console.log(JSON.stringify(rows, null, 1));
 
 	const emptyRows =
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -138,16 +138,28 @@ const SalesTable = () => {
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					<TableCell>{row.id}</TableCell>
-					<TableCell>
-						<Button component={Link} to={`sales/sale/${row.id}`}>
-							{row.billing_name}
-						</Button>
-					</TableCell>
-					<TableCell>{row.shipping_name}</TableCell>
+					<TableCell>{row.shipped && <CheckCircleIcon />}</TableCell>
+					<TableCell>{row.order_number}</TableCell>
 					<TableCell>{row.product.model}</TableCell>
 					<TableCell>{row.quantity_purchased}</TableCell>
-					<TableCell>$ {(row.total_price / 100).toFixed(2)}</TableCell>
+
+					<TableCell>{row.billing_name}</TableCell>
+					<TableCell>
+						<a href={'tel:+' + row.billing_phone}>{row.billing_phone}</a>
+					</TableCell>
+					<TableCell>{row.billing_email}</TableCell>
+					<TableCell>
+										{row.billing_line1}
+										{row.billing_line2 && ','} {row.billing_line2},{' '}
+										{row.billing_city}, {row.billing_state}{' '}
+										{row.billing_zipcode}
+									</TableCell>
+									<TableCell>
+										{row.shipping_line1}
+										{row.shipping_line2 && ', '}
+										{row.shipping_line2}, {row.shipping_city},{' '}
+										{row.shipping_state} {row.shipping_zipcode}
+									</TableCell>
 					<TableCell>{new Date(row.createdAt).toLocaleString()}</TableCell>
 				</TableRow>
 			</React.Fragment>
@@ -159,13 +171,18 @@ const SalesTable = () => {
 			<Table className={classes.table} aria-label="products table">
 				<TableHead>
 					<TableRow>
-						<TableCell>Id</TableCell>
-						<TableCell>Billing Name</TableCell>
-						<TableCell>Delivery Name</TableCell>
+						<TableCell>Shipped</TableCell>
+						<TableCell>Order Number</TableCell>
+
 						<TableCell>Model</TableCell>
 						<TableCell>Quantity</TableCell>
-						<TableCell>Total Price</TableCell>
-						<TableCell>Created At</TableCell>
+
+						<TableCell>Billing Name</TableCell>
+						<TableCell>Phone</TableCell>
+						<TableCell>Email</TableCell>
+						<TableCell>Billing Address</TableCell>
+						<TableCell>Shipping Address</TableCell>
+						<TableCell>Order Date</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>

@@ -1,83 +1,68 @@
 import React from 'react';
 
 // react router
-import {
-	Switch,
-	Route,
-	Link,
-	useRouteMatch,
-	//useParams,
-} from 'react-router-dom';
+// import {
+// 	Switch,
+// 	Route,
+// 	Link,
+// 	useRouteMatch,
+// 	//useParams,
+// } from 'react-router-dom';
 
 // material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 
 // components
 import SalesTable from './SalesTable';
-import SalesDetails from './SalesDetails';
-import AdminProductDetails from '../../../components/AdminProductDetails';
-import SalesProductsTable from './SalesProductTable';
-import AdminCreateSalesProducts from './AdminCreateSalesProduct';
+import UnShippedSales from './UnshippedSales';
+import PageHeader from '../../../components/PageHeader';
+import AdminTableHeaders from '../AdminTableHeaders';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		flexShrink: 3,
+		marginBottom: '20px',
+	},
+	section: {
+		height: 'auto',
+		marginTop: '20px',
 	},
 }));
 
 const AdminSales = () => {
 	const classes = useStyles();
 
-	let { url, path } = useRouteMatch();
+	//let { url, path } = useRouteMatch();
 
 	return (
-		<Grid container justify="center" className={classes.root}>
-			<Grid item xs={12}>
-				<Typography variant="h3">Sales</Typography>
+		<Container maxWidth="xl" className={classes.root}>
+			<Grid container justify="center" spacing={2}>
+				<PageHeader title="Sales" />
 
-				<Button component={Link} to={`${url}`}>
-					Sales
-				</Button>
-				<Button component={Link} to={`${path}/products-table`}>
-					Products
-				</Button>
-				<Button component={Link} to={`${path}/create`}>
-					add Product
-				</Button>
+				<Grid
+					item
+					xs={12}
+					md={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<AdminTableHeaders title="Unshipped Sales" />
+					<UnShippedSales />
+				</Grid>
+				<Grid
+					item
+					xs={12}
+					md={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<AdminTableHeaders title="Sales History" />
+					<SalesTable />
+				</Grid>
 			</Grid>
-
-			<Switch>
-				<Route exact path={path}>
-					<Grid item xs={12} md={10}>
-						<SalesTable />
-					</Grid>
-				</Route>
-				<Route path={`${path}/sale/:id`}>
-					<SalesDetails />
-				</Route>
-				<Route path={`${path}/products-table`}>
-					<Grid item xs={12} md={10}>
-						<SalesProductsTable />
-					</Grid>
-				</Route>
-				<Route path={`${path}/product/:id`}>
-					<Grid item xs={12} md={10}>
-					<AdminProductDetails type="sales" />
-					</Grid>
-				</Route>
-				<Route path={`${path}/create`}>
-					<Grid item xs={10}>
-						<Grid item xs={12}>
-							<Typography variant="h3">Create Sales Product</Typography>
-						</Grid>
-						<AdminCreateSalesProducts />
-					</Grid>
-				</Route>
-			</Switch>
-		</Grid>
+		</Container>
 	);
 };
 

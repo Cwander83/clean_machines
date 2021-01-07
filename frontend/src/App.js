@@ -21,7 +21,7 @@ import Contact from './pages/Contact/Contact';
 import Tutorials from './pages/Tutorials/Tutorials';
 import AdminRentals from './pages/Admin/Rentals/AdminRentals';
 import AdminSales from './pages/Admin/Sales/AdminSales';
-import AdminCustomers from './pages/Admin/Customers/AdminCustomers';
+import AdminProducts from './pages/Admin/Products/AdminProducts';
 import Layout from './layout/Layout';
 import Cart from './pages/Cart/Cart';
 import Faq from './pages/Faq/Faq';
@@ -60,8 +60,8 @@ function App() {
 									<ProtectedRoute path="/admin/sales" component={AdminSales} />
 
 									<ProtectedRoute
-										path="/admin/customers"
-										component={AdminCustomers}
+										path="/admin/products"
+										component={AdminProducts}
 									/>
 
 									<Route path="/rentals" component={Rentals} />

@@ -1,9 +1,11 @@
-// TODO fix and update table with current data
-
-import React, { useEffect, useState, memo } from 'react';
+import React, { useState, useEffect } from 'react';
+// moment
 
 // axios
 import axios from 'axios';
+
+// React router
+//import { Link } from 'react-router-dom';
 
 // material ui
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -21,11 +23,6 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-
-// react router
-//import { Link, useRouteMatch, useParams } from 'react-router-dom';
 
 const useStyles1 = makeStyles((theme) => ({
 	root: {
@@ -106,30 +103,20 @@ const useStyles2 = makeStyles((theme) => ({
 	},
 }));
 
-const RentalsTable = () => {
+const RentalProductsTable = () => {
 	const classes = useStyles2();
-
-	//let { path } = useRouteMatch();
-
-	const [loading, setLoading] = useState(false);
-
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
-
 	const [rows, setData] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			//setLoading(true);
-			const result = await axios(`/api/rentals/`);
+			const result = await axios(`/api/products/rental`);
 
 			setData(result.data);
-			setLoading(false);
 		};
 		fetchData();
 	}, []);
-
-	//console.log(rows);
 
 	const emptyRows =
 		rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -149,31 +136,30 @@ const RentalsTable = () => {
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					<TableCell>{row.active && <CheckCircleIcon />}</TableCell>
-					<TableCell>{row.picked_up && <CheckCircleIcon />}</TableCell>
-					<TableCell>{row.order_number}</TableCell>
-					<TableCell>{row.rentalProduct.model}</TableCell>
-					<TableCell>{row.start_date}</TableCell>
-					<TableCell>{row.end_date}</TableCell>
-					<TableCell>{row.billing_name}</TableCell>
+					<TableCell>{row.name}</TableCell>
+					<TableCell>{row.model}</TableCell>
+					<TableCell>${(row.rental_day / 100).toFixed(2)}</TableCell>
+					<TableCell>${(row.rental_two_day / 100).toFixed(2)}</TableCell>
+					<TableCell>${(row.rental_week / 100).toFixed(2)}</TableCell>
 
-					<TableCell>
-						<a href={'tel:+' + row.billing_phone}>{row.billing_phone}</a>
-					</TableCell>
-					<TableCell>{row.billing_email}</TableCell>
-					<TableCell>
-										{row.billing_line1}
-										{row.billing_line2 && ','} {row.billing_line2},{' '}
-										{row.billing_city}, {row.billing_state}{' '}
-										{row.billing_zipcode}
-									</TableCell>
-									<TableCell>
-										{row.delivery_line1}
-										{row.delivery_line2 && ', '}
-										{row.delivery_line2}, {row.delivery_city},{' '}
-										{row.delivery_state} {row.delivery_zipcode}
-									</TableCell>
-					<TableCell>{new Date(row.createdAt).toLocaleString()}</TableCell>
+					<TableCell>{row.category}</TableCell>
+					<TableCell>{row.short_description}</TableCell>
+					<TableCell>{row.cord}</TableCell>
+					<TableCell>{row.weight}</TableCell>
+					<TableCell>{row.height}</TableCell>
+					<TableCell>{row.width}</TableCell>
+					<TableCell>{row.tools}</TableCell>
+					<TableCell>{row.motor}</TableCell>
+					<TableCell>{row.sound_pressure}</TableCell>
+					<TableCell>{row.container_capacity}</TableCell>
+					<TableCell>{row.tank_capacity}</TableCell>
+					<TableCell>{row.speed}</TableCell>
+					<TableCell>{row.size}</TableCell>
+					<TableCell>{row.feature_1}</TableCell>
+					<TableCell>{row.feature_2}</TableCell>
+					<TableCell>{row.feature_3}</TableCell>
+					<TableCell>{row.feature_4}</TableCell>
+					<TableCell>{row.feature_5}</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -181,63 +167,69 @@ const RentalsTable = () => {
 
 	return (
 		<TableContainer component={Paper}>
-			{!loading ? (
-				<Table className={classes.table} aria-label="products table">
-					<TableHead>
-						<TableRow>
-							<TableCell>Active</TableCell>
-							<TableCell>Picked Up</TableCell>
-							<TableCell>Order Number</TableCell>
-							<TableCell>Model</TableCell>
-							<TableCell>Start Date</TableCell>
-							<TableCell>End Date</TableCell>
-							<TableCell>Name</TableCell>
+			<Table className={classes.table} aria-label="products table">
+				<TableHead>
+					<TableRow>
+						<TableCell>Name</TableCell>
+						<TableCell>Model</TableCell>
+						<TableCell>Day</TableCell>
+						<TableCell>Two Day</TableCell>
+						<TableCell>Week</TableCell>
+						<TableCell>Category</TableCell>
+						<TableCell>Short Description</TableCell>
+						<TableCell>Power Cord</TableCell>
+						<TableCell>Weight</TableCell>
+						<TableCell>Height</TableCell>
+						<TableCell>Width</TableCell>
+						<TableCell>Tools</TableCell>
+						<TableCell>Motor</TableCell>
+						<TableCell>Sound Pressure</TableCell>
+						<TableCell>Container Capacity</TableCell>
+						<TableCell>Tank Capacity</TableCell>
+						<TableCell>Speed</TableCell>
+						<TableCell>Size</TableCell>
+						<TableCell>Features</TableCell>
+						<TableCell></TableCell>
+						<TableCell></TableCell>
+						<TableCell></TableCell>
+						<TableCell></TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{(rowsPerPage > 0
+						? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+						: rows
+					).map((row, i) => (
+						<Row key={i} row={row} />
+					))}
 
-							<TableCell>Phone </TableCell>
-							<TableCell>Email</TableCell>
-							<TableCell>Delivery Address</TableCell>
-							<TableCell>Billing Address</TableCell>
-							<TableCell>Order Date</TableCell>
+					{emptyRows > 0 && (
+						<TableRow style={{ height: 53 * emptyRows }}>
+							<TableCell colSpan={12} />
 						</TableRow>
-					</TableHead>
-					<TableBody>
-						{(rowsPerPage > 0
-							? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-							: rows
-						).map((row, i) => (
-							<Row key={i} row={row} />
-						))}
-
-						{emptyRows > 0 && (
-							<TableRow style={{ height: 53 * emptyRows }}>
-								<TableCell colSpan={12} />
-							</TableRow>
-						)}
-					</TableBody>
-					<TableFooter>
-						<TableRow>
-							<TablePagination
-								rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-								colSpan={12}
-								count={rows.length}
-								rowsPerPage={rowsPerPage}
-								page={page}
-								SelectProps={{
-									inputProps: { 'aria-label': 'rows per page' },
-									native: true,
-								}}
-								onChangePage={handleChangePage}
-								onChangeRowsPerPage={handleChangeRowsPerPage}
-								ActionsComponent={TablePaginationActions}
-							/>
-						</TableRow>
-					</TableFooter>
-				</Table>
-			) : (
-				<CircularProgress />
-			)}
+					)}
+				</TableBody>
+				<TableFooter>
+					<TableRow>
+						<TablePagination
+							rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+							colSpan={12}
+							count={rows.length}
+							rowsPerPage={rowsPerPage}
+							page={page}
+							SelectProps={{
+								inputProps: { 'aria-label': 'rows per page' },
+								native: true,
+							}}
+							onChangePage={handleChangePage}
+							onChangeRowsPerPage={handleChangeRowsPerPage}
+							ActionsComponent={TablePaginationActions}
+						/>
+					</TableRow>
+				</TableFooter>
+			</Table>
 		</TableContainer>
 	);
 };
 
-export default memo(RentalsTable);
+export default RentalProductsTable;

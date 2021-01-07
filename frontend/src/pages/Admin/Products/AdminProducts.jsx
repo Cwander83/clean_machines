@@ -16,32 +16,31 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
 // components
-import RentalsTable from './RentalsTable';
-import CurrentRentals from './CurrentRentals';
-import UpComingRentals from './UpComingRentals';
+
 import PageHeader from '../../../components/PageHeader';
 import AdminTableHeaders from '../AdminTableHeaders';
+import RentalProductsTable from './RentalProductsTable';
+import SalesProductsTable from './SalesProductsTable'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		marginBottom: '20px',
 	},
-
 	section: {
 		height: 'auto',
 		marginTop: '20px',
 	},
 }));
 
-const AdminRentals = () => {
+const AdminProducts = () => {
 	const classes = useStyles();
 
-	//let { path, url } = useRouteMatch();
+	//let { url, path } = useRouteMatch();
 
 	return (
 		<Container maxWidth="xl" className={classes.root}>
-			<Grid container spacing={2} justify="center">
-				<PageHeader title="Rentals" />
+			<Grid container justify="center" spacing={2}>
+				<PageHeader title="Products" />
 
 				<Grid
 					item
@@ -50,8 +49,8 @@ const AdminRentals = () => {
 					component={Paper}
 					className={classes.section}
 				>
-					<AdminTableHeaders title="Active Rentals" />
-					<CurrentRentals />
+					<AdminTableHeaders title="Rental Products" />
+					<RentalProductsTable />
 				</Grid>
 				<Grid
 					item
@@ -60,22 +59,12 @@ const AdminRentals = () => {
 					component={Paper}
 					className={classes.section}
 				>
-					<AdminTableHeaders title="Upcoming Rentals" />
-					<UpComingRentals />
-				</Grid>
-				<Grid
-					item
-					xs={12}
-					md={10}
-					component={Paper}
-					className={classes.section}
-				>
-					<AdminTableHeaders title="Rentals History" />
-					<RentalsTable />
+					<AdminTableHeaders title="Sales Products" />
+					<SalesProductsTable />
 				</Grid>
 			</Grid>
 		</Container>
 	);
 };
 
-export default AdminRentals;
+export default AdminProducts;

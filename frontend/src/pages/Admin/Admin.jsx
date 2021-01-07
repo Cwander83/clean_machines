@@ -7,23 +7,21 @@ import { withAuthenticationRequired } from '@auth0/auth0-react';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
 
 // components
-//import Logout from '../../components/Logout';
-import CurrentRentals from './CurrentRentals';
-import RecentSalesTable from './RecentSalesTable';
+import CurrentRentals from './Rentals/CurrentRentals';
+import UnShippedSales from './Sales/UnshippedSales';
 import Spinner from '../../UI/Spinner';
 import UpComingRentals from './Rentals/UpComingRentals';
+import PageHeader from '../../components/PageHeader';
+import AdminTableHeaders from './AdminTableHeaders';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		marginBottom: '20px',
 	},
-	table: {
-		minWidth: 400,
-	},
+
 	section: {
 		height: 'auto',
 		marginTop: '20px',
@@ -36,43 +34,45 @@ const Admin = () => {
 	return (
 		<Container maxWidth="xl" className={classes.root}>
 			<Grid container spacing={2} justify="center">
+				<PageHeader title="Dashboard" />
 				{/* active rentals */}
-				<Grid item sm={1}></Grid>
+
 				<Grid
 					item
 					xs={12}
-					sm={10}
+					md={10}
 					component={Paper}
 					className={classes.section}
 				>
-					<Typography variant="h4">Active Rentals</Typography>
+					<AdminTableHeaders title="Active Rentals" />
 					<CurrentRentals />
 				</Grid>
-				<Grid item sm={1}></Grid>
-				{/* recent sales */}
-			
-	
+
 				{/* future rentals */}
-				<Grid item sm={1}></Grid>
 
 				<Grid
 					item
 					xs={12}
-					sm={10}
+					md={10}
 					component={Paper}
 					className={classes.section}
 				>
-					<Typography variant="h4">Upcoming Rentals</Typography>
+					<AdminTableHeaders title="Upcoming Rentals" />
 					<UpComingRentals />
 				</Grid>
-				<Grid item sm={1}></Grid>
-		
-	
 
+				{/* recent sales */}
 
-				{/* <Grid item xs={12}>
-					<Logout />
-				</Grid> */}
+				<Grid
+					item
+					xs={12}
+					md={10}
+					component={Paper}
+					className={classes.section}
+				>
+					<AdminTableHeaders title="Unshipped Sales" />
+					<UnShippedSales />
+				</Grid>
 			</Grid>
 		</Container>
 	);
