@@ -9,7 +9,7 @@ module.exports = {
 		// 	'product CREATE PURCHASE: ' + JSON.stringify(productData, null, 2)
 		// );
 
-		console.log('order number: ' + order_number);
+		//console.log('order number: ' + order_number);
 
 		productData.forEach((obj) => {
 			obj.type === 'rental'
@@ -41,7 +41,7 @@ module.exports = {
 				  })
 						// TODO remove before prod
 
-						.then((result) => console.log('created Rental: ' + result))
+						//.then((result) => console.log('created Rental: ' + result))
 						.catch((err) => console.error(err))
 				: db.Sales.create({
 						productId: obj.productId,
@@ -69,7 +69,7 @@ module.exports = {
 						shipping_state: userData.shipping.shipping_state,
 						shipped: false,
 				  })
-						.then((result) => console.log('created Sale: ' + result))
+						//.then((result) => console.log('created Sale: ' + result))
 						.catch((err) => console.error(err));
 		});
 	},

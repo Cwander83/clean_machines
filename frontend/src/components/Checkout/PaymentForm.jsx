@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 
+// material ui
 import { makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +14,7 @@ import icon2 from '../../assets/CCLOGOS/2.png';
 import icon3 from '../../assets/CCLOGOS/14.png';
 import icon4 from '../../assets/CCLOGOS/22.png';
 
+// stripe
 import {
 	CardNumberElement,
 	CardExpiryElement,
@@ -21,6 +23,7 @@ import {
 	useElements,
 } from '@stripe/react-stripe-js';
 
+// context
 import { CartContext } from '../../context/cart-context';
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function PaymentForm({ prevStep, nextStep }) {
+export default function PaymentForm({ prevStep, nextStep, orderHandler }) {
 	const { cart, user, totals, setUser, setTotals, setCart } = useContext(
 		CartContext
 	);
@@ -112,18 +115,18 @@ export default function PaymentForm({ prevStep, nextStep }) {
 				},
 			},
 		});
-		console.log('[PaymentMethod]', payload);
+		//console.log('[PaymentMethod]', payload);
 		handlePaymentMethodResult(payload);
 	};
 
 	const handlePaymentMethodResult = async (result) => {
-		console.log('hit');
-		console.log('results: ' + result);
-		console.log('cart: ' + JSON.stringify(cart, null, 2));
+		//console.log('hit');
+		//console.log('results: ' + result);
+		//console.log('cart: ' + JSON.stringify(cart, null, 2));
 		if (result.error) {
 			// An error happened when collecting card details,
 			// show `result.error.message` in the payment form.
-			console.log('result error ' + JSON.stringify(result.error, null, 2));
+			//console.log('result error ' + JSON.stringify(result.error, null, 2));
 			setErrors('Card Read Error: ' + result.error.message);
 			setIsProcessing(false);
 		} else {
@@ -147,18 +150,19 @@ export default function PaymentForm({ prevStep, nextStep }) {
 	};
 
 	const handleServerResponse = (serverResponse) => {
-		console.log('serverResponse' + JSON.stringify(serverResponse, null, 2));
+	//	console.log('serverResponse' + JSON.stringify(serverResponse, null, 2));
 		if (serverResponse.error) {
 			// An error happened when charging the card,
 			// show the error in the payment form.
-			console.log(
-				'serverResponse.error ' + JSON.stringify(serverResponse.error, null, 2)
-			);
+			// console.log(
+			// 	'serverResponse.error ' + JSON.stringify(serverResponse.error, null, 2)
+			// );
 			setErrors('Server Error: ' + serverResponse.error);
 			setIsProcessing(false);
 		} else {
 			// Show a success message
-
+			//console.log(JSON.stringify(serverResponse, null, 2));
+			orderHandler(serverResponse.order_number)
 			setSuccess(true);
 			setIsProcessing(false);
 			setUser({});
@@ -257,7 +261,6 @@ export default function PaymentForm({ prevStep, nextStep }) {
 						color="primary"
 						variant="contained"
 						type="submit"
-						// onClick={nextStep}
 						disabled={!stripe || isProcessing}
 						//disabled={true}
 					>

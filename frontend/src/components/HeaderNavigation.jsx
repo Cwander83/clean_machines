@@ -52,10 +52,10 @@ const HeaderNavigation = () => {
 
 	const admin = [
 		{ icon: Logo, path: '/admin' },
-		{ title: 'Orders', path: '/admin/Orders' },
+		// { title: 'Orders', path: '/admin/Orders' },
 		{ title: 'Sales', path: '/admin/sales' },
 		{ title: 'Rentals', path: '/admin/rentals' },
-	//	{ title: 'Products', path: '/admin/products' },
+		{ title: 'Products', path: '/admin/products' },
 		{ title: 'Logout', path: '/', logout: logout },
 	];
 

@@ -17,6 +17,7 @@ const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
 export default function Checkout() {
 	const [step, setStep] = useState(1);
+	const [orderNumber, setOrderNumber] = useState(null);
 
 	const nextStep = () => {
 		setStep(step + 1);
@@ -25,6 +26,7 @@ export default function Checkout() {
 	const prevStep = () => {
 		setStep(step - 1);
 	};
+	const orderHandler = (order) => setOrderNumber(order);
 
 	switch (step) {
 		case 1:
@@ -38,11 +40,15 @@ export default function Checkout() {
 		case 4:
 			return (
 				<Elements stripe={stripePromise}>
-					<PaymentForm prevStep={prevStep} nextStep={nextStep} />
+					<PaymentForm
+						prevStep={prevStep}
+						nextStep={nextStep}
+						orderHandler={orderHandler}
+					/>
 				</Elements>
 			);
 		case 5:
-			return <SuccessMessage />;
+			return <SuccessMessage orderNumber={orderNumber} />;
 		default:
 			throw new Error('Unknown step');
 	}

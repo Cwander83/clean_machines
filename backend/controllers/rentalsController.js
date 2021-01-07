@@ -25,6 +25,7 @@ module.exports = {
 		db.Rentals.findAll({
 			where: {
 				active: true,
+				picked_up: false,
 			},
 			include: db.RentalProducts,
 			order: [['end_date', 'ASC']],
@@ -86,8 +87,6 @@ module.exports = {
 
 	// find all active rentals by the current date
 	findUpComingRentals: async (req, res) => {
-		let currentDate = new Date();
-
 		await db.Rentals.findAll({
 			where: {
 				active: false,

@@ -165,8 +165,8 @@ const SalesProductTable = () => {
 					</TableCell>
 					<TableCell>{row.model}</TableCell>
 					<TableCell>{row.category}</TableCell>
-					<TableCell>$ {(row.sale_price / 100).toFixed(2)}</TableCell>
-					<TableCell>$ {(row.shipping_cost / 100).toFixed(2)}</TableCell>
+					<TableCell>${(row.sale_price / 100).toFixed(2)}</TableCell>
+					<TableCell>${(row.shipping_cost / 100).toFixed(2)}</TableCell>
 					<TableCell>{row.units}</TableCell>
 				</TableRow>
 			</React.Fragment>

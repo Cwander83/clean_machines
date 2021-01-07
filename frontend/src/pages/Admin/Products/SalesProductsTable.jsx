@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// moment
 
+// axios
 import axios from 'axios';
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+// React router
+//import { Link } from 'react-router-dom';
 
+// material ui
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -17,24 +22,15 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TableHead from '@material-ui/core/TableHead';
-import { AdminContext } from '../../../context/admin-context';
+
+
 const useStyles1 = makeStyles((theme) => ({
 	root: {
 		flexShrink: 0,
 		marginLeft: theme.spacing(2.5),
 	},
 }));
-
-const useRowStyles = makeStyles({
-	root: {
-		'& > *': {
-			borderBottom: 'unset',
-		},
-	},
-});
 
 function TablePaginationActions(props) {
 	const classes = useStyles1();
@@ -108,24 +104,15 @@ const useStyles2 = makeStyles((theme) => ({
 	},
 }));
 
-const AllProductsTable = React.memo(() => {
-	const { product,
-		 setProduct,
-		// setDeleteBtn, 
-		 setEditBtn } = React.useContext(
-		AdminContext
-	);
+const SalesProductsTable = () => {
 	const classes = useStyles2();
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(5);
+	const [rows, setData] = useState([]);
 
-	const [rows, setData] = React.useState([]);
-
-	console.log(JSON.stringify(product, null, 2));
-
-	React.useEffect(() => {
+	useEffect(() => {
 		const fetchData = async () => {
-			const result = await axios(`/products/`);
+			const result = await axios(`/api/products/sales`);
 
 			setData(result.data);
 		};
@@ -147,51 +134,33 @@ const AllProductsTable = React.memo(() => {
 	function Row(props) {
 		const { row } = props;
 
-		const classes = useRowStyles();
-
 		return (
 			<React.Fragment>
 				<TableRow className={classes.root}>
-					{/* <TableCell>
-						<IconButton
-							aria-label="expand row"
-							size="small"
-							onClick={() => setOpen(!open)}
-						>
-							{open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-						</IconButton>
-					</TableCell> */}
-					<TableCell align="left">{row.id}</TableCell>
-					<TableCell align="left">{row.name}</TableCell>
-					<TableCell align="left">{row.model}</TableCell>
-					<TableCell align="left">{row.category}</TableCell>
-					<TableCell>
-						<ButtonGroup>
-							<Button
-								onClick={() => {
-									setProduct(row);
-									setEditBtn(false);
-								}}
-							>
-								view
-							</Button>
-							<Button
-								onClick={() => {
-									setProduct(row);
-									setEditBtn(true);
-								}}
-							>
-								edit
-							</Button>
-							<Button
-								onClick={() => {
-									setProduct(row);
-								}}
-							>
-								delete
-							</Button>
-						</ButtonGroup>
-					</TableCell>
+					<TableCell>{row.units}</TableCell>
+					<TableCell>{row.name}</TableCell>
+					<TableCell>{row.model}</TableCell>
+					<TableCell>${(row.sale_price / 100).toFixed(2)}</TableCell>
+					<TableCell>${(row.shipping_cost / 100).toFixed(2)}</TableCell>
+
+					<TableCell>{row.category}</TableCell>
+					<TableCell>{row.short_description}</TableCell>
+					<TableCell>{row.cord}</TableCell>
+					<TableCell>{row.weight}</TableCell>
+					<TableCell>{row.height}</TableCell>
+					<TableCell>{row.width}</TableCell>
+					<TableCell>{row.tools}</TableCell>
+					<TableCell>{row.motor}</TableCell>
+					<TableCell>{row.sound_pressure}</TableCell>
+					<TableCell>{row.container_capacity}</TableCell>
+					<TableCell>{row.tank_capacity}</TableCell>
+					<TableCell>{row.speed}</TableCell>
+					<TableCell>{row.size}</TableCell>
+					<TableCell>{row.feature_1}</TableCell>
+					<TableCell>{row.feature_2}</TableCell>
+					<TableCell>{row.feature_3}</TableCell>
+					<TableCell>{row.feature_4}</TableCell>
+					<TableCell>{row.feature_5}</TableCell>
 				</TableRow>
 			</React.Fragment>
 		);
@@ -202,10 +171,29 @@ const AllProductsTable = React.memo(() => {
 			<Table className={classes.table} aria-label="products table">
 				<TableHead>
 					<TableRow>
-						<TableCell>id</TableCell>
-						<TableCell>name</TableCell>
-						<TableCell align="left">model</TableCell>
-						<TableCell align="left">category</TableCell>
+						<TableCell>Units</TableCell>
+						<TableCell>Name</TableCell>
+						<TableCell>Model</TableCell>
+						<TableCell>Sales Price</TableCell>
+						<TableCell>Shipping Cost</TableCell>
+
+						<TableCell>Category</TableCell>
+						<TableCell>Short Description</TableCell>
+						<TableCell>Power Cord</TableCell>
+						<TableCell>Weight</TableCell>
+						<TableCell>Height</TableCell>
+						<TableCell>Width</TableCell>
+						<TableCell>Tools</TableCell>
+						<TableCell>Motor</TableCell>
+						<TableCell>Sound Pressure</TableCell>
+						<TableCell>Container Capacity</TableCell>
+						<TableCell>Tank Capacity</TableCell>
+						<TableCell>Speed</TableCell>
+						<TableCell>Size</TableCell>
+						<TableCell>Features</TableCell>
+						<TableCell></TableCell>
+						<TableCell></TableCell>
+						<TableCell></TableCell>
 						<TableCell></TableCell>
 					</TableRow>
 				</TableHead>
@@ -244,6 +232,6 @@ const AllProductsTable = React.memo(() => {
 			</Table>
 		</TableContainer>
 	);
-});
+};
 
-export default AllProductsTable;
+export default SalesProductsTable;

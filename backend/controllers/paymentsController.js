@@ -18,7 +18,6 @@ module.exports = {
 				const order_number = await createOrderNumber();
 
 				// TODO check inventory if still there
-			
 
 				await stripe.paymentIntents.create({
 					payment_method: payment_method_id,
@@ -44,14 +43,15 @@ module.exports = {
 						userData.billing_name
 					}, order number: ${order_number}, at ${new Date().toDateString()}`,
 				});
-
 				
+
 				await createPurchase(userData, productData, order_number);
 
 				await updateProducts(productData);
 
 				return await res.status(200).send({
 					confirm: true,
+					order_number: order_number
 				});
 			} catch (error) {
 				console.error(error);

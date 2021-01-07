@@ -43,8 +43,12 @@ export default function UpComingRentals() {
 		fetchData();
 	}, []);
 
-	const activeHandler = (id) => {
-		axios.post(`/api/rentals/update-rental/${id}`, { active: true });
+	const activeHandler = async (id) => {
+		await axios.post(`/api/rentals/update-rental/${id}`, { active: true });
+		await axios
+			.get(`/api/rentals/upcoming`)
+			.then((result) => setData(result.data))
+			.catch((err) => console.error(err));
 	};
 
 	return (
@@ -72,7 +76,8 @@ export default function UpComingRentals() {
 							return (
 								<TableRow key={row.id}>
 									<TableCell>
-										<CheckBoxOutlineBlankIcon style={{cursor: 'pointer'}}
+										<CheckBoxOutlineBlankIcon
+											style={{ cursor: 'pointer' }}
 											onClick={() => activeHandler(row.id)}
 										/>
 									</TableCell>
@@ -97,13 +102,16 @@ export default function UpComingRentals() {
 									</TableCell>
 									<TableCell>{row.billing_email}</TableCell>
 									<TableCell>
-										{row.billing_line1} {row.billing_line2}, {row.billing_city},{' '}
-										{row.billing_state} {row.billing_zipcode}
+										{row.billing_line1}
+										{row.billing_line2 && ','} {row.billing_line2},{' '}
+										{row.billing_city}, {row.billing_state}{' '}
+										{row.billing_zipcode}
 									</TableCell>
 									<TableCell>
-										{row.delivery_line1} {row.delivery_line2},{' '}
-										{row.delivery_city}, {row.delivery_state}{' '}
-										{row.delivery_zipcode}
+										{row.delivery_line1}
+										{row.delivery_line2 && ', '}
+										{row.delivery_line2}, {row.delivery_city},{' '}
+										{row.delivery_state} {row.delivery_zipcode}
 									</TableCell>
 								</TableRow>
 							);
