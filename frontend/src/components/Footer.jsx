@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 // components
 
 // images / icons
-import Logo from '../assets/STAMPANDMARK/STAMP/CleanMachineRentals_Stamp-White.png';
+import Logo from '../images/footer_logo.png';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

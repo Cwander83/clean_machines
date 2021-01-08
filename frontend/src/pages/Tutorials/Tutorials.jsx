@@ -75,7 +75,7 @@ const Tutorials = () => {
 							className={classes.video}
 							src="https://www.youtube.com/embed/3bkz0mlzFbM"
 							title="Clean Machine Rental and Sales - Bissell Big Green Commercial BG10 Upright Deep Cleaner"
-							frameBorder="0"
+							frameBorder="1"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
 						></iframe>
@@ -92,7 +92,7 @@ const Tutorials = () => {
 							className={classes.video}
 							src="https://www.youtube.com/embed/dvRcKAp4oQA"
 							title="Clean Machine Rental and Sales - How to: Use BG10 Extractor Accessory"
-							frameBorder="0"
+							frameBorder="1"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
 						></iframe>
@@ -109,7 +109,7 @@ const Tutorials = () => {
 							className={classes.video}
 							src="https://www.youtube.com/embed/xVgdhfC_6gM"
 							title="Clean Machine Rental and Sales - Carpet Cleaning with the Bissell Big Green Clean Machine!"
-							frameBorder="0"
+							frameBorder="1"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
 						></iframe>
