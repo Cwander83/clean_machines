@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -7,6 +7,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import theme from './theme/theme';
 import * as serviceWorker from './serviceWorker';
+import Spinner from './UI/Spinner';
 
 import './assets/FONTS/ROBOTO/Roboto-Regular.ttf';
 import './assets/FONTS/ROBOTO/Roboto-Black.ttf';
@@ -14,11 +15,13 @@ import './assets/FONTS/ROBOTO/Roboto-Black.ttf';
 ReactDOM.render(
 	<React.Fragment>
 		<Router>
-			<ThemeProvider theme={theme}>
-				<Auth0ProviderWithHistory>
-					<App />
-				</Auth0ProviderWithHistory>
-			</ThemeProvider>
+			<Suspense fallback={<Spinner />}>
+				<ThemeProvider theme={theme}>
+					<Auth0ProviderWithHistory>
+						<App />
+					</Auth0ProviderWithHistory>
+				</ThemeProvider>
+			</Suspense>
 		</Router>
 	</React.Fragment>,
 	document.getElementById('root')

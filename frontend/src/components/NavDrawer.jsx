@@ -29,7 +29,8 @@ import Box from '@material-ui/core/Box';
 
 // images / logos
 //import Logo from '../assets/STAMPANDMARK/MARK/CleanMachineRentals_Mark-Camarone.png';
-import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
+// import DrawerLogo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
+import Logo from '../images/cleanmachinerentals_secondaryl.png';
 
 // components
 import HeaderNavigation from '../components/HeaderNavigation';
@@ -270,7 +271,7 @@ const NavDrawer = () => {
 				<div className={classes.drawerLogoBox}>
 					<img
 						className={classes.drawerLogo}
-						src={DrawerLogo}
+						src={Logo}
 						alt="clean machines rentals"
 					/>
 				</div>

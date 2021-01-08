@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 // components
 
 // images / icons
-import Logo from '../assets/SECONDARYLOGO/CleanMachineRentals_SecondaryLogo-GoldTips-Camarone.png';
+import Logo from '../images/cleanmachinerentals_secondaryl.png';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

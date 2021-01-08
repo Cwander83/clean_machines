@@ -9,10 +9,10 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // icons
-import icon1 from '../../assets/CCLOGOS/1.png';
-import icon2 from '../../assets/CCLOGOS/2.png';
-import icon3 from '../../assets/CCLOGOS/14.png';
-import icon4 from '../../assets/CCLOGOS/22.png';
+import icon1 from '../../images/CCLOGOS/1.png';
+import icon2 from '../../images/CCLOGOS/2.png';
+import icon3 from '../../images/CCLOGOS/14.png';
+import icon4 from '../../images/CCLOGOS/22.png';
 
 // stripe
 import {

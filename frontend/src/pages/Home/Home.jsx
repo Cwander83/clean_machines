@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 
 // images / icons
-import Logo from '../../assets/LOGO/CleanMachineRentals_Logo-Camarone-GoldTips(2).png';
+import Logo from '../../images/home_logo.png';
 
 // components
 import SalesBox from './SalesBox';
