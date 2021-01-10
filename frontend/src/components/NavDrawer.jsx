@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useState } from 'react';
 
 // auth 0
 import { useAuth0 } from '@auth0/auth0-react';
@@ -142,7 +142,7 @@ const NavDrawer = () => {
 	const { isAuthenticated } = useAuth0();
 
 	const classes = useStyles();
-	const [state, setState] = React.useState(false);
+	const [state, setState] = useState(false);
 
 	const handleDrawerOpen = () => {
 		setState(true);
@@ -329,4 +329,4 @@ const NavDrawer = () => {
 	);
 };
 
-export default NavDrawer;
+export default memo(NavDrawer);

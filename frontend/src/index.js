@@ -7,7 +7,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import theme from './theme/theme';
 import * as serviceWorker from './serviceWorker';
-import Spinner from './UI/Spinner';
+
+import Loading from './UI/Loading';
 
 import './assets/FONTS/ROBOTO/Roboto-Regular.ttf';
 import './assets/FONTS/ROBOTO/Roboto-Black.ttf';
@@ -15,7 +16,7 @@ import './assets/FONTS/ROBOTO/Roboto-Black.ttf';
 ReactDOM.render(
 	<React.Fragment>
 		<Router>
-			<Suspense fallback={<Spinner />}>
+			<Suspense fallback={<Loading />}>
 				<ThemeProvider theme={theme}>
 					<Auth0ProviderWithHistory>
 						<App />
