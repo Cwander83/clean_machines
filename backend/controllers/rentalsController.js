@@ -11,9 +11,13 @@ module.exports = {
 			include: db.RentalProducts,
 			order: [['end_date', 'ASC']],
 		})
-			.then((result) => {
-				res.status(200).json(result);
-				return result;
+			.then((results) => {
+				res.header('Access-Control-Expose-Headers', 'Content-Range');
+				res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+
+				res.set('Content-Range', `0-12/${results.length}`);
+				res.set('X-Total-Count', `${results.length}`);
+				res.status(200).json(results);
 			})
 			.catch((err) => console.error(err));
 	},

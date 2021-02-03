@@ -2,7 +2,6 @@
 
 const db = require('../config/config');
 
-
 module.exports = {
 	// create a product on DB
 	createRentalProduct: (req, res) => {
@@ -81,8 +80,14 @@ module.exports = {
 	findAllProducts: (req, res) => {
 		db.Products.findAll({})
 			.then((results) => {
-				res.json(results);
-				console.log(JSON.stringify(results, null, 2));
+				//let count = results.length;
+				res.header('Access-Control-Expose-Headers', 'Content-Range');
+				res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+
+				res.set('Content-Range', `0-12/${results.length}`);
+				res.set('X-Total-Count', `${results.length}`);
+				res.send(results);
+				//console.log(JSON.stringify(results, null, 2));
 			})
 			.catch((err) => console.error(err));
 	},
@@ -100,7 +105,6 @@ module.exports = {
 			.catch((err) => console.error(err));
 	},
 
-
 	// find one products
 	findProduct: (req, res) => {
 		db.Products.findOne({
@@ -117,12 +121,15 @@ module.exports = {
 	findAllRentalProducts: (req, res) => {
 		db.RentalProducts.findAll()
 			.then((results) => {
+				res.header('Access-Control-Expose-Headers', 'Content-Range');
+
+				res.set('Content-Range', `0-10/${results.length}`);
 				res.json(results);
-				console.log(JSON.stringify(results, null, 2));
+				//console.log(JSON.stringify(results, null, 2));
 			})
 			.catch((err) => console.error(err));
 	},
-	
+
 	// find one rental
 	findRentalProduct: (req, res) => {
 		db.RentalProducts.findOne({
@@ -135,7 +142,6 @@ module.exports = {
 			.catch((err) => console.error(err));
 	},
 
-	
 	// all products out of stock
 	findAllProductsOutOfStock: (req, res) => {
 		db.Products.findAll({

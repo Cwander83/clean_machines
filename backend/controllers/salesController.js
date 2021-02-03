@@ -23,7 +23,14 @@ module.exports = {
 			order: [['createdAt', 'ASC']],
 			include: db.Products,
 		})
-			.then((results) => res.status(200).json(results))
+			.then((results) => {
+				res.header('Access-Control-Expose-Headers', 'Content-Range');
+				res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+
+				res.set('Content-Range', `0-12/${results.length}`);
+				res.set('X-Total-Count', `${results.length}`);
+				res.status(200).json(results);
+			})
 			.catch((err) => console.error(err));
 	},
 	// find all sales with most recent first
@@ -36,7 +43,7 @@ module.exports = {
 			.then((results) => res.status(200).json(results))
 			.catch((err) => console.error(err));
 	},
-	
+
 	// update sales item to marked as shipped
 
 	updateSales: async (req, res) => {

@@ -136,26 +136,24 @@ const ProductGrid = () => {
 		return newString.toUpperCase();
 	};
 	return (
-		<>
-			<Grid container spacing={4}>
-				<Grid item xs sm={3}></Grid>
-				<Grid item xs={12} sm={6}>
-					<Typography display="inline" variant="h5">
-						CATEGORY:
-						<Typography
-							display="inline"
-							variant="body1"
-							className={classes.subtitle}
-						>
-							{categoryFunc(category)}
-						</Typography>
+		<Grid container spacing={4}>
+			<Grid item xs sm={3}></Grid>
+			<Grid item xs={12} sm={6}>
+				<Typography display="inline" variant="h5">
+					CATEGORY:
+					<Typography
+						display="inline"
+						variant="body1"
+						className={classes.subtitle}
+					>
+						{categoryFunc(category)}
 					</Typography>
-					<Divider className={classes.divider} />
-				</Grid>
-				<Grid item xs sm={3}></Grid>
-				{products.length === 0 ? <Spinner /> : productSection}
+				</Typography>
+				<Divider className={classes.divider} />
 			</Grid>
-		</>
+			<Grid item xs sm={3}></Grid>
+			{products.length === 0 ? <Spinner /> : productSection}
+		</Grid>
 	);
 };
 

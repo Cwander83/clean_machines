@@ -6,11 +6,13 @@ const emailRoutes = require('./contact.routes');
 const rentalRoutes = require('./rentals.routes');
 const salesRoutes = require('./sales.routes');
 const locationRoutes = require('./location.routes');
+const adminRoutes = require('./admin.routes');
 
 router.use('/products', productRoutes);
 router.use('/mail', emailRoutes);
 router.use('/rentals', rentalRoutes);
 router.use('/sales', salesRoutes);
 router.use('/location', locationRoutes);
+router.use('/admin', adminRoutes);
 
 module.exports = router;
