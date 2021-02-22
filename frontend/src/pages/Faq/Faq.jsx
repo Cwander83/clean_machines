@@ -16,6 +16,10 @@ import Container from '../../containers/Container';
 import Image from '../../images/30G3-4.jpg';
 
 const useStyles = makeStyles((theme) => ({
+	container: {
+		height: '100%',
+		//marginBottom: '130px'
+	},
 	title: {
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -31,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 		padding: '5px 25px',
 	},
 	image: {
-		width: '100%',
-		height: '100%',
+		width: '95%',
+		height: '95%',
 		boxShadow:
 			'rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px',
 		borderRadius: '4px',
@@ -52,7 +56,7 @@ const Faq = () => {
 
 	return (
 		<Container>
-			<Grid container direction="row">
+			<Grid container direction="row" className={classes.container}>
 				<PageHeader title="Frequently Asked Questions" />
 				<Grid item md={1}></Grid>
 
